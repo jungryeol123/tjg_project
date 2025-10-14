@@ -1,9 +1,11 @@
-import Main from './layouts/Main';
+import ProductList from 'features/catalog/ProductList/ProductList';
 import './styles/App.css';
 
 function App() {
   return (
-   <Main />
+    <div className='container'>
+      <ProductList/>
+    </div>
   );
 }
 

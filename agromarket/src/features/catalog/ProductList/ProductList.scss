@@ -1,0 +1,27 @@
+/* src/pages/Home.scss */
+.home-page {
+  padding: 40px;
+  background-color: #f7f9f8;
+  min-height: 100vh;
+
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #2f4f4f;
+  }
+  // .product-grid {
+  //   display: grid;
+  //   gap: 20px;
+  //   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  //   margin: 0 auto;
+  // }
+ .product-grid {
+  display: grid;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto; /* 좌우 여백을 자동 계산 → 중앙 정렬 */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+}
