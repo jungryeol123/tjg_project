@@ -32,3 +32,8 @@ src/
    ├─ components/
    ├─ utilities/
    └─ themes/
+
+
+
+   1. 경로는 절대경로 사용(상대경로 적용시 파일을 옮기게 되면 다 깨짐)
+   
