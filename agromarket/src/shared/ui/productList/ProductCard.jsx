@@ -1,6 +1,6 @@
 import React from "react";
 import "./ProductCard.scss";
-import productImages from "data/productImages.json";
+import productImages from "./productImages.json";
 export default function ProductCard({ item }) {
   const imageSrc = productImages[item.item_name] || "/준비중.png";
   return (

@@ -1,0 +1,23 @@
+.category-nav {
+  background-color: #2b7a3b;
+
+  &__list {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    color: white;
+
+    li {
+      cursor: pointer;
+      font-weight: 500;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #ffe082;
+      }
+    }
+  }
+}

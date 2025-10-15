@@ -1,7 +1,7 @@
 // src/pages/Home.jsx
 import React, { useEffect, useState } from "react";
 import { getKamisData } from "shared/lib/axiosInstance";
-import ProductCard from "shared/ui/ProductCard";
+import ProductCard from "shared/ui/productList/ProductCard";
 import "./ProductList.scss";
 
 export default function ProductList() {
@@ -15,7 +15,6 @@ export default function ProductList() {
         countryCode: "1101", // 서울 가락시장
         date: "20251014",
       });
-
       if (result?.data?.item) {
         setItems(result.data.item);
       } else {

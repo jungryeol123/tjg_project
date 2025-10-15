@@ -22,14 +22,24 @@ export async function getKamisData({
         p_country_code: countryCode,
         p_regday: date,
         p_convert_kg_yn: "N",
-        p_category_code: categoryCode,
+        p_item_category_code: categoryCode,
         p_cert_key: kamisKey,
         p_cert_id: apiId,
         p_returntype: "json",
     };
 
+    // try {
+    //     const response = await axios.get(url, { params: queryParams });
+    //     console.log("✅ KAMIS API 응답:", response.data);
+    //     return response.data;
+    // } catch (error) {
+    //     console.error("🚨 KAMIS API 오류:", error);
+    //     throw error;
+    // }
+
+    
     try {
-        const response = await axios.get(url, { params: queryParams });
+        const response = await axios.get("data/kamisDataVegetable.json");
         console.log("✅ KAMIS API 응답:", response.data);
         return response.data;
     } catch (error) {

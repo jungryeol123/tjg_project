@@ -1,27 +1,32 @@
 /* src/pages/Home.scss */
 .home-page {
-  padding: 40px;
+  padding: 10px;
   background-color: #f7f9f8;
   min-height: 100vh;
+  margin: 0;
 
   .section-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 24px;
     color: #2f4f4f;
+    padding-left: 10px;
   }
-  // .product-grid {
-  //   display: grid;
-  //   gap: 20px;
-  //   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  //   margin: 0 auto;
-  // }
- .product-grid {
+//  .product-grid {
+//   display: grid;
+//   gap: 21px;
+//   max-width: 1000px;
+//   margin: 0 auto; /* 좌우 여백을 자동 계산 → 중앙 정렬 */
+//   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+// }
+.product-grid {
   display: grid;
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto; /* 좌우 여백을 자동 계산 → 중앙 정렬 */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 21px;
+  width: 100%; /* ✅ 브라우저 전체 폭 사용 */
+  padding: 0; /* ✅ 너무 끝까지 붙지 않게 살짝 여백 */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* ✅ auto-fill로 빈칸도 자동조정 */
+  justify-content: stretch; /* ✅ 남는 공간 자동 채우기 */
 }
+
 
 }
