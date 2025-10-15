@@ -1,0 +1,22 @@
+.slide-dots {
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+
+  .dot {
+    cursor: pointer;
+    margin: 0 4px;
+    font-size: 1rem;
+    color: white;
+    transition: all 0.2s ease;
+
+    &.active {
+      color: #22c55e; // Tailwind green-500
+      font-size: 1.5rem;
+    }
+  }
+}

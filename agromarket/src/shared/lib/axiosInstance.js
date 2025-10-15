@@ -12,7 +12,7 @@ export async function getKamisData({
     productClsCode,
     countryCode,
     date,
-} = {}) {
+}) {
     const url = "https://www.kamis.or.kr/service/price/xml.do";
     const kamisKey = process.env.REACT_APP_KAMIS_API_KEY;
     const apiId = process.env.REACT_APP_API_ID;
@@ -44,6 +44,19 @@ export async function getKamisData({
         return response.data;
     } catch (error) {
         console.error("🚨 KAMIS API 오류:", error);
+        throw error;
+    }
+}
+
+
+export async function getData(url
+) {
+
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("데이터 오류", error);
         throw error;
     }
 }

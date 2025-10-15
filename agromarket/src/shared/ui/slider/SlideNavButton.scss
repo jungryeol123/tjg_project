@@ -1,0 +1,21 @@
+.slide-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  z-index: 30;
+  color: #16a34a; // Tailwind green-600
+  cursor: pointer;
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+
+  &:hover {
+    color: #22c55e; // 약간 밝은 초록 (hover)
+  }
+}
