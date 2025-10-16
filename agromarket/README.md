@@ -7,7 +7,7 @@ https://koreanssan.com/
 
 글자색 : #000000ff
 강조색 : #ff0000ff
-로고 : #2c2c54(네이비)
+로고 : #4949b1ff(네이비)
 
 프로젝트 구조
 src/

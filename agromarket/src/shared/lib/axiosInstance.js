@@ -7,39 +7,9 @@ import axios from "axios";
  * @param {string} params.countryCode 시장 코드 (1101=서울 가락시장 등)
  * @param {string} params.date 조회 날짜 (YYYYMMDD)
  */
-export async function getKamisData({
-    categoryCode,
-    productClsCode,
-    countryCode,
-    date,
-}) {
-    const url = "https://www.kamis.or.kr/service/price/xml.do";
-    const kamisKey = process.env.REACT_APP_KAMIS_API_KEY;
-    const apiId = process.env.REACT_APP_API_ID;
-    const queryParams = {
-        action: "dailyPriceByCategoryList",
-        p_product_cls_code: productClsCode,
-        p_country_code: countryCode,
-        p_regday: date,
-        p_convert_kg_yn: "N",
-        p_item_category_code: categoryCode,
-        p_cert_key: kamisKey,
-        p_cert_id: apiId,
-        p_returntype: "json",
-    };
-
-    // try {
-    //     const response = await axios.get(url, { params: queryParams });
-    //     console.log("✅ KAMIS API 응답:", response.data);
-    //     return response.data;
-    // } catch (error) {
-    //     console.error("🚨 KAMIS API 오류:", error);
-    //     throw error;
-    // }
-
-    
+export async function getData(url) {
     try {
-        const response = await axios.get("data/kamisDataVegetable.json");
+        const response = await axios.get(url);
         console.log("✅ KAMIS API 응답:", response.data);
         return response.data;
     } catch (error) {
@@ -49,7 +19,7 @@ export async function getKamisData({
 }
 
 
-export async function getData(url
+export async function axiosGet(url
 ) {
 
     try {

@@ -1,0 +1,82 @@
+{
+  "foodData": [
+    {
+      "pid": "P0001",
+      "imageUrl": "/images/image.png",
+      "imageUrl_name" : "치아바타",
+      "brandName": "압구정주꾸미",
+      "productName": "주꾸미 볶음 2종",
+      "price": 6900,
+      "origin": "국산",
+      "dc": 10,
+      "description": "마늘의 감칠맛이 듬뿍",
+      "isHotDeal": true,
+      "isMemberSpecial": true
+    },
+     {
+      "pid": "P0001",
+      "imageUrl": "/images/image.png",
+      "imageUrl_name" : "치아바타",
+      "brandName": "압구정주꾸미",
+      "productName": "주꾸미 볶음 2종",
+      "price": 6900,
+      "origin": "국산",
+      "dc": 10,
+      "description": "마늘의 감칠맛이 듬뿍",
+      "isHotDeal": true,
+      "isMemberSpecial": true
+    },
+     {
+      "pid": "P0001",
+      "imageUrl": "/images/image.png",
+      "imageUrl_name" : "치아바타",
+      "brandName": "압구정주꾸미",
+      "productName": "주꾸미 볶음 2종",
+      "price": 6900,
+      "origin": "국산",
+      "dc": 10,
+      "description": "마늘의 감칠맛이 듬뿍",
+      "isHotDeal": true,
+      "isMemberSpecial": true
+    },
+     {
+      "pid": "P0001",
+      "imageUrl": "/images/image.png",
+      "imageUrl_name" : "치아바타",
+      "brandName": "압구정주꾸미",
+      "productName": "주꾸미 볶음 2종",
+      "price": 6900,
+      "origin": "국산",
+      "dc": 10,
+      "description": "마늘의 감칠맛이 듬뿍",
+      "isHotDeal": true,
+      "isMemberSpecial": true
+    },
+     {
+      "pid": "P0001",
+      "imageUrl": "/images/image.png",
+      "imageUrl_name" : "치아바타",
+      "brandName": "압구정주꾸미",
+      "productName": "주꾸미 볶음 2종",
+      "price": 6900,
+      "origin": "국산",
+      "dc": 10,
+      "description": "마늘의 감칠맛이 듬뿍",
+      "isHotDeal": true,
+      "isMemberSpecial": true
+    },
+     {
+      "pid": "P0001",
+      "imageUrl": "/images/image.png",
+      "imageUrl_name" : "치아바타",
+      "brandName": "압구정주꾸미",
+      "productName": "주꾸미 볶음 2종",
+      "price": 6900,
+      "origin": "국산",
+      "dc": 10,
+      "description": "마늘의 감칠맛이 듬뿍",
+      "isHotDeal": true,
+      "isMemberSpecial": true
+    }
+  ]
+}

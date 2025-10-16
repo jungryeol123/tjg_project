@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import React, { useEffect, useState } from "react";
-import { getKamisData } from "shared/lib/axiosInstance";
+import { axiosGet } from "shared/lib/axiosInstance";
 import ProductCard from "shared/ui/productList/ProductCard";
 import "./ProductList.scss";
 
@@ -9,14 +9,9 @@ export default function ProductList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getKamisData({
-        categoryCode: "100", // 채소류
-        productClsCode: "01", // 농산물
-        countryCode: "1101", // 서울 가락시장
-        date: "20251014",
-      });
-      if (result?.data?.item) {
-        setItems(result.data.item);
+      const result = await axiosGet("/data/foodData.json");
+      if (result?.foodData) {
+        setItems(result.foodData);
       } else {
         console.warn("데이터가 없습니다:", result);
       }
