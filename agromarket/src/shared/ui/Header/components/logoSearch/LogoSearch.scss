@@ -1,16 +1,9 @@
 .logo-search {
-  width: 1200px;
   margin: 0 auto;
   padding: 20px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  &__logo {
-    font-size: 24px;
-    font-weight: 700;
-    color: #2a2a2a;
-  }
 
   &__bar {
     display: flex;
@@ -22,18 +15,83 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
-  }
 
-  &__btn {
-    background-color: #4949b1ff;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
+    @media (max-width: 768px) {
+      width: 80%;
+    }
 
-    &:hover {
-      background-color: #256d34;
+    @media (max-width: 480px) {
+      width: 70%;
+     }
+    }
+
+    &__btn {
+      background-color: #4949b1ff;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #256d34;
+      }
     }
   }
-}
+
+
+
+
+
+  // .logo-search {
+  //   width: 100%;
+  //   max-width: 1200px;
+  //   margin: 0 auto;
+  //   padding: 20px;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   flex-wrap: wrap; // ✅ 줄바꿈 허용
+
+  //   &__logo {
+  //     font-size: 24px;
+  //     font-weight: 700;
+  //   }
+
+  //   &__bar {
+  //     display: flex;
+  //     align-items: center;
+  //     flex-wrap: nowrap;
+
+  //     @media (max-width: 768px) {
+  //       width: 100%;
+  //       margin-top: 12px;
+  //     }
+  //   }
+
+  //   &__input {
+  //     width: 380px;
+  //     padding: 8px;
+  //     border: 1px solid #ccc;
+  //     border-radius: 4px 0 0 4px;
+
+  //     @media (max-width: 768px) {
+  //       width: 80%;
+  //     }
+
+  //     @media (max-width: 480px) {
+  //       width: 70%;
+  //     }
+  //   }
+
+  //   &__btn {
+  //     background-color: #4949b1ff;
+  //     color: #fff;
+  //     padding: 8px 16px;
+  //     border-radius: 0 4px 4px 0;
+
+  //     @media (max-width: 480px) {
+  //       padding: 8px 12px;
+  //     }
+  //   }
+  // }

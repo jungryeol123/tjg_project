@@ -21,7 +21,7 @@ export default function ProductList() {
 
   return (
     <div className="home-page">
-      <h2 className="section-title">🥦 오늘의 농산물 시세</h2>
+      <h2 className="section-title">🥦 오늘의 농산물 시세!</h2>
 
       <div className="product-grid">
         {items.length > 0 ? (

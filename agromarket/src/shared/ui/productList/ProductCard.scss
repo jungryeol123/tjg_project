@@ -11,35 +11,52 @@
     transform: translateY(-4px);
   }
 
-  .image-box {
-    position: relative;
+ .image-box {
+  position: relative;
 
-    .badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 12px;
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-weight: 600;
+  .badge-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: flex-start;
 
-      &.hot {
-        background-color: #8c4eff; // 보라색
-      }
+    // ✅ 기본: 한 개만 있을 때 (옆으로 하나)
+    flex-direction: row;
+    gap: 0; // 간격 없음
+  }
 
-      &.member {
-        background-color: #2c7a4b; // 녹색
-        top: 36px;
-      }
+  // ✅ 두 개 있을 때 (multi 클래스 추가)
+  .badge-container.multi {
+    flex-direction: column; // 위아래로 쌓기
+    gap: 6px; // 간격 살짝 띄우기
+  }
+
+  .badge {
+    font-size: 12px;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+
+    &.hot {
+      background-color: #8c4eff; // 보라색
     }
 
-    .product-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
+    &.member {
+      background-color: #2c7a4b; // 녹색
     }
   }
+
+  .product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+
+
 
   .product-info {
     padding: 12px;

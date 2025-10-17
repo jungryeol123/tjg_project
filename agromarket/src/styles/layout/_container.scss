@@ -7,3 +7,22 @@
   display: flex;
   flex-direction: column;
 }
+
+
+// .container {
+//   width: 100%;
+//   max-width: 1200px;
+//   min-height: 100vh;
+//   margin: 0 auto;
+//   display: flex;
+//   flex-direction: column;
+//   padding: 0 16px; // 모바일 여백 확보
+
+//   @media (max-width: 768px) {
+//     padding: 0 12px;
+//   }
+
+//   @media (max-width: 480px) {
+//     padding: 0 8px;
+//   }
+// }

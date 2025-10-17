@@ -25,4 +25,16 @@
       }
     }
   }
+
+ @media (max-width: 768px) {
+    padding: 8px 20px;
+
+    // ✅ 첫 번째, 두 번째 li만 숨김
+    &__menu {
+      li:nth-child(1),
+      li:nth-child(2) {
+        display: none;
+      }
+    }
+  }
 }

@@ -1,14 +1,38 @@
+// .category-nav {
+//   background-color: #4949b1ff;
+
+//   &__list {
+//     width: 1200px;
+//     margin: 0 auto;
+//     padding: 12px 0;
+//     display: flex;
+//     justify-content: space-around;
+//     list-style: none;
+//     color: white;
+
+//     li {
+//       cursor: pointer;
+//       font-weight: 500;
+//       transition: color 0.2s ease;
+
+//       &:hover {
+//         color: #ffe082;
+//       }
+//     }
+//   }
+// }
 .category-nav {
   background-color: #4949b1ff;
 
   &__list {
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 12px 0;
     display: flex;
     justify-content: space-around;
     list-style: none;
     color: white;
+    flex-wrap: wrap; // ✅ 줄바꿈 허용
 
     li {
       cursor: pointer;
@@ -17,6 +41,16 @@
 
       &:hover {
         color: #ffe082;
+      }
+
+      @media (max-width: 768px) {
+        flex: 1 1 33%; // 3개씩 줄 나열
+        text-align: center;
+        padding: 6px 0;
+      }
+
+      @media (max-width: 480px) {
+        flex: 1 1 50%; // 2개씩 줄 나열
       }
     }
   }

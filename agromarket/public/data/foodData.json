@@ -23,8 +23,8 @@
       "origin": "국산",
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
-      "isHotDeal": true,
-      "isMemberSpecial": true
+      "isHotDeal": false,
+      "isMemberSpecial": false
     },
      {
       "pid": "P0001",
@@ -37,7 +37,7 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": true,
-      "isMemberSpecial": true
+      "isMemberSpecial": false
     },
      {
       "pid": "P0001",
@@ -50,7 +50,7 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": true,
-      "isMemberSpecial": true
+      "isMemberSpecial": false
     },
      {
       "pid": "P0001",
@@ -62,8 +62,8 @@
       "origin": "국산",
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
-      "isHotDeal": true,
-      "isMemberSpecial": true
+      "isHotDeal": false,
+      "isMemberSpecial": false
     },
      {
       "pid": "P0001",
@@ -75,7 +75,7 @@
       "origin": "국산",
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
-      "isHotDeal": true,
+      "isHotDeal": false,
       "isMemberSpecial": true
     }
   ]
