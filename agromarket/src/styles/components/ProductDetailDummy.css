@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.content {
+  width: 1400px; /* 전체 표시 영역 */
+  margin: auto;
+}
+
+/* 강조색 */
+.redcolor{
+    color: red;
+}
+
+.catalog{
+    width: auto;
+}
+
+.catelog-detail {
+    display: flex;
+    align-items: center;
+}
+.catelog-detail-img{
+    margin-right: 50px;
+}
+
+.catelog-detail-img-main {
+    width: 500px;
+}
+
+.catelog-detail-img-main-list{
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  list-style-type: none;
+  padding: 20px 0;
+}
+
+.catelog-detail-img-main-list img {
+  width: 80px;
+  height: 100px;
+}
+
+.catelog-detail-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.catelog-detail-list {
+    width: 500px;
+    align-items: center;
+}
+
+.catelog-detail-list-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.catelog-detail-list-sales {
+    font-size: 1.1rem;
+    /* color:red; */
+    font-weight: bold;
+}
+
+.catelog-detail-list-sales-price {
+    color:gray;
+    padding-left: 20px;
+    text-decoration: line-through;
+}
+
+.catelog-detail-list-price {
+    font-size: 3rem;
+}
+
+/** info */
+.catelog-detail-sales-info {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.catelog-detail-sales {
+    width: 500px;
+    margin: 10px 0px 10px 0px;
+    padding: 20px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ddd;
+}
+
+.catelog-detail-tabs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.catelog-detail-tab {
+    display: flex;
+    justify-content: space-between;
+}
+
+.catalog-detail-info-text{
+    border: none;
+}
+
+.catelog-detail-info-button{
+    border: none;
+    width: 20px;
+    padding: 5px;
+    background-color: #ddd;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px; /* 둥근 모서리 */
+}
+
+.catelog-detail-info123 {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ddd;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.catelog-detail-buybutton {
+    width: 500px;
+    background-color: #4CAF50; /* 배경색 */
+    color: white; /* 글자색 */
+    border: none; /* 테두리 제거 */
+    padding: 10px 20px; /* 내부 여백 */
+    text-align: center;
+    font-size: 16px;
+    border-radius: 8px; /* 둥근 모서리 */
+    cursor: pointer;
+}

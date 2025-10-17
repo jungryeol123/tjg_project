@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #333;
+}
+
+.catalog {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.catelog-detail {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+
+.catelog-detail-img {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.catelog-detail-img-main {
+  width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.catelog-detail-img-main-list{
+  display: flex;
+}
+
+.catelog-detail-img-main-list img {
+  width: 80px;
+  height: 100px;
+}
+
+.catelog-detail-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.catelog-detail-list-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.catelog-detail-list-sales {
+  font-size: 16px;
+}
+
+.redcolor {
+  color: #e60023;
+  font-weight: 600;
+}
+
+.catelog-detail-list-sales-price {
+  margin-left: 6px;
+  text-decoration: line-through;
+  color: #888;
+  font-weight: 400;
+}
+
+.catelog-detail-list-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}
+
+.catelog-detail-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  list-style: none;
+  font-size: 15px;
+}
+
+.catelog-detail-sales {
+  margin-top: 20px;
+}
+
+.catelog-detail-sales-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  list-style: none;
+}
+
+.catelog-detail-info123 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.catelog-detail-info-button {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.catalog-detail-info-text {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 28px;
+}
+
+.catelog-detail-buybutton {
+  background: #6a0dad;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.catelog-detail-buybutton:hover {
+  background: #5a0aa5;
+}
+
+.catelog-detail-subbuttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.catelog-detail-cartbutton {
+  flex: 1;
+  background: #f4f4f4;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.catelog-detail-cartbutton:hover {
+  background: #eaeaea;
+}
+
+/* 찜하기 버튼 */
+.catelog-detail-wishbutton {
+  width: 110px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  color: #e60023;
+  border: 1px solid #e60023;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.catelog-detail-wishbutton:hover {
+  background: #ffe5ea;
+}
+
+/* 찜 상태일 때 (활성) */
+.catelog-detail-wishbutton.active {
+  background: #e60023;
+  color: #fff;
+  border-color: #e60023;
+}
+
+.catelog-detail-wishbutton.active:hover {
+  background: #cc001e;
+}
+
+.catelog-detail-tabs {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 50px;
+  border-top: 1px solid #eee;
+}
+
+.catelog-detail-tab {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #ddd;
+  list-style: none;
+  padding: 0;
+}
+
+.catelog-detail-tab li {
+  flex: 1;
+  text-align: center;
+}
+
+.catelog-detail-tab li button {
+  width: 100%;
+  padding: 16px 0;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.catelog-detail-tab li.active button {
+  font-weight: 700;
+  border-bottom: 3px solid #6a0dad;
+  color: #6a0dad;
+}

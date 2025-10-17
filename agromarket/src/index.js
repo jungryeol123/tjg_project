@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
-import App from './App';
-import reportWebVitals from '../reportWebVitals';
+import App from './App.js';
+// import { ProductDetail } from './features/catalog/ProductDetail.jsx';
+import ProductList from './pages/ProductList.jsx';
+import reportWebVitals from './reportWebVitals.js';
+// import './styles/components/ProductDetail.css';
+import './styles/components/ProductList.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ProductList />
   </React.StrictMode>
 );
 

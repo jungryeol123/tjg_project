@@ -1,0 +1,216 @@
+.product-detail {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #333;
+}
+
+.product-container {
+  display: flex;
+  gap: 60px;
+  padding: 60px 40px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* 왼쪽 */
+.product-left {
+  flex: 1;
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.product-brand {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.brand-name {
+  font-weight: 600;
+}
+
+.brand-desc {
+  font-size: 14px;
+  color: #666;
+}
+
+.product-view-count {
+  margin-top: 16px;
+  font-size: 14px;
+  background: #f4f4f4;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* 오른쪽 */
+.product-right {
+  flex: 1;
+}
+
+.product-category {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.product-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.product-subtitle {
+  font-size: 16px;
+  color: #555;
+}
+
+.product-origin {
+  font-size: 14px;
+  color: #777;
+  margin-top: 8px;
+}
+
+.product-price {
+  margin-top: 16px;
+}
+
+.discount-percent {
+  color: #e60023;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.discount-current {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.discount-original {
+  text-decoration: line-through;
+  color: #aaa;
+  margin-left: 5px;
+}
+
+.product-price-bottom {
+  font-size: 22px;
+  font-weight: 700;
+  color: #6a0dad;
+  margin-top: 8px;
+}
+
+.coupon-btn {
+  margin-top: 12px;
+  background: #f7f2fc;
+  color: #6a0dad;
+  border: 1px solid #d8bff3;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.coupon-btn:hover {
+  background: #efe6fa;
+}
+
+/* 표 영역 */
+.product-info-table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+
+.product-info-table th {
+  width: 100px;
+  text-align: left;
+  color: #666;
+  padding: 6px 0;
+  vertical-align: top;
+}
+
+.product-info-table td {
+  padding: 6px 0;
+  color: #333;
+}
+
+/* 구매 선택 영역 */
+.purchase-section {
+  margin-top: 20px;
+}
+
+.purchase-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.purchase-footer {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.total-price strong {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.wish-btn {
+  width: 60px;
+  height: 52px;
+  border: 1px solid #e60023;
+  color: #e60023;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wish-btn.active {
+  background: #e60023;
+  color: #fff;
+}
+
+.cart-btn {
+  flex: 1;
+  background: #6a0dad;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  height: 52px;
+}
+
+.cart-btn:hover {
+  background: #5a0aa5;
+}
