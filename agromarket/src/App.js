@@ -2,8 +2,6 @@ import './styles/App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from 'layouts/Layout';
 import Home from 'pages/Home';
-import ProductList from 'features/catalog/ProductList/ProductList';
-
 function App() {
   return (
     <div className='container'>

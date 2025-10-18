@@ -8,7 +8,7 @@ const location = useLocation();
     return (
         <>
             <Header />
-             {location.pathname === "/" && <MainNavBar className="min-h-screen bg-gray-50" />} {/* 홈에서만 표시 */}
+             {/* {location.pathname === "/" && <MainNavBar className="min-h-screen bg-gray-50" />} 홈에서만 표시 */}
             <Outlet />
             <Footer />
         </>

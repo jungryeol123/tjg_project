@@ -4,7 +4,7 @@
   transform: translateY(-50%);
   font-size: 1.8rem;
   z-index: 30;
-  color: #16a34a; // Tailwind green-600
+  color: #4949b1ff; // Tailwind green-600
   cursor: pointer;
 
   &.left {
@@ -16,6 +16,6 @@
   }
 
   &:hover {
-    color: #22c55e; // 약간 밝은 초록 (hover)
+    color: rgb(6, 6, 177); // 약간 밝은 초록 (hover)
   }
 }

@@ -11,12 +11,13 @@ export function SlideContainer({ images, index, setIndex }) {
   return (
     <div className="slide-container">
       {images && images.map((img, i) => (
-        <div
-          key={i}
-          className={`slide ${index === i ? "active" : ""}`}
-          style={{ backgroundImage: `url(${img})` }}
-        />
-      ))}
+  <img
+    key={i}
+    src={img}
+    alt=""
+    className={`slide ${index === i ? "active" : ""}`}
+  />
+))}
 
       <SlideNavButton
         position="left"

@@ -1,4 +1,4 @@
-.logo-search {
+.middle-search {
   margin: 0 auto;
   padding: 20px 0;
   display: flex;
@@ -8,21 +8,13 @@
   &__bar {
     display: flex;
     align-items: center;
-  }
 
-  &__input {
-    width: 380px;
+    &__input {
+    width: 40vw;
+    margin-left: 10px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
-
-    @media (max-width: 768px) {
-      width: 80%;
-    }
-
-    @media (max-width: 480px) {
-      width: 70%;
-     }
     }
 
     &__btn {
@@ -34,64 +26,22 @@
       cursor: pointer;
 
       &:hover {
-        background-color: #256d34;
+        background-color: rgb(9, 9, 173)
       }
     }
+
+
   }
 
+  
 
+    .etc {
+      display: flex;
+      align-content: center;
+      gap: 15px;
+      font-size: 23px;
+      margin-right: 10px;
+    }
 
-
-
-  // .logo-search {
-  //   width: 100%;
-  //   max-width: 1200px;
-  //   margin: 0 auto;
-  //   padding: 20px;
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   flex-wrap: wrap; // ✅ 줄바꿈 허용
-
-  //   &__logo {
-  //     font-size: 24px;
-  //     font-weight: 700;
-  //   }
-
-  //   &__bar {
-  //     display: flex;
-  //     align-items: center;
-  //     flex-wrap: nowrap;
-
-  //     @media (max-width: 768px) {
-  //       width: 100%;
-  //       margin-top: 12px;
-  //     }
-  //   }
-
-  //   &__input {
-  //     width: 380px;
-  //     padding: 8px;
-  //     border: 1px solid #ccc;
-  //     border-radius: 4px 0 0 4px;
-
-  //     @media (max-width: 768px) {
-  //       width: 80%;
-  //     }
-
-  //     @media (max-width: 480px) {
-  //       width: 70%;
-  //     }
-  //   }
-
-  //   &__btn {
-  //     background-color: #4949b1ff;
-  //     color: #fff;
-  //     padding: 8px 16px;
-  //     border-radius: 0 4px 4px 0;
-
-  //     @media (max-width: 480px) {
-  //       padding: 8px 12px;
-  //     }
-  //   }
-  // }
+    
+  }

@@ -1,38 +1,42 @@
-// .category-nav {
-//   background-color: #4949b1ff;
-
-//   &__list {
-//     width: 1200px;
-//     margin: 0 auto;
-//     padding: 12px 0;
-//     display: flex;
-//     justify-content: space-around;
-//     list-style: none;
-//     color: white;
-
-//     li {
-//       cursor: pointer;
-//       font-weight: 500;
-//       transition: color 0.2s ease;
-
-//       &:hover {
-//         color: #ffe082;
-//       }
-//     }
-//   }
-// }
 .category-nav {
   background-color: #4949b1ff;
 
   &__list {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 20px;
     padding: 12px 0;
     display: flex;
-    justify-content: space-around;
-    list-style: none;
+    justify-content: space-between;
+    align-content: center;
     color: white;
-    flex-wrap: wrap; // ✅ 줄바꿈 허용
+
+    @media (max-width: 600px) {
+       justify-content: center;
+      }
+
+    .category-first {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1;
+
+      svg {
+        vertical-align: middle;
+        /* 아이콘의 수직 기준 맞추기 */
+        margin-bottom: 1px;
+        /* 살짝 미세 조정 */
+      }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    .category-last {
+      white-space: nowrap;
+       @media (max-width: 600px) {
+        display: none;
+      }
+    }
 
     li {
       cursor: pointer;
@@ -43,14 +47,27 @@
         color: #ffe082;
       }
 
-      @media (max-width: 768px) {
-        flex: 1 1 33%; // 3개씩 줄 나열
-        text-align: center;
-        padding: 6px 0;
+      // @media (max-width: 768px) {
+      //   flex: 1 1 33%; // 3개씩 줄 나열
+      //   text-align: center;
+      //   padding: 6px 0;
+      // }
+
+      // @media (max-width: 480px) {
+      //   flex: 1 1 50%; // 2개씩 줄 나열
+      // }
+
+
+      ul {
+        display: flex;
+        justify-content: space-between;
+        gap : 8vw;
+        align-items: center;
+
+      li {
+        white-space: nowrap;
       }
 
-      @media (max-width: 480px) {
-        flex: 1 1 50%; // 2개씩 줄 나열
       }
     }
   }

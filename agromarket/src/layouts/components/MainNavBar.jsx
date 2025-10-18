@@ -12,10 +12,10 @@ export function MainNavBar() {
             <FiMenu size={18} />
             <span>전체카테고리</span>
           </li>
-          <li className="main-nav__item">농산물</li>
-          <li className="main-nav__item">축산물</li>
-          <li className="main-nav__item">수산물</li>
-          <li className="main-nav__item">가공품</li>
+          <li className="main-nav__item">신상품</li>
+          <li className="main-nav__item">베스트</li>
+          <li className="main-nav__item">알뜰상품</li>
+          <li className="main-nav__item">특가/혜택</li>
         </ul>
         <ul className="main-nav__right">
           <li>한국가격 정보공개</li>
