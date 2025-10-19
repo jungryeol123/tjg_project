@@ -1,6 +1,7 @@
 // src/layouts/Footer/Footer.jsx
 import React from "react";
 import "./Footer.scss";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -18,11 +19,11 @@ export default function Footer() {
 
         <div className="footer__links">
           <ul>
-            <li>이용약관</li>
-            <li>개인정보처리방침</li>
-            <li>이메일 무단 수집거부</li>
-            <li>청소년보호 책임자 고지</li>
-            <li>카카오톡 채널 추가</li>
+            <li><Link to="/terms">이용약관</Link></li>
+            <li><Link to="/privacy">개인정보처리방침</Link></li>
+            <li><Link to="/email-policy">이메일 무단 수집거부</Link></li>
+            <li><Link to="/youth-protection">청소년보호 책임자 고지</Link></li>
+            <li><Link to="/kakao">카카오톡 채널 추가</Link></li>
           </ul>
         </div>
 

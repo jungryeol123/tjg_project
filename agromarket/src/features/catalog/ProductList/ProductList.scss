@@ -1,22 +1,27 @@
 .home-page {
   width: 100%;
   margin: 10px auto;
-  padding: 0 clamp(16px, 4vw, 60px); // 화면에 따라 자동 여백
+  // padding: 0 clamp(16px, 4vw, 60px); // 화면에 따라 자동 여백
 }
 
 .section-header {
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content:center;
+  text-align: center;
   align-items: center;
   margin-bottom: 15px;
+  position: relative;
 
   .section-title {
-    font-size: clamp(1.4rem, 2vw, 2rem); // 반응형 폰트
-    font-weight: 700;
-    color: #222;
+    font-size: clamp(1.4rem, 1.5vw, 2rem); // 반응형 폰트
+    // font-weight: 700;
+    color: #474747;
   }
 
   .view-all-btn {
+    position: absolute;
+    top: 5px;
+    right: 0;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
     color: #666;
     background: transparent;
@@ -26,6 +31,10 @@
 
     &:hover {
       color: #000;
+    }
+
+    @media (max-width: 532px) {
+      display: none;
     }
   }
 }
@@ -56,12 +65,11 @@
 
   &:hover {
     background: #fff;
-    transform:  scale(1.1);
+    transform: scale(1.1);
   }
 
   &.left {
     left: clamp(-60px, -7vw, 60px);
-    
   }
 
   &.right {
@@ -72,13 +80,13 @@
 .slider-container {
   overflow-x: auto;
   overflow-y: visible;
-  scrollbar-width: none;
-  &::-webkit-scrollbar { display: none; }
-
   position: relative;
-  isolation: isolate; // ✅ 새로운 z-index context를 만들어 clipping 완화
-  contain: none; // ✅ 브라우저의 레이아웃 최적화 강제 해제 (Chrome 버그 대응)
-  transform: translateZ(0); // ✅ GPU 레이어 강제 생성 → hover clipping 완화
+  scrollbar-width: none; /* ✅ Firefox용 */
+  -ms-overflow-style: none; /* ✅ IE/Edge용 */
+  &::-webkit-scrollbar {
+    /* ✅ Chrome, Safari용 */
+    display: none;
+  }
 }
 
 .slides {
@@ -89,15 +97,19 @@
 }
 
 .slide {
-  flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 3)) / 4);
-  min-width: 240px;
+  flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 4)) / 5);
+  aspect-ratio: 3 / 5;
+  height: auto;
+  // min-width: 240px;
   position: relative;
   z-index: 0;
-  transition: transform 0.25s ease;
+  // transition: transform 0.25s ease;
 
-  &:hover {
-    transform: translateY(-20px);
-    z-index: 100; // ✅ 높게
-    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
-  }
+  // &:hover {
+  //   transform: translateY(-20px);
+  //   z-index: 100; // ✅ 높게
+  //   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+  // }
+
+  // 예시: hover될 때 absolute로 분리
 }

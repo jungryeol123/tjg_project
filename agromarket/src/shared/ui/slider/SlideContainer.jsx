@@ -14,15 +14,19 @@ export function SlideContainer({ images, index, setIndex }) {
     <div className="slide-container">
       {images &&
         images.map((img, i) => (
-          <img
+          <div
             key={i}
-            src={img}
-            alt="이미지"
-            className={`slide ${index === i ? "active" : ""}`}
-          />
+            className={`slide-wrapper ${index === i ? "active" : ""}`}
+          >
+            <img
+              src={img}
+              alt={`슬라이드-${i}`}
+              className="slide-image"
+            />
+          </div>
         ))}
 
-      <SlideNavButton
+      {/* <SlideNavButton
         position="left"
         onClick={() => setIndex(index === 0 ? images.length - 1 : index - 1)}
         icon={<MdOutlineArrowBackIosNew />}
@@ -32,7 +36,7 @@ export function SlideContainer({ images, index, setIndex }) {
         position="right"
         onClick={() => setIndex((index + 1) % images.length)}
         icon={<MdOutlineArrowForwardIos />}
-      />
+      /> */}
 
       <SlideDots
         count={images.length}

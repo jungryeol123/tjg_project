@@ -1,16 +1,17 @@
 // src/ui/Header/components/topbar/TopBar.jsx
 import React from "react";
 import "./TopBar.scss";
+import { Link } from "react-router-dom";
 
 export default function TopBar() {
   return (
     <div className="top-bar">
-      <div className="top-bar__left">AGROMARKET</div>
+      <div className="top-bar__left"><Link to="/">AGRO</Link></div>
       <div className="top-bar__right">
         <ul className="top-bar__menu">
-          <li>고객센터</li>
-          <li>공지사항</li>
-          <li>로그인</li>
+          <li><Link to="/support">고객센터</Link></li>
+          <li><Link to="/notice">공지사항</Link></li>
+          <li><Link to="/login">로그인</Link></li>
         </ul>
       </div>
     </div>

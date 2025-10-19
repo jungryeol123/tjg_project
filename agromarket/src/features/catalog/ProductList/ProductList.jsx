@@ -1,42 +1,3 @@
-// // src/pages/Home.jsx
-// import React, { useEffect, useState } from "react";
-// import { axiosGet } from "shared/lib/axiosInstance";
-// import ProductCard from "shared/ui/productList/ProductCard";
-// import "./ProductList.scss";
-
-// export default function ProductList({ title = "제품", limit = 4}) {
-//   const [items, setItems] = useState([]);
-
-//  useEffect(() => {
-//     const fetchData = async () => {
-//       const result = await axiosGet("/data/foodData.json");
-
-//       if (result?.foodData && Array.isArray(result.foodData)) {
-//         // 10개 중 limit개만 잘라서 보여주기
-//         const slicedData = result.foodData.slice(0, limit);
-//         setItems(slicedData);
-//       } else {
-//         console.warn("데이터가 없습니다:", result);
-//       }
-//     };
-//     fetchData();
-//   }, [limit])
-
-//   return (
-//     <div className="home-page">
-//       <h2 className="section-title">{title}</h2>
-
-//       <div className="product-grid">
-//         {items.length > 0 ? (
-//           items.map((item, idx) => <ProductCard key={idx} item={item} />)
-//         ) : (
-//           <p>데이터를 불러오는 중입니다...</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
 import React, { useEffect, useState, useRef } from "react";
 import { axiosGet } from "shared/lib/axiosInstance";
 import ProductCard from "shared/ui/productList/ProductCard";
@@ -120,6 +81,7 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
   return (
     <section className="home-page">
       <div className="section-header">
+        <div></div>
         <h2 className="section-title">{title}</h2>
         <button className="view-all-btn">전체보기 &gt;</button>
       </div>

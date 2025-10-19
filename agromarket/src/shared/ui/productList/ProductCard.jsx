@@ -46,7 +46,7 @@ export default function ProductCard({ item }) {
           )}
         </div>
 
-        <button className="cart-btn">🛒 담기</button>
+        {/* <button className="cart-btn">🛒 담기</button> */}
       </div>
     </div>
   );
