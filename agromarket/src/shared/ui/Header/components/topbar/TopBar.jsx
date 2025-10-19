@@ -12,6 +12,7 @@ export default function TopBar() {
           <li><Link to="/support">고객센터</Link></li>
           <li><Link to="/notice">공지사항</Link></li>
           <li><Link to="/login">로그인</Link></li>
+          <li><Link to="/pay">주문</Link></li>
         </ul>
       </div>
     </div>
