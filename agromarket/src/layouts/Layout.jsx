@@ -1,16 +1,15 @@
-import { Outlet, useLocation } from "react-router-dom";
-import  Footer  from "shared/ui/Footer/Footer";
-import  Header  from "shared/ui/Header/Header";
-import {MainNavBar} from "./components/MainNavBar";
-
+import { Outlet } from "react-router-dom";
+import Footer from "shared/ui/Footer/Footer";
+import Header from "shared/ui/Header/Header";
+import "./Layout.scss";
 export function Layout() {
-const location = useLocation();
-    return (
-        <>
-            <Header />
-             {/* {location.pathname === "/" && <MainNavBar className="min-h-screen bg-gray-50" />} 홈에서만 표시 */}
-            <Outlet />
-            <Footer />
-        </>
-    );
+  return (
+    <div className="layout">
+      <Header />
+      <main className="main container">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
 }

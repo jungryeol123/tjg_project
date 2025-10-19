@@ -18,7 +18,9 @@ const [images, setImages] = useState([]);
   return (
     <>
     <SlideContainer images={images} index={index} setIndex={setIndex} />
-    <ProductList title="제품" limit={6}/>
+    {/* <ProductList title="제품" limit={6}/> */}
+    {/* <ProductList title="제품" limit={6}/>
+    <ProductList title="제품" limit={6}/> */}
     </>
   );
 }

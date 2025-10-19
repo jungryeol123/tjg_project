@@ -1,53 +1,14 @@
-// /* src/pages/Home.scss */
-// .home-page {
-//   padding: 30px;
-//   padding-top: 10px;
-//   background-color: #f7f9f8;
-//   min-height: 100vh;
-//   margin: 0;
-
-//   .section-title {
-//     font-size: 24px;
-//     font-weight: bold;
-//     margin-bottom: 24px;
-//     color: #2f4f4f;
-//     padding-left: 10px;
-//   }
-// //  .product-grid {
-// //   display: grid;
-// //   gap: 21px;
-// //   max-width: 1000px;
-// //   margin: 0 auto; /* 좌우 여백을 자동 계산 → 중앙 정렬 */
-// //   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-// // }
-// .product-grid {
-//   display: grid;
-//   gap: 21px;
-//   width: 100%; /* ✅ 브라우저 전체 폭 사용 */
-//   padding: 0; /* ✅ 너무 끝까지 붙지 않게 살짝 여백 */
-//   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* ✅ auto-fill로 빈칸도 자동조정 */
-//   justify-content: stretch; /* ✅ 남는 공간 자동 채우기 */
-// }
-
-
-// }
-
-
-
-
 .home-page {
   width: 100%;
-  max-width: 1440px;
-  margin: 60px auto;
+  margin: 10px auto;
   padding: 0 clamp(16px, 4vw, 60px); // 화면에 따라 자동 여백
-  box-sizing: border-box;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
 
   .section-title {
     font-size: clamp(1.4rem, 2vw, 2rem); // 반응형 폰트
@@ -75,14 +36,14 @@
   display: flex;
   align-items: center;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* ✅ 화살표 버튼 */
 .nav-button {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 30%;
+  // transform: translateY(-50%);
   z-index: 10;
   background: rgba(255, 255, 255, 0.85);
   border: none;
@@ -95,61 +56,48 @@
 
   &:hover {
     background: #fff;
-    transform: translateY(-50%) scale(1.1);
+    transform:  scale(1.1);
   }
 
   &.left {
-    left: clamp(4px, 1vw, 16px);
+    left: clamp(-60px, -7vw, 60px);
+    
   }
 
   &.right {
-    right: clamp(4px, 1vw, 16px);
+    right: clamp(-60px, -7vw, 60px);
   }
 }
 
-/* ✅ 슬라이더 컨테이너 */
 .slider-container {
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+
+  position: relative;
+  isolation: isolate; // ✅ 새로운 z-index context를 만들어 clipping 완화
+  contain: none; // ✅ 브라우저의 레이아웃 최적화 강제 해제 (Chrome 버그 대응)
+  transform: translateZ(0); // ✅ GPU 레이어 강제 생성 → hover clipping 완화
+}
+
+.slides {
   display: flex;
   gap: clamp(12px, 1.8vw, 24px);
-  overflow-x: scroll;
-  scroll-behavior: auto;
-  cursor: grab;
-  user-select: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &.dragging {
-    cursor: grabbing;
-  }
-
-  .slide {
-    flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 3)) / 4); // 4열 기준
-    min-width: 240px;
-    transition: transform 0.25s ease;
-
-    &:hover {
-      transform: translateY(-4px);
-    }
-  }
+  position: relative;
+  overflow: visible;
 }
 
-/* ✅ 반응형 구조 */
-@media (max-width: 1024px) {
-  .slide {
-    flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 2)) / 3);
-  }
-}
+.slide {
+  flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 3)) / 4);
+  min-width: 240px;
+  position: relative;
+  z-index: 0;
+  transition: transform 0.25s ease;
 
-@media (max-width: 768px) {
-  .slide {
-    flex: 0 0 calc((100% - clamp(12px, 1.8vw, 24px)) / 2);
-  }
-}
-
-@media (max-width: 480px) {
-  .slide {
-    flex: 0 0 90%;
+  &:hover {
+    transform: translateY(-20px);
+    z-index: 100; // ✅ 높게
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
   }
 }

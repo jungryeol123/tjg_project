@@ -9,22 +9,22 @@ export default function ProductCard({ item }) {
 
   return (
     <div className="product-card">
-      <div className="image-box">
-        <div
-          className={`badge-container ${item.isHotDeal && item.isMemberSpecial ? "multi" : ""
-            }`}
-        >
-          {item.isHotDeal && <span className="badge hot">원딜핫딜</span>}
-          {item.isMemberSpecial && <span className="badge member">멤버특가</span>}
-        </div>
-
-        <img
-          src={item.imageUrl}
-          alt={item.imageUrl_name}
-          className="product-image"
-        />
+      {/* ✅ 뱃지 */}
+      <div
+        className={`badge-container ${item.isHotDeal && item.isMemberSpecial ? "multi" : ""}`}
+      >
+        {item.isHotDeal && <span className="badge hot">원딜핫딜</span>}
+        {item.isMemberSpecial && <span className="badge member">멤버특가</span>}
       </div>
 
+      {/* ✅ 제품 이미지 */}
+      <img
+        src={item.imageUrl}
+        alt={item.imageUrl_name}
+        className="product-image"
+      />
+
+      {/* ✅ 제품 정보 */}
       <div className="product-info">
         <h3 className="product-name">
           [{item.brandName}] <span>{item.productName}</span>

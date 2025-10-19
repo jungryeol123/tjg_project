@@ -1,35 +1,33 @@
 .product-card {
   background: #fff;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
-
-  &:hover {
-    transform: translateY(-4px);
-  }
-
- .image-box {
   position: relative;
 
+  &:hover {
+    transform: translateY(-20px);
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // ✅ 살짝 떠오르는 느낌
+  }
+
+  /* ✅ 뱃지 */
   .badge-container {
     position: absolute;
     top: 10px;
     left: 10px;
     display: flex;
     align-items: flex-start;
-
-    // ✅ 기본: 한 개만 있을 때 (옆으로 하나)
     flex-direction: row;
-    gap: 0; // 간격 없음
+    gap: 0;
   }
 
-  // ✅ 두 개 있을 때 (multi 클래스 추가)
   .badge-container.multi {
-    flex-direction: column; // 위아래로 쌓기
-    gap: 6px; // 간격 살짝 띄우기
+    flex-direction: column;
+    gap: 6px;
   }
 
   .badge {
@@ -48,16 +46,16 @@
     }
   }
 
+  /* ✅ 이미지 */
   .product-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
-}
 
-
-
-
+  /* ✅ 정보 영역 */
   .product-info {
     padding: 12px;
 

@@ -22,8 +22,6 @@
 //     fetchData();
 //   }, [limit])
 
-
-
 //   return (
 //     <div className="home-page">
 //       <h2 className="section-title">{title}</h2>
@@ -39,18 +37,13 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
 import React, { useEffect, useState, useRef } from "react";
 import { axiosGet } from "shared/lib/axiosInstance";
 import ProductCard from "shared/ui/productList/ProductCard";
-import { MdOutlineArrowForwardIos, MdOutlineArrowBackIosNew } from "react-icons/md";
+import {
+  MdOutlineArrowForwardIos,
+  MdOutlineArrowBackIosNew,
+} from "react-icons/md";
 import "./ProductList.scss";
 
 export default function ProductList({ title = "오늘의 특가", limit = 12 }) {
@@ -78,7 +71,8 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
     const animate = () => {
       el.scrollLeft -= velocity.current;
       velocity.current *= 0.95;
-      if (Math.abs(velocity.current) > 0.1) momentumId.current = requestAnimationFrame(animate);
+      if (Math.abs(velocity.current) > 0.1)
+        momentumId.current = requestAnimationFrame(animate);
     };
     animate();
   };
@@ -88,7 +82,9 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
     isDragging.current = true;
     prevX.current = e.pageX;
     sliderRef.current.classList.add("dragging");
-    sliderRef.current.querySelectorAll("*").forEach((el) => (el.style.pointerEvents = "none"));
+    sliderRef.current
+      .querySelectorAll("*")
+      .forEach((el) => (el.style.pointerEvents = "none"));
   };
 
   const handleMouseMove = (e) => {
@@ -105,15 +101,9 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
     if (!isDragging.current) return;
     isDragging.current = false;
     sliderRef.current.classList.remove("dragging");
-    sliderRef.current.querySelectorAll("*").forEach((el) => (el.style.pointerEvents = "auto"));
-    startMomentum();
-  };
-
-  const handleMouseLeave = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    sliderRef.current.classList.remove("dragging");
-    sliderRef.current.querySelectorAll("*").forEach((el) => (el.style.pointerEvents = "auto"));
+    sliderRef.current
+      .querySelectorAll("*")
+      .forEach((el) => (el.style.pointerEvents = "auto"));
     startMomentum();
   };
 
@@ -149,13 +139,15 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
+          // onMouseLeave={handleMouseLeave}
         >
-          {items.map((item, idx) => (
-            <div className="slide" key={idx}>
-              <ProductCard item={item} />
-            </div>
-          ))}
+          <div className="slides">
+            {items.map((item, idx) => (
+              <div className="slide" key={idx}>
+                <ProductCard item={item} />
+              </div>
+            ))}
+          </div>
         </div>
 
         <button

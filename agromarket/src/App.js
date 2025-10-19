@@ -1,10 +1,9 @@
-import './styles/App.css';
+import './styles/main.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from 'layouts/Layout';
 import Home from 'pages/Home';
 function App() {
   return (
-    <div className='container'>
       <BrowserRouter>
         <Routes>
         <Route  path="/" element={<Layout />}>
@@ -12,7 +11,6 @@ function App() {
         </Route>
         </Routes>
       </BrowserRouter>
-    </div>
   );
 }
 
