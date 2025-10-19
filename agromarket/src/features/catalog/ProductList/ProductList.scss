@@ -1,33 +1,155 @@
-/* src/pages/Home.scss */
-.home-page {
-  padding: 30px;
-  padding-top: 10px;
-  background-color: #f7f9f8;
-  min-height: 100vh;
-  margin: 0;
+// /* src/pages/Home.scss */
+// .home-page {
+//   padding: 30px;
+//   padding-top: 10px;
+//   background-color: #f7f9f8;
+//   min-height: 100vh;
+//   margin: 0;
 
-  .section-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 24px;
-    color: #2f4f4f;
-    padding-left: 10px;
-  }
-//  .product-grid {
+//   .section-title {
+//     font-size: 24px;
+//     font-weight: bold;
+//     margin-bottom: 24px;
+//     color: #2f4f4f;
+//     padding-left: 10px;
+//   }
+// //  .product-grid {
+// //   display: grid;
+// //   gap: 21px;
+// //   max-width: 1000px;
+// //   margin: 0 auto; /* 좌우 여백을 자동 계산 → 중앙 정렬 */
+// //   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+// // }
+// .product-grid {
 //   display: grid;
 //   gap: 21px;
-//   max-width: 1000px;
-//   margin: 0 auto; /* 좌우 여백을 자동 계산 → 중앙 정렬 */
-//   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+//   width: 100%; /* ✅ 브라우저 전체 폭 사용 */
+//   padding: 0; /* ✅ 너무 끝까지 붙지 않게 살짝 여백 */
+//   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* ✅ auto-fill로 빈칸도 자동조정 */
+//   justify-content: stretch; /* ✅ 남는 공간 자동 채우기 */
 // }
-.product-grid {
-  display: grid;
-  gap: 21px;
-  width: 100%; /* ✅ 브라우저 전체 폭 사용 */
-  padding: 0; /* ✅ 너무 끝까지 붙지 않게 살짝 여백 */
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* ✅ auto-fill로 빈칸도 자동조정 */
-  justify-content: stretch; /* ✅ 남는 공간 자동 채우기 */
+
+
+// }
+
+
+
+
+.home-page {
+  width: 100%;
+  max-width: 1440px;
+  margin: 60px auto;
+  padding: 0 clamp(16px, 4vw, 60px); // 화면에 따라 자동 여백
+  box-sizing: border-box;
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 
+  .section-title {
+    font-size: clamp(1.4rem, 2vw, 2rem); // 반응형 폰트
+    font-weight: 700;
+    color: #222;
+  }
+
+  .view-all-btn {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    color: #666;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+/* ✅ 슬라이더 전체 래퍼 */
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ✅ 화살표 버튼 */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 50%;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: clamp(6px, 1.5vw, 10px);
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  &.left {
+    left: clamp(4px, 1vw, 16px);
+  }
+
+  &.right {
+    right: clamp(4px, 1vw, 16px);
+  }
+}
+
+/* ✅ 슬라이더 컨테이너 */
+.slider-container {
+  display: flex;
+  gap: clamp(12px, 1.8vw, 24px);
+  overflow-x: scroll;
+  scroll-behavior: auto;
+  cursor: grab;
+  user-select: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &.dragging {
+    cursor: grabbing;
+  }
+
+  .slide {
+    flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 3)) / 4); // 4열 기준
+    min-width: 240px;
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+}
+
+/* ✅ 반응형 구조 */
+@media (max-width: 1024px) {
+  .slide {
+    flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 2)) / 3);
+  }
+}
+
+@media (max-width: 768px) {
+  .slide {
+    flex: 0 0 calc((100% - clamp(12px, 1.8vw, 24px)) / 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    flex: 0 0 90%;
+  }
 }
