@@ -18,9 +18,9 @@ const [images, setImages] = useState([]);
   return (
     <>
     <SlideContainer images={images} index={index} setIndex={setIndex} />
-    <ProductList title="마감 임박! 원더특가 ~66%" limit={6}/>
-    <ProductList title="실시간 인기 랭킹" limit={6}/> 
-    <ProductList title="48시간 주말 슈퍼 찬스" limit={6}/> */
+    <ProductList title="마감 임박! 원더특가 ~66%" limit={17}/>
+    <ProductList title="실시간 인기 랭킹" limit={17}/> 
+    <ProductList title="48시간 주말 슈퍼 찬스" limit={17}/> */
     </>
   );
 }

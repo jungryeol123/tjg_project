@@ -2,7 +2,7 @@
   "foodData": [
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "압구정주꾸미",
       "productName": "주꾸미 볶음 2종",
@@ -15,7 +15,7 @@
     },
      {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage2.jpeg",
       "imageUrl_name" : "치아바타",
       "brandName": "치아바타",
       "productName": "주꾸미 볶음 2종",
@@ -28,7 +28,7 @@
     },
      {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage3.jpeg",
       "imageUrl_name" : "치아바타",
       "brandName": "호우",
       "productName": "주꾸미 볶음 2종",
@@ -41,7 +41,7 @@
     },
      {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage4.jpg",
       "imageUrl_name" : "치아바타",
       "brandName": "안뇽",
       "productName": "주꾸미 볶음 2종",
@@ -54,7 +54,7 @@
     },
      {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage5.jpeg",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -67,7 +67,7 @@
     },
      {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage6.jpg",
       "imageUrl_name" : "치아바타",
       "brandName": "할루",
       "productName": "주꾸미 볶음 2종",
@@ -80,7 +80,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage7.jpg",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -93,7 +93,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage8.jpg",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -106,7 +106,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage9.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -119,7 +119,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -132,7 +132,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -145,7 +145,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -158,7 +158,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -171,7 +171,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -184,7 +184,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -197,7 +197,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -210,7 +210,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -223,7 +223,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",
@@ -236,7 +236,7 @@
     },
     {
       "pid": "P0001",
-      "imageUrl": "/images/image.png",
+      "imageUrl": "/images/productImage1.png",
       "imageUrl_name" : "치아바타",
       "brandName": "하이",
       "productName": "주꾸미 볶음 2종",

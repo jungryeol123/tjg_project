@@ -2,7 +2,7 @@
   background-color: #4949b1ff;
 
   &__list {
-    max-width: 1200px;
+    // max-width: 1200px;
     margin: 0 20px;
     padding: 12px 0;
     display: flex;
@@ -43,9 +43,9 @@
       font-weight: 500;
       transition: color 0.2s ease;
 
-      &:hover {
-        color: #ffe082;
-      }
+      // &:hover {
+      //   color: #ffe082;
+      // }
 
       // @media (max-width: 768px) {
       //   flex: 1 1 33%; // 3개씩 줄 나열
@@ -61,7 +61,7 @@
       ul {
         display: flex;
         justify-content: space-between;
-        gap : 8vw;
+        gap : clamp(30px, 5vw, 300px);;
         align-items: center;
 
       li {

@@ -101,6 +101,7 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
           // onMouseLeave={handleMouseLeave}
         >
           <div className="slides">
