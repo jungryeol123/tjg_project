@@ -27,7 +27,8 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path="/delivery" element={<Delivery/>}/>
           <Route path="/login" element={<Login/>} />
-           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
+          <Route path="/detail" element={<ProductDetail/>} />
+          <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           <Route path="/pay" element={<PaymentButton/>} />
           <Route path="/" element={<PaymentButton/>} />
           <Route path="/products/:pid" element={<ProductDetail />} />
