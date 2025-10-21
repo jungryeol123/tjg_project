@@ -1,0 +1,527 @@
+[
+    {
+        "pid" : "1",
+        "image" : "/images/1.webp",
+        "name" : "후드티",
+        "price": 15000,
+        "info" : "분홍색 후드티",
+        "rate": "4.2",
+        "imgList" : [
+            "/images/1.webp",
+            "/images/1.webp",
+            "/images/1.webp"
+        ],
+        "detailInfo": {
+            "title_en": "FRENCH ZIP-UP HOODIE",
+            "title_ko": "프렌치 집업 후디",
+            "list": [
+                        {                
+                                "title": "FABRIC",
+                                "color": "Grey",
+                                "material": "Cotton 100%",
+                                "description": [
+                                    "원단의 컬러와 두께, 촉감은 모두 파사드패턴에서 기획되어 제작된 FACADE PATTERN 의 EXCLUSIVE 원단입니다.",
+                                    "실켓 가공하여 일반적인 스웻 셔츠보다 표면이 깨끗하고 은은한 광택이 납니다.",
+                                    "탄탄하게 편직 된 프렌치 테리 원단입니다.",
+                                    "원단 수축을 최소화 하기 위해 덤블워싱과 텐타가공이 되었습니다.",
+                                    "22년도 제품에서 보풀이 적고, 여름을 제외한 계절에 입기 좋게 좀 더 얇은 두께감으로 원단을 리뉴얼 했습니다."
+                                ]
+                        },
+                        {
+                                "title": "DETAIL",
+                                "description": [
+                                    "풀오버 집업과 앞 포켓이 있어 캐주얼하고 편안한 후디 자켓입니다.",
+                                    "옆 라인에 립 원단으로 사이드 패널을 넣어 움직임이 편안합니다.",
+                                    "탄탄한 원단으로 실루엣이 잘 유지되고 멋스럽습니다.",
+                                    "단품으로 입기에도 부담이 없는 실용적인 아이템입니다",
+                                    "클래식한 재킷이나 맥코트 이너로 매치하면 자연스럽고 무심한 스타일링을 연출할 수 있습니다.",
+                                    "와이드 프렌치 스웻 팬츠와 SET-UP으로 착용 가능합니다."
+                                ]
+                        },
+                        {
+                                "title": "MAKING",
+                                "description": [
+                                    "지퍼와 후디 스트링은 아이보리 배색으로 포인트를 주었습니다.",
+                                    "촘촘한 땀수로 봉제되어 옷매무새가 단정하고 깨끗합니다."
+                                ]
+                        },
+                        {
+                                "title": "SIZE",
+                                "type": "SMALL / MEDIUM",
+                                "totalLength": "51cm / 52cm",
+                                "shoulderWidth": "48.5cm / 50cm",
+                                "chestWidth": "59cm / 61cm",
+                                "sleeveLength": "61cm / 62cm",
+                                "sleeveHemWidth": "9.5cm / 10cm",
+                                "hemLength": "47cm / 49cm",
+                                "armhole": "26cm / 26.5cm"
+                        },
+                        {
+                                "title": "MODEL SIZE",
+                                "height": "Height 175cm",
+                                "size": "MEDIUM size 착용" 
+                        },
+                        {
+                                "title": "CARE INSTRUCTION",
+                                "description": [
+                                    "전문가에게 드라이 클리닝 맡기는 것을 권장합니다.",
+                                    "30도의 낮은온도로 세탁망에 넣어 세탁도 가능합니다.",
+                                    "표백제 사용을 피해주세요.",
+                                    "건조기 사용을 피해주세요.",
+                                    "낮은 온도에 천을 덧대어 다림질 해주세요."
+                                ]
+                        }
+            ]
+        }
+    },
+    {
+        "pid" : "2",
+        "image" : "/images/2.webp",
+        "name" : "후드티",
+        "price": 15000,
+        "info" : "검정색 후드티",
+        "rate": "2.2",
+        "imgList" : [
+            "/images/2.webp",
+            "/images/2.webp",
+            "/images/2.webp"
+        ],
+        "detailInfo": {
+            "title_en": "FRENCH ZIP-UP HOODIE",
+            "title_ko": "프렌치 집업 후디",
+            "list": [
+                        {                
+                                "title": "FABRIC",
+                                "color": "Grey",
+                                "material": "Cotton 100%",
+                                "description": [
+                                    "원단의 컬러와 두께, 촉감은 모두 파사드패턴에서 기획되어 제작된 FACADE PATTERN 의 EXCLUSIVE 원단입니다.",
+                                    "실켓 가공하여 일반적인 스웻 셔츠보다 표면이 깨끗하고 은은한 광택이 납니다.",
+                                    "탄탄하게 편직 된 프렌치 테리 원단입니다.",
+                                    "원단 수축을 최소화 하기 위해 덤블워싱과 텐타가공이 되었습니다.",
+                                    "22년도 제품에서 보풀이 적고, 여름을 제외한 계절에 입기 좋게 좀 더 얇은 두께감으로 원단을 리뉴얼 했습니다."
+                                ]
+                        },
+                        {
+                                "title": "DETAIL",
+                                "description": [
+                                    "풀오버 집업과 앞 포켓이 있어 캐주얼하고 편안한 후디 자켓입니다.",
+                                    "옆 라인에 립 원단으로 사이드 패널을 넣어 움직임이 편안합니다.",
+                                    "탄탄한 원단으로 실루엣이 잘 유지되고 멋스럽습니다.",
+                                    "단품으로 입기에도 부담이 없는 실용적인 아이템입니다",
+                                    "클래식한 재킷이나 맥코트 이너로 매치하면 자연스럽고 무심한 스타일링을 연출할 수 있습니다.",
+                                    "와이드 프렌치 스웻 팬츠와 SET-UP으로 착용 가능합니다."
+                                ]
+                        },
+                        {
+                                "title": "MAKING",
+                                "description": [
+                                    "지퍼와 후디 스트링은 아이보리 배색으로 포인트를 주었습니다.",
+                                    "촘촘한 땀수로 봉제되어 옷매무새가 단정하고 깨끗합니다."
+                                ]
+                        },
+                        {
+                                "title": "SIZE",
+                                "type": "SMALL / MEDIUM",
+                                "totalLength": "51cm / 52cm",
+                                "shoulderWidth": "48.5cm / 50cm",
+                                "chestWidth": "59cm / 61cm",
+                                "sleeveLength": "61cm / 62cm",
+                                "sleeveHemWidth": "9.5cm / 10cm",
+                                "hemLength": "47cm / 49cm",
+                                "armhole": "26cm / 26.5cm"
+                        },
+                        {
+                                "title": "MODEL SIZE",
+                                "height": "Height 175cm",
+                                "size": "MEDIUM size 착용" 
+                        },
+                        {
+                                "title": "CARE INSTRUCTION",
+                                "description": [
+                                    "전문가에게 드라이 클리닝 맡기는 것을 권장합니다.",
+                                    "30도의 낮은온도로 세탁망에 넣어 세탁도 가능합니다.",
+                                    "표백제 사용을 피해주세요.",
+                                    "건조기 사용을 피해주세요.",
+                                    "낮은 온도에 천을 덧대어 다림질 해주세요."
+                                ]
+                        }
+            ]
+        }
+    },
+    {
+        "pid" : "3",
+        "image" : "/images/3.webp",
+        "name" : "원피스",
+        "price": 25000,
+        "info" : "원피스",
+        "rate": "4",
+        "imgList" : [
+            "/images/3.webp",
+            "/images/3.webp",
+            "/images/3.webp"
+        ],
+        "detailInfo": {
+            "title_en": "FRENCH ZIP-UP HOODIE",
+            "title_ko": "프렌치 집업 후디",
+            "list": [
+                        {                
+                                "title": "FABRIC",
+                                "color": "Grey",
+                                "material": "Cotton 100%",
+                                "description": [
+                                    "원단의 컬러와 두께, 촉감은 모두 파사드패턴에서 기획되어 제작된 FACADE PATTERN 의 EXCLUSIVE 원단입니다.",
+                                    "실켓 가공하여 일반적인 스웻 셔츠보다 표면이 깨끗하고 은은한 광택이 납니다.",
+                                    "탄탄하게 편직 된 프렌치 테리 원단입니다.",
+                                    "원단 수축을 최소화 하기 위해 덤블워싱과 텐타가공이 되었습니다.",
+                                    "22년도 제품에서 보풀이 적고, 여름을 제외한 계절에 입기 좋게 좀 더 얇은 두께감으로 원단을 리뉴얼 했습니다."
+                                ]
+                        },
+                        {
+                                "title": "DETAIL",
+                                "description": [
+                                    "풀오버 집업과 앞 포켓이 있어 캐주얼하고 편안한 후디 자켓입니다.",
+                                    "옆 라인에 립 원단으로 사이드 패널을 넣어 움직임이 편안합니다.",
+                                    "탄탄한 원단으로 실루엣이 잘 유지되고 멋스럽습니다.",
+                                    "단품으로 입기에도 부담이 없는 실용적인 아이템입니다",
+                                    "클래식한 재킷이나 맥코트 이너로 매치하면 자연스럽고 무심한 스타일링을 연출할 수 있습니다.",
+                                    "와이드 프렌치 스웻 팬츠와 SET-UP으로 착용 가능합니다."
+                                ]
+                        },
+                        {
+                                "title": "MAKING",
+                                "description": [
+                                    "지퍼와 후디 스트링은 아이보리 배색으로 포인트를 주었습니다.",
+                                    "촘촘한 땀수로 봉제되어 옷매무새가 단정하고 깨끗합니다."
+                                ]
+                        },
+                        {
+                                "title": "SIZE",
+                                "type": "SMALL / MEDIUM",
+                                "totalLength": "51cm / 52cm",
+                                "shoulderWidth": "48.5cm / 50cm",
+                                "chestWidth": "59cm / 61cm",
+                                "sleeveLength": "61cm / 62cm",
+                                "sleeveHemWidth": "9.5cm / 10cm",
+                                "hemLength": "47cm / 49cm",
+                                "armhole": "26cm / 26.5cm"
+                        },
+                        {
+                                "title": "MODEL SIZE",
+                                "height": "Height 175cm",
+                                "size": "MEDIUM size 착용" 
+                        },
+                        {
+                                "title": "CARE INSTRUCTION",
+                                "description": [
+                                    "전문가에게 드라이 클리닝 맡기는 것을 권장합니다.",
+                                    "30도의 낮은온도로 세탁망에 넣어 세탁도 가능합니다.",
+                                    "표백제 사용을 피해주세요.",
+                                    "건조기 사용을 피해주세요.",
+                                    "낮은 온도에 천을 덧대어 다림질 해주세요."
+                                ]
+                        }
+            ]
+        }
+    },
+    {
+        "pid" : "4",
+        "image" : "/images/4.webp",
+        "name" : "티셔츠",
+        "price": 12000,
+        "info" : "티셔츠",
+        "rate": "3.2",
+        "imgList" : [
+            "/images/4.webp",
+            "/images/4.webp",
+            "/images/4.webp"            
+        ],
+        "detailInfo": {
+            "title_en": "FRENCH ZIP-UP HOODIE",
+            "title_ko": "프렌치 집업 후디",
+            "list": [
+                        {                
+                                "title": "FABRIC",
+                                "color": "Grey",
+                                "material": "Cotton 100%",
+                                "description": [
+                                    "원단의 컬러와 두께, 촉감은 모두 파사드패턴에서 기획되어 제작된 FACADE PATTERN 의 EXCLUSIVE 원단입니다.",
+                                    "실켓 가공하여 일반적인 스웻 셔츠보다 표면이 깨끗하고 은은한 광택이 납니다.",
+                                    "탄탄하게 편직 된 프렌치 테리 원단입니다.",
+                                    "원단 수축을 최소화 하기 위해 덤블워싱과 텐타가공이 되었습니다.",
+                                    "22년도 제품에서 보풀이 적고, 여름을 제외한 계절에 입기 좋게 좀 더 얇은 두께감으로 원단을 리뉴얼 했습니다."
+                                ]
+                        },
+                        {
+                                "title": "DETAIL",
+                                "description": [
+                                    "풀오버 집업과 앞 포켓이 있어 캐주얼하고 편안한 후디 자켓입니다.",
+                                    "옆 라인에 립 원단으로 사이드 패널을 넣어 움직임이 편안합니다.",
+                                    "탄탄한 원단으로 실루엣이 잘 유지되고 멋스럽습니다.",
+                                    "단품으로 입기에도 부담이 없는 실용적인 아이템입니다",
+                                    "클래식한 재킷이나 맥코트 이너로 매치하면 자연스럽고 무심한 스타일링을 연출할 수 있습니다.",
+                                    "와이드 프렌치 스웻 팬츠와 SET-UP으로 착용 가능합니다."
+                                ]
+                        },
+                        {
+                                "title": "MAKING",
+                                "description": [
+                                    "지퍼와 후디 스트링은 아이보리 배색으로 포인트를 주었습니다.",
+                                    "촘촘한 땀수로 봉제되어 옷매무새가 단정하고 깨끗합니다."
+                                ]
+                        },
+                        {
+                                "title": "SIZE",
+                                "type": "SMALL / MEDIUM",
+                                "totalLength": "51cm / 52cm",
+                                "shoulderWidth": "48.5cm / 50cm",
+                                "chestWidth": "59cm / 61cm",
+                                "sleeveLength": "61cm / 62cm",
+                                "sleeveHemWidth": "9.5cm / 10cm",
+                                "hemLength": "47cm / 49cm",
+                                "armhole": "26cm / 26.5cm"
+                        },
+                        {
+                                "title": "MODEL SIZE",
+                                "height": "Height 175cm",
+                                "size": "MEDIUM size 착용" 
+                        },
+                        {
+                                "title": "CARE INSTRUCTION",
+                                "description": [
+                                    "전문가에게 드라이 클리닝 맡기는 것을 권장합니다.",
+                                    "30도의 낮은온도로 세탁망에 넣어 세탁도 가능합니다.",
+                                    "표백제 사용을 피해주세요.",
+                                    "건조기 사용을 피해주세요.",
+                                    "낮은 온도에 천을 덧대어 다림질 해주세요."
+                                ]
+                        }
+            ]
+        }
+    },
+    {
+        "pid" : "5",
+        "image" : "/images/5.webp",
+        "name" : "티셔츠",
+        "price": 20000,
+        "info" : "티셔츠",
+        "rate": "5",
+        "imgList": [
+            "/images/5.webp",
+            "/images/5.webp",
+            "/images/5.webp"
+        ],
+        "detailInfo": {
+            "title_en": "FRENCH ZIP-UP HOODIE",
+            "title_ko": "프렌치 집업 후디",
+            "list": [
+                        {                
+                                "title": "FABRIC",
+                                "color": "Grey",
+                                "material": "Cotton 100%",
+                                "description": [
+                                    "원단의 컬러와 두께, 촉감은 모두 파사드패턴에서 기획되어 제작된 FACADE PATTERN 의 EXCLUSIVE 원단입니다.",
+                                    "실켓 가공하여 일반적인 스웻 셔츠보다 표면이 깨끗하고 은은한 광택이 납니다.",
+                                    "탄탄하게 편직 된 프렌치 테리 원단입니다.",
+                                    "원단 수축을 최소화 하기 위해 덤블워싱과 텐타가공이 되었습니다.",
+                                    "22년도 제품에서 보풀이 적고, 여름을 제외한 계절에 입기 좋게 좀 더 얇은 두께감으로 원단을 리뉴얼 했습니다."
+                                ]
+                        },
+                        {
+                                "title": "DETAIL",
+                                "description": [
+                                    "풀오버 집업과 앞 포켓이 있어 캐주얼하고 편안한 후디 자켓입니다.",
+                                    "옆 라인에 립 원단으로 사이드 패널을 넣어 움직임이 편안합니다.",
+                                    "탄탄한 원단으로 실루엣이 잘 유지되고 멋스럽습니다.",
+                                    "단품으로 입기에도 부담이 없는 실용적인 아이템입니다",
+                                    "클래식한 재킷이나 맥코트 이너로 매치하면 자연스럽고 무심한 스타일링을 연출할 수 있습니다.",
+                                    "와이드 프렌치 스웻 팬츠와 SET-UP으로 착용 가능합니다."
+                                ]
+                        },
+                        {
+                                "title": "MAKING",
+                                "description": [
+                                    "지퍼와 후디 스트링은 아이보리 배색으로 포인트를 주었습니다.",
+                                    "촘촘한 땀수로 봉제되어 옷매무새가 단정하고 깨끗합니다."
+                                ]
+                        },
+                        {
+                                "title": "SIZE",
+                                "type": "SMALL / MEDIUM",
+                                "totalLength": "51cm / 52cm",
+                                "shoulderWidth": "48.5cm / 50cm",
+                                "chestWidth": "59cm / 61cm",
+                                "sleeveLength": "61cm / 62cm",
+                                "sleeveHemWidth": "9.5cm / 10cm",
+                                "hemLength": "47cm / 49cm",
+                                "armhole": "26cm / 26.5cm"
+                        },
+                        {
+                                "title": "MODEL SIZE",
+                                "height": "Height 175cm",
+                                "size": "MEDIUM size 착용" 
+                        },
+                        {
+                                "title": "CARE INSTRUCTION",
+                                "description": [
+                                    "전문가에게 드라이 클리닝 맡기는 것을 권장합니다.",
+                                    "30도의 낮은온도로 세탁망에 넣어 세탁도 가능합니다.",
+                                    "표백제 사용을 피해주세요.",
+                                    "건조기 사용을 피해주세요.",
+                                    "낮은 온도에 천을 덧대어 다림질 해주세요."
+                                ]
+                        }
+            ]
+        }
+    },
+    {
+        "pid" : "6",
+        "image" : "/images/6.webp",
+        "name" : "스트레치 비스트 드레스",
+        "price": 55000,
+        "info" : "스트레치 비스트 드레스",
+        "rate": "3",
+        "imgList": [
+            "/images/6.webp",
+            "/images/6.webp",
+            "/images/6.webp"
+        ],
+        "detailInfo": {
+            "title_en": "FRENCH ZIP-UP HOODIE",
+            "title_ko": "프렌치 집업 후디",
+            "list": [
+                        {                
+                                "title": "FABRIC",
+                                "color": "Grey",
+                                "material": "Cotton 100%",
+                                "description": [
+                                    "원단의 컬러와 두께, 촉감은 모두 파사드패턴에서 기획되어 제작된 FACADE PATTERN 의 EXCLUSIVE 원단입니다.",
+                                    "실켓 가공하여 일반적인 스웻 셔츠보다 표면이 깨끗하고 은은한 광택이 납니다.",
+                                    "탄탄하게 편직 된 프렌치 테리 원단입니다.",
+                                    "원단 수축을 최소화 하기 위해 덤블워싱과 텐타가공이 되었습니다.",
+                                    "22년도 제품에서 보풀이 적고, 여름을 제외한 계절에 입기 좋게 좀 더 얇은 두께감으로 원단을 리뉴얼 했습니다."
+                                ]
+                        },
+                        {
+                                "title": "DETAIL",
+                                "description": [
+                                    "풀오버 집업과 앞 포켓이 있어 캐주얼하고 편안한 후디 자켓입니다.",
+                                    "옆 라인에 립 원단으로 사이드 패널을 넣어 움직임이 편안합니다.",
+                                    "탄탄한 원단으로 실루엣이 잘 유지되고 멋스럽습니다.",
+                                    "단품으로 입기에도 부담이 없는 실용적인 아이템입니다",
+                                    "클래식한 재킷이나 맥코트 이너로 매치하면 자연스럽고 무심한 스타일링을 연출할 수 있습니다.",
+                                    "와이드 프렌치 스웻 팬츠와 SET-UP으로 착용 가능합니다."
+                                ]
+                        },
+                        {
+                                "title": "MAKING",
+                                "description": [
+                                    "지퍼와 후디 스트링은 아이보리 배색으로 포인트를 주었습니다.",
+                                    "촘촘한 땀수로 봉제되어 옷매무새가 단정하고 깨끗합니다."
+                                ]
+                        },
+                        {
+                                "title": "SIZE",
+                                "type": "SMALL / MEDIUM",
+                                "totalLength": "51cm / 52cm",
+                                "shoulderWidth": "48.5cm / 50cm",
+                                "chestWidth": "59cm / 61cm",
+                                "sleeveLength": "61cm / 62cm",
+                                "sleeveHemWidth": "9.5cm / 10cm",
+                                "hemLength": "47cm / 49cm",
+                                "armhole": "26cm / 26.5cm"
+                        },
+                        {
+                                "title": "MODEL SIZE",
+                                "height": "Height 175cm",
+                                "size": "MEDIUM size 착용" 
+                        },
+                        {
+                                "title": "CARE INSTRUCTION",
+                                "description": [
+                                    "전문가에게 드라이 클리닝 맡기는 것을 권장합니다.",
+                                    "30도의 낮은온도로 세탁망에 넣어 세탁도 가능합니다.",
+                                    "표백제 사용을 피해주세요.",
+                                    "건조기 사용을 피해주세요.",
+                                    "낮은 온도에 천을 덧대어 다림질 해주세요."
+                                ]
+                        }
+            ]
+        }
+    },
+    {
+        "pid" : "7",
+        "image" : "/images/7.webp",
+        "name" : "자켓",
+        "price": 115000,
+        "info" : "자켓",
+        "rate": "3.5",
+        "imgList": [
+            "/images/7.webp",
+            "/images/7.webp",
+            "/images/7.webp"
+        ],
+        "detailInfo": {
+            "title_en": "FRENCH ZIP-UP HOODIE",
+            "title_ko": "프렌치 집업 후디",
+            "list": [
+                        {                
+                                "title": "FABRIC",
+                                "color": "Grey",
+                                "material": "Cotton 100%",
+                                "description": [
+                                    "원단의 컬러와 두께, 촉감은 모두 파사드패턴에서 기획되어 제작된 FACADE PATTERN 의 EXCLUSIVE 원단입니다.",
+                                    "실켓 가공하여 일반적인 스웻 셔츠보다 표면이 깨끗하고 은은한 광택이 납니다.",
+                                    "탄탄하게 편직 된 프렌치 테리 원단입니다.",
+                                    "원단 수축을 최소화 하기 위해 덤블워싱과 텐타가공이 되었습니다.",
+                                    "22년도 제품에서 보풀이 적고, 여름을 제외한 계절에 입기 좋게 좀 더 얇은 두께감으로 원단을 리뉴얼 했습니다."
+                                ]
+                        },
+                        {
+                                "title": "DETAIL",
+                                "description": [
+                                    "풀오버 집업과 앞 포켓이 있어 캐주얼하고 편안한 후디 자켓입니다.",
+                                    "옆 라인에 립 원단으로 사이드 패널을 넣어 움직임이 편안합니다.",
+                                    "탄탄한 원단으로 실루엣이 잘 유지되고 멋스럽습니다.",
+                                    "단품으로 입기에도 부담이 없는 실용적인 아이템입니다",
+                                    "클래식한 재킷이나 맥코트 이너로 매치하면 자연스럽고 무심한 스타일링을 연출할 수 있습니다.",
+                                    "와이드 프렌치 스웻 팬츠와 SET-UP으로 착용 가능합니다."
+                                ]
+                        },
+                        {
+                                "title": "MAKING",
+                                "description": [
+                                    "지퍼와 후디 스트링은 아이보리 배색으로 포인트를 주었습니다.",
+                                    "촘촘한 땀수로 봉제되어 옷매무새가 단정하고 깨끗합니다."
+                                ]
+                        },
+                        {
+                                "title": "SIZE",
+                                "type": "SMALL / MEDIUM",
+                                "totalLength": "51cm / 52cm",
+                                "shoulderWidth": "48.5cm / 50cm",
+                                "chestWidth": "59cm / 61cm",
+                                "sleeveLength": "61cm / 62cm",
+                                "sleeveHemWidth": "9.5cm / 10cm",
+                                "hemLength": "47cm / 49cm",
+                                "armhole": "26cm / 26.5cm"
+                        },
+                        {
+                                "title": "MODEL SIZE",
+                                "height": "Height 175cm",
+                                "size": "MEDIUM size 착용" 
+                        },
+                        {
+                                "title": "CARE INSTRUCTION",
+                                "description": [
+                                    "전문가에게 드라이 클리닝 맡기는 것을 권장합니다.",
+                                    "30도의 낮은온도로 세탁망에 넣어 세탁도 가능합니다.",
+                                    "표백제 사용을 피해주세요.",
+                                    "건조기 사용을 피해주세요.",
+                                    "낮은 온도에 천을 덧대어 다림질 해주세요."
+                                ]
+                        }
+            ]
+        }
+    }
+]

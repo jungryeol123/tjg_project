@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { getData } from 'shared/lib/axiosInstance.js'
 import { ImageList } from '../shared/constants/ImageList.jsx';
+import { axiosGet } from 'shared/lib/axiosInstance.js'
 
 export function ProductDetail() {
     // const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
@@ -16,7 +16,7 @@ export function ProductDetail() {
 
             // getProductDetail();
 
-            const jsonData = await getData("/data/homeDataImages.json");
+            const jsonData = await axiosGet("/data/data.json");
             const [fdata] = await jsonData.filter( data => data.pid === pid);
         
             setCatalog(fdata);
