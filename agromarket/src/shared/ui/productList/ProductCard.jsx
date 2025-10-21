@@ -22,6 +22,7 @@ export default function ProductCard({ item }) {
         src={item.imageUrl}
         alt={item.imageUrl_name}
         className="product-image"
+        draggable="false"
       />
 
       {/* ✅ 제품 정보 */}

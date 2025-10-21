@@ -7,6 +7,7 @@ import { Login } from 'pages/Login';
 import KakaoCallback from 'features/auth/Kakao';
 import { useEffect } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
+import { ProductDetail } from 'pages/ProductDetail';
 function App() {
 
    useEffect(() => {
@@ -28,6 +29,8 @@ function App() {
           <Route path="/login" element={<Login/>} />
            <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           <Route path="/pay" element={<PaymentButton/>} />
+          <Route path="/" element={<PaymentButton/>} />
+          <Route path="/products/:pid" element={<ProductDetail />} />
         </Route>
         </Routes>
       </BrowserRouter>
