@@ -3,29 +3,28 @@ import { useParams } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { ImageList } from '../shared/constants/ImageList.jsx';
 import { axiosGet } from 'shared/lib/axiosInstance.js'
+import "../styles/components/ProductDetail.css";
 
 export function ProductDetail() {
     // const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
     const pid = "1"; // 선택한 상품의 상품번호(primarykey)
-    const [catalog, setCatalog] = useState({}); // 선택한 상품 정보
-    const [imgList, setImgList] = useState([]); // 선택한 상품의 이미지 리스트
+    const [catalog, setCatalog] = useState([]); // 선택한 상품 정보
+    // const [imgList, setImgList] = useState([]); // 선택한 상품의 이미지 리스트
     const [isWished, setIsWished] = useState(false); // 찜 상태 관리
 
     useEffect( () => {
         const fillter = async () => {
 
             // getProductDetail();
-
-            const jsonData = await axiosGet("/data/data.json");
-            const [fdata] = await jsonData.filter( data => data.pid === pid);
-        
-            setCatalog(fdata);
-            setImgList(fdata.imgList);
+            const jsonData = await axiosGet("/data/foodData.json");
+            setCatalog(jsonData);
         }
         fillter();
 
     }, [pid]);
 
+    console.log("test : ", catalog);
+    
     const toggleWish = () => {
         setIsWished(prev => !prev);
     };
@@ -34,15 +33,15 @@ export function ProductDetail() {
     const [tabName, setTabName] = useState("detail");
     const tabEventNames = ['item','detail', 'review', 'qna', 'return']
     
-    const price = parseInt(catalog.price).toLocaleString() + "원";
+    const price = parseInt(catalog.foodData[0].price).toLocaleString() + "원";
 
     return (
         <div className='content'>
             <div className='catalog'>
                 <div className='catelog-detail'>
                     <div className='catelog-detail-img'>
-                        <img src={catalog.image} alt={catalog.info} className='catelog-detail-img-main'/>
-                        <ImageList imgList={imgList} className="catelog-detail-img-main-list"/>
+                        <img src={catalog.foodData[0].imageUrl} alt={catalog.imageUrl_name} className='catelog-detail-img-main'/>
+                        {/* <ImageList imgList={imgList} className="catelog-detail-img-main-list"/> */}
                     </div>
                     <div className='catelog-detail-list'>
                         <div className='catelog-detail-list-title'>[사미헌]갈비탕</div> {/** 상품명 */}
