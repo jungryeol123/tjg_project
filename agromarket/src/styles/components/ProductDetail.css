@@ -74,10 +74,13 @@
 
 .catelog-detail-list-sales-price {
   margin-left: 6px;
-  text-decoration: line-through;
   color: #888;
   font-weight: 400;
 }
+
+.line-through{
+  text-decoration: line-through;
+};
 
 .catelog-detail-list-price {
   font-size: 28px;
