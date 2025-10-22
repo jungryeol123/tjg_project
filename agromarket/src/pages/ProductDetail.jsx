@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { ImageList } from '../shared/constants/ImageList.jsx';
 import { axiosGet } from 'shared/lib/axiosInstance.js'
 import "../styles/components/ProductDetail.css";
+import Item from "./productDetail/Item";
+import Detail from "./productDetail/Detail";
+import Review from "./productDetail/Review";
+import QnA from "./productDetail/QnA";
+import Return from "./productDetail/Return";
 
 export function ProductDetail() {
     const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
@@ -14,7 +19,6 @@ export function ProductDetail() {
 
     useEffect( () => {
         const fillter = async (pid) => {
-
             // getProductDetail();
             const jsonData = await axiosGet("/data/foodData.json");
             const [data] = jsonData.foodData.filter( data => data.pid === pid );
@@ -66,11 +70,24 @@ export function ProductDetail() {
     };
 
     // 탭 화면 표시용
-    const tabLables = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
-    // 탭 초기 설정
-    const [tabName, setTabName] = useState("detail");
+    const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
     // 탭 이벤트용 변수명
-    const tabEventNames = ['item','detail', 'review', 'qna', 'return']
+    const tabEventNames = ['item','detail', 'review', 'qna', 'return'];
+    // 탭 클릭시 위치 설정
+    const sectionRefs = {
+        item: useRef(null),
+        detail: useRef(null),
+        review: useRef(null),
+        qna: useRef(null),
+        return: useRef(null),
+    };
+    // 탭 클릭 이벤트
+    const handleTabClick = (name) => {
+        const section = sectionRefs[name].current;
+        if (section) {
+            section.scrollIntoView({ block: "start" });
+        }
+    };
     
     // 화면 표시용 가격 표시 : 9,999원
     const price = parseInt(catalog.price).toLocaleString() + "원";
@@ -80,108 +97,100 @@ export function ProductDetail() {
     const salesPrice = (parseInt(catalog.price) - parseInt(catalog.price/catalog.dc)).toLocaleString() + "원";
 
     return (
-        <div className='content'>
-            <div className='catalog'>
-                <div className='catelog-detail'>
-                    <div className='catelog-detail-img'>
-                        <img src={catalog.imageUrl} alt={catalog.imageUrl_name} className='catelog-detail-img-main'/>
-                        {/* <ImageList imgList={imgList} className="catelog-detail-img-main-list"/> */}
+        <div className="product-container">
+            <div className="product-detail">
+                <div className="product-detail-main">
+                    <div className="product-image">
+                        <img src={catalog.imageUrl} alt={catalog.imageUrl_name} className="product-image-main" />
                     </div>
-                    <div className='catelog-detail-list'>
-                        {/* delivery |  클릭시 해당 브랜드로 검색 */}
-                        <div className='catelog-detail-list-sales-price'>{}{catalog.brandName}</div>
-                        <div className='catelog-detail-list-title'>[{catalog.brandName}]{catalog.productName}</div> {/** 상품명 */}
-                        {/** 할인시 정보 */}
-                        <div className='catelog-detail-list-sales redcolor'>{dc} 할인
-                            <span className='catelog-detail-list-sales-price line-through'>{price}</span></div> {/** 할인 금액 */}
-                        <div className='catelog-detail-list-price'>{salesPrice}</div> {/** 단가 price parseInt(catalog.price).toLocaleString() + "원"*/}
-                        <div className='catelog-detail-list-sales redcolor'>행사 기간 2025-09-10 ~ 2025-10-20</div> {/** 할인 행사 기간 */}
-                        <hr/>
-                        <ul className='catelog-detail-info'>
-                            <li>상품번호</li>
-                            <li>{catalog.pid}</li> {/** 상품 번호 */}
-                        </ul>
-                        <ul className='catelog-detail-info'>
-                            <li>배송</li>
-                            <li>샛별배송</li> {/** delivery */}
-                        </ul>
-                        <ul className='catelog-detail-info'>
-                            <li>판매자</li>
-                            <li>컬리</li> {/** seller */}
-                        </ul>
-                        <ul className='catelog-detail-info'>
-                            <li>포장타입</li>
-                            <li>냉동(종이포장)</li> {/** sellType */}
-                        </ul>
-                        <ul className='catelog-detail-info'>
-                            <li>판매단위</li>
-                            <li>1팩</li> {/** count */}
-                        </ul>
-                        <ul className='catelog-detail-info'>
-                            <li>중량/용량</li>
-                            <li>1KG</li> {/** weight */}
-                        </ul>
-                        <ul className='catelog-detail-info'>
-                            <li>알레르기정보</li>
-                            <li>소고리,대두,밀</li> {/** alrege */}
-                        </ul>
-                        <ul className='catelog-detail-info'>
-                            <li>안내사항</li>
-                            <li>{catalog.description}</li> {/** tax */}
-                        </ul>
-                        <hr/>
-                        <div className='catelog-detail-sales'>
-                            <ul className='catelog-detail-sales-info'>
+
+                    <div className="product-info">
+                        <div className="product-brand">{catalog.brandName}</div>
+                        <div className="product-title">[{catalog.brandName}] {catalog.productName}</div>
+
+                        <div className="product-discount red">
+                            {dc} 할인 <span className="product-price-original line">{price}</span>
+                        </div>
+
+                        <div className="product-price-final">{salesPrice}</div>
+                        <div className="product-period red">행사 기간 2025-09-10 ~ 2025-10-20</div>
+                        <hr />
+
+                        <ul className="product-meta"><li>상품번호</li><li>{catalog.pid}</li></ul>
+                        <ul className="product-meta"><li>배송</li><li>샛별배송</li></ul>
+                        <ul className="product-meta"><li>판매자</li><li>컬리</li></ul>
+                        <ul className="product-meta"><li>포장타입</li><li>냉동(종이포장)</li></ul>
+                        <ul className="product-meta"><li>판매단위</li><li>1팩</li></ul>
+                        <ul className="product-meta"><li>중량/용량</li><li>1KG</li></ul>
+                        <ul className="product-meta"><li>알레르기정보</li><li>소고리,대두,밀</li></ul>
+                        <ul className="product-meta"><li>안내사항</li><li>{catalog.description}</li></ul>
+                        <hr />
+
+                        <div className="product-purchase">
+                            <ul className="product-purchase-info">
                                 <li>수량 <span>(최소구매수량 1개)</span></li>
                                 <li>
-                                    <div className='catelog-detail-info123'>
-                                        <button className='catelog-detail-info-button' onClick={handleDecrease}>-</button>
-                                        <input
-                                            className='catalog-detail-info-text'
-                                            type='text'
-                                            value={count}
-                                            onChange={handleChange}
-                                            style={{ width: '50px' }}
-                                        />
-                                    <button className='catelog-detail-info-button' onClick={handleIncrease}>+</button>
+                                    <div className="product-qty-control">
+                                        <button className="qty-btn" onClick={handleDecrease}>-</button>
+                                        <input className="qty-input" type="text" value={count} onChange={handleChange} />
+                                        <button className="qty-btn" onClick={handleIncrease}>+</button>
                                     </div>
                                 </li>
                             </ul>
-                            <ul className='catelog-detail-sales-info'>
+                            <ul className="product-purchase-info">
                                 <li>총금액 <span>(부가세포함)</span></li>
                                 <li>30,000원</li>
                             </ul>
                         </div>
-                        <button className='catelog-detail-buybutton'>구매버튼</button>
-                        <div className='catelog-detail-subbuttons'>
+
+                        <button className="btn-buy">구매하기</button>
+
+                        <div className="product-buttons">
                             <button
-                                className={`catelog-detail-wishbutton ${isWished ? 'active' : ''}`}
+                                className={`btn-wish ${isWished ? 'active' : ''}`}
                                 onClick={toggleWish}
                             >
-                                {isWished ? <AiFillHeart size={20}/> : <AiOutlineHeart size={20}/>}
+                                {isWished ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
                             </button>
-                            <button className='catelog-detail-cartbutton'>장바구니</button>
+                            <button className="btn-cart">장바구니</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className='catelog-detail-tabs'>
-                <ul className='catelog-detail-tab'>{
-                        tabLables && tabLables.map( (lable, i) =>
-                            <li className={tabName=== tabEventNames[i] ? "active": ""}>
-                                <button type='button'
-                                        onClick={ () => setTabName(tabEventNames[i])}>{lable}</button>
-                            </li> 
-                        )
-                    }
+            <div className="product-tabs">
+                <ul className="product-tab-list">
+                {tabLabels.map((label, i) => (
+                    <li key={i}>
+                    <button onClick={() => handleTabClick(tabEventNames[i])}>
+                        {label}
+                    </button>
+                    </li>
+                ))}
                 </ul>
-                { tabName === "itme" ? ""
-                    : tabName === "detail" ? ""  
-                    : tabName === "review" ? ""
-                    : tabName === "qna" ? ""
-                    : tabName === "return"}
             </div>
-            <div style={{marginBottom:"50px"}}></div>
+            <div style={{ marginBottom: "50px" }}></div>
+            {/* 각 탭 섹션 */}
+            <div className="product-tab-content" style={{ marginTop: "30px" }}>
+                <section ref={sectionRefs.item} id="item" style={{ marginBottom: "80px" }}>
+                <Item />
+                </section>
+
+                <section ref={sectionRefs.detail} id="detail" style={{ marginBottom: "80px" }}>
+                <Detail />
+                </section>
+
+                <section ref={sectionRefs.review} id="review" style={{ marginBottom: "80px" }}>
+                <Review />
+                </section>
+
+                <section ref={sectionRefs.qna} id="qna" style={{ marginBottom: "80px" }}>
+                <QnA />
+                </section>
+
+                <section ref={sectionRefs.return} id="return" style={{ marginBottom: "80px" }}>
+                <Return />
+                </section>
+            </div>
         </div>
     );
 }
