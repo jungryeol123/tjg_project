@@ -8,12 +8,18 @@ import { Review } from "./productDetail/Review.jsx";
 import { QnA } from "./productDetail/QnA.jsx";
 import { Return } from "./productDetail/Return.jsx";
 import "../styles/components/ProductDetail.css";
+import { useSelector, useDispatch } from 'react-redux';
+import { addCartCount } from 'features/cart/cartAPI.js';
 
 export function ProductDetail() {
     const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
     const [product, setProduct] = useState({}); // 선택한 상품 정보
     const [isWished, setIsWished] = useState(false); // 찜 상태 관리
     const [count, setCount] = useState(1); // 수량 관리
+    // 장바구니 카운트
+    const cartCount = useSelector( state => state.cart.cartCount );
+    // dispatch
+    const dispatch = useDispatch();
 
     // pid기준 데이터 취득
     useEffect( () => {
@@ -67,10 +73,10 @@ export function ProductDetail() {
         }
     };
 
-    // 장바구니 담기 클릭시 이벤트
-    const handleAddCart = (e) =>{
-        
+    const handleAddCart = () => {
+        dispatch(addCartCount(count));
     }
+
 
     // 탭 화면 표시용
     const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
@@ -109,7 +115,7 @@ export function ProductDetail() {
                     </div>
 
                     <div className="product-info">
-                        <div>{product.productName} : <a href="#"className="product-brand">{product.brandName}</a></div>
+                        <div>{product.productName} : {cartCount} :<a href="#"className="product-brand">{product.brandName}</a></div>
                         <div className="product-title">[{product.brandName}] {product.productName}</div>
 
                         <div className="product-discount red">
@@ -135,9 +141,9 @@ export function ProductDetail() {
                                 <li>수량 <span>(최소구매수량 1개)</span></li>
                                 <li>
                                     <div className="product-qty-control">
-                                        <button className="qty-btn" onClick={handleDecrease}>-</button>
-                                        <input className="qty-input" type="text" value={count} onChange={handleChange} />
-                                        <button className="qty-btn" onClick={handleIncrease}>+</button>
+                                        <button className="qty-btn" onClick={ handleDecrease }>-</button>
+                                        <input className="qty-input" type="text" value={count} onChange={ handleChange } />
+                                        <button className="qty-btn" onClick={ handleIncrease }>+</button>
                                     </div>
                                 </li>
                             </ul>
@@ -156,7 +162,7 @@ export function ProductDetail() {
                             >
                                 {isWished ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
                             </button>
-                            <button className="btn-cart" onClick={handleAddCart}>장바구니</button>
+                            <button className="btn-cart" onClick={ handleAddCart }>장바구니</button>
                         </div>
                     </div>
                 </div>
