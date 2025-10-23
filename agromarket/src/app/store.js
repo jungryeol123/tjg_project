@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import cartSlice from '../features/cart/cartSlice.js'
+import  productSlice  from 'features/product/productSlice.js'
 
 // // 액션 로깅 처리 담당 미들웨어
 // // store => next => action
@@ -29,7 +30,8 @@ import cartSlice from '../features/cart/cartSlice.js'
 
 export const store = configureStore({
   reducer: {
-    "cart": cartSlice
+    cart : cartSlice,
+    product : productSlice
     // "product": productSlice,
     // "auth":authSlice
   },

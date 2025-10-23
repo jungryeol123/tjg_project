@@ -1,0 +1,90 @@
+
+.review-list {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2vw;
+  font-family: "Pretendard", sans-serif;
+
+  h2 {
+    font-size: clamp(16px, 2vw, 28px);
+    margin-bottom: 1vw;
+  }
+
+  p {
+    font-size: clamp(14px, 1vw, 18px);
+    color: #555;
+  }
+
+  .review-card {
+    border-bottom: 0.2vw solid #eee;
+    padding: 2vw 0;
+
+    .badge {
+      display: inline-block;
+      background-color: #ff6b6b;
+      color: white;
+      font-size: clamp(12px, 0.8vw, 16px);
+      padding: 0.5vw 1vw;
+      border-radius: 0.5vw;
+      margin-bottom: 1vw;
+    }
+
+    h3 {
+      font-size: clamp(14px, 1vw, 18px);
+      margin-bottom: 0.5vw;
+    }
+
+    .review-title {
+      font-size: clamp(16px, 1.2vw, 22px);
+      font-weight: 600;
+      margin-bottom: 0.8vw;
+    }
+
+    .review-content {
+      font-size: clamp(14px, 0.9vw, 18px);
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .review-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1vw;
+      margin-top: 1vw;
+
+      img {
+        width: clamp(60px, 5vw, 100px);
+        height: clamp(60px, 5vw, 100px);
+        border-radius: 0.8vw;
+        object-fit: cover;
+      }
+    }
+
+    .review-footer {
+      margin-top: 1vw;
+      display: flex;
+      justify-content: space-between;
+      font-size: clamp(12px, 0.8vw, 16px);
+      color: #888;
+
+      .user-Date {
+        display: flex;
+        gap: 5px;
+      }
+
+      .likes {
+        color: #ff6b6b;
+      }
+    }
+
+    .tags {
+      margin-top: 0.8vw;
+
+      .tag {
+        margin-right: 0.8vw;
+        font-size: clamp(13px, 1vw, 18px);
+        color: #666;
+      }
+    }
+  }
+}

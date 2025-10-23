@@ -143,8 +143,12 @@ import {
 } from "react-icons/md";
 import "./ProductList.scss";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductListAPI } from "features/product/productAPI";
 
 export default function ProductList({ title = "오늘의 특가", limit = 12 }) {
+  const productList = useSelector((state) => state.product.productList );
+  const dispatch = useDispatch();
   const [items, setItems] = useState([]);
   const sliderRef = useRef(null);
   const isDragging = useRef(false);
@@ -159,12 +163,14 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
     const fetchData = async () => {
       const result = await axiosGet("/data/foodData.json");
       if (result?.foodData && Array.isArray(result.foodData)) {
-        setItems(result.foodData.slice(0, limit));
+        dispatch(setProductListAPI(result.foodData));
+        // setItems(result.foodData.slice(0, limit));
       }
     };
     fetchData();
   }, [limit]);
 
+  console.log("productList", productList);
   const stopMomentum = () => cancelAnimationFrame(momentumId.current);
 
   const startMomentum = () => {
@@ -256,7 +262,7 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
           onMouseLeave={handleMouseLeave}
         >
           <div className="slides">
-            {items.map((item, idx) => (
+            {productList && productList.map((item, idx) => (
               <Link
                 to={`/products/${item.pid}`}
                 className="slide"

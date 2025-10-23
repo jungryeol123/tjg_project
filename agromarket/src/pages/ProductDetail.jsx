@@ -4,34 +4,37 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { axiosGet } from 'shared/lib/axiosInstance.js'
 import { Item } from "./productDetail/Item.jsx";
 import { Detail } from "./productDetail/Detail.jsx";
-import { Review } from "./productDetail/Review.jsx";
 import { QnA } from "./productDetail/QnA.jsx";
 import { Return } from "./productDetail/Return.jsx";
 import "../styles/components/ProductDetail.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { addCartCount } from 'features/cart/cartAPI.js';
+import { ReviewList } from './productDetail/ReviewList.jsx';
+import { setProductAPI } from 'features/product/productAPI.js';
 
 export function ProductDetail() {
     const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
-    const [product, setProduct] = useState({}); // 선택한 상품 정보
+    // const [product, setProduct] = useState({}); // 선택한 상품 정보
     const [isWished, setIsWished] = useState(false); // 찜 상태 관리
     const [count, setCount] = useState(1); // 수량 관리
     // 장바구니 카운트
     const cartCount = useSelector( state => state.cart.cartCount );
     // dispatch
     const dispatch = useDispatch();
-
+   const product =  useSelector((state) =>  state.product.product);
     // pid기준 데이터 취득
     useEffect( () => {
         const fillter = async (pid) => {
             // getProductDetail();
             const jsonData = await axiosGet("/data/foodData.json");
             const [data] = jsonData.foodData.filter( data => data.pid === pid );
-            setProduct(data);
+            dispatch(setProductAPI(data)); 
+            // setProduct(data);
         }
         fillter(pid);
-    }, []);
+    }, [pid]);
 
+    console.log("안녕", product.productDescriptionImage);
     // 좋아요 버튼 클릭 이벤트
     const toggleWish = () => {
         setIsWished(prev => !prev);
@@ -182,15 +185,15 @@ export function ProductDetail() {
             {/* 각 탭 섹션 */}
             <div className="product-tab-content">
                 <section className="product-section" ref={sectionRefs.item} id="item">
-                    <Item />
+                    <Item  images={product.productDescriptionImage}/>
                 </section>
 
                 <section className="product-section" ref={sectionRefs.detail} id="detail">
-                    <Detail />
+                    <Detail images={product.productInformationImage}/>
                 </section>
 
                 <section className="product-section" ref={sectionRefs.review} id="review">
-                    <Review />
+                    <ReviewList pid={pid}/>
                 </section>
 
                 <section className="product-section" ref={sectionRefs.qna} id="qna">
