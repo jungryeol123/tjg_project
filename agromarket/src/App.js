@@ -1,4 +1,3 @@
-// import './styles/main.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from 'layouts/Layout';
 import Home from 'pages/Home';
@@ -9,6 +8,7 @@ import KakaoCallback from 'features/auth/Kakao';
 import { useEffect } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
 import { ProductDetail } from 'pages/ProductDetail';
+
 function App() {
 
    useEffect(() => {

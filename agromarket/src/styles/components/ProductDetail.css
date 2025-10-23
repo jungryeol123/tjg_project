@@ -1,11 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    box-sizing: border-box;
-}
-
-.content {
+.product-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -14,7 +7,7 @@
   color: #333;
 }
 
-.catalog {
+.product-detail {
   width: 100%;
   max-width: 1200px;
   display: flex;
@@ -22,73 +15,74 @@
   padding: 60px 0;
 }
 
-.catelog-detail {
+.product-detail-main {
   display: flex;
   gap: 40px;
   width: 100%;
 }
 
-.catelog-detail-img {
+.product-image {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.catelog-detail-img-main {
+.product-image-main {
   width: 480px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.catelog-detail-img-main-list{
-  display: flex;
-}
-
-.catelog-detail-img-main-list img {
-  width: 80px;
-  height: 100px;
-}
-
-.catelog-detail-list {
+.product-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.catelog-detail-list-title {
+.product-brand {
+  font-size: 18px;
+  font-weight: 500;
+  color: #777;
+}
+
+.product-title {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-.catelog-detail-list-sales {
+.product-discount {
   font-size: 16px;
 }
 
-.redcolor {
+.red {
   color: #e60023;
   font-weight: 600;
 }
 
-.catelog-detail-list-sales-price {
+.product-price-original {
   margin-left: 6px;
   color: #888;
   font-weight: 400;
 }
 
-.line-through{
+.line {
   text-decoration: line-through;
-};
+}
 
-.catelog-detail-list-price {
+.product-price-final {
   font-size: 28px;
   font-weight: 700;
   color: #333;
 }
 
-.catelog-detail-info {
+.product-period {
+  font-size: 14px;
+}
+
+.product-meta {
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
@@ -97,11 +91,11 @@
   font-size: 15px;
 }
 
-.catelog-detail-sales {
+.product-purchase {
   margin-top: 20px;
 }
 
-.catelog-detail-sales-info {
+.product-purchase-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,13 +103,13 @@
   list-style: none;
 }
 
-.catelog-detail-info123 {
+.product-qty-control {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.catelog-detail-info-button {
+.qty-btn {
   background: #f4f4f4;
   border: 1px solid #ddd;
   width: 28px;
@@ -124,14 +118,15 @@
   cursor: pointer;
 }
 
-.catalog-detail-info-text {
+.qty-input {
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 4px;
   height: 28px;
+  width: 50px;
 }
 
-.catelog-detail-buybutton {
+.btn-buy {
   background: #6a0dad;
   color: #fff;
   border: none;
@@ -144,18 +139,19 @@
   transition: background 0.3s ease;
 }
 
-.catelog-detail-buybutton:hover {
+.btn-buy:hover {
   background: #5a0aa5;
 }
 
-.catelog-detail-subbuttons {
+.product-buttons {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 10px;
 }
 
-.catelog-detail-cartbutton {
+/* 장바구니 버튼 */
+.btn-cart {
   flex: 1;
   background: #f4f4f4;
   color: #333;
@@ -168,12 +164,12 @@
   transition: all 0.3s ease;
 }
 
-.catelog-detail-cartbutton:hover {
+.btn-cart:hover {
   background: #eaeaea;
 }
 
 /* 찜하기 버튼 */
-.catelog-detail-wishbutton {
+.btn-wish {
   width: 110px;
   height: 52px;
   display: flex;
@@ -190,29 +186,38 @@
   transition: all 0.3s ease;
 }
 
-.catelog-detail-wishbutton:hover {
+.btn-wish:hover {
   background: #ffe5ea;
 }
 
-/* 찜 상태일 때 (활성) */
-.catelog-detail-wishbutton.active {
+/* 찜 상태 (활성) */
+.btn-wish.active {
   background: #e60023;
   color: #fff;
   border-color: #e60023;
 }
 
-.catelog-detail-wishbutton.active:hover {
+.btn-wish.active:hover {
   background: #cc001e;
 }
 
-.catelog-detail-tabs {
+/* 탭 영역 */
+.product-tabs {
   width: 100%;
   max-width: 1200px;
   margin-top: 50px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #6d6c6c;
+
+  /* 탭 상단 고정*/
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
 
-.catelog-detail-tab {
+.product-tab-list {
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid #ddd;
@@ -220,12 +225,12 @@
   padding: 0;
 }
 
-.catelog-detail-tab li {
+.product-tab-list li {
   flex: 1;
   text-align: center;
 }
 
-.catelog-detail-tab li button {
+.product-tab-list li button {
   width: 100%;
   padding: 16px 0;
   background: none;
@@ -235,8 +240,18 @@
   transition: all 0.2s ease;
 }
 
-.catelog-detail-tab li.active button {
+.product-tab-list li.active button {
   font-weight: 700;
   border-bottom: 3px solid #6a0dad;
   color: #6a0dad;
+}
+
+/* 탭 */
+.product-tab-content {
+  margin-top: 30px;
+}
+
+/* 탭 내용별 margin */
+.product-section {
+  margin-bottom: 80px;
 }
