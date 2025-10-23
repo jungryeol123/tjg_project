@@ -1,0 +1,33 @@
+{
+  "reviews": [
+    {
+      "id": 1,
+      "pid" : "P0001",
+      "userId" : "te**", 
+      "productName": "[KF365] 에어프라이어용 통등심 돈까스 450g",
+      "title": "에어프라이어에 돌려서 먹었는데 조리도 간편하고 맛있습니다!",
+      "content": "저는 돈까스 테두리 바삭한 부분을 좋아하는데, 이 제품은 전체적으로 빵가루가 얇아서 처음부터 끝까지 바삭하게 먹을 수 있었어요! 간단하게 조리해서 먹기 너무 좋아요. 카레 곁들여 통등심으로 먹어도 좋고, 여러모로 활용도가 높아요. 또 사먹을 의향 있습니다!",
+      "date": "2025.07.18",
+      "isBest": true,
+      "images": [
+        "/images/reviewImages/review1.png",
+        "/images/reviewImages/review2.png"
+      ],
+      "likes": 11,
+      "tags": ["베스트", "에어프라이어", "간편조리"]
+    },
+    {
+      "id": 2,
+      "pid" : "P0002",
+      "userId" : "qe**", 
+      "productName": "[KF365] 크리스피 치킨너겟 300g",
+      "title": "아이 간식으로 딱이에요!",
+      "content": "바삭하고 간단하게 조리돼서 너무 편해요. 아이가 좋아해서 자주 사먹을 것 같아요.",
+      "date": "2025.06.22",
+      "isBest": false,
+      "images": ["/images/reviewImages/review3.png"],
+      "likes": 4,
+      "tags": ["아이간식", "바삭바삭"]
+    }
+  ]
+}

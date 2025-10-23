@@ -11,7 +11,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": true,
-      "isMemberSpecial": true
+      "isMemberSpecial": true,
+      "productDescriptionImage" : "productDescriptionImageP0001.png",
+      "productInformationImage" : "productInformationImageP0001.png"
     },
      {
       "pid": "P0002",
@@ -24,7 +26,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0002.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
      {
       "pid": "P0003",
@@ -37,7 +41,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": true,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0003.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
      {
       "pid": "P0004",
@@ -50,7 +56,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": true,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0004.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
      {
       "pid": "P0005",
@@ -63,7 +71,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0005.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
      {
       "pid": "P0006",
@@ -76,7 +86,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": true
+      "isMemberSpecial": true,
+       "productDescriptionImage" : "productDescriptionImageP0006.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0007",
@@ -89,7 +101,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0007.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0008",
@@ -102,7 +116,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0008.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0009",
@@ -115,7 +131,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0009.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0010",
@@ -128,7 +146,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0010.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0011",
@@ -141,7 +161,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0011.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0012",
@@ -154,7 +176,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0012.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0013",
@@ -167,7 +191,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0013.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0014",
@@ -180,7 +206,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0012.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0015",
@@ -193,7 +221,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0012.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0016",
@@ -206,7 +236,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0012.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0017",
@@ -219,7 +251,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0012.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0018",
@@ -232,7 +266,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0012.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     },
     {
       "pid": "P0019",
@@ -245,7 +281,9 @@
       "dc": 10,
       "description": "마늘의 감칠맛이 듬뿍",
       "isHotDeal": false,
-      "isMemberSpecial": false
+      "isMemberSpecial": false,
+       "productDescriptionImage" : "productDescriptionImageP0012.png",
+       "productInformationImage" : "productInformationImageP0001.png"
     }
   ]
 }
