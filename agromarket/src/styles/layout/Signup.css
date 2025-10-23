@@ -1,0 +1,263 @@
+/* 기본 레이아웃 설정 */
+.signup-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container .essential {
+    text-align: right;
+}
+
+/* 리스트 스타일 */
+.signup-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.signup-container li {
+  margin-bottom: 20px;
+}
+
+.signup-container h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #000000ff;
+}
+
+.signup-container > div {
+    margin-bottom: 15px;
+}
+
+.signup-container .part {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.signup-container .part li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.signup-container .left {
+    width: 120px;
+    font-size: 14px;
+    color: #000000ff;
+    padding-right: 15px;
+}
+
+.signup-container .middle {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.signup-container .input-field {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.signup-container .input-field:focus {
+    border-color: #4949b1ff;
+    outline: none;
+}
+
+.signup-container .btn {
+    padding: 10px 20px;
+    background-color: #4949b1ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+/* .signup-container .btn:hover {
+    background-color: #2d82c3;
+} */
+
+.signup-container span {
+    font-size: 14px;
+}
+
+.signup-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.signup-container li {
+    margin-bottom: 15px;
+}
+
+/* 라디오 버튼 및 체크박스 스타일 */
+.signup-container input[type="radio"], 
+.signup-container input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.signup-container input[type="radio"]:checked + span,
+.signup-container input[type="checkbox"]:checked + span {
+    color: #4949b1ff;
+}
+
+/* 이메일 셀렉트 */
+.signup-container .part li select {
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+}
+
+.signup-container .part li select:focus {
+    border-color: #4949b1ff;
+}
+
+/* 주소 및 전화번호 */
+.signup-container .btn {
+    width: auto;
+}
+
+/* 아이디 확인 및 인증번호 버튼 */
+.signup-container .middle > .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* 추가 입력 사항 */
+.signup-container .middle > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-container .middle > div > li {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #888;
+}
+
+.signup-container .btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #4949b1ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup-container .signup-container > div > div {
+    color: #999;
+    font-size: 12px;
+}
+
+.signup-container .gender .middle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup-container .genderList {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100px;
+    text-align: center;
+}
+
+.signup-container .genderButton {
+    width: 50px;
+}
+
+.signup-container .date > .middle {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.signup-container .input-date {
+    width: 80px;
+}
+
+.signup-container .plusAfter {
+    display: none !important;
+}
+
+.signup-container .agree > .left {
+    width: 120px;
+}
+
+.signup-container .agree > .middle {
+    width: 360px;
+}
+
+.signup-container .agree > .middle > div {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.signup-container .allAgree {
+    text-align: left;
+    width: 400px;
+    display: flex;
+    flex-direction: column !important;
+}
+
+.signup-container .allAgree > div {
+    display: flex;
+    width: 500px;
+}
+
+.signup-container .sns {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 5px;
+}
+
+.signup-container .allAgree > div > span, 
+.signup-container .essential {
+    padding-left: 20px;
+    font-size: 12px;
+    color: #888;
+}
+
+.signup-container .essential > span {
+    color: #ff0000ff;
+}
+
+.signup-container .btn-address {
+    padding-left: 3px;
+    margin-bottom: 5px;
+    width: 260px;
+}
+
+.signup-container .phone {
+    width: 550px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.signup-container .phone-btn {
+    margin-top: 5px;
+}

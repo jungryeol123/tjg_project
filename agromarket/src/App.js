@@ -4,6 +4,7 @@ import { Layout } from 'layouts/Layout';
 import Home from 'pages/Home';
 import { Delivery } from 'pages/Delivery';
 import { Login } from 'pages/Login';
+import { Signup } from 'pages/Signup';
 import KakaoCallback from 'features/auth/Kakao';
 import { useEffect } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
@@ -27,6 +28,7 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path="/delivery" element={<Delivery/>}/>
           <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<Signup/>} />
           <Route path="/detail" element={<ProductDetail/>} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           <Route path="/pay" element={<PaymentButton/>} />
