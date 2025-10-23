@@ -1,31 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { ImageList } from '../shared/constants/ImageList.jsx';
 import { axiosGet } from 'shared/lib/axiosInstance.js'
+import { Item } from "./productDetail/Item.jsx";
+import { Detail } from "./productDetail/Detail.jsx";
+import { Review } from "./productDetail/Review.jsx";
+import { QnA } from "./productDetail/QnA.jsx";
+import { Return } from "./productDetail/Return.jsx";
 import "../styles/components/ProductDetail.css";
-import Item from "./productDetail/Item";
-import Detail from "./productDetail/Detail";
-import Review from "./productDetail/Review";
-import QnA from "./productDetail/QnA";
-import Return from "./productDetail/Return";
 
 export function ProductDetail() {
     const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
-    const [catalog, setCatalog] = useState({}); // 선택한 상품 정보
-    // const [imgList, setImgList] = useState([]); // 선택한 상품의 이미지 리스트
+    const [product, setProduct] = useState({}); // 선택한 상품 정보
     const [isWished, setIsWished] = useState(false); // 찜 상태 관리
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(1); // 수량 관리
 
+    // pid기준 데이터 취득
     useEffect( () => {
         const fillter = async (pid) => {
             // getProductDetail();
             const jsonData = await axiosGet("/data/foodData.json");
             const [data] = jsonData.foodData.filter( data => data.pid === pid );
-            setCatalog(data);
+            setProduct(data);
         }
         fillter(pid);
-
     }, []);
 
     // 좋아요 버튼 클릭 이벤트
@@ -42,7 +40,7 @@ export function ProductDetail() {
 
     // 구매 수량 증가 버튼 클릭 이벤트
     const handleIncrease = () => {
-        if(count < catalog.dc){
+        if(count < product.dc){
             setCount(count + 1);
         }
     };
@@ -61,13 +59,18 @@ export function ProductDetail() {
                 value = 1;
             } 
             // 최대 갯수를 초과할 경우 최대치 설정
-            else if (value > catalog.dc) {
-                value = catalog.dc;
+            else if (value > product.dc) {
+                value = product.dc;
             }
 
             setCount(value);
         }
     };
+
+    // 장바구니 담기 클릭시 이벤트
+    const handleAddCart = (e) =>{
+        
+    }
 
     // 탭 화면 표시용
     const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
@@ -81,6 +84,7 @@ export function ProductDetail() {
         qna: useRef(null),
         return: useRef(null),
     };
+
     // 탭 클릭 이벤트
     const handleTabClick = (name) => {
         const section = sectionRefs[name].current;
@@ -90,23 +94,23 @@ export function ProductDetail() {
     };
     
     // 화면 표시용 가격 표시 : 9,999원
-    const price = parseInt(catalog.price).toLocaleString() + "원";
+    const price = parseInt(product.price).toLocaleString() + "원";
     // 화면 표시용 할인가 : 9,999원
-    const dc = parseInt(catalog.price/catalog.dc).toLocaleString() + "원";
+    const dc = parseInt(product.price/product.dc).toLocaleString() + "원";
     // 화면 표시용 할인가 적용 가격 : 9,999원
-    const salesPrice = (parseInt(catalog.price) - parseInt(catalog.price/catalog.dc)).toLocaleString() + "원";
+    const salesPrice = (parseInt(product.price) - parseInt(product.price/product.dc)).toLocaleString() + "원";
 
     return (
         <div className="product-container">
             <div className="product-detail">
                 <div className="product-detail-main">
                     <div className="product-image">
-                        <img src={catalog.imageUrl} alt={catalog.imageUrl_name} className="product-image-main" />
+                        <img src={product.imageUrl} alt={product.imageUrl_name} className="product-image-main" />
                     </div>
 
                     <div className="product-info">
-                        <div className="product-brand">{catalog.brandName}</div>
-                        <div className="product-title">[{catalog.brandName}] {catalog.productName}</div>
+                        <div>{product.productName} : <a href="#"className="product-brand">{product.brandName}</a></div>
+                        <div className="product-title">[{product.brandName}] {product.productName}</div>
 
                         <div className="product-discount red">
                             {dc} 할인 <span className="product-price-original line">{price}</span>
@@ -116,14 +120,14 @@ export function ProductDetail() {
                         <div className="product-period red">행사 기간 2025-09-10 ~ 2025-10-20</div>
                         <hr />
 
-                        <ul className="product-meta"><li>상품번호</li><li>{catalog.pid}</li></ul>
+                        <ul className="product-meta"><li>상품번호</li><li>{product.pid}</li></ul>
                         <ul className="product-meta"><li>배송</li><li>샛별배송</li></ul>
                         <ul className="product-meta"><li>판매자</li><li>컬리</li></ul>
                         <ul className="product-meta"><li>포장타입</li><li>냉동(종이포장)</li></ul>
                         <ul className="product-meta"><li>판매단위</li><li>1팩</li></ul>
                         <ul className="product-meta"><li>중량/용량</li><li>1KG</li></ul>
                         <ul className="product-meta"><li>알레르기정보</li><li>소고리,대두,밀</li></ul>
-                        <ul className="product-meta"><li>안내사항</li><li>{catalog.description}</li></ul>
+                        <ul className="product-meta"><li>안내사항</li><li>{product.description}</li></ul>
                         <hr />
 
                         <div className="product-purchase">
@@ -152,7 +156,7 @@ export function ProductDetail() {
                             >
                                 {isWished ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
                             </button>
-                            <button className="btn-cart">장바구니</button>
+                            <button className="btn-cart" onClick={handleAddCart}>장바구니</button>
                         </div>
                     </div>
                 </div>
@@ -168,27 +172,27 @@ export function ProductDetail() {
                 ))}
                 </ul>
             </div>
-            <div style={{ marginBottom: "50px" }}></div>
+            <div style={{ marginBottom: "20px" }}></div>
             {/* 각 탭 섹션 */}
-            <div className="product-tab-content" style={{ marginTop: "30px" }}>
-                <section ref={sectionRefs.item} id="item" style={{ marginBottom: "80px" }}>
-                <Item />
+            <div className="product-tab-content">
+                <section className="product-section" ref={sectionRefs.item} id="item">
+                    <Item />
                 </section>
 
-                <section ref={sectionRefs.detail} id="detail" style={{ marginBottom: "80px" }}>
-                <Detail />
+                <section className="product-section" ref={sectionRefs.detail} id="detail">
+                    <Detail />
                 </section>
 
-                <section ref={sectionRefs.review} id="review" style={{ marginBottom: "80px" }}>
-                <Review />
+                <section className="product-section" ref={sectionRefs.review} id="review">
+                    <Review />
                 </section>
 
-                <section ref={sectionRefs.qna} id="qna" style={{ marginBottom: "80px" }}>
-                <QnA />
+                <section className="product-section" ref={sectionRefs.qna} id="qna">
+                    <QnA />
                 </section>
 
-                <section ref={sectionRefs.return} id="return" style={{ marginBottom: "80px" }}>
-                <Return />
+                <section className="product-section" ref={sectionRefs.return} id="return">
+                    <Return />
                 </section>
             </div>
         </div>

@@ -1,4 +1,4 @@
-export default function Detail() {
+export function Detail() {
   return (
     <div>
       <h2>상세 설명</h2>

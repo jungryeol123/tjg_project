@@ -1,4 +1,4 @@
-export default function QnA() {
+export function QnA() {
   return (
     <div>
       <h2>Q&A</h2>

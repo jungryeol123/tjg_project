@@ -1,4 +1,4 @@
-export default function Return() {
+export function Return() {
   return (
     <div>
       <h2>반품 / 교환 안내</h2>

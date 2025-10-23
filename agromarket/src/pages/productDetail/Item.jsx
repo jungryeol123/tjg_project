@@ -1,4 +1,4 @@
-export default function Item() {
+export function Item() {
   return (
     <div>
       <h2>상품 정보</h2>

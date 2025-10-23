@@ -1,10 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  box-sizing: border-box;
-}
-
 .product-container {
   width: 100%;
   display: flex;
@@ -213,7 +206,15 @@
   width: 100%;
   max-width: 1200px;
   margin-top: 50px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #6d6c6c;
+
+  /* 탭 상단 고정*/
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
 
 .product-tab-list {
@@ -245,12 +246,12 @@
   color: #6a0dad;
 }
 
-/* 탭 상단 고정 */
-.product-tabs {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  z-index: 10;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+/* 탭 */
+.product-tab-content {
+  margin-top: 30px;
+}
+
+/* 탭 내용별 margin */
+.product-section {
+  margin-bottom: 80px;
 }

@@ -1,4 +1,4 @@
-export default function Review() {
+export function Review() {
   return (
     <div>
       <h2>리뷰</h2>
