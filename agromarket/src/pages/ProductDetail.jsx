@@ -14,27 +14,26 @@ import { setProductAPI } from 'features/product/productAPI.js';
 
 export function ProductDetail() {
     const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
-    // const [product, setProduct] = useState({}); // 선택한 상품 정보
     const [isWished, setIsWished] = useState(false); // 찜 상태 관리
     const [count, setCount] = useState(1); // 수량 관리
     // 장바구니 카운트
     const cartCount = useSelector( state => state.cart.cartCount );
-    // dispatch
     const dispatch = useDispatch();
-   const product =  useSelector((state) =>  state.product.product);
+    // 상품 정보
+    const product =  useSelector((state) =>  state.product.product);
+
     // pid기준 데이터 취득
     useEffect( () => {
         const fillter = async (pid) => {
             // getProductDetail();
             const jsonData = await axiosGet("/data/foodData.json");
+            // 나중엔 필터되서 하나의 데이터만 가져오므로 불필요
             const [data] = jsonData.foodData.filter( data => data.pid === pid );
             dispatch(setProductAPI(data)); 
-            // setProduct(data);
         }
         fillter(pid);
     }, [pid]);
 
-    console.log("안녕", product.productDescriptionImage);
     // 좋아요 버튼 클릭 이벤트
     const toggleWish = () => {
         setIsWished(prev => !prev);
@@ -79,7 +78,6 @@ export function ProductDetail() {
     const handleAddCart = () => {
         dispatch(addCartCount(count));
     }
-
 
     // 탭 화면 표시용
     const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
@@ -135,7 +133,7 @@ export function ProductDetail() {
                         <ul className="product-meta"><li>포장타입</li><li>냉동(종이포장)</li></ul>
                         <ul className="product-meta"><li>판매단위</li><li>1팩</li></ul>
                         <ul className="product-meta"><li>중량/용량</li><li>1KG</li></ul>
-                        <ul className="product-meta"><li>알레르기정보</li><li>소고리,대두,밀</li></ul>
+                        <ul className="product-meta"><li>알레르기정보</li><li>소고기,대두,밀</li></ul>
                         <ul className="product-meta"><li>안내사항</li><li>{product.description}</li></ul>
                         <hr />
 
@@ -158,7 +156,7 @@ export function ProductDetail() {
 
                         <button className="btn-buy">구매하기</button>
 
-                        <div className="product-buttons">
+                        <div className="product-buttons">   
                             <button
                                 className={`btn-wish ${isWished ? 'active' : ''}`}
                                 onClick={toggleWish}
