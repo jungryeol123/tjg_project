@@ -1,14 +1,101 @@
 
 .review-list {
-  width: 100%;
+  width: 95%;
   margin: 0 auto;
-  padding: 2vw;
+  // padding: 2vw;
   font-family: "Pretendard", sans-serif;
 
   h2 {
     font-size: clamp(16px, 2vw, 28px);
     margin-bottom: 1vw;
   }
+
+  .review-images {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+
+  .review-thumb {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+
+    &.more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  }
+}
+
+/* 모달 스타일 (그대로) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+
+  .modal-image img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+}
+
+
+
 
   p {
     font-size: clamp(14px, 1vw, 18px);

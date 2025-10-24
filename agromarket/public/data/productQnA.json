@@ -1,0 +1,36 @@
+{
+  "qnaList": [
+    {
+      "id": 1,
+      "title": "비밀글입니다.",
+      "writer": "하정",
+      "date": "2025.09.26",
+      "status": "답변완료",
+      "isPrivate": true
+    },
+    {
+      "id": 2,
+      "title": "비밀글입니다.",
+      "writer": "나디",
+      "date": "2025.09.10",
+      "status": "답변완료",
+      "isPrivate": true
+    },
+    {
+      "id": 3,
+      "title": "돼지고기 함량 몇프로인가요?",
+      "writer": "최병",
+      "date": "2025.08.13",
+      "status": "답변완료",
+      "isPrivate": false
+    },
+    {
+      "id": 4,
+      "title": "에어프라이어 없으면?",
+      "writer": "박진",
+      "date": "2025.08.04",
+      "status": "답변완료",
+      "isPrivate": false
+    }
+  ]
+}
