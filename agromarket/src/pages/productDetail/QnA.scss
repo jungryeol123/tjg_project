@@ -1,0 +1,73 @@
+.qna-section {
+  width: 95%;
+  margin: 3rem auto;
+  font-family: "Pretendard", sans-serif;
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .qna-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+
+    .highlight {
+      font-weight: bold;
+      color: #7b4bff;
+    }
+  }
+
+  .qna-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+
+    th, td {
+      border-bottom: 1px solid #eee;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #fafafa;
+      font-weight: 600;
+    }
+
+    .lock-icon {
+      margin-left: 5px;
+      color: #999;
+    }
+
+    .status {
+      color: #7b4bff;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+      transition: background 0.2s ease-in;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    button {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+    }
+  }
+}
