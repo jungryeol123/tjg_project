@@ -24,14 +24,10 @@ export function ProductDetail() {
   const product = useSelector((state) => state.product.product);
 
   useEffect(() => {
-    dispatch(setProductAPI(pid));
-  }, [dispatch, pid]);
-
-  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(pid));
   }, [dispatch, pid]);
-
+  
   console.log("안녕", product.productDescriptionImage);
   // 좋아요 버튼 클릭 이벤트
   const toggleWish = () => {
