@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./QnA.scss";
 
-export  function QnA() {
+export function QnA() {
   const [qnaList, setQnaList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     fetch("/data/productQnA.json")
@@ -10,6 +12,22 @@ export  function QnA() {
       .then((data) => setQnaList(data.qnaList))
       .catch((err) => console.error("QnA 불러오기 실패:", err));
   }, []);
+
+  const handleNext = () => {
+    setCurrentPage((prev) =>
+      prev * itemsPerPage < qnaList.length ? prev + 1 : prev
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+
+  // ✅ slice 계산을 여기서 즉시 수행
+  const currentItems = qnaList.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="qna-section">
@@ -19,8 +37,6 @@ export  function QnA() {
         배송관련, 주문(취소/교환/환불) 관련 문의 및 요청사항은{" "}
         <span className="highlight">고객문의</span>에 남겨주세요.
       </p>
-
-      
 
       <table className="qna-table">
         <thead>
@@ -32,8 +48,8 @@ export  function QnA() {
           </tr>
         </thead>
         <tbody>
-          {qnaList.map((item) => (
-            <tr key={item.id}>
+          {currentItems.map((item, index) => (
+            <tr key={index}>
               <td>
                 {item.title}{" "}
                 {item.isPrivate && <span className="lock-icon">🔒</span>}
@@ -47,8 +63,16 @@ export  function QnA() {
       </table>
 
       <div className="pagination">
-        <button disabled>{"<"}</button>
-        <button disabled>{">"}</button>
+        <button onClick={handlePrev} disabled={currentPage === 1}>{"<"}</button>
+        <span style={{ margin: "0 0.6rem" }}>
+          {currentPage} / {Math.ceil(qnaList.length / itemsPerPage)}
+        </span>
+        <button
+          onClick={handleNext}
+          disabled={currentPage * itemsPerPage >= qnaList.length}
+        >
+          {">"}
+        </button>
       </div>
     </div>
   );

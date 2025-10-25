@@ -1,209 +1,284 @@
-import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { axiosGet } from 'shared/lib/axiosInstance.js'
+import { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { axiosGet } from "shared/lib/axiosInstance.js";
 import { Item } from "./productDetail/Item.jsx";
 import { Detail } from "./productDetail/Detail.jsx";
 import { QnA } from "./productDetail/QnA.jsx";
 import { Return } from "./productDetail/Return.jsx";
 import "../styles/components/ProductDetail.css";
-import { useSelector, useDispatch } from 'react-redux';
-import { addCartCount } from 'features/cart/cartAPI.js';
-import { ReviewList } from './productDetail/ReviewList.jsx';
-import { setProductAPI } from 'features/product/productAPI.js';
+import { useSelector, useDispatch } from "react-redux";
+import { addCartCount } from "features/cart/cartAPI.js";
+import { ReviewList } from "./productDetail/ReviewList.jsx";
+import { setProductAPI } from "features/product/productAPI.js";
 
 export function ProductDetail() {
-    const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
-    // const [product, setProduct] = useState({}); // 선택한 상품 정보
-    const [isWished, setIsWished] = useState(false); // 찜 상태 관리
-    const [count, setCount] = useState(1); // 수량 관리
-    // 장바구니 카운트
-    const cartCount = useSelector( state => state.cart.cartCount );
-    // dispatch
-    const dispatch = useDispatch();
-   const product =  useSelector((state) =>  state.product.product);
-    // pid기준 데이터 취득
-    useEffect( () => {
-        const fillter = async (pid) => {
-            // getProductDetail();
-            const jsonData = await axiosGet("/data/foodData.json");
-            const [data] = jsonData.foodData.filter( data => data.pid === pid );
-            dispatch(setProductAPI(data)); 
-            // setProduct(data);
-        }
-        fillter(pid);
-    }, [pid]);
+  const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
+  // const [product, setProduct] = useState({}); // 선택한 상품 정보
+  const [isWished, setIsWished] = useState(false); // 찜 상태 관리
+  const [count, setCount] = useState(1); // 수량 관리
+  // 장바구니 카운트
+  const cartCount = useSelector((state) => state.cart.cartCount);
+  // dispatch
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.product);
 
-    console.log("안녕", product.productDescriptionImage);
-    // 좋아요 버튼 클릭 이벤트
-    const toggleWish = () => {
-        setIsWished(prev => !prev);
-    };
+  useEffect(() => {
+    dispatch(setProductAPI(pid));
+  }, [dispatch, pid]);
 
-    // 구매 수량 감소 버튼 클릭 이벤트
-    const handleDecrease = () => {
-        if(count !== 1){
-            setCount(count - 1);
-        }
-    };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+    dispatch(setProductAPI(pid));
+  }, [dispatch, pid]);
 
-    // 구매 수량 증가 버튼 클릭 이벤트
-    const handleIncrease = () => {
-        if(count < product.dc){
-            setCount(count + 1);
-        }
-    };
+  console.log("안녕", product.productDescriptionImage);
+  // 좋아요 버튼 클릭 이벤트
+  const toggleWish = () => {
+    setIsWished((prev) => !prev);
+  };
 
-    // 구매 수량 직접 입력시 이벤트
-    const handleChange = (e) => {
-        let value = e.target.value;
-
-        // 숫자만 입력
-        if (/^\d+$/.test(value)) {
-            // 숫자로 value값 설정
-            value = Number(value);
-
-            // 1미만을 입력할 경우 1설정
-            if (value < 1) {
-                value = 1;
-            } 
-            // 최대 갯수를 초과할 경우 최대치 설정
-            else if (value > product.dc) {
-                value = product.dc;
-            }
-
-            setCount(value);
-        }
-    };
-
-    const handleAddCart = () => {
-        dispatch(addCartCount(count));
+  // 구매 수량 감소 버튼 클릭 이벤트
+  const handleDecrease = () => {
+    if (count !== 1) {
+      setCount(count - 1);
     }
+  };
 
+  // 구매 수량 증가 버튼 클릭 이벤트
+  const handleIncrease = () => {
+    if (count < product.dc) {
+      setCount(count + 1);
+    }
+  };
 
-    // 탭 화면 표시용
-    const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
-    // 탭 이벤트용 변수명
-    const tabEventNames = ['item','detail', 'review', 'qna', 'return'];
-    // 탭 클릭시 위치 설정
-    const sectionRefs = {
-        item: useRef(null),
-        detail: useRef(null),
-        review: useRef(null),
-        qna: useRef(null),
-        return: useRef(null),
-    };
+  // 구매 수량 직접 입력시 이벤트
+  const handleChange = (e) => {
+    let value = e.target.value;
 
-    // 탭 클릭 이벤트
-    const handleTabClick = (name) => {
-        const section = sectionRefs[name].current;
-        if (section) {
-            section.scrollIntoView({ block: "start" });
-        }
-    };
-    
-    // 화면 표시용 가격 표시 : 9,999원
-    const price = parseInt(product.price).toLocaleString() + "원";
-    // 화면 표시용 할인가 : 9,999원
-    const dc = parseInt(product.price/product.dc).toLocaleString() + "원";
-    // 화면 표시용 할인가 적용 가격 : 9,999원
-    const salesPrice = (parseInt(product.price) - parseInt(product.price/product.dc)).toLocaleString() + "원";
+    // 숫자만 입력
+    if (/^\d+$/.test(value)) {
+      // 숫자로 value값 설정
+      value = Number(value);
 
-    return (
-        <div className="product-container">
-            <div className="product-detail">
-                <div className="product-detail-main">
-                    <div className="product-image">
-                        <img src={product.imageUrl} alt={product.imageUrl_name} className="product-image-main" />
-                    </div>
+      // 1미만을 입력할 경우 1설정
+      if (value < 1) {
+        value = 1;
+      }
+      // 최대 갯수를 초과할 경우 최대치 설정
+      else if (value > product.dc) {
+        value = product.dc;
+      }
 
-                    <div className="product-info">
-                        <div>{product.productName} : {cartCount} :<a href="#"className="product-brand">{product.brandName}</a></div>
-                        <div className="product-title">[{product.brandName}] {product.productName}</div>
+      setCount(value);
+    }
+  };
 
-                        <div className="product-discount red">
-                            {dc} 할인 <span className="product-price-original line">{price}</span>
-                        </div>
+  const handleAddCart = () => {
+    dispatch(addCartCount(count));
+  };
 
-                        <div className="product-price-final">{salesPrice}</div>
-                        <div className="product-period red">행사 기간 2025-09-10 ~ 2025-10-20</div>
-                        <hr />
+  // 탭 화면 표시용
+  const tabLabels = [
+    "속성정보",
+    "상세정보",
+    "구매후기",
+    "상품문의",
+    "배송/반품/교환정보",
+  ];
+  // 탭 이벤트용 변수명
+  const tabEventNames = ["item", "detail", "review", "qna", "return"];
+  // 탭 클릭시 위치 설정
+  const sectionRefs = {
+    item: useRef(null),
+    detail: useRef(null),
+    review: useRef(null),
+    qna: useRef(null),
+    return: useRef(null),
+  };
 
-                        <ul className="product-meta"><li>상품번호</li><li>{product.pid}</li></ul>
-                        <ul className="product-meta"><li>배송</li><li>샛별배송</li></ul>
-                        <ul className="product-meta"><li>판매자</li><li>컬리</li></ul>
-                        <ul className="product-meta"><li>포장타입</li><li>냉동(종이포장)</li></ul>
-                        <ul className="product-meta"><li>판매단위</li><li>1팩</li></ul>
-                        <ul className="product-meta"><li>중량/용량</li><li>1KG</li></ul>
-                        <ul className="product-meta"><li>알레르기정보</li><li>소고리,대두,밀</li></ul>
-                        <ul className="product-meta"><li>안내사항</li><li>{product.description}</li></ul>
-                        <hr />
+  // 탭 클릭 이벤트
+  const handleTabClick = (name) => {
+    const section = sectionRefs[name].current;
+    if (section) {
+      section.scrollIntoView({ block: "start" });
+    }
+  };
 
-                        <div className="product-purchase">
-                            <ul className="product-purchase-info">
-                                <li>수량 <span>(최소구매수량 1개)</span></li>
-                                <li>
-                                    <div className="product-qty-control">
-                                        <button className="qty-btn" onClick={ handleDecrease }>-</button>
-                                        <input className="qty-input" type="text" value={count} onChange={ handleChange } />
-                                        <button className="qty-btn" onClick={ handleIncrease }>+</button>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul className="product-purchase-info">
-                                <li>총금액 <span>(부가세포함)</span></li>
-                                <li>30,000원</li>
-                            </ul>
-                        </div>
+  // 화면 표시용 가격 표시 : 9,999원
+  const price = parseInt(product.price).toLocaleString() + "원";
+  // 화면 표시용 할인가 : 9,999원
+  const dc = parseInt(product.price / product.dc).toLocaleString() + "원";
+  // 화면 표시용 할인가 적용 가격 : 9,999원
+  const salesPrice =
+    (
+      parseInt(product.price) - parseInt(product.price / product.dc)
+    ).toLocaleString() + "원";
 
-                        <button className="btn-buy">구매하기</button>
+  return (
+    <div className="product-container">
+      <div className="product-detail">
+        <div className="product-detail-main">
+          <div className="product-image">
+            <img
+              src={product.imageUrl}
+              alt={product.imageUrl_name}
+              className="product-image-main"
+            />
+          </div>
 
-                        <div className="product-buttons">
-                            <button
-                                className={`btn-wish ${isWished ? 'active' : ''}`}
-                                onClick={toggleWish}
-                            >
-                                {isWished ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
-                            </button>
-                            <button className="btn-cart" onClick={ handleAddCart }>장바구니</button>
-                        </div>
-                    </div>
-                </div>
+          <div className="product-info">
+            <div>
+              {product.productName} : {cartCount} :
+              <a href="#" className="product-brand">
+                {product.brandName}
+              </a>
             </div>
-            <div className="product-tabs">
-                <ul className="product-tab-list">
-                {tabLabels.map((label, i) => (
-                    <li key={i}>
-                    <button onClick={() => handleTabClick(tabEventNames[i])}>
-                        {label}
+            <div className="product-title">
+              [{product.brandName}] {product.productName}
+            </div>
+
+            <div className="product-discount red">
+              {dc} 할인{" "}
+              <span className="product-price-original line">{price}</span>
+            </div>
+
+            <div className="product-price-final">{salesPrice}</div>
+            <div className="product-period red">
+              행사 기간 2025-09-10 ~ 2025-10-20
+            </div>
+            <hr />
+
+            <ul className="product-meta">
+              <li>상품번호</li>
+              <li>{product.pid}</li>
+            </ul>
+            <ul className="product-meta">
+              <li>배송</li>
+              <li>샛별배송</li>
+            </ul>
+            <ul className="product-meta">
+              <li>판매자</li>
+              <li>컬리</li>
+            </ul>
+            <ul className="product-meta">
+              <li>포장타입</li>
+              <li>냉동(종이포장)</li>
+            </ul>
+            <ul className="product-meta">
+              <li>판매단위</li>
+              <li>1팩</li>
+            </ul>
+            <ul className="product-meta">
+              <li>중량/용량</li>
+              <li>1KG</li>
+            </ul>
+            <ul className="product-meta">
+              <li>알레르기정보</li>
+              <li>소고리,대두,밀</li>
+            </ul>
+            <ul className="product-meta">
+              <li>안내사항</li>
+              <li>{product.description}</li>
+            </ul>
+            <hr />
+
+            <div className="product-purchase">
+              <ul className="product-purchase-info">
+                <li>
+                  수량 <span>(최소구매수량 1개)</span>
+                </li>
+                <li>
+                  <div className="product-qty-control">
+                    <button className="qty-btn" onClick={handleDecrease}>
+                      -
                     </button>
-                    </li>
-                ))}
-                </ul>
+                    <input
+                      className="qty-input"
+                      type="text"
+                      value={count}
+                      onChange={handleChange}
+                    />
+                    <button className="qty-btn" onClick={handleIncrease}>
+                      +
+                    </button>
+                  </div>
+                </li>
+              </ul>
+              <ul className="product-purchase-info">
+                <li>
+                  총금액 <span>(부가세포함)</span>
+                </li>
+                <li>30,000원</li>
+              </ul>
             </div>
-            <div style={{ marginBottom: "20px" }}></div>
-            {/* 각 탭 섹션 */}
-            <div className="product-tab-content">
-                <section className="product-section" ref={sectionRefs.item} id="item">
-                    <Item  images={product.productDescriptionImage}/>
-                </section>
 
-                <section className="product-section" ref={sectionRefs.detail} id="detail">
-                    <Detail images={product.productInformationImage}/>
-                </section>
+            <button className="btn-buy">구매하기</button>
 
-                <section className="product-section" ref={sectionRefs.review} id="review">
-                    <ReviewList pid={pid}/>
-                </section>
-
-                <section className="product-section" ref={sectionRefs.qna} id="qna">
-                    <QnA />
-                </section>
-
-                <section className="product-section" ref={sectionRefs.return} id="return">
-                    <Return />
-                </section>
+            <div className="product-buttons">
+              <button
+                className={`btn-wish ${isWished ? "active" : ""}`}
+                onClick={toggleWish}
+              >
+                {isWished ? (
+                  <AiFillHeart size={20} />
+                ) : (
+                  <AiOutlineHeart size={20} />
+                )}
+              </button>
+              <button className="btn-cart" onClick={handleAddCart}>
+                장바구니
+              </button>
             </div>
+          </div>
         </div>
-    );
+      </div>
+      <div className="product-tabs">
+        <ul className="product-tab-list">
+          {tabLabels.map((label, i) => (
+            <li key={i}>
+              <button onClick={() => handleTabClick(tabEventNames[i])}>
+                {label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style={{ marginBottom: "20px" }}></div>
+      {/* 각 탭 섹션 */}
+      <div className="product-tab-content">
+        <section className="product-section" ref={sectionRefs.item} id="item">
+          <Item images={product.productDescriptionImage} />
+        </section>
+
+        <section
+          className="product-section"
+          ref={sectionRefs.detail}
+          id="detail"
+        >
+          <Detail images={product.productInformationImage} />
+        </section>
+
+        <section
+          className="product-section"
+          ref={sectionRefs.review}
+          id="review"
+        >
+          <ReviewList pid={pid} />
+        </section>
+
+        <section className="product-section" ref={sectionRefs.qna} id="qna">
+          <QnA />
+        </section>
+
+        <section
+          className="product-section"
+          ref={sectionRefs.return}
+          id="return"
+        >
+          <Return />
+        </section>
+      </div>
+    </div>
+  );
 }

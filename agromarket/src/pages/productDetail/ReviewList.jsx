@@ -1,57 +1,93 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ReviewList.scss";
 import { axiosGet } from "shared/lib/axiosInstance";
 
 export function ReviewList({ pid }) {
   const [reviews, setReviews] = useState([]);
-    const [reviewImages, setReviewImages] = useState([]);
-    const [images, setImages] = useState([]);
-     const [showModal, setShowModal] = useState(false);
+  const [reviewImages, setReviewImages] = useState([]);
+  const [images, setImages] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  const isFirstRender = useRef(true);
 
-     
+  // ✅ 부모요소 ref 추가
+  const containerRef = useRef(null);
+
   useEffect(() => {
     const axiosData = async () => {
       const result = await axiosGet("/data/reviews.json");
       const reviews = result.reviews.filter((item) => item.pid === pid);
       const allImages = reviews.flatMap((review) => review.images);
       setImages(allImages);
-       // ✅ 6개까지만 표시
-      const visibleImages = allImages.slice(0, 6);
+      setReviewImages(allImages.slice(0, 6));
       setReviews(reviews);
-      setReviewImages(visibleImages );
     };
     axiosData();
   }, [pid]);
 
+
+
+  useEffect(() => {
+  if (isFirstRender.current) {
+    isFirstRender.current = false;
+    return; // 첫 렌더링일 땐 스크롤하지 않음
+  }
+
+  if (containerRef.current) {
+    containerRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+}, [currentPage]);
+
+
+
+  const handleNext = () => {
+    setCurrentPage((prev) =>
+      prev * itemsPerPage < reviews.length ? prev + 1 : prev
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+
+  // ✅ slice 계산을 여기서 즉시 수행
+  const currentItems = reviews.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
-    <div className="review-list">
+    <div className="review-list" ref={containerRef}>
       <h2>상품 후기</h2>
       <p>총 {reviews.length}개</p>
 
       <div className="review-images">
-      {reviewImages.map((img, i) => (
-        <div key={i} className="review-thumb">
-          <img src={img} alt={`review-${i}`} />
-        </div>
-      ))}
+        {reviewImages.map((img, i) => (
+          <div key={i} className="review-thumb">
+            <img src={img} alt={`review-${i}`} />
+          </div>
+        ))}
 
-      {/* ✅ 나머지 있으면 '더보기' 버튼 표시 */}
-      {images.length > 6 && (
-        <div className="review-thumb more" onClick={() => setShowModal(true)}>
-          <span>+ 더보기</span>
-        </div>
-      )}
+        {images.length > 6 && (
+          <div className="review-thumb more" onClick={() => setShowModal(true)}>
+            <span>+ 더보기</span>
+          </div>
+        )}
+      </div>
 
-      {/* ✅ 전체 이미지 모달 */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()} // 내부 클릭 시 닫히지 않게
-          >
-            <button className="close-btn" onClick={() => setShowModal(false)}>
-              ✕
-            </button>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-top">
+              <span>상품 전체 보기</span>
+              <button className="close-btn" onClick={() => setShowModal(false)}>
+                ✕
+              </button>
+            </div>
             <div className="modal-grid">
               {images.map((img, i) => (
                 <div key={i} className="modal-image">
@@ -62,22 +98,19 @@ export function ReviewList({ pid }) {
           </div>
         </div>
       )}
-    </div>
 
-      {reviews.map((r) => (
-        <div key={r.id} className="review-card">
+      {/* ✅ 리뷰 카드 목록 */}
+      {currentItems.map((r, index) => (
+        <div key={index} className="review-card">
           {r.isBest && <span className="badge">베스트</span>}
-
           <h3>{r.productName}</h3>
           <p className="review-title">{r.title}</p>
           <p className="review-content">{r.content}</p>
-
           <div className="review-images">
             {r.images.map((img, i) => (
               <img key={i} src={img} alt="리뷰 이미지" />
             ))}
           </div>
-
           <div className="review-footer">
             <div className="user-Date">
               <span>{r.userId}</span>
@@ -85,7 +118,6 @@ export function ReviewList({ pid }) {
             </div>
             <span className="likes">도움돼요 {r.likes}</span>
           </div>
-
           <div className="tags">
             {r.tags.map((tag, i) => (
               <span key={i} className="tag">
@@ -95,6 +127,21 @@ export function ReviewList({ pid }) {
           </div>
         </div>
       ))}
+
+      <div className="pagination">
+        <button onClick={handlePrev} disabled={currentPage === 1}>
+          {"<"}
+        </button>
+        <span style={{ margin: "0 0.6rem" }}>
+          {currentPage} / {Math.ceil(reviews.length / itemsPerPage)}
+        </span>
+        <button
+          onClick={handleNext}
+          disabled={currentPage * itemsPerPage >= reviews.length}
+        >
+          {">"}
+        </button>
+      </div>
     </div>
   );
 }
