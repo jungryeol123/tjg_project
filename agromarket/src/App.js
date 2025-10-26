@@ -8,6 +8,7 @@ import KakaoCallback from 'features/auth/Kakao';
 import { useEffect } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
 import { ProductDetail } from 'pages/ProductDetail';
+import { HeaderProductList } from 'pages/productCategoryList/HeaderProductList';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/pay" element={<PaymentButton/>} />
           <Route path="/" element={<PaymentButton/>} />
           <Route path="/products/:pid/:id" element={<ProductDetail />} />
+          <Route path="/productList/:id" element={<HeaderProductList />} />
         </Route>
         </Routes>
       </BrowserRouter>
