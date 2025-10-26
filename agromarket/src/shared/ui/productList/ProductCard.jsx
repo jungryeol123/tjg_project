@@ -11,7 +11,9 @@ export default function ProductCard({ item }) {
     <div className="product-card">
       {/* ✅ 뱃지 */}
       <div
-        className={`badge-container ${item.isHotDeal && item.isMemberSpecial ? "multi" : ""}`}
+        className={`badge-container ${
+          item.isHotDeal && item.isMemberSpecial ? "multi" : ""
+        }`}
       >
         {item.isHotDeal && <span className="badge hot">원딜핫딜</span>}
         {item.isMemberSpecial && <span className="badge member">멤버특가</span>}
@@ -19,7 +21,7 @@ export default function ProductCard({ item }) {
 
       {/* ✅ 제품 이미지 */}
       <img
-        src={item.imageUrl}
+        src={`/images/productImages/${item.imageUrl}`}
         alt={item.imageUrl_name}
         className="product-image"
         draggable="false"
@@ -43,7 +45,7 @@ export default function ProductCard({ item }) {
               </span>
             </>
           ) : (
-            <span className="no-price">가격 정보 없음</span>
+              <span className="or-price">{item.price.toLocaleString()}원</span>   
           )}
         </div>
 
@@ -52,3 +54,4 @@ export default function ProductCard({ item }) {
     </div>
   );
 }
+

@@ -1,12 +1,13 @@
 
 import { createSlice } from '@reduxjs/toolkit';
+import { act } from 'react';
 
 // 전체 전역 변수
 const initialState = {
   
     productList: [],
-    
     product: {},
+    productReviewList : []
     
 };
 
@@ -18,16 +19,20 @@ export const productSlice = createSlice({
   initialState,
   reducers : {
     setProductList(state, action) {
-        const {foodData} = action.payload;
-        state.productList = foodData;
+      const {result} = action.payload;
+        state.productList = result;
     },
     setProduct(state, action) {
         const {product} = action.payload;
       state.product = product;
+    },
+    setProductReviewList(state, action) {
+      const {result} = action.payload;
+      state.productReviewList = result;
     }
   }});
 
 
 
-  export const {setProductList, setProduct} = productSlice.actions; 
+  export const {setProductList,setProduct, setProductReviewList} = productSlice.actions; 
   export default productSlice.reducer;

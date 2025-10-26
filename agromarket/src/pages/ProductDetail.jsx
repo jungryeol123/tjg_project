@@ -117,7 +117,7 @@ export function ProductDetail() {
         <div className="product-detail-main">
           <div className="product-image">
             <img
-              src={product.imageUrl}
+              src={`/images/productImages/${product.imageUrl}`}
               alt={product.imageUrl_name}
               className="product-image-main"
             />
@@ -264,7 +264,7 @@ export function ProductDetail() {
         </section>
 
         <section className="product-section" ref={sectionRefs.qna} id="qna">
-          <QnA />
+          <QnA pid={pid}/>
         </section>
 
         <section
