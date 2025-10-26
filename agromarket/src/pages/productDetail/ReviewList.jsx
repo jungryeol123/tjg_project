@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./ReviewList.scss";
 import { axiosGet } from "shared/lib/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
 
 export function ReviewList({ pid }) {
+  const reviewsAll = useSelector((state) => state.product.productReviewList);
   const [reviews, setReviews] = useState([]);
   const [reviewImages, setReviewImages] = useState([]);
   const [images, setImages] = useState([]);
@@ -14,17 +16,36 @@ export function ReviewList({ pid }) {
   // ✅ 부모요소 ref 추가
   const containerRef = useRef(null);
 
+  // useEffect(() => {
+  //   const axiosData = async () => {
+  //     // const result = await axiosGet("/data/reviews.json")
+  //     const reviews = result.reviews.filter((item) => item.pid === pid);
+  //     const allImages = reviews.flatMap((review) => review.images);
+  //     setImages(allImages);
+  //     setReviewImages(allImages.slice(0, 6));
+  //     setReviews(reviews);
+  //   };
+  //   axiosData();
+  // }, [pid]);
+
+  // ✅ 상품별 리뷰 필터링
+  const productReviews = useMemo(() => {
+    if (!reviewsAll || reviewsAll.length === 0) return [];
+    return reviewsAll.filter((review) => review.pid === pid);
+  }, [reviewsAll, pid]);
+
+  // ✅ 리뷰에서 이미지만 추출
   useEffect(() => {
-    const axiosData = async () => {
-      const result = await axiosGet("/data/reviews.json");
-      const reviews = result.reviews.filter((item) => item.pid === pid);
-      const allImages = reviews.flatMap((review) => review.images);
-      setImages(allImages);
+    if (productReviews.length > 0) {
+      const allImages = productReviews.flatMap((r) => r.images || []);
       setReviewImages(allImages.slice(0, 6));
-      setReviews(reviews);
-    };
-    axiosData();
-  }, [pid]);
+      setReviews(productReviews); // 6개까지만 미리보기
+    } else {
+      setReviews(productReviews); 
+      setReviewImages([]);
+    }
+  }, [productReviews]);
+
 
 
 
