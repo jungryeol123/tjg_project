@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./QnA.scss";
+import { useSelector } from "react-redux";
 
-export function QnA() {
-  const [qnaList, setQnaList] = useState([]);
+export function QnA({id}) {
+  const qnaAll = useSelector((state) => state.product.productQnAList);
+  // const [qnaList, setQnaList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  useEffect(() => {
-    fetch("/data/productQnA.json")
-      .then((res) => res.json())
-      .then((data) => setQnaList(data.qnaList))
-      .catch((err) => console.error("QnA 불러오기 실패:", err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/data/productQnA.json")
+  //     .then((res) => res.json())
+  //     .then((data) => setQnaList(data.qnaList))
+  //     .catch((err) => console.error("QnA 불러오기 실패:", err));
+  // }, []);
+
+    // ✅ 상품별 QnA 필터링
+  const qnaList = useMemo(() => {
+    if (!qnaAll || qnaAll.length === 0) return [];
+    // 🔥 숫자/문자열 타입이 다를 수 있으니 Number()로 변환
+    return qnaAll.filter((item) => Number(item.ppk) === Number(id));
+  }, [qnaAll, id]);
 
   const handleNext = () => {
     setCurrentPage((prev) =>

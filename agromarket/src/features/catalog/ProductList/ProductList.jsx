@@ -30,6 +30,7 @@ import { setProductListAPI } from "features/product/productAPI";
   // }, [dispatch, keyword]);
 
 
+    console.log("id", typeof id);
    // ✅ 필터 조건 분기
   const productFilterList = useMemo(() => {
     if (!productList || productList.length === 0) return [];
@@ -155,7 +156,7 @@ console.log("productFilterList", productFilterList);
           <div className="slides">
             {productFilterList && productFilterList.map((item, idx) => (
               <Link
-                to={`/products/${item.pid}`}
+                to={`/products/${item.pid}/${item.id}`}
                 className="slide"
                 key={idx}
                 draggable="false"

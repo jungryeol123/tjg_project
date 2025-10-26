@@ -33,7 +33,7 @@ function App() {
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           <Route path="/pay" element={<PaymentButton/>} />
           <Route path="/" element={<PaymentButton/>} />
-          <Route path="/products/:pid" element={<ProductDetail />} />
+          <Route path="/products/:pid/:id" element={<ProductDetail />} />
         </Route>
         </Routes>
       </BrowserRouter>

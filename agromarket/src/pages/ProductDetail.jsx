@@ -13,7 +13,7 @@ import { ReviewList } from "./productDetail/ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
 
 export function ProductDetail() {
-  const { pid } = useParams(); // 선택한 상품의 상품번호(primarykey)
+  const { pid, id } = useParams(); // 선택한 상품의 상품번호(primarykey)
   // const [product, setProduct] = useState({}); // 선택한 상품 정보
   const [isWished, setIsWished] = useState(false); // 찜 상태 관리
   const [count, setCount] = useState(1); // 수량 관리
@@ -22,7 +22,7 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-
+   console.log("id", typeof id);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(pid));
@@ -260,11 +260,11 @@ export function ProductDetail() {
           ref={sectionRefs.review}
           id="review"
         >
-          <ReviewList pid={pid} />
+          <ReviewList pid={pid} id={id} />
         </section>
 
         <section className="product-section" ref={sectionRefs.qna} id="qna">
-          <QnA pid={pid}/>
+          <QnA id={id}/>
         </section>
 
         <section

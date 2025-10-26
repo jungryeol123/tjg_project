@@ -3,6 +3,7 @@ import {
   setProductList,
   setProduct,
   setProductReviewList,
+  setProductQnAList,
 } from "./productSlice";
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
@@ -43,6 +44,13 @@ export const setProductReviewListAPI = () => async (dispatch) => {
   } catch (error) {
     console.error("리뷰 데이터 불러오기 실패:", error);
   }
+};
+
+export const setProductQnAListAPI = () => async (dispatch) => {
+  const result = await axiosGet("http://localhost:8080/product/productQnAList");
+  console.log("productQnAList", result);
+  dispatch(setProductQnAList({"result" : result}));
+
 };
 
 // // 상품 디테일 정보 취득
