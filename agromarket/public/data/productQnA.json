@@ -2,75 +2,84 @@
   "qnaList": [
     {
       "id": 1,
+      "ppk": 1,
       "title": "비밀글입니다.",
-      "writer": "하정우",
       "date": "2025.09.26",
       "status": "답변완료",
-      "isPrivate": true
+      "isPrivate": true,
+      "upk": 3
     },
     {
       "id": 2,
+      "ppk": 2,
       "title": "비밀글입니다.",
-      "writer": "나디지",
       "date": "2025.09.10",
       "status": "답변완료",
-      "isPrivate": true
+      "isPrivate": true,
+      "upk": 1
     },
     {
       "id": 3,
+      "ppk": 3,
       "title": "돼지고기 함량 몇프로인가요?",
-      "writer": "최병우",
       "date": "2025.08.13",
       "status": "답변완료",
-      "isPrivate": false
+      "isPrivate": false,
+      "upk": 5
     },
     {
       "id": 4,
+      "ppk": 4,
       "title": "에어프라이어 없으면?",
-      "writer": "박진철",
       "date": "2025.08.04",
       "status": "답변완료",
-      "isPrivate": false
+      "isPrivate": false,
+      "upk": 2
     },
-     {
+    {
       "id": 5,
+      "ppk": 5,
       "title": "에어프라이어 없으면?",
-      "writer": "박진우",
       "date": "2025.08.04",
       "status": "답변완료",
-      "isPrivate": false
+      "isPrivate": false,
+      "upk": 4
     },
-     {
+    {
       "id": 6,
+      "ppk": 6,
       "title": "에어프라이어 없으면?",
-      "writer": "최현우",
       "date": "2025.08.04",
       "status": "답변완료",
-      "isPrivate": false
+      "isPrivate": false,
+      "upk": 1
     },
-     {
+    {
       "id": 7,
+      "ppk": 7,
       "title": "에어프라이어 없으면?",
-      "writer": "김철수",
       "date": "2025.08.04",
       "status": "답변완료",
-      "isPrivate": false
+      "isPrivate": false,
+      "upk": 5
     },
-     {
+    {
       "id": 8,
+      "ppk": 8,
       "title": "에어프라이어 없으면?",
-      "writer": "김진",
       "date": "2025.08.04",
       "status": "답변완료",
-      "isPrivate": false
+      "isPrivate": false,
+      "upk": 2
     },
-     {
+    {
       "id": 9,
+      "ppk": 9,
       "title": "에어프라이어 없으면?",
-      "writer": "안상우",
       "date": "2025.08.04",
       "status": "안녕",
-      "isPrivate": false
+      "isPrivate": false,
+      "upk": 4
     }
   ]
 }
