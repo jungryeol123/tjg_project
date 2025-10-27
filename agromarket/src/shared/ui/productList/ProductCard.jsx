@@ -12,11 +12,11 @@ export default function ProductCard({ item }) {
       {/* ✅ 뱃지 */}
       <div
         className={`badge-container ${
-          item.isHotDeal && item.isMemberSpecial ? "multi" : ""
+          item.hotDeal && item.memberSpecial ? "multi" : ""
         }`}
       >
-        {item.isHotDeal && <span className="badge hot">원딜핫딜</span>}
-        {item.isMemberSpecial && <span className="badge member">멤버특가</span>}
+        {item.hotDeal && <span className="badge hot">원딜핫딜</span>}
+        {item.memberSpecial && <span className="badge member">멤버특가</span>}
       </div>
 
       {/* ✅ 제품 이미지 */}
