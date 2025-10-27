@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
 import { ProductDetail } from 'pages/ProductDetail';
 import { HeaderProductList } from 'pages/productCategoryList/HeaderProductList';
+import { Cart } from 'pages/Cart';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/detail" element={<ProductDetail/>} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           <Route path="/pay" element={<PaymentButton/>} />
           <Route path="/" element={<PaymentButton/>} />

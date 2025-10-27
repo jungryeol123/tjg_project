@@ -1,0 +1,219 @@
+/* ===== 카트 전체 컨테이너 ===== */
+.cart-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 30px;
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+/* ===== 헤더 ===== */
+.cart-container .cart-header {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #2c2c2c;
+  border-bottom: 3px solid #4949b1ff;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+/* ===== 본문 (좌/우) ===== */
+.cart-container .cart-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.cart-container .cart-left {
+  flex: 2;
+  min-width: 600px;
+}
+
+.cart-container .cart-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* ===== 카트 아이템 ===== */
+.cart-container .cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.cart-container .cart-item:hover {
+  transform: scale(1.01);
+}
+
+.cart-container .cart-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cart-container .cart-item-details {
+  flex: 1;
+  margin-left: 15px;
+}
+
+.cart-container .cart-item-title {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.cart-container .cart-item-price {
+  font-size: 16px;
+  color: #555;
+  font-weight: bold;
+}
+
+/* ===== 수량 조절 버튼 ===== */
+.cart-container .cart-quantity {
+  display: flex;
+  align-items: center;
+  background: #f1f1f1;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.cart-container .cart-quantity button {
+  background-color: #4949b1ff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.cart-container .cart-quantity button:hover {
+  background-color: #35358f;
+}
+
+.cart-container .cart-quantity input {
+  width: 45px;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  background: transparent;
+  outline: none;
+  margin: 0 5px;
+}
+
+/* ===== 제거 버튼 ===== */
+.cart-container .cart-remove {
+  background: #ff4c4c;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.cart-container .cart-remove:hover {
+  background: #d93636;
+}
+
+/* ===== 주문 요약 ===== */
+.cart-container .cart-summary {
+  border: 1px solid #e1e1e1;
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 25px 20px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.cart-container .cart-summary h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #2c2c2c;
+}
+
+.cart-container .cart-summary-sub {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.cart-container .cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+.cart-container .cart-total2 {
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.cart-container .cart-total2 label,
+.cart-container .cart-total2 span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* ===== 주문하기 버튼 ===== */
+.cart-container .cart-actions {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.cart-container .cart-actions button {
+  background: #4949b1ff;
+  color: white;
+  padding: 12px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.cart-container .cart-actions button:hover {
+  background: #35358f;
+  transform: translateY(-2px);
+}
+
+/* ===== 빈 장바구니 ===== */
+.cart-container .cart-right > div {
+  text-align: center;
+  color: #777;
+  font-size: 18px;
+}
+
+.cart-container .cart-right img {
+  width: 60%;
+  max-width: 250px;
+  opacity: 0.85;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 900px) {
+  .cart-container .cart-body {
+    flex-direction: column;
+  }
+
+  .cart-container .cart-left,
+  .cart-container .cart-right {
+    min-width: 100%;
+  }
+}
