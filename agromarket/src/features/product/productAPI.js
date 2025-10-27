@@ -50,8 +50,15 @@ export const setProductQnAListAPI = () => async (dispatch) => {
   const result = await axiosGet("http://localhost:8080/product/productQnAList");
   console.log("productQnAList", result);
   dispatch(setProductQnAList({"result" : result}));
-
 };
+
+
+export const setProductBestListAPI = async() =>  {
+    const result = await axiosGet("http://localhost:8080/product/productBestList");
+    console.log("result12", result);
+    return result;
+
+}
 
 // // 상품 디테일 정보 취득
 // export const getProductDetail = (pid) => async (dispatch) => {
