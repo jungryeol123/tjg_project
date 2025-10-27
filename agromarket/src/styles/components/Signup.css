@@ -170,7 +170,7 @@
 
 .signup-container .gender .middle {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .signup-container .genderList {
@@ -187,7 +187,7 @@
 
 .signup-container .date > .middle {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     text-align: center;
 }
 
@@ -246,9 +246,8 @@
 }
 
 .signup-container .btn-address {
-    padding-left: 3px;
     margin-bottom: 5px;
-    width: 260px;
+    width: 252px;
 }
 
 .signup-container .phone {
@@ -260,4 +259,11 @@
 
 .signup-container .phone-btn {
     margin-top: 5px;
+}
+
+.signup-container .address > .middle > span {
+    /* margin-left: 20px; */
+    padding-left: 20px;
+    font-size: 12px;
+    color: #888;
 }
