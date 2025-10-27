@@ -44,7 +44,7 @@ import { setProductListAPI } from "features/product/productAPI";
           )
           .slice(0, limit);
 
-      case "dc": // 할인율 20% 이상
+      case "dc": // 할인율 10% 이상
         return productList
           .filter((item) => item.dc >= 10)
           .sort((a, b) => b.dc - a.dc)

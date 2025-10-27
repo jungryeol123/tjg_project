@@ -1,0 +1,166 @@
+.notice-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #333;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .notice-desc {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 28px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ✅ 공지 테이블 */
+  .notice-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #222;
+    font-size: 15px;
+    text-align: center;
+
+    thead {
+      background: #f8f9fa;
+
+      th {
+        padding: 14px 0;
+        border-bottom: 1px solid #ddd;
+        font-weight: 600;
+        color: #222;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #eee;
+        transition: background 0.2s ease-in-out;
+
+        &:hover {
+          background: #f5f9ff;
+        }
+
+        td {
+          padding: 14px 8px;
+          color: #444;
+          vertical-align: middle;
+        }
+
+        /* ✅ 제목 컬럼 */
+        .title {
+          text-align: left;
+          padding-left: 20px;
+          font-weight: 500;
+
+          a {
+            display: inline-block;
+            color: #2a7de1;
+            text-decoration: none;
+            transition: 0.2s;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      /* ✅ 데이터 없음 표시 */
+      .empty {
+        text-align: center;
+        padding: 60px 0;
+        font-size: 16px;
+        color: #999;
+      }
+    }
+  }
+
+  /* ✅ 페이지네이션 */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+
+    button {
+      background: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 6px 12px;
+      margin: 0 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+
+      &:hover:not(:disabled) {
+        background: #2a7de1;
+        color: #fff;
+        border-color: #2a7de1;
+      }
+
+      &:disabled {
+        color: #aaa;
+        border-color: #eee;
+        cursor: default;
+      }
+    }
+
+    span {
+      font-size: 14px;
+      color: #666;
+      margin: 0 8px;
+    }
+  }
+
+  /* ✅ 반응형 디자인 */
+  @media (max-width: 768px) {
+    padding: 40px 16px;
+
+    h2 {
+      font-size: 20px;
+    }
+
+    .notice-table {
+      font-size: 14px;
+
+      th,
+      td {
+        padding: 10px 6px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .notice-table {
+      th:nth-child(1),
+      td:nth-child(1) {
+        display: none; /* 번호 열 숨김 */
+      }
+
+      .title {
+        padding-left: 8px;
+        font-size: 14px;
+      }
+    }
+
+    .pagination {
+      button {
+        padding: 4px 10px;
+        font-size: 13px;
+      }
+
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+}

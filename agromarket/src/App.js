@@ -9,6 +9,10 @@ import { useEffect } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
 import { ProductDetail } from 'pages/ProductDetail';
 import { HeaderProductList } from 'pages/productCategoryList/HeaderProductList';
+import SearchResult from 'pages/searchResult/SearchResult';
+import CustomerService from 'pages/customerService/CustomerService';
+import {NoticeList} from 'pages/noticeList/NoticeList';
+import NoticeDetail from 'pages/noticeList/NoticeDetail';
 
 function App() {
 
@@ -36,6 +40,10 @@ function App() {
           <Route path="/" element={<PaymentButton/>} />
           <Route path="/products/:pid/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
+           <Route path="/search/:keyword" element={<SearchResult />} />
+             <Route path="/support" element={<CustomerService />} />
+             <Route path="/notice" element={<NoticeList />} />
+                <Route path="/notice/:id" element={<NoticeDetail />} />
         </Route>
         </Routes>
       </BrowserRouter>

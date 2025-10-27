@@ -5,7 +5,7 @@ import "./HeaderProductList.scss";
 import ProductCard from "shared/ui/productList/ProductCard";
 import { useParams } from "react-router-dom";
 import { setProductBestListAPI } from "features/product/productAPI";
-
+import { Link } from "react-router-dom";
 export function HeaderProductList() {
   const { id } = useParams();
   const productList = useSelector((state) => state.product.productList);
@@ -90,8 +90,14 @@ export function HeaderProductList() {
           <p className="loading">로딩 중...</p>
         ) : filteredProducts.length > 0 ? (
           <div className="product-grid">
-            {filteredProducts.map((item) => (
-              <ProductCard item={item} />
+            {filteredProducts.map((item, idx) => (
+              <Link
+                to={`/products/${item.pid}/${item.id}`}
+                key={idx}
+              >
+                  <ProductCard item={item} />
+              </Link>
+              
             ))}
           </div>
         ) : (
