@@ -1,0 +1,73 @@
+.search-result-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #333;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: left;
+    span {
+      color: #2a7de1; /* 강조 색상 */
+    }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .product-grid .product-card {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .empty {
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+    margin-top: 80px;
+  }
+
+  /* 반응형 */
+  @media (max-width: 768px) {
+    padding: 40px 16px;
+
+    h2 {
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .product-grid {
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }s
+
+    .empty {
+      font-size: 16px;
+    }
+  }
+}

@@ -77,39 +77,71 @@
   }
 }
 
+// .slider-container {
+//   overflow-x: auto;
+//   overflow-y: visible;
+//   position: relative;
+//   scrollbar-width: none; /* ✅ Firefox용 */
+//   -ms-overflow-style: none; /* ✅ IE/Edge용 */
+//   &::-webkit-scrollbar {
+//     /* ✅ Chrome, Safari용 */
+//     display: none;
+//   }
+// }
+
+// .slides {
+//   display: flex;
+//   gap: clamp(12px, 1.8vw, 24px);
+//   position: relative;
+//   overflow: visible;
+// }
+
+// .slide {
+
+
+
+
+//   flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 4)) / 5);
+//   aspect-ratio: 3 / 5;
+//   // height: auto;
+//   min-height: 400px; 
+//   position: relative;
+//   z-index: 1;
+
+//   // transition: transform 0.25s ease;
+
+//   // &:hover {
+//   //   transform: translateY(-20px);
+//   //   z-index: 100; // ✅ 높게
+//   //   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+//   // }
+
+//   // 예시: hover될 때 absolute로 분리
+// }
+
 .slider-container {
   overflow-x: auto;
-  overflow-y: hidden;
-  position: relative;
-  scrollbar-width: none; /* ✅ Firefox용 */
-  -ms-overflow-style: none; /* ✅ IE/Edge용 */
+  padding: 0 20px;
+  scrollbar-width: none;
   &::-webkit-scrollbar {
-    /* ✅ Chrome, Safari용 */
     display: none;
   }
 }
 
 .slides {
   display: flex;
-  gap: clamp(12px, 1.8vw, 24px);
-  position: relative;
+  gap: 20px;
   overflow: visible;
 }
 
 .slide {
-  flex: 0 0 calc((100% - (clamp(12px, 1.8vw, 24px) * 4)) / 5);
-  aspect-ratio: 3 / 5;
-  height: auto;
-  min-height: 220px; 
-  position: relative;
-  z-index: 1;
-  // transition: transform 0.25s ease;
+  flex: 0 0 18%;
+  min-width: 220px;
+  aspect-ratio: 3 / 4.5;
+  border-radius: 8px;
+  transition: transform 0.25s ease;
 
-  // &:hover {
-  //   transform: translateY(-20px);
-  //   z-index: 100; // ✅ 높게
-  //   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
-  // }
-
-  // 예시: hover될 때 absolute로 분리
+  &:hover {
+    transform: translateY(-10px);
+  }
 }
