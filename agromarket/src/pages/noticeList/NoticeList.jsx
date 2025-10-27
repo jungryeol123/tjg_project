@@ -9,12 +9,12 @@ export function NoticeList() {
   const dispatch = useDispatch();
   // const [noticeList, setNoticeList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 20;
 
   // ✅ JSON 데이터 불러오기
   useEffect(() => {
     dispatch(setNoticeListAPI());
-  }, []);
+  }, [dispatch]);
 
   // ✅ 최신순 정렬
   const sortedNotices = useMemo(() => {
