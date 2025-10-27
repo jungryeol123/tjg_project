@@ -5,9 +5,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   
     productList: [],
-    
     product: {},
-    
+    productReviewList : [],
+    productQnAList : []
 };
 
 // Slice reducers 설정( 함수 설정 )
@@ -18,16 +18,24 @@ export const productSlice = createSlice({
   initialState,
   reducers : {
     setProductList(state, action) {
-        const {foodData} = action.payload;
-        state.productList = foodData;
+      const {result} = action.payload;
+        state.productList = result;
     },
     setProduct(state, action) {
         const {product} = action.payload;
       state.product = product;
+    },
+    setProductReviewList(state, action) {
+      const {result} = action.payload;
+      state.productReviewList = result;
+    },
+    setProductQnAList(state, action) {
+      const {result} = action.payload;
+      state.productQnAList = result;
     }
   }});
 
 
 
-  export const {setProductList, setProduct} = productSlice.actions; 
+  export const {setProductList,setProduct, setProductReviewList, setProductQnAList} = productSlice.actions; 
   export default productSlice.reducer;

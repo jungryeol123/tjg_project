@@ -1,5 +1,3 @@
-import { useSearchParams } from "react-router-dom";
-
 export function Item({images}) {
   console.log(images);
   return (
