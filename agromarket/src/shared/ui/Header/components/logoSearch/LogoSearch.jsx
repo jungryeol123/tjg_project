@@ -6,6 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom"; // ✅ 페이지 이동용
 
+import { Link } from "react-router-dom";
 export default function LogoSearch() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
