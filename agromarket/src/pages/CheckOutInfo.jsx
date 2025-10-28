@@ -1,4 +1,4 @@
-import '../styles/CheckOutInfo.css'
+import '../styles/components/CheckOutInfo.css'
 import { useSelector } from "react-redux";
 
 // import { getPayment } from '../feature/payment/paymentAPI.js';
@@ -14,8 +14,8 @@ export function CheckoutInfo() {
     }
 
     return (
-        <div className="cart-container">
-        <h2 className="cart-header"> 주문/결제</h2>
+        <div className="checkout-container">
+        <h2 className="checkout-header"> 주문/결제</h2>
         <div className="section">
             {/* 구매자 정보 */}
             <h2 className="section-title">구매자정보</h2>

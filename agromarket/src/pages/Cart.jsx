@@ -1,4 +1,4 @@
-import "../styles/Cart.css";
+import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
 // import { useSelector } from "react-redux";
 
