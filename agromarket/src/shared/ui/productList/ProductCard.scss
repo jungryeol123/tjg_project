@@ -5,7 +5,6 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
   position: relative;
-
   // &:hover {
   //   transform: translateY(-20px);
   //   z-index: 10;
@@ -53,7 +52,7 @@
 
   /* ✅ 정보 영역 */
   .product-info {
-    padding: 12px;
+    padding: 5px;
 
     .product-name {
       font-size: clamp(0.7rem, 1.8vw, 1.3rem);
@@ -88,8 +87,13 @@
         text-decoration: line-through;
       }
 
-      .no-price {
-        color: #888;
+
+
+      .or-price {
+        color: #222;
+        font-weight: 700;
+        font-size: 15px;
+        margin-right: 6px;
       }
     }
 
@@ -110,3 +114,4 @@
     }
   }
 }
+

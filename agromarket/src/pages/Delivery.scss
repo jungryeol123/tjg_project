@@ -1,0 +1,101 @@
+.delivery-info {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #333;
+
+  .hero {
+    background: url("http://localhost:3000/images/delivery.jpg") center/cover no-repeat;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .hero-text {
+      text-align: center;
+      color: white;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 1.5rem 3rem;
+      border-radius: 12px;
+
+      h1 {
+        font-size: 32px;
+        font-weight: 600;
+      }
+
+      p {
+        margin-top: 8px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .highlights {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #faf7ff;
+
+    h2 {
+      color: #6a4dfd;
+      margin-bottom: 1.5rem;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+
+      .card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.2rem 1.5rem;
+        width: 260px;
+
+        h3 {
+          color: #6a4dfd;
+          margin-bottom: 0.6rem;
+        }
+      }
+    }
+  }
+
+  .delivery-table {
+    padding: 2rem;
+    text-align: center;
+
+    table {
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      th, td {
+        border: 1px solid #ddd;
+        padding: 0.8rem;
+      }
+      th {
+        background-color: #f3f1ff;
+        color: #4c3ed9;
+      }
+      td {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .map-section {
+    margin-top: 2rem;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #6a4dfd;
+    }
+
+    .map-container {
+      width: 80%;
+      height: 400px;
+      margin: 0 auto;
+      border: 2px solid #6a4dfd;
+      border-radius: 10px;
+    }
+  }
+}

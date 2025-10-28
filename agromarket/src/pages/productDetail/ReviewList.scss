@@ -1,0 +1,214 @@
+
+.review-list {
+  width: 95%;
+  margin: 0 auto;
+  // padding: 2vw;
+  font-family: "Pretendard", sans-serif;
+
+  h2 {
+    font-size: clamp(16px, 2vw, 28px);
+    margin-bottom: 1vw;
+  }
+
+  .review-images {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+
+
+  .review-thumb {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+
+    &.more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  }
+}
+
+/* 모달 스타일 (그대로) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+
+  .modal-content {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 50%;
+  height: 50%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+
+  .modal-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    font-size: 10%; 
+    border-bottom: 1px solid rgb(165, 164, 164);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    .close-btn {
+  background: transparent;
+  font-size: 10%; 
+  border: none;
+  cursor: pointer;
+}
+
+  }
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+
+
+  .modal-image img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+}
+
+}
+}
+
+
+
+
+
+
+
+
+  p {
+    font-size: clamp(14px, 1vw, 18px);
+    color: #555;
+  }
+
+  .review-card {
+    border-bottom: 0.2vw solid #eee;
+    padding: 2vw 0;
+
+    .badge {
+      display: inline-block;
+      background-color: #ff6b6b;
+      color: white;
+      font-size: clamp(12px, 0.8vw, 16px);
+      padding: 0.5vw 1vw;
+      border-radius: 0.5vw;
+      margin-bottom: 1vw;
+    }
+
+    h3 {
+      font-size: clamp(14px, 1vw, 18px);
+      margin-bottom: 0.5vw;
+    }
+
+    .review-title {
+      font-size: clamp(16px, 1.2vw, 22px);
+      font-weight: 600;
+      margin-bottom: 0.8vw;
+    }
+
+    .review-content {
+      font-size: clamp(14px, 0.9vw, 18px);
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .review-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1vw;
+      margin-top: 1vw;
+
+      img {
+        width: clamp(60px, 5vw, 100px);
+        height: clamp(60px, 5vw, 100px);
+        border-radius: 0.8vw;
+        object-fit: cover;
+      }
+    }
+
+    .review-footer {
+      margin-top: 1vw;
+      display: flex;
+      justify-content: space-between;
+      font-size: clamp(12px, 0.8vw, 16px);
+      color: #888;
+
+      .user-Date {
+        display: flex;
+        gap: 5px;
+      }
+
+      .likes {
+        color: #ff6b6b;
+      }
+    }
+
+    .tags {
+      margin-top: 0.8vw;
+
+      .tag {
+        margin-right: 0.8vw;
+        font-size: clamp(13px, 1vw, 18px);
+        color: #666;
+      }
+    }
+  }
+
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    button {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+    }
+  }
+}

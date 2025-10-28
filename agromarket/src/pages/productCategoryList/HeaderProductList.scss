@@ -1,0 +1,61 @@
+.new-products-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: "Pretendard", sans-serif;
+  padding: 2rem 0;
+
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .product-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    button {
+      background: none;
+      border: none;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: #777;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+
+      &.active {
+        color: #000;
+        border-color: #000;
+        font-weight: 600;
+      }
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  .product-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+
+    .empty {
+      color: #888;
+      margin-top: 2rem;
+      font-size: 1rem;
+    }
+  }
+}

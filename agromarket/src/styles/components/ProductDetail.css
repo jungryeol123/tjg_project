@@ -1,0 +1,258 @@
+.product-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #333;
+}
+
+.product-detail {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.product-detail-main {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+
+.product-image {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-image-main {
+  width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-brand {
+  font-size: 18px;
+  font-weight: 500;
+  color: #777;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.product-discount {
+  font-size: 16px;
+}
+
+.red {
+  color: #e60023;
+  font-weight: 600;
+}
+
+.product-price-original {
+  margin-left: 6px;
+  color: #888;
+  font-weight: 400;
+}
+
+.line {
+  text-decoration: line-through;
+}
+
+.product-price-final {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}
+
+.product-period {
+  font-size: 14px;
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  list-style: none;
+  font-size: 15px;
+}
+
+.product-purchase {
+  margin-top: 20px;
+}
+
+.product-purchase-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  list-style: none;
+}
+
+.product-qty-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty-btn {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qty-input {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 28px;
+  width: 50px;
+}
+
+.btn-buy {
+  background: #6a0dad;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.btn-buy:hover {
+  background: #5a0aa5;
+}
+
+.product-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* 장바구니 버튼 */
+.btn-cart {
+  flex: 1;
+  background: #f4f4f4;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cart:hover {
+  background: #eaeaea;
+}
+
+/* 찜하기 버튼 */
+.btn-wish {
+  width: 110px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  color: #e60023;
+  border: 1px solid #e60023;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-wish:hover {
+  background: #ffe5ea;
+}
+
+/* 찜 상태 (활성) */
+.btn-wish.active {
+  background: #e60023;
+  color: #fff;
+  border-color: #e60023;
+}
+
+.btn-wish.active:hover {
+  background: #cc001e;
+}
+
+/* 탭 영역 */
+.product-tabs {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 50px;
+  border-top: 1px solid #6d6c6c;
+
+  /* 탭 상단 고정*/
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.product-tab-list {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #ddd;
+  list-style: none;
+  padding: 0;
+}
+
+.product-tab-list li {
+  flex: 1;
+  text-align: center;
+}
+
+.product-tab-list li button {
+  width: 100%;
+  padding: 16px 0;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.product-tab-list li.active button {
+  font-weight: 700;
+  border-bottom: 3px solid #6a0dad;
+  color: #6a0dad;
+}
+
+/* 탭 */
+.product-tab-content {
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* 탭 내용별 margin */
+.product-section {
+  margin-bottom: 80px;
+}

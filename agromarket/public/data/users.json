@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "address": "서울특별시 강남구 테헤란로 10",
+    "birthday": "1990-05-12",
+    "email": "hong.gildong@example.com",
+    "gender": "M",
+    "name": "홍길동",
+    "password": "$2b$12$OQB7iJVt438Wck89wdEqNuDmDovV2V22CK.hVBFRPcsglPtKG50za",
+    "phone": "010-1234-5678",
+    "provider": "local",
+    "recommendation": null,
+    "user_id": "hongg"
+  },
+  {
+    "id": 2,
+    "address": "부산광역시 해운대구 우동 100",
+    "birthday": "1985-10-02",
+    "email": "lee.soon@example.com",
+    "gender": "F",
+    "name": "이순자",
+    "password": "$2b$12$exR6Sntm3shfqyZcj61VXOs.dmZeRWn5lc/.12WDfzP9Svlc.e6Nm",
+    "phone": "010-2345-6789",
+    "provider": "kakao",
+    "recommendation": "friend_abc",
+    "user_id": "lees"
+  },
+  {
+    "id": 3,
+    "address": "대구광역시 달서구 성당동 5",
+    "birthday": "1995-01-22",
+    "email": "kim.min@example.com",
+    "gender": "M",
+    "name": "김민수",
+    "password": "$2b$12$TwiSyKu614X2DrA52svUne1k7y6lwaNz0QuP4x5QZveBhRnPOear6",
+    "phone": "010-3456-7890",
+    "provider": "naver",
+    "recommendation": null,
+    "user_id": "kmin"
+  },
+  {
+    "id": 4,
+    "address": "인천광역시 연수구 송도동 20",
+    "birthday": "2000-07-15",
+    "email": "park.ji@example.com",
+    "gender": "F",
+    "name": "박지연",
+    "password": "$2b$12$yMefJyxXIipVKvqw.K7Bj.0j66NaE/B32O2TKtLumhRns2sAyIOj2",
+    "phone": "010-4567-8901",
+    "provider": "local",
+    "recommendation": "campaign_x",
+    "user_id": "parkj"
+  },
+  {
+    "id": 5,
+    "address": "광주광역시 북구 용봉동 9",
+    "birthday": "1992-03-03",
+    "email": "choi.ha@example.com",
+    "gender": "F",
+    "name": "최하늘",
+    "password": "$2b$12$wIj87IW3RSIg8Ljz62KvIeT0qAxShJpaZfBiREIAP6HH3BemkTizS",
+    "phone": "010-5678-9012",
+    "provider": "local",
+    "recommendation": null,
+    "user_id": "choih"
+  }
+]

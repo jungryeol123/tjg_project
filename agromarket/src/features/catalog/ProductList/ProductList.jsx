@@ -1,140 +1,4 @@
-// import React, { useEffect, useState, useRef } from "react";
-// import { axiosGet } from "shared/lib/axiosInstance";
-// import ProductCard from "shared/ui/productList/ProductCard";
-// import {
-//   MdOutlineArrowForwardIos,
-//   MdOutlineArrowBackIosNew,
-// } from "react-icons/md";
-// import "./ProductList.scss";
-// import { Link } from "react-router-dom";
-
-// export default function ProductList({ title = "오늘의 특가", limit = 12 }) {
-//   const [items, setItems] = useState([]);
-//   const sliderRef = useRef(null);
-//   const isDragging = useRef(false);
-//   const prevX = useRef(0);
-//   const velocity = useRef(0);
-//   const momentumId = useRef(null);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const result = await axiosGet("/data/foodData.json");
-//       if (result?.foodData && Array.isArray(result.foodData)) {
-//         setItems(result.foodData.slice(0, limit));
-//       }
-//     };
-//     fetchData();
-//   }, [limit]);
-
-//   const stopMomentum = () => cancelAnimationFrame(momentumId.current);
-
-//   const startMomentum = () => {
-//     const el = sliderRef.current;
-//     const animate = () => {
-//       el.scrollLeft -= velocity.current;
-//       velocity.current *= 0.95;
-//       if (Math.abs(velocity.current) > 0.1)
-//         momentumId.current = requestAnimationFrame(animate);
-//     };
-//     animate();
-//   };
-
-//   const handleMouseDown = (e) => {
-//     stopMomentum();
-//     isDragging.current = true;
-//     prevX.current = e.pageX;
-//     sliderRef.current.classList.add("dragging");
-//     sliderRef.current
-//       .querySelectorAll("*")
-//       .forEach((el) => (el.style.pointerEvents = "none"));
-//   };
-
-//   const handleMouseMove = (e) => {
-//     if (!isDragging.current) return;
-//     e.preventDefault();
-//     const el = sliderRef.current;
-//     const delta = e.pageX - prevX.current;
-//     prevX.current = e.pageX;
-//     el.scrollLeft -= delta;
-//     velocity.current = delta;
-//   };
-
-//   const handleMouseUp = () => {
-//     if (!isDragging.current) return;
-//     isDragging.current = false;
-//     sliderRef.current.classList.remove("dragging");
-//     sliderRef.current
-//       .querySelectorAll("*")
-//       .forEach((el) => (el.style.pointerEvents = "auto"));
-//     startMomentum();
-//   };
-
-
-//   const scrollByCards = (direction) => {
-//     const el = sliderRef.current;
-//     const slideWidth = el.querySelector(".slide").offsetWidth + 24;
-//     const scrollAmount = slideWidth * 4;
-//     el.scrollBy({
-//       left: direction === "left" ? -scrollAmount : scrollAmount,
-//       behavior: "smooth",
-//     });
-//   };
-
-
-//   return (
-//     <section className="home-page">
-//       <div className="section-header">
-//         <div></div>
-//         <h2 className="section-title">{title}</h2>
-//         <button className="view-all-btn">전체보기 &gt;</button>
-//       </div>
-
-//       <div className="slider-wrapper">
-//         <button
-//           className="nav-button left"
-//           onClick={() => scrollByCards("left")}
-//           aria-label="이전"
-//         >
-//           <MdOutlineArrowBackIosNew />
-//         </button>
-
-//         <div
-//           className="slider-container"
-//           ref={sliderRef}
-//           onMouseDown={handleMouseDown}
-//           onMouseMove={handleMouseMove}
-//           onMouseUp={handleMouseUp}
-//           onMouseLeave={handleMouseUp}
-//           // onMouseLeave={handleMouseLeave}
-//         >
-//           <div className="slides">
-//             {items.map((item, idx) => (
-//               // <div className="slide" key={idx}>
-//               //   <ProductCard item={item} />
-//               // </div>
-//                  <Link to={`/products/${item.pid}`} className="slide" key={idx}  draggable="false">
-//                 <ProductCard item={item} />
-//               </Link>
-//             ))}
-//           </div>
-//         </div>
-
-//         <button
-//           className="nav-button right"
-//           onClick={() => scrollByCards("right")}
-//           aria-label="다음"
-//         >
-//           <MdOutlineArrowForwardIos />
-//         </button>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
-
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo, memo } from "react";
 import { axiosGet } from "shared/lib/axiosInstance";
 import ProductCard from "shared/ui/productList/ProductCard";
 import {
@@ -143,9 +7,13 @@ import {
 } from "react-icons/md";
 import "./ProductList.scss";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductListAPI } from "features/product/productAPI";
 
-export default function ProductList({ title = "오늘의 특가", limit = 12 }) {
-  const [items, setItems] = useState([]);
+ function ProductList({ title = "오늘의 특가", limit = 20, keyword }) {
+  const productList = useSelector((state) => state.product.productList );
+  const dispatch = useDispatch();
+  // const [items, setItems] = useState([]);
   const sliderRef = useRef(null);
   const isDragging = useRef(false);
   const prevX = useRef(0);
@@ -155,15 +23,45 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
   const dragPreventClick = useRef(false);
   const dragThreshold = 5; // 클릭으로 인식할 최대 이동 거리(px)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axiosGet("/data/foodData.json");
-      if (result?.foodData && Array.isArray(result.foodData)) {
-        setItems(result.foodData.slice(0, limit));
-      }
-    };
-    fetchData();
-  }, [limit]);
+  // useEffect(() => {
+  //   if(keyword) {
+  //        dispatch(setProductListAPI(keyword));
+  //   } 
+  // }, [dispatch, keyword]);
+
+
+    console.log("id", typeof id);
+   // ✅ 필터 조건 분기
+  const productFilterList = useMemo(() => {
+    if (!productList || productList.length === 0) return [];
+
+    switch (keyword) {
+      case "time": // 오래된 순 (등록일 기준 오름차순)
+        return [...productList]
+          .sort(
+            (a, b) =>
+              new Date(a.productDate) - new Date(b.productDate)
+          )
+          .slice(0, limit);
+
+      case "dc": // 할인율 10% 이상
+        return productList
+          .filter((item) => item.dc >= 10)
+          .sort((a, b) => b.dc - a.dc)
+          .slice(0, limit);
+
+      default: // 기본값 (그냥 전체)
+        return productList.slice(0, limit);
+    }
+  }, [productList, keyword, limit]);
+
+
+
+
+
+
+console.log("productFilterList", productFilterList);
+
 
   const stopMomentum = () => cancelAnimationFrame(momentumId.current);
 
@@ -223,7 +121,7 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
   const scrollByCards = (direction) => {
     const el = sliderRef.current;
     const slideWidth = el.querySelector(".slide").offsetWidth + 24;
-    const scrollAmount = slideWidth * 4;
+    const scrollAmount = slideWidth * 5;
     el.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -256,9 +154,9 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
           onMouseLeave={handleMouseLeave}
         >
           <div className="slides">
-            {items.map((item, idx) => (
+            {productFilterList && productFilterList.map((item, idx) => (
               <Link
-                to={`/products/${item.pid}`}
+                to={`/products/${item.pid}/${item.id}`}
                 className="slide"
                 key={idx}
                 draggable="false"
@@ -287,3 +185,7 @@ export default function ProductList({ title = "오늘의 특가", limit = 12 }) 
     </section>
   );
 }
+
+
+
+export default memo(ProductList);
