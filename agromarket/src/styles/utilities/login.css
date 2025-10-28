@@ -1,0 +1,127 @@
+.content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #f8f6ff 0%, #ffffff 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+}
+
+.center-layout.login-form {
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(101, 84, 173, 0.12);
+  padding: 34px 32px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.center-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-form ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-form-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background-color: #fff;
+  transition: box-shadow 0.18s ease, border-color 0.12s ease;
+}
+
+.login-form-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.login-form-input:focus-within {
+  border-color: #4949b1ff;
+  box-shadow: 0 6px 18px rgba(73,73,177,0.2);
+}
+
+/* 버튼 스타일 및 공통 간격 */
+.center-layout.login-form .btn-main-color,
+.center-layout.login-form .btn-main-color-naver {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  margin-top: 12px; /* 버튼 간격 */
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-main-color {
+  background-color: #4949b1ff;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(73,73,177,0.25);
+}
+
+.btn-main-color:hover {
+  background-color: #3f3fa3;
+  transform: translateY(-1px);
+}
+
+.btn-main-color-naver {
+  background-color: #03c75a;
+  color: #fff;
+}
+
+.login-form li div.links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  font-size: 13px;
+  margin-top: 8px; 
+}
+
+.login-form li div.links a {
+  color: #4949b1ff;
+  text-decoration: none;
+}
+
+.login-form li div.links span {
+  color: #9aa0a6;
+  font-size: 13px;
+}
+
+.login-form span {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.login-form img {
+  margin-top: 16px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media (max-width: 440px) {
+  .center-layout.login-form {
+    padding: 22px;
+  }
+  .center-title {
+    font-size: 18px;
+  }
+}
