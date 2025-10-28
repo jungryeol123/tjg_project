@@ -14,21 +14,20 @@ import { setProductAPI } from "features/product/productAPI.js";
 
 export function ProductDetail() {
   const { pid, id } = useParams(); // 선택한 상품의 상품번호(primarykey)
-  // const [product, setProduct] = useState({}); // 선택한 상품 정보
   const [isWished, setIsWished] = useState(false); // 찜 상태 관리
   const [count, setCount] = useState(1); // 수량 관리
+  
   // 장바구니 카운트
   const cartCount = useSelector((state) => state.cart.cartCount);
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-   console.log("id", typeof id);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
-    dispatch(setProductAPI(pid));
-  }, [dispatch, pid]);
+    dispatch(setProductAPI(id));
+  }, [dispatch, id]);
   
-  console.log("안녕", product.productDescriptionImage);
   // 좋아요 버튼 클릭 이벤트
   const toggleWish = () => {
     setIsWished((prev) => !prev);

@@ -1,4 +1,4 @@
-import { axiosGet } from "shared/lib/axiosInstance";
+import { axiosGet, axiosGetParams } from "shared/lib/axiosInstance";
 import {
   setProductList,
   setProduct,
@@ -16,10 +16,16 @@ export const setProductListAPI = (keyword) => async (dispatch) => {
   }
 };
 
-export const setProductAPI = (pid) => async (dispatch) => {
-  const jsonData = await axiosGet("/data/foodData.json");
-  const [data] = jsonData.filter((data) => data.pid === pid);
-  dispatch(setProduct({ product: data }));
+export const setProductAPI = (id) => async (dispatch) => {
+  const url = "http://localhost:8080/product/productDetail";
+  const params = { "id" : id };
+  
+  const jsonData = await axiosGetParams(url, { params });
+
+  // null이 아닐경우만 실행
+  if(jsonData && Object.keys(jsonData).length > 0){
+    dispatch(setProduct({ product: jsonData }));
+  }
 };
 
 export const setProductReviewListAPI = () => async (dispatch) => {

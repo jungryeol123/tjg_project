@@ -18,9 +18,7 @@ export async function getData(url) {
     }
 }
 
-
-export async function axiosGet(url
-) {
+export async function axiosGet(url) {
 
     try {
         const response = await axios.get(url);
@@ -31,3 +29,26 @@ export async function axiosGet(url
     }
 }
 
+// post방식
+export async function axiosPost(url, params) {
+
+    try {
+        const response = await axios.post(url, params);
+        return response.data;
+    } catch (error) {
+        console.error("데이터 오류", error);
+        throw error;
+    }
+}
+
+// get방식 params 보내기
+export async function axiosGetParams(url, params) {
+
+    try {
+        const response = await axios.get(url, params);
+        return response.data;
+    } catch (error) {
+        console.error("데이터 오류", error);
+        throw error;
+    }
+}
