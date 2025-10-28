@@ -1,7 +1,9 @@
-import { useSelector } from "react-redux";
 import "../styles/components/Cart.css";
+import { useNavigate } from 'react-router-dom';
+// import { useSelector } from "react-redux";
 
 export function Cart() {
+    const navigate = useNavigate();
     const cartList = [{"cid":"testCid", "image":"/productImages/productImage5.png", "qty":"1", "size":"XL", "name":"testName", "price":15000, }];
     // const cartList = useSelector((state) => state.cart.cartList);
 
@@ -59,7 +61,7 @@ export function Cart() {
                                 </p>
                             </div>
                             <div className='cart-actions'>
-                                <button type='button'>주문하기</button>
+                                <button type='button' onClick={()=>{navigate("/checkout")}}>주문하기</button>
                             </div>
                         </>
                     : <div>
@@ -73,4 +75,3 @@ export function Cart() {
         </div>
     );
 }
-

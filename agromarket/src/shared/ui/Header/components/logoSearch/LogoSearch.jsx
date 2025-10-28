@@ -48,7 +48,7 @@ export default function LogoSearch() {
           <FaRegHeart />
         </span>
         <span>
-          <IoCartOutline />
+          <Link to="/cart"><IoCartOutline /></Link>
         </span>
       </div>
     </div>

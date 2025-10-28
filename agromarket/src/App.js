@@ -14,6 +14,7 @@ import CustomerService from 'pages/customerService/CustomerService';
 import {NoticeList} from 'pages/noticeList/NoticeList';
 import NoticeDetail from 'pages/noticeList/NoticeDetail';
 import { Cart } from 'pages/Cart';
+import { CheckoutInfo } from 'pages/CheckOutInfo';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/detail" element={<ProductDetail/>} />
           <Route path="/cart" element={<Cart />} />
+          <Route path='/checkout' element={<CheckoutInfo />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           <Route path="/pay" element={<PaymentButton/>} />
           <Route path="/" element={<PaymentButton/>} />
