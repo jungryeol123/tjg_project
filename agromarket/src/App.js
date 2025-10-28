@@ -15,6 +15,8 @@ import {NoticeList} from 'pages/noticeList/NoticeList';
 import NoticeDetail from 'pages/noticeList/NoticeDetail';
 import { Cart } from 'pages/Cart';
 import { CheckoutInfo } from 'pages/CheckOutInfo';
+import { FindUserId } from 'pages/FindUserId';
+import { FindPassword } from 'pages/FindPassword';
 
 function App() {
 
@@ -35,6 +37,8 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path="/delivery" element={<Delivery/>}/>
           <Route path="/login" element={<Login/>} />
+          <Route path="/find-user-id" element={<FindUserId />} />
+          <Route path="/find-password" element={<FindPassword />} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/detail" element={<ProductDetail/>} />
           <Route path="/cart" element={<Cart />} />
