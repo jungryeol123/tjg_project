@@ -19,8 +19,26 @@
 //     }
 
 // }});
-
-
-
 //   export const {setOrderList} = orderSlice.actions; 
 //   export default orderSlice.reducer;
+
+import { createSlice } from '@reduxjs/toolkit';
+
+// 전체 전역 변수
+const initialState = {
+    deliveryList: []
+};
+
+export const orderSlice = createSlice({
+  name: 'order',
+  initialState,
+  reducers : {
+    setDeliveryList(state, action) {
+        const { deliveryList } = action.payload;
+        state.deliveryList = deliveryList;
+    }
+}});
+
+export const { setDeliveryList } = orderSlice.actions; 
+export default orderSlice.reducer;
+

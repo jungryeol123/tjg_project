@@ -84,11 +84,26 @@
 
 .product-meta {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
   padding: 8px 0;
   border-bottom: 1px solid #eee;
   list-style: none;
   font-size: 15px;
+}
+
+.product-meta li:first-child {
+  width: 120px;
+  flex-shrink: 0;
+  color: #555;
+  font-weight: 600;
+}
+
+.product-meta li:last-child {
+  flex: 1;
+  color: #666;
+  line-height: 1.6;
+  white-space: pre-line;
 }
 
 .product-purchase {
