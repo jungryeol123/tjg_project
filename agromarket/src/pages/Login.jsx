@@ -26,17 +26,18 @@ export function Login() {
     const navigate = useNavigate();
     const idRef = useRef(null);
     const pwdRef = useRef(null);
-    const [formData, setFormData] = useState({id:'', pwd:''});
-    const [errors, setErrors] = useState({id:'', pwd:''});
+    const [formData, setFormData] = useState({userId:'', password:''});
+    const [errors, setErrors] = useState({userId:'', password:''});
     
 
     const handleFormChange = (e) => {
         const { name, value } = e.target; 
         setFormData({...formData, [name]:value});
-        setErrors({id:'', pwd:''});
+        setErrors({userId:'', password:''});
     }
 
     const handleLoginSubmit = async(e) => {
+        
         e.preventDefault();
         const param = {
             idRef: idRef,
@@ -51,7 +52,7 @@ export function Login() {
             navigate("/");
         } else {
             alert("로그인 실패!!");
-            setFormData({id:"",pwd:""});
+            setFormData({userId:"",password:""});
             idRef.current.focus();
         }
     }
@@ -66,25 +67,25 @@ export function Login() {
                         <div className="login-form-input">
                             <FaUser />
                             <input  type="text" 
-                                    name="id" 
-                                    value={formData.id}
+                                    name="userId" 
+                                    value={formData.userId}
                                     ref={idRef}
                                     onChange={handleFormChange}
                                     placeholder="아이디를 입력해주세요" />
                         </div>
-                        <span style={{color:"red", fontSize:"0.8rem"}}>{errors.id}</span>
+                        <span style={{color:"red", fontSize:"0.8rem"}}>{errors.userId}</span>
                     </li>
                     <li>
                         <div className="login-form-input">
                             <FaLock />
                             <input  type="password" 
-                                    name="pwd" 
-                                    value={formData.pwd}
+                                    name="password" 
+                                    value={formData.password}
                                     ref={pwdRef}
                                     onChange={handleFormChange}
                                     placeholder="패스워드를 입력해주세요" />
                         </div>
-                        <span style={{color:"red", fontSize:"0.8rem"}}>{errors.pwd}</span>
+                        <span style={{color:"red", fontSize:"0.8rem"}}>{errors.password}</span>
                     </li>
                     <li>
                         <button type="submit"
@@ -92,8 +93,9 @@ export function Login() {
                                 >로그인</button>
                     </li>
                     <li>
-                        <button type="submit"
-                                className="btn-main-color"                                
+                        <button type="button"
+                                className="btn-main-color"      
+                                onClick={() => {navigate("/signup")}}                          
                                 >회원가입</button>
                     </li>
                     <li>
