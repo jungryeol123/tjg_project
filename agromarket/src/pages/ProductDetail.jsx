@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { axiosGet } from "shared/lib/axiosInstance.js";
 import { Item } from "./productDetail/Item.jsx";
 import { Detail } from "./productDetail/Detail.jsx";
 import { QnA } from "./productDetail/QnA.jsx";
@@ -42,7 +41,7 @@ export function ProductDetail() {
 
   // 구매 수량 증가 버튼 클릭 이벤트
   const handleIncrease = () => {
-    if (count < product.dc) {
+    if (count < product.count) {
       setCount(count + 1);
     }
   };
@@ -61,8 +60,8 @@ export function ProductDetail() {
         value = 1;
       }
       // 최대 갯수를 초과할 경우 최대치 설정
-      else if (value > product.dc) {
-        value = product.dc;
+      else if (value > product.count) {
+        value = product.count;
       }
 
       setCount(value);
@@ -124,10 +123,7 @@ export function ProductDetail() {
 
           <div className="product-info">
             <div>
-              {product.productName} : {cartCount} :
-              <a href="#" className="product-brand">
-                {product.brandName}
-              </a>
+              {product.productName} ㅣ <Link to={`/brand/${product.brandName}`} className="product-brand">{product.brandName}</Link>
             </div>
             <div className="product-title">
               [{product.brandName}] {product.productName}
@@ -157,8 +153,8 @@ export function ProductDetail() {
               <li>컬리</li>
             </ul>
             <ul className="product-meta">
-              <li>포장타입</li>
-              <li>냉동(종이포장)</li>
+              <li>원산지</li>
+              <li>{product.origin}</li>
             </ul>
             <ul className="product-meta">
               <li>판매단위</li>
@@ -169,8 +165,12 @@ export function ProductDetail() {
               <li>1KG</li>
             </ul>
             <ul className="product-meta">
+              <li>총 수량</li>
+              <li>{product.count}개</li>
+            </ul>
+            <ul className="product-meta">
               <li>알레르기정보</li>
-              <li>소고리,대두,밀</li>
+              <li>소고기,대두,밀</li>
             </ul>
             <ul className="product-meta">
               <li>안내사항</li>

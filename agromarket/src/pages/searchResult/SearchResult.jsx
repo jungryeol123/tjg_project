@@ -1,6 +1,6 @@
 // src/pages/SearchResult.jsx
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProductCard from "shared/ui/productList/ProductCard";
 import "./SearchResult.scss";
@@ -8,10 +8,22 @@ import { Link } from "react-router-dom";
 export default function SearchResult() {
   const { keyword } = useParams();
   const productList = useSelector((state) => state.product.productList);
+  // 현재 경로 취득
+  const location = useLocation();
+  
+  let filtered;
 
-  const filtered = productList.filter((p) =>
-    p.description.toLowerCase().includes(keyword.toLowerCase())
-  );
+  // 어떤 경로로 들어왔는지 확인 가능
+  const isCheckRoot = location.pathname.includes("/keyword/");
+
+  if(isCheckRoot){
+    filtered = productList.filter((p) =>
+      p.description.toLowerCase().includes(keyword.toLowerCase())
+    );
+  } else {
+    filtered = productList.filter((p) =>
+      p.brandName == keyword.toLowerCase());
+  }
 
   return (
     <div className="search-result-page">

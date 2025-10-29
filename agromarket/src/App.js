@@ -49,6 +49,7 @@ function App() {
           <Route path="/products/:pid/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
            <Route path="/search/:keyword" element={<SearchResult />} />
+           <Route path="/brand/:keyword" element={<SearchResult />} />
              <Route path="/support" element={<CustomerService />} />
              <Route path="/notice" element={<NoticeList />} />
                 <Route path="/notice/:id" element={<NoticeDetail />} />
