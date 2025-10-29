@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Item } from "./productDetail/Item.jsx";
@@ -21,12 +21,26 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
+  // 배송 정보 리스트
+  const delList = useSelector((state) => state.order.deliveryList);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(id));
   }, [dispatch, id]);
-  
+
+  // 해당 상품의 배송 정보 취득
+  const delData = useMemo(() => {
+    if (!product || !delList) {
+      // 초기 실행시 빈값
+      console.log("testestasefsafsdafdsaf");
+      return { "delType":"", "delName":"", "delDescription":"" };
+    } else{
+      // product 정보가 설정된후 실행
+      return delList.find( item => item.delType == product.delType );
+    }    
+  }, [product, delList]);
+
   // 좋아요 버튼 클릭 이벤트
   const toggleWish = () => {
     setIsWished((prev) => !prev);
@@ -80,8 +94,10 @@ export function ProductDetail() {
     "상품문의",
     "배송/반품/교환정보",
   ];
+
   // 탭 이벤트용 변수명
   const tabEventNames = ["item", "detail", "review", "qna", "return"];
+  
   // 탭 클릭시 위치 설정
   const sectionRefs = {
     item: useRef(null),
@@ -139,14 +155,21 @@ export function ProductDetail() {
               행사 기간 2025-09-10 ~ 2025-10-20
             </div>
             <hr />
-
             <ul className="product-meta">
               <li>상품번호</li>
               <li>{product.pid}</li>
             </ul>
             <ul className="product-meta">
               <li>배송</li>
-              <li>샛별배송</li>
+              <li>
+                {delData?.delName}<br/>
+                {(delData?.delDescription || "").split("\n").map((line, i) => (
+                  <React.Fragment key={i}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </li>
             </ul>
             <ul className="product-meta">
               <li>판매자</li>
