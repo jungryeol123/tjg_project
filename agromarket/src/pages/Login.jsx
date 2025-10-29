@@ -20,7 +20,7 @@ import { useDispatch } from 'react-redux';
 import { getLogin } from '../features/auth/authAPI.js';
 import '../styles/utilities/login.css'
 
-
+//로그인페이지
 export function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
