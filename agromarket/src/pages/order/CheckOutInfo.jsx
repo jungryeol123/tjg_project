@@ -1,17 +1,52 @@
-import '../styles/components/CheckOutInfo.css'
+import { getPayment } from 'features/payment/paymentAPI';
+import './CheckOutInfo.css'
 import { useSelector } from "react-redux";
+import { useState } from 'react';
 
 // import { getPayment } from '../feature/payment/paymentAPI.js';
 
 export function CheckoutInfo() {   
     // const cartList = useSelector((state)=>state.cart.cartList);
     // const totalPrice = useSelector((state)=>state.cart.totalPrice);
-    const cartList = [{"cid":"testCid", "image":"/productImages/productImage5.png", "qty":"1", "size":"XL", "name":"testName", "price":15000, }];
-    const totalPrice = "토탈 프라이스"
+   const [cartList, setCartList] = useState([
+    {
+      id: 1,
+      productName: "압구정주꾸미",
+      imageUrl: "productImage1.png",
+      price: 6900,
+      qty: 1
+    },
+    {
+      id: 2,
+      productName: "한우 불고기 400g",
+      imageUrl: "productImage2.png",
+      price: 15900,
+      qty: 2,
+    },
+  ]);
+     const totalPrice = cartList.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
 
-    const handlePayment = async() => {
-        // const result = await getPayment();
-    }
+  const receiver = {
+    name: "홍길동",
+    phone: "010-1234-1234",
+    zipcode: "12345",
+    address1: "서울시 강남구 역삼동",
+    address2: "101호",
+    memo: "문 앞에 두세요",
+  };
+
+  const paymentInfo = {
+    shippingFee: 0,
+    discountAmount: 0,
+    totalAmount: totalPrice,
+  };
+
+      const handlePayment = async () => {
+        await getPayment(receiver, paymentInfo, cartList);
+  };
 
     return (
         <div className="checkout-container">
@@ -70,8 +105,8 @@ export function CheckoutInfo() {
                     <>
                         <div className="label">상품명</div>
                         <div className="value">
-                            <img src={item.image} alt="product image" style={{width:'35px'}} />
-                            {item.name}, {item.info}, 수량({item.qty}), 가격({item.price.toLocaleString()}원)
+                            <img src={`/images/productImages/${item.imageUrl}`} alt="product image" style={{width:'35px'}} />
+                            {item.productName}({item.qty}), 가격({item.price.toLocaleString()}원)
                         </div>
                     </>
                 )}

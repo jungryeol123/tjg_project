@@ -14,9 +14,9 @@ import CustomerService from 'pages/customerService/CustomerService';
 import {NoticeList} from 'pages/noticeList/NoticeList';
 import NoticeDetail from 'pages/noticeList/NoticeDetail';
 import { Cart } from 'pages/Cart';
-import { CheckoutInfo } from 'pages/CheckOutInfo';
 import { FindUserId } from 'pages/FindUserId';
 import { FindPassword } from 'pages/FindPassword';
+import { CheckoutInfo } from 'pages/order/CheckOutInfo';
 
 function App() {
 
