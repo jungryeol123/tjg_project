@@ -1,7 +1,10 @@
 import { useRef, useState } from 'react';
 import '../styles/components/Signup.css';
+import { getSignup } from 'features/auth/authAPI';
+import { useDispatch } from 'react-redux';
 
 export function Signup() {
+    const dispatch = useDispatch();
     const [form, setForm] = useState({});
     const yearRef = useRef(null);
     const monthRef = useRef(null);
@@ -23,10 +26,17 @@ export function Signup() {
     }    
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        const formData = {...form, "email":form.emailName.concat(form.emailDomain),  "date":form.dateYear.concat('-', form.dateMonth, '-', form.dateDay)};
+        const param = {};
+        const formData = {
+            ...form, 
+            "email":form.emailName.concat(form.emailDomain),  
+            "birthday":form.dateYear.concat('-', form.dateMonth, '-', form.dateDay),
+            "phone":form.phone.slice(0,3).concat('-', form.phone.slice(3,7), '-', form.phone.slice(7,11))
+        };
         console.log(formData);
+        const result = await dispatch(getSignup(formData, param));
     }
     return (
         <div className="signup-container">
@@ -37,13 +47,13 @@ export function Signup() {
                     <li>
                         <ul className='part id'>
                             <li className='left'><span>아이디</span></li>
-                            <li><input className="input-field" type="text" placeholder='아이디를 입력해주세요' name='id' value={form.id} onChange={handleChangeForm} /></li>
+                            <li><input className="input-field" type="text" placeholder='아이디를 입력해주세요' name='userId' value={form.id} onChange={handleChangeForm} /></li>
                         </ul>
                     </li>
                     <li>
                         <ul className='part pwd'>
                             <li className='left'><span>비밀번호</span></li>
-                            <li><input className="input-field" type="password" placeholder='비밀번호를 입력해주세요' name='pwd' value={form.pwd} onChange={handleChangeForm} /></li>
+                            <li><input className="input-field" type="password" placeholder='비밀번호를 입력해주세요' name='password' value={form.pwd} onChange={handleChangeForm} /></li>
                         </ul>
                     </li>
                     <li>
@@ -82,7 +92,7 @@ export function Signup() {
                     <li>
                         <ul className='part phone'>
                             <li className='left'><span>휴대폰</span></li>
-                            <li><input className="input-field" type="text" placeholder='숫자만 입력해주세요' name='phone' value={form.phone} onChange={handleChangeForm} /></li>
+                            <li><input className="input-field" type="text" maxLength={11} placeholder='숫자만 입력해주세요' name='phone' value={form.phone} onChange={handleChangeForm} /></li>
                             <li className='phone-btn'>
                                 <button className="btn" type="button">인증번호 받기</button>
                             </li>
@@ -105,7 +115,7 @@ export function Signup() {
                             <li className='middle'>
                                 <div className='genderList'>
                                     <div>
-                                        <input type="radio" name="gender" className='genderButton' value='male' onChange={handleChangeForm}/>
+                                        <input type="radio" name="gender" className='genderButton' value='M' onChange={handleChangeForm}/>
                                     </div>
                                     <div>
                                         <span>남자</span>
@@ -113,7 +123,7 @@ export function Signup() {
                                 </div>
                                 <div className='genderList'>
                                     <div>
-                                        <input type="radio" name="gender" className='genderButton' value='female' onChange={handleChangeForm}/>
+                                        <input type="radio" name="gender" className='genderButton' value='F' onChange={handleChangeForm}/>
                                     </div>
                                     <div>
                                         <span>여자</span>
