@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/utilities/login.css'; 
+import '../styles/utilities/login.css';
 
 export function FindUserId() {
   const navigate = useNavigate();
-  const [phoneOrEmail, setPhoneOrEmail] = useState('');
+  const [query, setQuery] = useState('');
   const [result, setResult] = useState('');
 
   const handleChange = (e) => {
-    setPhoneOrEmail(e.target.value);
+    setQuery(e.target.value);
     setResult('');
   };
 
@@ -17,15 +17,10 @@ export function FindUserId() {
 
     try {
       const response = await fetch(
-        `/api/find-userId?query=${encodeURIComponent(phoneOrEmail)}`
+        `/member/find-user-Id?query=${encodeURIComponent(query)}`
       );
-      const data = await response.json();
-
-      if (data.userId) {
-        setResult(`회원님의 아이디는: ${data.userId}`);
-      } else {
-        setResult('일치하는 아이디가 없습니다.');
-      }
+      const data = await response.text(); // 문자열 반환
+      setResult(data);
     } catch (err) {
       console.error(err);
       setResult('서버 오류가 발생했습니다.');
@@ -43,7 +38,7 @@ export function FindUserId() {
                 <input
                   type="text"
                   placeholder="휴대폰 번호 또는 이메일 입력"
-                  value={phoneOrEmail}
+                  value={query}
                   onChange={handleChange}
                 />
               </div>
