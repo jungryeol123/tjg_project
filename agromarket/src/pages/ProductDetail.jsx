@@ -149,12 +149,12 @@ export function ProductDetail() {
               <li>배송</li>
               <li>
                 {product.delName}<br/>
-                {/* {product.delDescription.split("\n").map((line, i) => (
+                {product.delDescription.split("\n").map((line, i) => (
                   <React.Fragment key={i}>
                     {line}
                     <br />
                   </React.Fragment>
-                ))} */}
+                ))}
               </li>
             </ul>
             <ul className="product-meta">
