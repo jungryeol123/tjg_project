@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Item } from "./productDetail/Item.jsx";
 import { Detail } from "./productDetail/Detail.jsx";
@@ -7,7 +7,7 @@ import { QnA } from "./productDetail/QnA.jsx";
 import { Return } from "./productDetail/Return.jsx";
 import "../styles/components/ProductDetail.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addCartCount } from "features/cart/cartAPI.js";
+import { addCart } from "features/cart/cartAPI.js";
 import { ReviewList } from "./productDetail/ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
 
@@ -15,7 +15,11 @@ export function ProductDetail() {
   const { pid, id } = useParams(); // 선택한 상품의 상품번호(primarykey)
   const [isWished, setIsWished] = useState(false); // 찜 상태 관리
   const [count, setCount] = useState(1); // 수량 관리
-  
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  const navigate = useNavigate();
+  // 현재 경로 확인용
+  const location = useLocation();
+
   // 장바구니 카운트
   const cartCount = useSelector((state) => state.cart.cartCount);
   // dispatch
@@ -69,7 +73,14 @@ export function ProductDetail() {
   };
 
   const handleAddCart = () => {
-    dispatch(addCartCount(count));
+    if(isLogin){
+      // 상품의 id와 qty 연계
+      dispatch(addCart(id, count));
+    } else {
+      alert("로그인이 필요합니다.");
+      // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
+      navigate("/login", { state: { from: location.pathname } });
+    }
   };
 
   // 탭 화면 표시용

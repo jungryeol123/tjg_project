@@ -94,7 +94,7 @@ export const removeCart = (cid, qty) => async(dispatch) => {
     dispatch(updateTotalPrice());
 }
 
-
+// 장바구니 추가
 export const addCartCount = (count) => (dispatch)=> {
     dispatch(setCartCount({ "cartCount": count }));
 }

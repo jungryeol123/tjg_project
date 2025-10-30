@@ -1,4 +1,4 @@
-import { axiosPost } from "../../utils/dataFetch";
+import { axiosPost } from "./dataFetch.js";
 
 export const getPayment = async (receiver, paymentInfo, cartList) => {
   const cidList = cartList.map((item) => item.cid);
