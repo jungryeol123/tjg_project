@@ -21,6 +21,7 @@ export const setProductAPI = (id) => async (dispatch) => {
   const params = { "id" : id };
   
   const jsonData = await axiosGetParams(url, { params });
+  console.log("asdfsdafsdafafa  : ",jsonData);
 
   // null이 아닐경우만 실행
   if(jsonData && Object.keys(jsonData).length > 0){

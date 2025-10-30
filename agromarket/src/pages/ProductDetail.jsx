@@ -21,25 +21,11 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-  // 배송 정보 리스트
-  const delList = useSelector((state) => state.order.deliveryList);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(id));
   }, [dispatch, id]);
-
-  // 해당 상품의 배송 정보 취득
-  const delData = useMemo(() => {
-    if (!product || !delList) {
-      // 초기 실행시 빈값
-      console.log("testestasefsafsdafdsaf");
-      return { "delType":"", "delName":"", "delDescription":"" };
-    } else{
-      // product 정보가 설정된후 실행
-      return delList.find( item => item.delType == product.delType );
-    }    
-  }, [product, delList]);
 
   // 좋아요 버튼 클릭 이벤트
   const toggleWish = () => {
@@ -162,13 +148,13 @@ export function ProductDetail() {
             <ul className="product-meta">
               <li>배송</li>
               <li>
-                {delData?.delName}<br/>
-                {(delData?.delDescription || "").split("\n").map((line, i) => (
+                {product.delName}<br/>
+                {/* {product.delDescription.split("\n").map((line, i) => (
                   <React.Fragment key={i}>
                     {line}
                     <br />
                   </React.Fragment>
-                ))}
+                ))} */}
               </li>
             </ul>
             <ul className="product-meta">
