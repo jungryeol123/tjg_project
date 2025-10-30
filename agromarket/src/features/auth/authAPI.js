@@ -38,10 +38,10 @@ export const getIdCheck = (id) => async(dispatch) => {
 */
 export const getSignup = (formData, param) => async(dispatch) => {
     let result = null;
-    if(validateSignupFormCheck(param)) {
+    // if(validateSignupFormCheck(param)) {
         const url = "/member/signup"
         result = await axiosPost(url,formData);
-    }
+    // }
     return result;
 }
 
