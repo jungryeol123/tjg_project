@@ -2,11 +2,13 @@ import React, { useRef, useState, useMemo } from 'react';
 import '../styles/components/Signup.css';
 import { getSignup } from 'features/auth/authAPI';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay"];
     const numericOnly = ["phone", "dateYear", "dateMonth", "dateDay"];
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     function initForm(initArray) {
         return initArray.reduce((acc,cur) => {
@@ -15,7 +17,7 @@ export function Signup() {
         }, {});
     } 
     
-    const [form, setForm] = useState(initForm(initArray));
+    const [form, setForm] = useState({...initForm(initArray), emailDomain: "default"});
     const [errors, setErrors] = useState({...initForm(initArray), emailDomain: ""});
     
     const refs = useMemo(() => {    //Hooks 비동기식 처리 진행
@@ -62,6 +64,7 @@ export function Signup() {
         
         if(result) {
             alert("회원가입 성공!");
+            navigate("/login");
         } else {
             alert("회원가입 실패!");
         }
