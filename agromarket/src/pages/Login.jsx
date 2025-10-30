@@ -12,8 +12,8 @@
 
 // npm install react-icons react-redux @reduxjs/toolkit axios -- 아이콘 설치 코드
 
-import { useState, useRef,useContext } from 'react';
-import { useNavigate,Link} from 'react-router-dom';
+import { useState, useRef, useContext } from 'react';
+import { useNavigate, Link, useLocation} from 'react-router-dom';
 import { FaUser } from "react-icons/fa6";
 import { FaLock } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
@@ -28,7 +28,10 @@ export function Login() {
     const pwdRef = useRef(null);
     const [formData, setFormData] = useState({userId:'', password:''});
     const [errors, setErrors] = useState({userId:'', password:''});
-    
+    const location = useLocation();
+
+    // 이전 페이지 경로 설정 (없으면 기본값으로 홈)
+    const from = location.state?.from || "/";
 
     const handleFormChange = (e) => {
         const { name, value } = e.target; 
@@ -47,9 +50,10 @@ export function Login() {
         }
 
         const succ = await dispatch(getLogin(formData,param));        //비동기식 처리 후 isLogin 변경
+        
         if(succ) {
             alert("로그인 성공!!");
-            navigate("/");
+            navigate(from, { replace: true });
         } else {
             alert("로그인 실패!!");
             setFormData({userId:"",password:""});
