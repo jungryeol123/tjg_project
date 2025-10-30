@@ -1,5 +1,5 @@
 import { setCartItem, setCartCount, updateCartCount, updateTotalPrice } from './cartSlice.js';
-import { axiosGet } from 'shared/lib/axiosInstance.js'
+import { axiosGet, axiosPost } from 'shared/lib/axiosInstance.js'
 
 export const getTotalPrice = () => (dispatch) => {
     // 총 금액 설정
@@ -14,24 +14,28 @@ export const setCount = (id) => async(dispatch) => {
     dispatch(setCartCount({ "cartCount": jsonData.sumQty }));
 }
 
-export const addCart = (pid, size) => async (dispatch) => {
-    // localStorage에 String타입으로 저장했으니 json타입    으로 parse
-    const { userId } = JSON.parse(localStorage.getItem("loginInfo"));
-    // 장바구니 테이블에서 선택한 상품이 존재하는가 체크
-    const result = await checkCart(pid, size, userId);
+// 장바구니 추가(신규일경우 레코드추가, 기존 레코드 존재시 qty 증가)
+export const addCart = (ppk, qty) => async(dispatch) => {
+    const url = "/cart/add";
+    // localStorage에서 user의id취득
+    const { id } = JSON.parse(localStorage.getItem("loginInfo"));
+    // 장바구니 값 설정
+    const cart = {
+        "ppk":ppk,
+        "qty":qty,
+        "upk":id
+    }
 
-    // 장바구니 테이블에 값이 존재 할 경우 qty값 + 1
-    if(result){
-        dispatch(updateCart(result.cid, true));
+    // 장바구니 설정
+    const result = await axiosPost(url, cart);
+    console.log("result", result);
+
+    if (result) {
+
+    } else {
+        console.error("장바구니 저장 실패");
     }
-    // 장바구니 테이블에 존재하지 않을 경우 레코드 추가
-    else {
-        const url = "/cart/add";
-        const cartItem = { "pid": pid, "size":size, "qty":1, "id":userId };
-        const rows = await axiosGet(url, cartItem);
-        // 장바구니 갯수 + 1
-        dispatch(updateCartCount({"cartCount": 1}));
-    }
+
 }
 
 // 장바구니 정보 취득

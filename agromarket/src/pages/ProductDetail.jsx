@@ -72,11 +72,14 @@ export function ProductDetail() {
     }
   };
 
+  // 장바구니 클릭
   const handleAddCart = () => {
+    // 로그인 상태 확인
     if(isLogin){
-      // 상품의 id와 qty 연계
+      // 로그인시 상품의 id와 qty 연계
       dispatch(addCart(id, count));
     } else {
+      // 로그인이 필요
       alert("로그인이 필요합니다.");
       // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
       navigate("/login", { state: { from: location.pathname } });
