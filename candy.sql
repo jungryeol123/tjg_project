@@ -18,7 +18,6 @@ AND p.pid = c.pid;
 -- delivery table 생성
 -- id delivery name, delivery desciption
 -- 판매자 => userId? 이름?
---
 
 select * from orders;
 select * from cart;
