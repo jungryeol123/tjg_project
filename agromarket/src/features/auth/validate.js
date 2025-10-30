@@ -19,13 +19,13 @@ export const validateFormCheck = ({ idRef, pwdRef, setErrors, errors }) => {
  * Shoppy 회원가입 폼 체크
  */
 export function validateSignupFormCheck({refs, setErrors}) {
-    if(refs.idRef.current.value === "") {
-        setErrors({id: "아이디를 입력해주세요"});
-        refs.idRef.current.focus();
+    if(refs.userIdRef.current.value === "") {
+        setErrors({userId: "아이디를 입력해주세요"});
+        refs.userIdRef.current.focus();
         return false;
-    } else if(refs.pwdRef.current.value === "") {
-        setErrors({pwd: "비밀번호를 입려해주세요"});
-        refs.pwdRef.current.focus();
+    } else if(refs.passwordRef.current.value === "") {
+        setErrors({password: "비밀번호를 입려해주세요"});
+        refs.passwordRef.current.focus();
         return false;
     }else if(refs.cpwdRef.current.value === "") {
         setErrors({cpwdRef: "비밀번호를 한번 더 입력해주세요"});
@@ -34,10 +34,6 @@ export function validateSignupFormCheck({refs, setErrors}) {
     }else if(refs.nameRef.current.value === "") {
         setErrors({name: "이름을 입력해주세요"});
         refs.nameRef.current.focus();
-        return false;
-    }else if(refs.phoneRef.current.value === "") {
-        setErrors({phone: "전화번호를 입력해주세요"});
-        refs.phoneRef.current.focus();
         return false;
     }else if(refs.emailNameRef.current.value === "") {
         setErrors({emailName: "이메일을 입력해주세요"});
