@@ -8,7 +8,6 @@ import {
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
   console.log("keyword", keyword);
-  //  const result = await axiosGet("/data/foodData.json");
   const result = await axiosGet("http://localhost:8080/product/productList");
   console.log("result", result);
   if (result !== null && Array.isArray(result)) {
