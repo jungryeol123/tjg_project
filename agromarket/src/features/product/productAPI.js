@@ -8,7 +8,7 @@ import {
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
   console.log("keyword", keyword);
-  const result = await axiosGet("http://localhost:8080/product/productList");
+  const result = await axiosGet("/product/productList");
   console.log("result", result);
   if (result !== null && Array.isArray(result)) {
     dispatch(setProductList({ result: result }));
@@ -16,7 +16,7 @@ export const setProductListAPI = (keyword) => async (dispatch) => {
 };
 
 export const setProductAPI = (id) => async (dispatch) => {
-  const url = "http://localhost:8080/product/productDetail";
+  const url = "/product/productDetail";
   const params = { "id" : id };
   
   const jsonData = await axiosGetParams(url, { params });
@@ -30,7 +30,7 @@ export const setProductAPI = (id) => async (dispatch) => {
 export const setProductReviewListAPI = () => async (dispatch) => {
   try {
     const result = await axiosGet(
-      "http://localhost:8080/product/productReviewList"
+      "/product/productReviewList"
     );
     console.log("resultReview (before parse):", result);
 
@@ -52,14 +52,14 @@ export const setProductReviewListAPI = () => async (dispatch) => {
 };
 
 export const setProductQnAListAPI = () => async (dispatch) => {
-  const result = await axiosGet("http://localhost:8080/product/productQnAList");
+  const result = await axiosGet("/product/productQnAList");
   console.log("productQnAList", result);
   dispatch(setProductQnAList({"result" : result}));
 };
 
 
 export const setProductBestListAPI = async() =>  {
-    const result = await axiosGet("http://localhost:8080/product/productBestList");
+    const result = await axiosGet("/product/productBestList");
     console.log("result12", result);
     return result;
 
