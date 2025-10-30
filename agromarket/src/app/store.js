@@ -3,6 +3,7 @@ import cartSlice from '../features/cart/cartSlice.js'
 import  productSlice  from 'features/product/productSlice.js'
 import { orderSlice } from 'features/order/orderSlice.js'
 import  noticeSlice  from 'features/catalog/notice/noticeSlice.js'
+import  authSlice  from 'features/auth/authSlice.js'
 
 // // 액션 로깅 처리 담당 미들웨어
 // // store => next => action
@@ -35,7 +36,8 @@ export const store = configureStore({
     cart : cartSlice,
     product : productSlice,
     order : orderSlice,
-    notice : noticeSlice
+    notice : noticeSlice,
+    auth : authSlice
     // "product": productSlice,
     // "auth":authSlice
   },
