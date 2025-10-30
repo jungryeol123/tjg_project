@@ -22,7 +22,7 @@ export default function SearchResult() {
     );
   } else {
     filtered = productList.filter((p) =>
-      p.brandName == keyword.toLowerCase());
+      p.brandName == keyword);
   }
 
   return (
