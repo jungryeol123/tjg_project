@@ -10,18 +10,18 @@ export function CheckoutInfo() {
     // const totalPrice = useSelector((state)=>state.cart.totalPrice);
    const [cartList, setCartList] = useState([
     {
-      id: 1,
-      productName: "압구정주꾸미",
+      cid: 1,
+      productName: "한우 불고기 400g",
       imageUrl: "productImage1.png",
-      price: 6900,
-      qty: 1
+      price: 15900,
+      qty: 2
     },
     {
-      id: 2,
-      productName: "한우 불고기 400g",
+      cid: 2,
+      productName: "수제 딸기잼 200g",
       imageUrl: "productImage2.png",
-      price: 15900,
-      qty: 2,
+      price: 4900,
+      qty: 3
     },
   ]);
      const totalPrice = cartList.reduce(

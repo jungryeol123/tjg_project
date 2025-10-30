@@ -4,11 +4,11 @@ export const getPayment = async (receiver, paymentInfo, cartList) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + item.qty, 0);
   const totalAmount = paymentInfo.totalAmount;
-  const userId = "hong123"; // 로그인 사용자 예시
+  const id = 7; // 로그인 사용자 예시
 
   const data = {
     orderId: "",
-    userId,
+    id,
     itemName: cartList.length === 1 
       ? cartList[0].name 
       : `${cartList[0].name} 외 ${cartList.length - 1}건`,

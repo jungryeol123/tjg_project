@@ -17,6 +17,8 @@ import { Cart } from 'pages/Cart';
 import { FindUserId } from 'pages/FindUserId';
 import { FindPassword } from 'pages/FindPassword';
 import { CheckoutInfo } from 'pages/order/CheckOutInfo';
+import { PayResult } from 'pages/PayResult';
+import { MyOrders } from 'pages/myOrders/MyOrders';
 
 function App() {
 
@@ -53,6 +55,8 @@ function App() {
              <Route path="/support" element={<CustomerService />} />
              <Route path="/notice" element={<NoticeList />} />
                 <Route path="/notice/:id" element={<NoticeDetail />} />
+                 <Route path="/payResult" element={<PayResult />} />
+                  <Route path="/MyOrders" element={<MyOrders />} />
         </Route>
         </Routes>
       </BrowserRouter>
