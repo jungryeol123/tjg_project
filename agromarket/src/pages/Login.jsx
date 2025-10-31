@@ -69,7 +69,7 @@ export function Login() {
     const handleKakaoLogin = async () => {
         try {
             // ✅ 1. 카카오 로그인 페이지로 리디렉트 요청
-            window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
+            window.location.href = "/oauth2/authorization/kakao";
         } catch (error) {
             console.error("카카오 로그인 실패:", error);
         }

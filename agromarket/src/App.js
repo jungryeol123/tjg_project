@@ -72,7 +72,7 @@ function App() {
                 <Route path="/notice/:id" element={<NoticeDetail />} />
                  <Route path="/payResult" element={<PayResult />} />
                   <Route path="/MyOrders" element={<MyOrders />} />
-                   <Route path="/success" element={<SuccessPage />} />
+                   <Route path="/oauth/success" element={<SuccessPage />} />
         </Route>
         </Routes>
       </BrowserRouter>

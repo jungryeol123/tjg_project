@@ -39,7 +39,6 @@ export default function SuccessPage() {
                 </>
             ) : (
                 <>
-                    <h1>❌ 결제 실패</h1>
                     <p>문제가 발생했습니다. 다시 시도해주세요.</p>
                 </>
             )}
