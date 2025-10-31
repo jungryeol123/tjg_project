@@ -57,6 +57,7 @@ export function CheckoutInfo() {
 ];
 
     const totalPrice = useSelector((state) => state.cart.totalPrice);
+    const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
     const cidList = useSelector((state) => state.cart.cidList);
     // const name = cartList[0].mname;
     // const phone = cartList[0].phone;
@@ -89,14 +90,14 @@ return (
         <div className="info-box">
         <div className="info-grid">
             <div className="label">이름</div>
-            <div className="value"></div>
+            <div className="value">{cartList[0].user.name}</div>
 
             <div className="label">이메일</div>
-            <div className="value"></div>
+            <div className="value">{cartList[0].user.email}</div>
 
             <div className="label">휴대폰 번호</div>
             <div className="value phone-input">
-            <input type="text" />
+            <input type="text" value={cartList[0].user.phone} />
             <button className="btn">수정</button>
             </div>
         </div>
@@ -137,8 +138,8 @@ return (
                 <>
                     <div className="label">상품명</div>
                     <div className="value">
-                        <img src={`/images/${item.image}`} alt="product image" style={{width:'35px'}} />
-                        {item.name}, {item.info}, 수량({item.qty}), 가격({item.price.toLocaleString()}원)
+                        <img src={`/images/productImages/${item.product.imageUrl}`} alt="product image" style={{width:'35px'}} />
+                        {item.product.productName}, {item.product.description}, 수량({item.qty}), 가격({item.product.price}원)
                     </div>
                 </>
             )}
@@ -155,7 +156,7 @@ return (
         </tr>
         <tr>
             <td>즉시할인</td>
-            <td class="discount">-0원</td>
+            <td class="discount">-{totalDcPrice.toLocaleString()}원</td>
         </tr>
         <tr>
             <td>할인쿠폰</td>
@@ -175,7 +176,7 @@ return (
         </tr>
         <tr class="total">
             <td>총결제금액</td>
-            {/* <td class="total-price">{totalPrice.toLocaleString()}원</td> */}
+            <td class="total-price">{(totalPrice-totalDcPrice).toLocaleString()}원</td>
         </tr>
         </table>
     </div>

@@ -1,4 +1,4 @@
-import { setCartItem, setCartCount, updateCartCount, updateTotalPrice } from './cartSlice.js';
+import { setCartItem, setCartCount, updateCartCount, updateTotalPrice, updateTotalDcPrice } from './cartSlice.js';
 import { axiosGet, axiosPost } from 'shared/lib/axiosInstance.js'
 
 export const getTotalPrice = () => (dispatch) => {
@@ -38,13 +38,19 @@ export const addCart = (ppk, qty) => async(dispatch) => {
 
 }
 
+
 // 장바구니 정보 취득
 export const showCart = () => async(dispatch) => {
     const url = "/cart/cartList";
-    const { userId } = JSON.parse(localStorage.getItem("loginInfo"));
-    const cartItem = { "id" : userId };
-    const cartData = await axiosGet(url, cartItem);
+    const { id } = JSON.parse(localStorage.getItem("loginInfo"));
+    const cartItem = { "user" : {"id":id} };
+    const cartData = await axiosPost(url, cartItem);
     dispatch(setCartItem({"cartItem": cartData}));
+    dispatch(updateTotalPrice());
+    dispatch(updateTotalDcPrice());
+    console.log(cartData);
+    console.log(cartData[0].product.price*cartData[0].qty);
+    // return cartData;
 }
 
 // 장바구니 테이블의 기존 항목 확인
