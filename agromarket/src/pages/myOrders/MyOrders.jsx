@@ -4,7 +4,7 @@ import axios from "axios";
 export function MyOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(7); // ✅ 테스트용 사용자 id (나중엔 토큰으로 대체)
+  const [userId, setUserId] = useState(1); // ✅ 테스트용 사용자 id (나중엔 토큰으로 대체)
 
   useEffect(() => {
     const fetchOrders = async () => {

@@ -4,7 +4,7 @@ export const getPayment = async (receiver, paymentInfo, cartList) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + item.qty, 0);
   const totalAmount = paymentInfo.totalAmount;
-  const id = 7; // 로그인 사용자 예시
+  const id = 1; // 로그인 사용자 예시
 
   const data = {
     orderId: "",
@@ -20,7 +20,7 @@ export const getPayment = async (receiver, paymentInfo, cartList) => {
   };
 
   try {
-    const result = await axiosPost("/payment/kakao/ready", data);
+    const result = await axiosPost("http://localhost:8080/payment/kakao/ready", data);
     console.log("카카오 결제 요청 결과:", result);
     if (result?.tid) {
       window.location.href = result.next_redirect_pc_url;
