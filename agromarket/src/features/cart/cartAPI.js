@@ -21,9 +21,9 @@ export const addCart = (ppk, qty) => async(dispatch) => {
     const { id } = JSON.parse(localStorage.getItem("loginInfo"));
     // 장바구니 값 설정
     const cart = {
-        "ppk":ppk,
-        "qty":qty,
-        "upk":id
+            "qty": qty,
+            "product": { "id": ppk },
+            "user": { "id": id }
     }
 
     // 장바구니 설정
