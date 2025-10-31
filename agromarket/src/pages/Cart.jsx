@@ -2,25 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { showCart } from "features/cart/cartAPI";
+import { showCart, updateCart } from "features/cart/cartAPI";
 // import { useSelector } from "react-redux";
 
 export function Cart() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const cartList = [{"cid":"testCid", "image":"/productImages/productImage5.png", "qty":"1", "size":"XL", "name":"testName", "price":15000, }];
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
-    // const [cartList,setCartList] = useState([]);
 
-    // useEffect(() => {
-    //     const fetchCart = async () => {
-    //     const data = await dispatch(showCart());
-    //     setCartList(data);
-    // };
-    // fetchCart();
-    // }, []);
     useEffect(() => {
         dispatch(showCart());
     }, [])
@@ -40,9 +31,9 @@ export function Cart() {
                                         <p className='cart-item-title'>{parseInt(item.product.price).toLocaleString()}원</p>
                                     </div>
                                     <div className='cart-quantity'>
-                                        <button type='button'>-</button>
+                                        <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1))) : null}>-</button>
                                         <input type="text" value={item.qty} readOnly/>
-                                        <button type='button'>+</button>
+                                        <button type='button' onClick={() => dispatch(updateCart(item.cid, (item.qty+1)))}>+</button>
                                     </div>
                                     <button className='cart-remove'>제거</button>
                                 </div>

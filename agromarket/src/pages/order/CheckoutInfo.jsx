@@ -5,57 +5,7 @@ import "./checkoutinfo.css";
 import { getPayment } from './paymentAPI.js';
 
 export function CheckoutInfo() {
-    const cartList = [
-  {
-    "cid": 1,
-    "upk": 1,
-    "ppk": 5,
-    "productName": "한우 불고기 400g",
-    "brandName": "농협한우",
-    "imageUrl": "productImage1.png",
-    "info": "냉장 / 1+ 등급",
-    "origin": "국산",
-    "price": 15900,
-    "qty": 2,
-    "totalPrice": 31800,
-    "dc": 10,
-    "isHotDeal": true,
-    "isMemberSpecial": false
-  },
-  {
-    "cid": 2,
-    "upk": 1,
-    "ppk": 8,
-    "productName": "무농약 시금치 1단",
-    "brandName": "친환경농장",
-    "imageUrl": "productImage2.png",
-    "info": "무농약 / 당일수확",
-    "origin": "국산",
-    "price": 2900,
-    "qty": 3,
-    "totalPrice": 31800,
-    "dc": 0,
-    "isHotDeal": false,
-    "isMemberSpecial": true
-  }
-//   {
-//     "cid": 42,
-//     "upk": 1,
-//     "ppk": 11,
-//     "productName": "유기농 계란 10구",
-//     "brandName": "파머스",
-//     "imageUrl": "productImage3.png",
-//     "info": "냉장 / 유기농 인증",
-//     "origin": "국산",
-//     "price": 6200,
-//     "qty": 1,
-//     "totalPrice": 31800,
-//     "dc": 5,
-//     "isHotDeal": false,
-//     "isMemberSpecial": false
-//   }
-];
-
+    const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
     const cidList = useSelector((state) => state.cart.cidList);

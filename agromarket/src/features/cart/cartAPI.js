@@ -49,7 +49,6 @@ export const showCart = () => async(dispatch) => {
     dispatch(updateTotalPrice());
     dispatch(updateTotalDcPrice());
     console.log(cartData);
-    console.log(cartData[0].product.price*cartData[0].qty);
     // return cartData;
 }
 
@@ -61,26 +60,12 @@ export const checkCart = async(pid, size, id) => {
     return cartData;
 }
 
-export const updateCart = (cid, upFlag) => async(dispatch) => {
+export const updateCart = (cid, qty) => async(dispatch) => {
     const url = "/cart/updateQty";
-    const cartData = { "cid": cid, "upFlag":upFlag };
-    let count = 0;
-    // 장바구니 테이블의 qty값 변경 upFlag(true : 1증가, false : 1감소)
-    const rows = await axiosGet(url, cartData);
-    // + - 버튼 클릭에 따른 카운트 증가 감소 설정
-    if(upFlag){
-        // 장바구니 갯수 설정
-        count = 1;
-    } else {
-        // 장바구니 갯수 설정
-        count = -1;
-    }
-    // 장바구니 갯수 + 1
-    dispatch(updateCartCount({"cartCount": count}));
+    const cartData = { "cid": cid, "qty":qty };
+    const rows = await axiosPost(url, cartData);
     // 장바구니 아이템 재설정
     dispatch(showCart());
-    // 총 금액 설정
-    dispatch(updateTotalPrice());
     return rows;
 }
 
