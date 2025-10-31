@@ -6,9 +6,10 @@ console.log(cartList);
     const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
     // const { userId } = JSON.parse(localStorage.getItem("loginInfo"));
     const url = "/payment/kakao/ready";  //카카오 QR 코드 호출
+    const id = 6;
     const data = {
         "orderId": "",
-        "userId": "test",
+        id,
         "itemName": cartList[0].productName,
         "qty": qty,
         "totalAmount": cartList[0].totalPrice,
