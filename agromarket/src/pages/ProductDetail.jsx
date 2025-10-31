@@ -124,12 +124,20 @@ export function ProductDetail() {
     (
       parseInt(product.price) - parseInt(product.price / product.dc)
     ).toLocaleString() + "원";
-
+    console.log("safsdafsdafsdafsdafdsfs : ", product);
   return (
     <div className="product-container">
       <div className="product-detail">
         <div className="product-detail-main">
           <div className="product-image">
+            <div
+              className={`badge-container ${
+                product.hotDeal && product.memberSpecial ? "multi" : ""
+              }`}
+            >
+              {product.hotDeal && <span className="badge hot">원딜핫딜</span>}
+              {product.memberSpecial && <span className="badge member">멤버특가</span>}
+            </div>
             <img
               src={`/images/productImages/${product.imageUrl}`}
               alt={product.imageUrl_name}
