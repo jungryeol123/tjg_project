@@ -1,11 +1,19 @@
+import { useDispatch } from "react-redux";
 import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { showCart } from "features/cart/cartAPI";
 // import { useSelector } from "react-redux";
 
 export function Cart() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const cartList = [{"cid":"testCid", "image":"/productImages/productImage5.png", "qty":"1", "size":"XL", "name":"testName", "price":15000, }];
     // const cartList = useSelector((state) => state.cart.cartList);
+
+    useEffect(() => {
+        dispatch(showCart());
+    });
 
     return (
         <div className='cart-container'>

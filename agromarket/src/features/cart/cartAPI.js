@@ -41,10 +41,11 @@ export const addCart = (ppk, qty) => async(dispatch) => {
 // 장바구니 정보 취득
 export const showCart = () => async(dispatch) => {
     const url = "/cart/cartList";
-    const { userId } = JSON.parse(localStorage.getItem("loginInfo"));
-    const cartItem = { "id" : userId };
-    const cartData = await axiosGet(url, cartItem);
+    const { id } = JSON.parse(localStorage.getItem("loginInfo"));
+    const cartItem = { "user" : {"id":id} };
+    const cartData = await axiosPost(url, cartItem);
     dispatch(setCartItem({"cartItem": cartData}));
+    console.log(cartData);
 }
 
 // 장바구니 테이블의 기존 항목 확인
