@@ -15,12 +15,14 @@ export default function SearchResult() {
 
   // 어떤 경로로 들어왔는지 확인 가능
   const isCheckRoot = location.pathname.includes("/keyword/");
-
+  console.log("asdfsdafsafsdfdsfsa1 ",isCheckRoot);
   if(isCheckRoot){
+      console.log("asdfsdafsafsdfdsfsa2 ",isCheckRoot);
     filtered = productList.filter((p) =>
       p.description.toLowerCase().includes(keyword.toLowerCase())
     );
   } else {
+          console.log("asdfsdafsafsdfdsfsa3 ",isCheckRoot);
     filtered = productList.filter((p) =>
       p.brandName == keyword);
   }

@@ -230,9 +230,6 @@ export function ProductDetail() {
                 <li>30,000원</li>
               </ul>
             </div>
-
-            <button className="btn-buy">구매하기</button>
-
             <div className="product-buttons">
               <button
                 className={`btn-wish ${isWished ? "active" : ""}`}
