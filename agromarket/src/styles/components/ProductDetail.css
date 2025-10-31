@@ -141,19 +141,6 @@
   width: 50px;
 }
 
-.btn-buy {
-  background: #6a0dad;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 14px 0;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background 0.3s ease;
-}
-
 .btn-buy:hover {
   background: #5a0aa5;
 }
@@ -168,8 +155,8 @@
 /* 장바구니 버튼 */
 .btn-cart {
   flex: 1;
-  background: #f4f4f4;
-  color: #333;
+  background: #4949b1ff;
+  color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 14px 0;
