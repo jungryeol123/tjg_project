@@ -16,10 +16,9 @@ import NoticeDetail from 'pages/noticeList/NoticeDetail';
 import { Cart } from 'pages/Cart';
 import { FindUserId } from 'pages/FindUserId';
 import { FindPassword } from 'pages/FindPassword';
-import { CheckoutInfo } from 'pages/order/CheckOutInfo';
 import { PayResult } from 'pages/PayResult';
 import { MyOrders } from 'pages/myOrders/MyOrders';
-
+import { CheckoutInfo } from 'pages/order/CheckoutInfo';
 function App() {
 
    useEffect(() => {
@@ -46,7 +45,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path='/checkout' element={<CheckoutInfo />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
-          <Route path="/pay" element={<PaymentButton/>} />
+          {/* <Route path="/pay" element={<PaymentButton/>} /> */}
           <Route path="/" element={<PaymentButton/>} />
           <Route path="/products/:pid/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
