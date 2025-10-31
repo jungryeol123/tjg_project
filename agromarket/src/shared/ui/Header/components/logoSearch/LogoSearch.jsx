@@ -14,7 +14,7 @@ export default function LogoSearch() {
   // ✅ 검색 버튼 클릭 시 이동
   const handleSearch = () => {
     if (keyword.trim() === "") return; // 빈 입력 방지
-    navigate(`/search/${encodeURIComponent(keyword)}/null`);
+    navigate(`/search/${encodeURIComponent(keyword)}`);
   };
 
   // ✅ Enter 키로도 검색 가능하게

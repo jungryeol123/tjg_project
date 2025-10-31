@@ -14,15 +14,17 @@ export default function SearchResult() {
   let filtered;
 
   // 어떤 경로로 들어왔는지 확인 가능
-  const isCheckRoot = location.pathname.includes("/keyword/");
-
+  const isCheckRoot = location.pathname.includes("/brand");
+  console.log("location", location);
+  console.log(" isCheckRoot",  isCheckRoot);
   if(isCheckRoot){
-    filtered = productList.filter((p) =>
+      filtered = productList.filter((p) =>
+      p.brandName == keyword);
+  } else {
+     filtered = productList.filter((p) =>
       p.description.toLowerCase().includes(keyword.toLowerCase())
     );
-  } else {
-    filtered = productList.filter((p) =>
-      p.brandName == keyword);
+
   }
 
   return (
@@ -43,4 +45,5 @@ export default function SearchResult() {
       )}
     </div>
   );
+
 }
