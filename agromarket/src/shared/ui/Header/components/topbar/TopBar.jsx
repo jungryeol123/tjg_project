@@ -4,8 +4,9 @@ import "./TopBar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { LuCandy } from "react-icons/lu";
 import { useDispatch,useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import { getLogout } from "features/auth/authAPI";
+
+
 export default function TopBar() {
 
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ export default function TopBar() {
           <li><Link to="/notice">공지사항</Link></li>
           <li>{ !isLogin &&  <Link to="/signup">회원가입</Link>}
           { isLogin && <li></li>}
+          <li>{ !isLogin && <li></li>}
+              { isLogin && <Link to = "/mypage">마이페이지</Link>}
+          </li>
           </li>
           <li>{ !isLogin &&  <Link to="/login">로그인</Link> }
           { isLogin &&<li onClick={handleLogout}>로그아웃</li> }</li>

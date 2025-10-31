@@ -10,8 +10,8 @@ export const authSlice = createSlice({
   reducers: {
         login(state,action) {
             state.isLogin = !state.isLogin;
-            const { userId,id } = action.payload;
-            const loginInfo = {"token": "token1234", "userId" : userId, "id" : id};
+            const { userId ,id } = action.payload;
+            const loginInfo = {"token": "token1234", "userId" : userId, "id" : id };
             localStorage.setItem("loginInfo",JSON.stringify(loginInfo));
         },
         logout(state,action) {
