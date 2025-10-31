@@ -5,7 +5,7 @@ import { Delivery } from 'pages/Delivery';
 import { Login } from 'pages/Login';
 import { Signup } from 'pages/Signup';
 import KakaoCallback from 'features/auth/Kakao';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
 import { ProductDetail } from 'pages/ProductDetail';
 import { HeaderProductList } from 'pages/productCategoryList/HeaderProductList';
@@ -19,16 +19,32 @@ import { FindPassword } from 'pages/FindPassword';
 import { PayResult } from 'pages/PayResult';
 import { MyOrders } from 'pages/myOrders/MyOrders';
 import { CheckoutInfo } from 'pages/order/CheckoutInfo';
+import IntroAnimation from 'IntroAnimation';
+import SuccessPage from 'pages/successPage/SuccessPage';
 function App() {
 
-   useEffect(() => {
-    // 카카오 SDK 초기화 (한번만 실행)
+   const [isIntroFinished, setIsIntroFinished] = useState(false);
+
+
+  useEffect(() => {
+    // ✅ 1. 카카오 SDK 초기화
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init("217fcf3151ca4922f670954462e84226");
       console.log("Kakao SDK initialized:", window.Kakao.isInitialized());
     }
-    console.log(window.Kakao.isInitialized()); 
+
+    // ✅ 2. 인트로 애니메이션 3초 후 종료
+    const timer = setTimeout(() => {
+      setIsIntroFinished(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, []);
+
+  // // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
+  // if (!isIntroFinished) {
+  //   return <IntroAnimation />;
+  // }
 
 
   return (
@@ -56,6 +72,7 @@ function App() {
                 <Route path="/notice/:id" element={<NoticeDetail />} />
                  <Route path="/payResult" element={<PayResult />} />
                   <Route path="/MyOrders" element={<MyOrders />} />
+                   <Route path="/success" element={<SuccessPage />} />
         </Route>
         </Routes>
       </BrowserRouter>

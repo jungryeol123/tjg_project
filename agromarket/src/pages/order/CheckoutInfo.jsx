@@ -7,7 +7,7 @@ import { getPayment } from './paymentAPI.js';
 export function CheckoutInfo() {
     const cartList = [
   {
-    "cid": 38,
+    "cid": 1,
     "upk": 1,
     "ppk": 5,
     "productName": "한우 불고기 400g",
@@ -23,7 +23,7 @@ export function CheckoutInfo() {
     "isMemberSpecial": false
   },
   {
-    "cid": 40,
+    "cid": 2,
     "upk": 1,
     "ppk": 8,
     "productName": "무농약 시금치 1단",
@@ -37,23 +37,23 @@ export function CheckoutInfo() {
     "dc": 0,
     "isHotDeal": false,
     "isMemberSpecial": true
-  },
-  {
-    "cid": 42,
-    "upk": 1,
-    "ppk": 11,
-    "productName": "유기농 계란 10구",
-    "brandName": "파머스",
-    "imageUrl": "productImage3.png",
-    "info": "냉장 / 유기농 인증",
-    "origin": "국산",
-    "price": 6200,
-    "qty": 1,
-    "totalPrice": 31800,
-    "dc": 5,
-    "isHotDeal": false,
-    "isMemberSpecial": false
   }
+//   {
+//     "cid": 42,
+//     "upk": 1,
+//     "ppk": 11,
+//     "productName": "유기농 계란 10구",
+//     "brandName": "파머스",
+//     "imageUrl": "productImage3.png",
+//     "info": "냉장 / 유기농 인증",
+//     "origin": "국산",
+//     "price": 6200,
+//     "qty": 1,
+//     "totalPrice": 31800,
+//     "dc": 5,
+//     "isHotDeal": false,
+//     "isMemberSpecial": false
+//   }
 ];
 
     const totalPrice = useSelector((state) => state.cart.totalPrice);
