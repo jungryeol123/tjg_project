@@ -35,7 +35,6 @@ export default function SuccessPage() {
         >
             {success === "200" ? (
                 <>
-                    <h1>🎉 결제가 완료되었습니다!</h1>
                     <p>잠시 후 메인 페이지로 이동합니다.</p>
                 </>
             ) : (

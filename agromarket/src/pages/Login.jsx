@@ -19,6 +19,7 @@ import { FaLock } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { getLogin } from '../features/auth/authAPI.js';
 import '../styles/utilities/login.css'
+// import KakaoLoginButton from 'features/auth/KakaoLoginButton.jsx';
 
 //로그인페이지
 export function Login() {
@@ -55,16 +56,24 @@ export function Login() {
             alert("로그인 성공!!");
             navigate(from, { replace: true });
         } else {
-         
+
             setFormData({ userId: "", password: "" });
             idRef.current.focus();
         }
     }
 
-         const handleNaverLogin = () => {
+    const handleNaverLogin = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/naver";
-      };
+    };
 
+    const handleKakaoLogin = async () => {
+        try {
+            // ✅ 1. 카카오 로그인 페이지로 리디렉트 요청
+            window.location.href = "http://localhost:8080/oauth2/authorization/kakao";
+        } catch (error) {
+            console.error("카카오 로그인 실패:", error);
+        }
+    };
 
     return (
         <div className="content">
@@ -117,10 +126,19 @@ export function Login() {
                         <li>
                             <button className="btn-main-color-naver" onClick={handleNaverLogin}>네이버 로그인</button>
                         </li>
-                        {/* <li>
-                        <KakaoLoginButton/>
-                        <KakaoLogoutButton />
-                     </li> */}
+                        <li>
+                            <button
+                                onClick={handleKakaoLogin}
+                                style={{
+                                    backgroundColor: "#FEE500",
+
+                                }}
+
+                                className="btn-main-color-naver"
+                            >
+                                카카오로 로그인
+                            </button>
+                        </li>
                     </ul>
                 </form>
             </div>
