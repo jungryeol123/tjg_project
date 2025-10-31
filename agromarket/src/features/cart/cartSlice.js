@@ -7,7 +7,9 @@ const initialState = {
     // 장바구니 리스트
     cartList: [],
     // 총 금액
-    totalPrice: 0
+    totalPrice: 0,
+    // 총 할인 금액
+    totalDcPrice: 0
 };
 
 // Slice reducers 설정( 함수 설정 )
@@ -39,7 +41,10 @@ export const cartSlice = createSlice({
     },
     // 총 금액 설정
     updateTotalPrice (state) {
-      state.totalPrice = state.cartList.reduce( ( total, item ) => total + (item.qty * item.price) , 0);
+      state.totalPrice = state.cartList.reduce( ( total, item ) => total + (item.qty * item.product.price) , 0);
+    },
+    updateTotalDcPrice (state) {
+      state.totalDcPrice = state.cartList.reduce( ( total, item ) => total + (item.qty * (item.product.price * item.product.dc * 0.01)) , 0);
     },
     // 장바구니 초기화
     initCartItem (state, action) {
@@ -51,7 +56,7 @@ export const cartSlice = createSlice({
 });
 
 // 컴포넌트, API함수에서 reducers의 함수를 사용하기 위해 action 추가(dispatch)
-export const { addCartItem, setCartItem, setCartCount, updateCartCount, updateTotalPrice, initCartItem } = cartSlice.actions;
+export const { addCartItem, setCartItem, setCartCount, updateCartCount, updateTotalPrice, updateTotalDcPrice, initCartItem } = cartSlice.actions;
 
 // store import
 export default cartSlice.reducer;

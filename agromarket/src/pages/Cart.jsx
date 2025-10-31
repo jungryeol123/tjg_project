@@ -1,19 +1,29 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { showCart } from "features/cart/cartAPI";
 // import { useSelector } from "react-redux";
 
 export function Cart() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const cartList = [{"cid":"testCid", "image":"/productImages/productImage5.png", "qty":"1", "size":"XL", "name":"testName", "price":15000, }];
-    // const cartList = useSelector((state) => state.cart.cartList);
+    // const cartList = [{"cid":"testCid", "image":"/productImages/productImage5.png", "qty":"1", "size":"XL", "name":"testName", "price":15000, }];
+    const cartList = useSelector((state) => state.cart.cartList);
+    const totalPrice = useSelector((state) => state.cart.totalPrice);
+    const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
+    // const [cartList,setCartList] = useState([]);
 
+    // useEffect(() => {
+    //     const fetchCart = async () => {
+    //     const data = await dispatch(showCart());
+    //     setCartList(data);
+    // };
+    // fetchCart();
+    // }, []);
     useEffect(() => {
         dispatch(showCart());
-    });
+    }, [])
 
     return (
         <div className='cart-container'>
@@ -24,12 +34,10 @@ export function Cart() {
                         cartList && cartList.map(item => 
                             <div>
                                 <div className='cart-item'>
-                                    {item.cid}
-                                    <img src={`/images/${item.image}`} alt='product img' />
+                                    <img src={`/images/productImages/${item.product.imageUrl}`} alt='product img' />
                                     <div className='cart-item-details'>
-                                        <p className='cart-item-title'>{item.name}</p>
-                                        <p className='cart-item-title'>{item.size}</p>
-                                        <p className='cart-item-title'>{parseInt(item.price).toLocaleString()}원</p>
+                                        <p className='cart-item-title'>{item.product.productName}</p>
+                                        <p className='cart-item-title'>{parseInt(item.product.price).toLocaleString()}원</p>
                                     </div>
                                     <div className='cart-quantity'>
                                         <button type='button'>-</button>
@@ -52,11 +60,11 @@ export function Cart() {
                                 <div className='cart-summary-sub'>
                                     <p className='cart-total'>
                                         <label>총 상품 가격 : </label>
-                                        <span>토탈프라이스 원</span>
+                                        <span>{totalPrice}원</span>
                                     </p>
                                     <p className='cart-total'>
                                         <label>총 할인 가격 : </label>
-                                        <span>0원</span>
+                                        <span>{totalDcPrice}원</span>
                                     </p>
                                     <p className='cart-total'>
                                         <label>총 배송비 : </label>
@@ -65,7 +73,7 @@ export function Cart() {
                                 </div>
                                 <p className='cart-total2'>
                                     <label>총 금액 : </label>
-                                    <span>토탈프라이스 원</span>
+                                    <span>{totalPrice - totalDcPrice} 원</span>
                                 </p>
                             </div>
                             <div className='cart-actions'>

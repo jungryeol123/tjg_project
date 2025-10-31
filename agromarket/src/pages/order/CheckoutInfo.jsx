@@ -5,58 +5,9 @@ import "./checkoutinfo.css";
 import { getPayment } from './paymentAPI.js';
 
 export function CheckoutInfo() {
-    const cartList = [
-  {
-    "cid": 38,
-    "upk": 1,
-    "ppk": 5,
-    "productName": "한우 불고기 400g",
-    "brandName": "농협한우",
-    "imageUrl": "productImage1.png",
-    "info": "냉장 / 1+ 등급",
-    "origin": "국산",
-    "price": 15900,
-    "qty": 2,
-    "totalPrice": 31800,
-    "dc": 10,
-    "isHotDeal": true,
-    "isMemberSpecial": false
-  },
-  {
-    "cid": 40,
-    "upk": 1,
-    "ppk": 8,
-    "productName": "무농약 시금치 1단",
-    "brandName": "친환경농장",
-    "imageUrl": "productImage2.png",
-    "info": "무농약 / 당일수확",
-    "origin": "국산",
-    "price": 2900,
-    "qty": 3,
-    "totalPrice": 31800,
-    "dc": 0,
-    "isHotDeal": false,
-    "isMemberSpecial": true
-  },
-  {
-    "cid": 42,
-    "upk": 1,
-    "ppk": 11,
-    "productName": "유기농 계란 10구",
-    "brandName": "파머스",
-    "imageUrl": "productImage3.png",
-    "info": "냉장 / 유기농 인증",
-    "origin": "국산",
-    "price": 6200,
-    "qty": 1,
-    "totalPrice": 31800,
-    "dc": 5,
-    "isHotDeal": false,
-    "isMemberSpecial": false
-  }
-];
-
+    const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
+    const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
     const cidList = useSelector((state) => state.cart.cidList);
     // const name = cartList[0].mname;
     // const phone = cartList[0].phone;
@@ -89,14 +40,14 @@ return (
         <div className="info-box">
         <div className="info-grid">
             <div className="label">이름</div>
-            <div className="value"></div>
+            <div className="value">{cartList[0].user.name}</div>
 
             <div className="label">이메일</div>
-            <div className="value"></div>
+            <div className="value">{cartList[0].user.email}</div>
 
             <div className="label">휴대폰 번호</div>
             <div className="value phone-input">
-            <input type="text" />
+            <input type="text" value={cartList[0].user.phone} />
             <button className="btn">수정</button>
             </div>
         </div>
@@ -137,8 +88,8 @@ return (
                 <>
                     <div className="label">상품명</div>
                     <div className="value">
-                        <img src={`/images/${item.image}`} alt="product image" style={{width:'35px'}} />
-                        {item.name}, {item.info}, 수량({item.qty}), 가격({item.price.toLocaleString()}원)
+                        <img src={`/images/productImages/${item.product.imageUrl}`} alt="product image" style={{width:'35px'}} />
+                        {item.product.productName}, {item.product.description}, 수량({item.qty}), 가격({item.product.price}원)
                     </div>
                 </>
             )}
@@ -155,7 +106,7 @@ return (
         </tr>
         <tr>
             <td>즉시할인</td>
-            <td class="discount">-0원</td>
+            <td class="discount">-{totalDcPrice.toLocaleString()}원</td>
         </tr>
         <tr>
             <td>할인쿠폰</td>
@@ -175,7 +126,7 @@ return (
         </tr>
         <tr class="total">
             <td>총결제금액</td>
-            {/* <td class="total-price">{totalPrice.toLocaleString()}원</td> */}
+            <td class="total-price">{(totalPrice-totalDcPrice).toLocaleString()}원</td>
         </tr>
         </table>
     </div>
