@@ -20,9 +20,10 @@ export const authSlice = createSlice({
         },
         socialLogin(state,action) {
             state.isLogin = !state.isLogin;
-            // const { userId,id } = action.payload;
-            // const loginInfo = {"token": "token1234", "userId" : userId, "id" : id};
-            // localStorage.setItem("loginInfo",JSON.stringify(loginInfo));
+            const { provider,id } = action.payload;
+            console.log("provider", provider, "id", id);
+            const loginInfo = {"token": "token1234", "provider" : provider, "id" : id};
+            localStorage.setItem("loginInfo",JSON.stringify(loginInfo));
         },
   },
 })

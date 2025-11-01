@@ -15,7 +15,7 @@ export function Cart() {
     useEffect(() => {
         dispatch(showCart());
     }, [])
-
+    
     return (
         <div className='cart-container'>
             <h2 className='cart-header'>장바구니</h2>

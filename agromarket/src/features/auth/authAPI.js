@@ -53,6 +53,6 @@ export const getLogout = () => async (dispatch) => {
     return true;
 }
 
-export const socialApiLogin = () => (dispatch) => {
-    dispatch(socialLogin());
+export const socialApiLogin = (provider, id) => (dispatch) => {
+    dispatch(socialLogin({provider, id}));
 }

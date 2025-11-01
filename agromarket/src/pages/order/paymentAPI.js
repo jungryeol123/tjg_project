@@ -15,7 +15,7 @@
 //         "totalAmount": cartList[0].totalPrice,
 //         "receiver": receiver,
 //         "paymentInfo": paymentInfo,
-//         "cidList": cidList 
+//         "cidList": cidList
 //     }
 
 //     try {
@@ -30,7 +30,6 @@
 //         console.log("error :: ", error);
 //     }
 // }
-
 
 // import { axiosPost } from "./dataFetch.js";
 
@@ -59,19 +58,18 @@
 //   }
 // };
 
-
-
-
 import { axiosPost } from "./dataFetch.js";
 import { loadNaverPaySDK } from "../../utils/loadNaverSDK.js";
 /** ✅ 카카오페이 결제 */
 export const getKakaoPayment = async (receiver, paymentInfo, cartList) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
-
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+  const id = loginInfo.id;
   const url = "/payment/kakao/ready";
   const data = {
     itemName: cartList[0].product.productName,
+    id,
     qty,
     totalAmount: cartList[0].product.price * qty,
     receiver,
@@ -89,10 +87,6 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList) => {
   }
 };
 
-
-
-
-
 /** ✅ 네이버페이 결제 요청 */
 export const getNaverPayment = async (receiver, paymentInfo, cartList) => {
   const cidList = cartList.map((item) => item.cid);
@@ -100,11 +94,14 @@ export const getNaverPayment = async (receiver, paymentInfo, cartList) => {
     (sum, item) => sum + item.product.price * item.qty,
     0
   );
-   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
-
+  const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+  const id = loginInfo.id;
+  console.log("id", id);
   // 1️⃣ 백엔드에 주문 생성 요청
-   const data = {
+  const data = {
     itemName: cartList[0].product.productName,
+    id,
     qty,
     totalAmount: cartList[0].product.price * qty,
     receiver,
