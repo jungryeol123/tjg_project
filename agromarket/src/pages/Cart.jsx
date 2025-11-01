@@ -11,7 +11,7 @@ export function Cart() {
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
-
+    console.log("cart", cartList);
     useEffect(() => {
         dispatch(showCart());
     }, [])
