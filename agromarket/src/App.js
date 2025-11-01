@@ -71,7 +71,7 @@ function App() {
              <Route path="/notice" element={<NoticeList />} />
                 <Route path="/notice/:id" element={<NoticeDetail />} />
                  <Route path="/payResult" element={<PayResult />} />
-                  <Route path="/MyOrders" element={<MyOrders />} />
+                  <Route path="/mypage" element={<MyOrders />} />
                    <Route path="/oauth/success" element={<SuccessPage />} />
         </Route>
         </Routes>
