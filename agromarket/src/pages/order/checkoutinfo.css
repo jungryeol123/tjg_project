@@ -74,9 +74,12 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  background-color: #4949b1ff;
 }
 
 .btn:hover {
+  background: #35358f;
+
   opacity: 0.8;
 }
 
@@ -146,10 +149,10 @@ body {
 }
 
 /* 섹션 스타일 */
-.section {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 20px;
+.order-info-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 h2 {
@@ -243,7 +246,7 @@ input[type="checkbox"] {
 
 .pay-button {
   width: 100%;
-  background: #007bff;
+  background: #4949b1ff;
   color: white;
   border: none;
   padding: 15px;
@@ -254,7 +257,7 @@ input[type="checkbox"] {
 }
 
 .pay-button:hover {
-  background: #0056b3;
+  background: #35358f;
 }
 
 /** 회원가입 - 주소검색 모달 */

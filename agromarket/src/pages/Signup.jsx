@@ -3,9 +3,10 @@ import '../styles/components/Signup.css';
 import { getSignup } from 'features/auth/authAPI';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 export function Signup() {
-    const initArray = ["userId", "password", "cpwd", "name", "phone", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay"];
+    const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay"];
     const numericOnly = ["phone", "dateYear", "dateMonth", "dateDay"];
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -57,9 +58,9 @@ export function Signup() {
             ...form, 
             "email":form.emailName.concat(form.emailDomain),  
             "birthday":form.dateYear.concat('-', form.dateMonth, '-', form.dateDay),
-            "phone":form.phone.slice(0,3).concat('-', form.phone.slice(3,7), '-', form.phone.slice(7,11))
+            "phone":form.phone.slice(0,3).concat('-', form.phone.slice(3,7), '-', form.phone.slice(7,11)),
+            "address":userFullAddress.concat(" ", form.addressDetail)
         };
-        console.log(errors);
         const result = await dispatch(getSignup(formData, param));
         
         if(result) {
@@ -69,6 +70,37 @@ export function Signup() {
             alert("회원가입 실패!");
         }
     }
+    
+    const [userFullAddress, setFullAddress] = useState(""); //유저 주소
+    const [userZoneCode, setUserZoneCode] = useState(""); //유저 우편번호
+    const [isDaumPostcodeOpen, setIsDaumPostcodeOpen] = useState(false);
+    //다음 우편번호 찾기 API사용
+    const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
+
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = "";
+        let zonecode = data.zonecode;
+
+        if (data.addressType === "R") {
+            if (data.bname !== "") {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== "") {
+                extraAddress +=
+                extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+            }
+            fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+        }
+
+        setFullAddress(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+        setUserZoneCode(zonecode);
+  };
+
+    const handleClick = () => {
+        open({ onComplete: handleComplete });
+    };
+
     return (
         <div className="signup-container">
             <h2>회원가입</h2>
@@ -132,10 +164,23 @@ export function Signup() {
                     <li>
                         <ul className='part address'>
                             <li className='left'><span>주소</span></li>
+                            {userFullAddress === "" 
+                            ?
                             <li className='middle'>
-                                <div className='btn-address'><button className="btn btn-address" type="button">주소 검색</button></div>
+                                <div className='btn-address'><button className="btn btn-address" type="button" onClick={handleClick}>주소 검색</button></div>
                                 <span>배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
                             </li>
+                            : 
+                            <>
+                            <li className='address-hide'>
+                                <input className="input-field" type="text" placeholder={userFullAddress} name='address' value={userFullAddress} ref={refs.addressRef} onChange={handleChangeForm} readOnly/>
+                                <input className="input-field" type="text" placeholder='나머지 주소를 입력해주세요' name='addressDetail' value={form.addressDetail} ref={refs.addressDetailRef} onChange={handleChangeForm} />
+                            </li>
+                            <li className='phone-btn'>
+                                <button className="btn" type="button" onClick={handleClick}>재검색</button>
+                            </li>
+                            </>
+                            }
                         </ul>
                     </li>
                     <li>

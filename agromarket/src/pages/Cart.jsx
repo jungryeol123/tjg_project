@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { showCart, updateCart } from "features/cart/cartAPI";
+import { removeCart, showCart, updateCart } from "features/cart/cartAPI";
 // import { useSelector } from "react-redux";
 
 export function Cart() {
@@ -28,14 +28,15 @@ export function Cart() {
                                     <img src={`/images/productImages/${item.product.imageUrl}`} alt='product img' />
                                     <div className='cart-item-details'>
                                         <p className='cart-item-title'>{item.product.productName}</p>
-                                        <p className='cart-item-title'>{parseInt(item.product.price).toLocaleString()}원</p>
+                                        <p className='cart-item-title cart-item-price'>{parseInt(item.product.price).toLocaleString()}원</p>
+                                        <p className='cart-item-title cart-item-dcprice'>{parseInt((item.product.price)*(100-item.product.dc)*0.01).toLocaleString()}원</p>
                                     </div>
                                     <div className='cart-quantity'>
                                         <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1))) : null}>-</button>
                                         <input type="text" value={item.qty} readOnly/>
                                         <button type='button' onClick={() => dispatch(updateCart(item.cid, (item.qty+1)))}>+</button>
                                     </div>
-                                    <button className='cart-remove'>제거</button>
+                                    <button className='cart-remove' onClick={()=>dispatch(removeCart(item.cid))}>제거</button>
                                 </div>
 
                             </div>
