@@ -1,9 +1,9 @@
-import { axiosGet, axiosGetParams } from "shared/lib/axiosInstance";
+import { axiosGet, axiosGetParams, axiosPost } from "shared/lib/axiosInstance";
 import {
   setProductList,
   setProduct,
   setProductReviewList,
-  setProductQnAList,
+  setProductQnAList
 } from "./productSlice";
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
@@ -62,7 +62,14 @@ export const setProductBestListAPI = async() =>  {
     const result = await axiosGet("/product/productBestList");
     console.log("result12", result);
     return result;
+}
 
+
+export const setProductData = (productData) => {
+  const url = "/product/productAdd";
+
+  const result = axiosPost("/product/productAdd");
+  console.log("result DDDDD : ", result);
 }
 
 // // 상품 디테일 정보 취득
