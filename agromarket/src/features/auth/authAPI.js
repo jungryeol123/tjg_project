@@ -1,4 +1,4 @@
-import { login,logout } from "./authSlice.js";
+import { login,logout, socialLogin } from "./authSlice.js";
 import { validateFormCheck,validateSignupFormCheck } from "./validate.js";
 import { axiosPost } from "./dataFetch.js";
 
@@ -51,4 +51,8 @@ export const getSignup = (formData, param) => async(dispatch) => {
 export const getLogout = () => async (dispatch) => {
     dispatch(logout());
     return true;
+}
+
+export const socialApiLogin = (provider, id) => (dispatch) => {
+    dispatch(socialLogin({provider, id}));
 }

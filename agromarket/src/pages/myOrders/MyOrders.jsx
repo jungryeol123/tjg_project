@@ -4,12 +4,27 @@ import axios from "axios";
 export function MyOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(1); // ✅ 테스트용 사용자 id (나중엔 토큰으로 대체)
+  const [userId, setUserId] = useState(null); // ✅ 테스트용 사용자 id (나중엔 토큰으로 대체)
+
+
+
+  useEffect(() => {
+    // ✅ 1️⃣ 로그인 정보 먼저 읽기
+    const stored = localStorage.getItem("loginInfo");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      setUserId(parsed.id);
+    }
+  }, []); // 처음 한 번만 실행
+
 
   useEffect(() => {
     const fetchOrders = async () => {
+      if (!userId) return; 
       try {
-        const res = await axios.get(`http://localhost:8080/orders/my/${userId}`);
+        const res = await axios.get(
+          `http://localhost:8080/orders/my/${userId}`
+        );
         setOrders(res.data);
       } catch (err) {
         console.error("주문 내역 조회 실패:", err);
@@ -28,7 +43,7 @@ export function MyOrders() {
     <div style={styles.container}>
       <h2 style={styles.title}>🧾 내 주문 내역</h2>
 
-      {orders.map((order) => (
+      {orders && orders.map((order) => (
         <div key={order.id} style={styles.card}>
           <div style={styles.header}>
             <h3>주문번호: {order.orderCode}</h3>
@@ -52,8 +67,8 @@ export function MyOrders() {
             <ul style={{ listStyle: "none", paddingLeft: 0 }}>
               {order.orderDetails.map((item) => (
                 <li key={item.id}>
-                  <span>{item.productName}</span> —{" "}
-                  <b>{item.qty}</b>개 / {item.price.toLocaleString()}원
+                  <span>{item.productName}</span> — <b>{item.qty}</b>개 /{" "}
+                  {item.price.toLocaleString()}원
                 </li>
               ))}
             </ul>

@@ -1,4 +1,4 @@
-import { setCartItem, setCartCount, updateCartCount, updateTotalPrice } from './cartSlice.js';
+import { setCartItem, setCartCount, updateCartCount, updateTotalPrice, updateTotalDcPrice } from './cartSlice.js';
 import { axiosGet, axiosPost } from 'shared/lib/axiosInstance.js'
 
 export const getTotalPrice = () => (dispatch) => {
@@ -38,6 +38,7 @@ export const addCart = (ppk, qty) => async(dispatch) => {
 
 }
 
+
 // 장바구니 정보 취득
 export const showCart = () => async(dispatch) => {
     const url = "/cart/cartList";
@@ -45,6 +46,10 @@ export const showCart = () => async(dispatch) => {
     const cartItem = { "user" : {"id":id} };
     const cartData = await axiosPost(url, cartItem);
     dispatch(setCartItem({"cartItem": cartData}));
+    dispatch(updateTotalPrice());
+    dispatch(updateTotalDcPrice());
+    console.log(cartData);
+    // return cartData;
 }
 
 // 장바구니 테이블의 기존 항목 확인
@@ -55,26 +60,12 @@ export const checkCart = async(pid, size, id) => {
     return cartData;
 }
 
-export const updateCart = (cid, upFlag) => async(dispatch) => {
+export const updateCart = (cid, qty) => async(dispatch) => {
     const url = "/cart/updateQty";
-    const cartData = { "cid": cid, "upFlag":upFlag };
-    let count = 0;
-    // 장바구니 테이블의 qty값 변경 upFlag(true : 1증가, false : 1감소)
-    const rows = await axiosGet(url, cartData);
-    // + - 버튼 클릭에 따른 카운트 증가 감소 설정
-    if(upFlag){
-        // 장바구니 갯수 설정
-        count = 1;
-    } else {
-        // 장바구니 갯수 설정
-        count = -1;
-    }
-    // 장바구니 갯수 + 1
-    dispatch(updateCartCount({"cartCount": count}));
+    const cartData = { "cid": cid, "qty":qty };
+    const rows = await axiosPost(url, cartData);
     // 장바구니 아이템 재설정
     dispatch(showCart());
-    // 총 금액 설정
-    dispatch(updateTotalPrice());
     return rows;
 }
 
