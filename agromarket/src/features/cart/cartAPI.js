@@ -45,7 +45,6 @@ export const showCart = () => async(dispatch) => {
     const cartItem = { "user" : {"id":id} };
     const cartData = await axiosPost(url, cartItem);
     dispatch(setCartItem({"cartItem": cartData}));
-    console.log(cartData);
 }
 
 // 장바구니 테이블의 기존 항목 확인

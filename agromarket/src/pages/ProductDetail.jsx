@@ -26,6 +26,9 @@ export function ProductDetail() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
 
+  // 레시피 토글
+  const [showRecipe, setShowRecipe] = useState(false);
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(id));
@@ -146,8 +149,33 @@ export function ProductDetail() {
           </div>
 
           <div className="product-info">
-            <div>
-              {product.productName} ㅣ <Link to={`/brand/${product.brandName}`} className="product-brand">{product.brandName}</Link>
+            <div className="product-info-top">
+              <div className="product-info-left">
+                {product.productName} ㅣ{" "}
+                <Link to={`/brand/${product.brandName}`} className="product-brand">
+                  {product.brandName}
+                </Link>
+              </div>
+
+              {/* 레시피 글자 */}
+              <div
+                className="recipe-hover-area"
+                onMouseEnter={() => setShowRecipe(true)}
+                onMouseLeave={() => setShowRecipe(false)}
+              >
+                <span className="recipe-text">레시피</span>
+
+                {showRecipe && (
+                  <div className="recipe-box">
+                    <h4 className="recipe-title">레시피 보기</h4>
+                    <ol className="recipe-list">
+                      <li>팬에 식용유를 두르고 주꾸미를 볶습니다.</li>
+                      <li>양념장을 넣고 3분간 더 볶습니다.</li>
+                      <li>통깨를 뿌리고 완성!</li>
+                    </ol>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="product-title">
               [{product.brandName}] {product.productName}
