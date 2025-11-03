@@ -235,7 +235,7 @@ export function CheckoutInfo() {
             <div className="section">
                 <h2 className="section-title">
                     받는사람정보 &nbsp;&nbsp;&nbsp;
-                    <button>배송지 변경</button>
+                    <button className='btn'>배송지 변경</button>
                 </h2>
                 <div className="info-box">
                     <div className="info-grid">
@@ -259,14 +259,14 @@ export function CheckoutInfo() {
             </div>
 
             {/* 🟢 주문 상품 */}
-            <div className="section">
+            <div className="section order-section">
                 <h2 className="section-title">주문 상품</h2>
                 <div className="info-box">
-                    <div className="info-grid">
+                    <div className="info-grid order-info-grid">
                         {cartList.map((item) => (
                             <div key={item.cid} className="value">
                                 <img src={`/images/productImages/${item.product.imageUrl}`} alt="product" style={{ width: '35px' }} />
-                                {item.product.productName}, 수량({item.qty}), 가격({item.product.price.toLocaleString()}원)
+                                {item.product.productName}, 수량({item.qty}), 가격({(item.product.price*(100-item.product.dc)*0.01*item.qty).toLocaleString()}원)
                             </div>
                         ))}
                     </div>

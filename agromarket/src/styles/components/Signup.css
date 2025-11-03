@@ -267,3 +267,8 @@
     font-size: 12px;
     color: #888;
 }
+
+.address-hide {
+    display: flex;
+    flex-direction: column;
+}

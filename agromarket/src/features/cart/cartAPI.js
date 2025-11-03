@@ -69,24 +69,12 @@ export const updateCart = (cid, qty) => async(dispatch) => {
     return rows;
 }
 
-export const removeCart = (cid, qty) => async(dispatch) => {
+export const removeCart = (cid) => async(dispatch) => {
     const url = "/cart/deleteItem";
-    const cartData = { "cid": cid };
-    // 장바구니 테이블의 삭제
-    const rows = await axiosGet(url, cartData);
-
-    // 장바구니 테이블의 삭제가 정상 처리 됬을 경우
-    if(rows === 1){
-        // 장바구니 갯수 설정
-        dispatch(updateCartCount({"cartCount": -qty}));
-    } else {
-        alert("errer");
-    }
-
-    // 장바구니 아이템 재설정
+    const data = {"cid": cid};
+    const rows = await axiosPost(url, data);
     dispatch(showCart());
-    // 총 금액 설정
-    dispatch(updateTotalPrice());
+    return rows;
 }
 
 // 장바구니 추가
