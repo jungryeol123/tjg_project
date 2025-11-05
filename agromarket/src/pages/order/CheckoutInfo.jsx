@@ -1,185 +1,15 @@
-// import { useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import "./cart.css";
-// import "./checkoutinfo.css";
-// import { getPayment } from './paymentAPI.js';
-
-// export function CheckoutInfo() {
-//     const cartList = useSelector((state) => state.cart.cartList);
-//     const totalPrice = useSelector((state) => state.cart.totalPrice);
-//     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
-//     const cidList = useSelector((state) => state.cart.cidList);
-//     // const name = cartList[0].mname;
-//     // const phone = cartList[0].phone;
-//     // const email = cartList[0].email;
-//     const [receiver, setReceiver] = useState({
-//             "name": "홍길동",
-//             "phone": "010-1234-1234",
-//             "zipcode": "12345",
-//             "address1": "서울시 강남구 역삼동",
-//             "address2": "123",
-//             "memo": "문앞"
-//         });
-//     const [paymentInfo, setPaymentInfo] = useState({
-//             "shippingFee": "0",
-//             "discountAmount": "0",
-//             "totalAmount": totalPrice
-//         });
-
-//   /** payment */
-//   const handlePayment = async() => {
-//       const result = await getPayment(receiver, paymentInfo, cartList);
-//   }
-
-// return (
-//     <div className="cart-container">
-//     <h2 className="cart-header"> 주문/결제</h2>
-//     <div className="section">
-//         {/* 구매자 정보 */}
-//         <h2 className="section-title">구매자정보</h2>
-//         <div className="info-box">
-//         <div className="info-grid">
-//             <div className="label">이름</div>
-//             <div className="value">{cartList[0].user.name}</div>
-
-//             <div className="label">이메일</div>
-//             <div className="value">{cartList[0].user.email}</div>
-
-//             <div className="label">휴대폰 번호</div>
-//             <div className="value phone-input">
-//             <input type="text" value={cartList[0].user.phone} />
-//             <button className="btn">수정</button>
-//             </div>
-//         </div>
-//         </div>
-//     </div>
-//     {/* 받는사람 정보 */}
-//     <div className="section">
-//         <h2 className="section-title">
-//         받는사람정보 &nbsp;&nbsp;&nbsp;
-//         <button>배송지 변경</button>
-//         </h2>
-//         <div className="info-box">
-//         <div className="info-grid">
-//             <div className="label">이름</div>
-//             <div className="value">{receiver.name}</div>
-
-//             <div className="label">배송주소</div>
-//             <div className="value">{receiver.zipcode} / {receiver.address1} {receiver.address2}</div>
-          
-//             <div className="label">연락처</div>
-//             <div className="value">{receiver.phone}</div>
-
-//             <div className="label">배송 요청사항</div>
-//             <div className="value phone-input">
-//             <input type="text" defaultValue={receiver.memo} />
-//             <button className="btn">변경</button>
-//             </div>
-//         </div>
-//         </div>
-//     </div>
-
-//     {/* 주문 정보 */}
-//     <div className="section">
-//         <h2 className="section-title">주문 상품</h2>
-//         <div className="info-box">
-//         <div className="info-grid">
-//             { cartList && cartList.map(item => 
-//                 <>
-//                     <div className="label">상품명</div>
-//                     <div className="value">
-//                         <img src={`/images/productImages/${item.product.imageUrl}`} alt="product image" style={{width:'35px'}} />
-//                         {item.product.productName}, {item.product.description}, 수량({item.qty}), 가격({item.product.price}원)
-//                     </div>
-//                 </>
-//             )}
-//         </div>
-//         </div>
-//     </div>
-
-//     <div class="section">
-//         <h2>결제정보</h2>
-//         <table class="payment-table">
-//         <tr>
-//             <td>총상품가격</td>
-//             <td class="price">{totalPrice.toLocaleString()}원</td>
-//         </tr>
-//         <tr>
-//             <td>즉시할인</td>
-//             <td class="discount">-{totalDcPrice.toLocaleString()}원</td>
-//         </tr>
-//         <tr>
-//             <td>할인쿠폰</td>
-//             <td class="coupon">
-//             0원 <span class="info">적용 가능한 할인쿠폰이 없습니다.</span>
-//             </td>
-//         </tr>
-//         <tr>
-//             <td>배송비</td>
-//             <td class="price">0원</td>
-//         </tr>
-//         <tr>
-//             <td>쿠페이캐시</td>
-//             <td class="price">
-//             0원 <span class="info">보유 : 0원</span>
-//             </td>
-//         </tr>
-//         <tr class="total">
-//             <td>총결제금액</td>
-//             <td class="total-price">{(totalPrice-totalDcPrice).toLocaleString()}원</td>
-//         </tr>
-//         </table>
-//     </div>
-
-//     <div class="section">
-//         <h2>결제 수단</h2>
-//         <div class="payment-method">
-//             <label class="radio-label">
-//                 <input type="radio" name="payment" checked /> 카카오페이
-//                 <span class="badge">최대 캐시적립</span>
-//             </label>
-//         </div>
-
-//         <div class="payment-method">
-//         <label class="radio-label">
-//             <input type="radio" name="payment" />
-//             쿠페이 머니 
-//         </label>
-//         </div>
-
-//         <div class="payment-method">
-//         <label class="radio-label">
-//             <input type="radio" name="payment" />
-//             다른 결제 수단 <span class="arrow">▼</span>
-//         </label>
-//         </div>
-//     </div>
-
-//     <div class="terms">
-//         <input type="checkbox" id="terms"/>
-//         <label for="terms">구매조건 확인 및 결제대행 서비스 약관 동의</label>
-//         <br />
-//         <input type="checkbox" id="privacy" />
-//         <label for="privacy">개인정보 국외 이전 동의</label>
-//     </div>
-
-//      <button className="pay-button" onClick={handlePayment}>결제하기</button>
-//     </div>
-// );
-// }
-
-
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import "./cart.css";
 import "./checkoutinfo.css";
 import { getKakaoPayment, getNaverPayment } from './paymentAPI.js';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 export function CheckoutInfo() {
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
+    const [isChange,setIsChange] = useState(true);
 
     // ✅ 결제 수단 상태 추가
     const [paymentMethod, setPaymentMethod] = useState("kakao");
@@ -187,10 +17,10 @@ export function CheckoutInfo() {
     const [receiver, setReceiver] = useState({
         name: "홍길동",
         phone: "010-1234-1234",
-        zipcode: "12345",
         address1: "서울시 강남구 역삼동",
-        address2: "123",
-        memo: "문앞"
+        address2: "1동 101호",
+        zipcode: "12345",
+        memo: "문앞에 놔주세요"
     });
 
     const [paymentInfo, setPaymentInfo] = useState({
@@ -199,6 +29,17 @@ export function CheckoutInfo() {
         totalAmount: totalPrice - totalDcPrice
     });
 
+    useEffect(() => {
+        setReceiver({
+            name: cartList[0].user.name,
+            phone: cartList[0].user.phone,
+            address1: cartList[0].user.address,
+            address2: "",
+            zipcode: "",
+            memo: "문앞에 놔주세요"
+        });
+    }, [])
+
     /** ✅ 결제 실행 */
     const handlePayment = async () => {
         if (paymentMethod === "kakao") {
@@ -206,6 +47,47 @@ export function CheckoutInfo() {
         } else if (paymentMethod === "naver") {
             await getNaverPayment(receiver, paymentInfo, cartList);
         }
+    };
+
+    const handleChange = () => {
+        setIsChange(!isChange);
+    }
+
+    const handleChangeValue = (e) => {
+        const {name, value} = e.target;
+        setReceiver({...receiver, [name]:value})
+    }
+
+    
+    const [userFullAddress, setFullAddress] = useState(cartList[0].user.address); //유저 주소
+    const [userZoneCode, setUserZoneCode] = useState(""); //유저 우편번호
+    const [isDaumPostcodeOpen, setIsDaumPostcodeOpen] = useState(false);
+    //다음 우편번호 찾기 API사용
+    const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
+
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = "";
+        let zonecode = data.zonecode;
+
+        if (data.addressType === "R") {
+            if (data.bname !== "") {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== "") {
+                extraAddress +=
+                extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+            }
+            fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+        }
+
+        setFullAddress(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+        setUserZoneCode(zonecode);
+    };
+    
+    const handleClick = () => {
+        open({ onComplete: handleComplete });
+        setReceiver({...receiver, "address1": userFullAddress, "zipcode": userZoneCode});
     };
 
     return (
@@ -235,27 +117,53 @@ export function CheckoutInfo() {
             <div className="section">
                 <h2 className="section-title">
                     받는사람정보 &nbsp;&nbsp;&nbsp;
-                    <button className='btn'>배송지 변경</button>
+                    {isChange ?
+                    <button className='btn' onClick={handleChange}>배송지 변경</button>
+                    :
+                    <button className='btn' onClick={handleChange}>수정</button>
+                    }
                 </h2>
-                <div className="info-box">
-                    <div className="info-grid">
-                        <div className="label">이름</div>
-                        <div className="value">{receiver.name}</div>
+                {isChange ?
+                    <div className="info-box">
+                        <div className="info-grid">
+                            <div className="label">이름</div>
+                            <div className="value">{receiver.name}</div>
 
-                        <div className="label">배송주소</div>
-                        <div className="value">
-                            {receiver.zipcode} / {receiver.address1} {receiver.address2}
-                        </div>
+                            <div className="label">배송주소</div>
+                            <div className="value">
+                                {userZoneCode==="" ? <></> : <>{userZoneCode} /</> } {userFullAddress} {receiver.address2}
+                            </div>
 
-                        <div className="label">연락처</div>
-                        <div className="value">{receiver.phone}</div>
+                            <div className="label">연락처</div>
+                            <div className="value">{receiver.phone}</div>
 
-                        <div className="label">배송 요청사항</div>
-                        <div className="value phone-input">
-                            <input type="text" defaultValue={receiver.memo} />
+                            <div className="label">배송 요청사항</div>
+                            <div className="value">{receiver.memo}</div>
                         </div>
                     </div>
-                </div>
+                :
+                    <div className="info-box">
+                        <div className="info-grid">
+                            <div className="label">이름</div>
+                            <div className="value phone-input">
+                                <input type="text" name='name' onChange={handleChangeValue} defaultValue={receiver.name} />
+                            </div>
+                            <div className="label">배송주소</div>
+                            <div className="value phone-input">
+                                <input type="text" name='address1' value={userFullAddress} onClick={handleClick} focusout={handleChangeValue}/>
+                                <input type="text" name='address2' onChange={handleChangeValue} defaultValue={receiver.address2} />
+                            </div>
+                            <div className="label">연락처</div>
+                            <div className="value phone-input">
+                                <input type="text" name='phone' onChange={handleChangeValue} defaultValue={receiver.phone} />
+                            </div>
+                            <div className="label">배송 요청사항</div>
+                            <div className="value phone-input">
+                                <input type="text" name='memo' onChange={handleChangeValue} defaultValue={receiver.memo} />
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
 
             {/* 🟢 주문 상품 */}
