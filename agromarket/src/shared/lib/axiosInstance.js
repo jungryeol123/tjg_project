@@ -42,6 +42,18 @@ export async function axiosPost(url, params) {
     }
 }
 
+// post방식(파일 전송)
+export async function axiosPostFile(url, params) {
+    try {
+        const response = await axios.post(url, params);
+
+        return response.data;
+    } catch (error) {
+        console.error("데이터 오류", error);
+        throw error;
+    }
+}
+
 // get방식 params 보내기
 export async function axiosGetParams(url, params) {
 
