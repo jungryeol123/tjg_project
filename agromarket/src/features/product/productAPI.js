@@ -1,4 +1,4 @@
-import { axiosGet, axiosGetParams, axiosPost } from "shared/lib/axiosInstance";
+import { axiosGet, axiosGetParams, axiosPostFile } from "shared/lib/axiosInstance";
 import {
   setProductList,
   setProduct,
@@ -64,12 +64,24 @@ export const setProductBestListAPI = async() =>  {
     return result;
 }
 
-
-export const setProductData = (productData) => {
+// 상품 정보 등록
+export const setProductData = async(formData, imageFile) => {
   const url = "/product/productAdd";
 
-  const result = axiosPost("/product/productAdd");
-  console.log("result DDDDD : ", result);
+  // 이미지 전송을 위한 FormData
+  const data = new FormData();
+
+  // formData설정(String타입으로 전송)
+  data.append("product", JSON.stringify(formData));
+
+  // 이미지 파일 추가
+  data.append("file", imageFile);
+
+  console.log("product : ", data.get("product"));
+  console.log("file : ", data.get("file"));
+
+  const result = await axiosPostFile(url, data);
+  console.log("result", result);
 }
 
 // // 상품 디테일 정보 취득

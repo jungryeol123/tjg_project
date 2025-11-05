@@ -1,5 +1,6 @@
 .product-add-container {
-  max-width: 600px;
+  width: 100%;
+  max-width: 1200px;
   margin: 50px auto;
   padding: 30px;
   border: 1px solid #ddd;
@@ -61,3 +62,22 @@
 .submit-btn:hover {
   background-color: #0056b3;
 }
+
+
+/* 2열 레이아웃 */
+.product-add-form .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .product-add-form .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
