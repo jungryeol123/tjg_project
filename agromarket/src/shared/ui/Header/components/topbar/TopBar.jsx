@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LuCandy } from "react-icons/lu";
 import { useDispatch,useSelector } from "react-redux";
 import { getLogout } from "features/auth/authAPI";
-
+import api from "features/auth/axios";
 
 export default function TopBar() {
 
@@ -13,13 +13,26 @@ export default function TopBar() {
   const dispatch = useDispatch();
   const isLogin  = useSelector((state) => state.auth.isLogin);
   
-  const handleLogout = () => {
-    const succ = dispatch(getLogout());
-    if(succ === null){
-      alert("로그아웃 되었습니다.");
-      navigate("/");
-    }
+  // const handleLogout = () => {
+  //   const succ = dispatch(getLogout());
+  //   if(succ === null){
+  //     alert("로그아웃 되었습니다.");
+  //     navigate("/");
+  //   }
+  // }
+
+  
+
+ const handleLogout = async () => {
+  try {
+    await api.post("/auth/logout");
+    localStorage.removeItem("loginInfo");
+    window.location.href = "/";
+  } catch (err) {
+    console.error("로그아웃 실패:", err);
   }
+};
+
 
 
 

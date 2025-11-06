@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { parseJwt } from "features/auth/parseJwt";
 
 export function MyOrders() {
   const [orders, setOrders] = useState([]);
@@ -8,19 +9,33 @@ export function MyOrders() {
 
 
 
+  // useEffect(() => {
+  //   // ✅ 1️⃣ 로그인 정보 먼저 읽기
+  //   const stored = localStorage.getItem("loginInfo");
+  //   if (stored) {
+  //     const parsed = JSON.parse(stored);
+  //     setUserId(parsed.id);
+  //   }
+  // }, []); // 처음 한 번만 실행
+
   useEffect(() => {
-    // ✅ 1️⃣ 로그인 정보 먼저 읽기
     const stored = localStorage.getItem("loginInfo");
     if (stored) {
-      const parsed = JSON.parse(stored);
-      setUserId(parsed.id);
+      const { accessToken } = JSON.parse(stored);
+      const payload = parseJwt(accessToken);
+      console.log("토큰 payload:", payload); // { id: 7, iat: ..., exp: ... }
+
+      setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
     }
-  }, []); // 처음 한 번만 실행
+
+  }, []);
+
+
 
 
   useEffect(() => {
     const fetchOrders = async () => {
-      if (!userId) return; 
+      if (!userId) return;
       try {
         const res = await axios.get(
           `http://localhost:8080/orders/my/${userId}`
