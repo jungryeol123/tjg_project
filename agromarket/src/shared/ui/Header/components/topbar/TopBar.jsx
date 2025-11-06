@@ -39,8 +39,7 @@ export default function TopBar() {
           <li>{ !isLogin &&  <Link to="/login">로그인</Link> }
           { isLogin &&<li onClick={handleLogout}>로그아웃</li> }</li>
           <li><Link to="/pay">주문</Link></li>
-          {/* { isLogin &&<li><Link to="/product/add">상품등록</Link></li> } */}
-          <li><Link to="/products/add">상품등록</Link></li>
+          { isLogin &&<li><Link to="/product/add">상품등록</Link></li> }
           <li><Link to="/mypage">마이페이지</Link></li>
         </ul>
       </div>
