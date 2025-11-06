@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ImageUpload.css";
 
-export function ImageUpload({ onFileSelect }) {
+export function ImageUpload({ onFileSelect , text, idx}) {
     const [image, setImage] = useState(null);
 
     // 이미지 파일 변경 시 이벤트
@@ -14,14 +14,14 @@ export function ImageUpload({ onFileSelect }) {
 
             // ProductAdd에 파일 전송
             if (onFileSelect) {
-                onFileSelect(selectedFile);
+                onFileSelect(idx, selectedFile);
             }
         }
      };
 
     return (
     <div className="image-upload-container">
-      <h2 className="image-upload-title">📸 이미지 선택</h2>
+      <h2 className="image-upload-title">📸 { text } 선택</h2>
 
       <input
         type="file"

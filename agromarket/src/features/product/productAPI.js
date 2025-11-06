@@ -65,8 +65,14 @@ export const setProductBestListAPI = async() =>  {
 }
 
 // 상품 정보 등록
-export const setProductData = async(formData, imageFile) => {
+export const setProductData = async(formData, imageListFile) => {
   const url = "/product/productAdd";
+
+  // localStorage에서 user의id취득
+  const { id } = JSON.parse(localStorage.getItem("loginInfo"));
+  
+  // user의 id설정
+  formData = {...formData, "user": { "id": id }};
 
   // 이미지 전송을 위한 FormData
   const data = new FormData();
@@ -75,10 +81,7 @@ export const setProductData = async(formData, imageFile) => {
   data.append("product", JSON.stringify(formData));
 
   // 이미지 파일 추가
-  data.append("file", imageFile);
-
-  console.log("product : ", data.get("product"));
-  console.log("file : ", data.get("file"));
+  imageListFile.map( imageFile => data.append("files", imageFile));
 
   const result = await axiosPostFile(url, data);
   console.log("result", result);

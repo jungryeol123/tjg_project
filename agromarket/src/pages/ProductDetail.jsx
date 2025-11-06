@@ -76,11 +76,13 @@ export function ProductDetail() {
   };
 
   // 장바구니 클릭
-  const handleAddCart = () => {
+  const handleAddCart = async () => {
     // 로그인 상태 확인
     if(isLogin){
       // 로그인시 상품의 id와 qty 연계
-      dispatch(addCart(id, count));
+      await dispatch(addCart(id, count));
+      // 장바구니 확인
+      alert("장바구니에 등록이 완료되었습니다.");
     } else {
       // 로그인이 필요
       alert("로그인이 필요합니다.");
@@ -118,16 +120,8 @@ export function ProductDetail() {
     }
   };
 
-  // 화면 표시용 가격 표시 : 9,999원
-  const price = parseInt(product.price).toLocaleString() + "원";
-  // 화면 표시용 할인가 : 9,999원
-  const dc = parseInt(product.price / product.dc).toLocaleString() + "원";
-  // 화면 표시용 할인가 적용 가격 : 9,999원
-  const salesPrice =
-    (
-      parseInt(product.price) - parseInt(product.price / product.dc)
-    ).toLocaleString() + "원";
-    console.log("safsdafsdafsdafsdafdsfs : ", product);
+  // 화면 표시용 할인가 적용 가격 : 9,999
+  const salesPrice = Math.floor(product.price * ((100 - product.dc) / 100));
   return (
     <div className="product-container">
       <div className="product-detail">
@@ -178,15 +172,16 @@ export function ProductDetail() {
               </div>
             </div>
             <div className="product-title">
-              [{product.brandName}] {product.productName}
+              [{ product.brandName }] { product.productName }
             </div>
 
+            {/* 할인 정보 */}
             <div className="product-discount red">
-              {dc} 할인{" "}
-              <span className="product-price-original line">{price}</span>
+              { Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원" } 할인
+              <span className="product-price-original line">{ (product.price)?.toLocaleString() + "원" }</span>
             </div>
 
-            <div className="product-price-final">{salesPrice}</div>
+            <div className="product-price-final">{ salesPrice?.toLocaleString() + "원" }</div>
             <div className="product-period red">
               행사 기간 2025-09-10 ~ 2025-10-20
             </div>
@@ -209,31 +204,31 @@ export function ProductDetail() {
             </ul>
             <ul className="product-meta">
               <li>판매자</li>
-              <li>컬리</li>
+              <li>{ product.seller }</li>
             </ul>
             <ul className="product-meta">
               <li>원산지</li>
-              <li>{product.origin}</li>
+              <li>{ product.origin }</li>
             </ul>
             <ul className="product-meta">
               <li>판매단위</li>
-              <li>1팩</li>
+              <li>{ product.unit }</li>
             </ul>
             <ul className="product-meta">
               <li>중량/용량</li>
-              <li>1KG</li>
+              <li>{ product.weight }</li>
             </ul>
             <ul className="product-meta">
               <li>총 수량</li>
-              <li>{product.count}개</li>
+              <li>{ product.count }개</li>
             </ul>
             <ul className="product-meta">
               <li>알레르기정보</li>
-              <li>소고기,대두,밀</li>
+              <li>{ product.allergyInfo }</li>
             </ul>
             <ul className="product-meta">
               <li>안내사항</li>
-              <li>{product.description}</li>
+              <li>{ product.description }</li>
             </ul>
             <hr />
 
@@ -244,16 +239,16 @@ export function ProductDetail() {
                 </li>
                 <li>
                   <div className="product-qty-control">
-                    <button className="qty-btn" onClick={handleDecrease}>
+                    <button className="qty-btn" onClick={ handleDecrease }>
                       -
                     </button>
                     <input
                       className="qty-input"
                       type="text"
-                      value={count}
-                      onChange={handleChange}
+                      value={ count }
+                      onChange={ handleChange }
                     />
-                    <button className="qty-btn" onClick={handleIncrease}>
+                    <button className="qty-btn" onClick={ handleIncrease }>
                       +
                     </button>
                   </div>
@@ -263,12 +258,12 @@ export function ProductDetail() {
                 <li>
                   총금액 <span>(부가세포함)</span>
                 </li>
-                <li>30,000원</li>
+                <li>{ (salesPrice * count)?.toLocaleString() + "원" }</li>
               </ul>
             </div>
             <div className="product-buttons">
               <button
-                className={`btn-wish ${isWished ? "active" : ""}`}
+                className={ `btn-wish ${isWished ? "active" : ""}` }
                 onClick={toggleWish}
               >
                 {isWished ? (
@@ -277,7 +272,7 @@ export function ProductDetail() {
                   <AiOutlineHeart size={20} />
                 )}
               </button>
-              <button className="btn-cart" onClick={handleAddCart}>
+              <button className="btn-cart" onClick={ handleAddCart }>
                 장바구니
               </button>
             </div>
