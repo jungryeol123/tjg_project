@@ -10,15 +10,18 @@ export default function SuccessPage() {
   const dispatch = useDispatch();
   // URL 쿼리 파라미터 파싱
   const queryParams = new URLSearchParams(location.search);
+  const accessToken = queryParams.get("accessToken");
   const success = queryParams.get("success");
   const provider = queryParams.get("provider");
   const id = queryParams.get("userId");
-       console.log("provider1", provider, "id1", id);
   useEffect(() => {
     if (success === "200") {
-      dispatch(socialApiLogin(provider, id));
-      console.log("결제 성공!");
-      // ✅ 3초 뒤 메인페이지로 자동 이동 (선택사항)
+      
+      if (accessToken) {
+      dispatch(socialApiLogin(provider, id, accessToken));
+    }
+
+
       const timer = setTimeout(() => {
         navigate("/", { replace: true });
       }, 2000);

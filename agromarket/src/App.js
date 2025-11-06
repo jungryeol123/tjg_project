@@ -22,10 +22,20 @@ import { MyOrders } from 'pages/myOrders/MyOrders';
 import { CheckoutInfo } from 'pages/order/CheckoutInfo';
 import IntroAnimation from 'IntroAnimation';
 import SuccessPage from 'pages/successPage/SuccessPage';
+import { useDispatch } from 'react-redux';
+import { login } from 'features/auth/authSlice';
 function App() {
 
    const [isIntroFinished, setIsIntroFinished] = useState(false);
+    const dispatch = useDispatch();
 
+  useEffect(() => {
+    const saved = localStorage.getItem("loginInfo");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      dispatch(login(parsed)); // Redux 복원
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     // ✅ 1. 카카오 SDK 초기화
@@ -46,6 +56,11 @@ function App() {
   // if (!isIntroFinished) {
   //   return <IntroAnimation />;
   // }
+
+
+
+
+
 
 
   return (

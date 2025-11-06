@@ -1,27 +1,64 @@
 import { login,logout, socialLogin } from "./authSlice.js";
 import { validateFormCheck,validateSignupFormCheck } from "./validate.js";
 import { axiosPost } from "./dataFetch.js";
+import api from "./axios.js";
 
-export const getLogin = (formData, param) => async(dispatch) => {
-//        console.log(formData.id, param);
- if(validateFormCheck(param)) {
+// export const getLogin = (formData, param) => async(dispatch) => {
+// //        console.log(formData.id, param);
+//  if(validateFormCheck(param)) {
 
-    /**
-        springboot - @RestController, @PostMapping("/member/login")
-        axios API (**fetch = body, axios = data)
-    */
-    const url = "/member/login";
-    const result = await axiosPost(url,formData);
+//     /**
+//         springboot - @RestController, @PostMapping("/member/login")
+//         axios API (**fetch = body, axios = data)
+//     */
+//     const url = "/member/login";
+//     const result = await axiosPost(url,formData);
 
-    if(result){
-           //로그인 성공
-           const {userId,id} = result;
-           dispatch(login({"userId":formData.id, userId, id}));
-           return true;
-            }
-        }
-        return false;
-}
+//     if(result){
+//            //로그인 성공
+//            const {userId,id} = result;
+//            dispatch(login({"userId":formData.id, userId, id}));
+//            return true;
+//             }
+//         }
+//         return false;
+// }
+
+
+
+export const getLogin = (formData, param) => async (dispatch) => {
+  const { userId, password } = formData;
+
+  try {
+    // ✅ 1. 백엔드에 로그인 요청
+    const res = await api.post("/auth/login", {
+      userId: userId,
+      password: password,
+    });
+
+    // ✅ 2. AccessToken 받기
+    const accessToken = res.data.accessToken;
+    console.log("로그인 성공 → accessToken:", accessToken);
+    if (accessToken) {
+      // ✅ 3. Redux 상태 업데이트
+      dispatch(login({"id" : userId, provider : "local", "accessToken" : accessToken }));
+
+      return true;
+    }
+  } catch (err) {
+    console.error("로그인 실패:", err);
+    param.setErrors({
+      ...param.errors,
+      password: "아이디 또는 비밀번호를 확인해주세요.",
+    });
+    return false;
+  }
+};
+
+
+
+
+
 /**
     id중복 체크
 */
@@ -53,6 +90,6 @@ export const getLogout = () => async (dispatch) => {
     return true;
 }
 
-export const socialApiLogin = (provider, id) => (dispatch) => {
-    dispatch(socialLogin({provider, id}));
+export const socialApiLogin = (provider, id, accessToken) => (dispatch) => {
+    dispatch(socialLogin({provider, id, accessToken}));
 }
