@@ -24,7 +24,7 @@ export default function SuccessPage() {
 
       const timer = setTimeout(() => {
         navigate("/", { replace: true });
-      }, 2000);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [success, navigate]);

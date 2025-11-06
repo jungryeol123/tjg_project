@@ -39,7 +39,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   isLogin: false,
-  id: null,
   provider: null,
   accessToken: null,
 }
@@ -50,11 +49,10 @@ export const authSlice = createSlice({
   reducers: {
     login(state, action) {
       state.isLogin = true;
-      const { id, provider, accessToken } = action.payload;
-      state.id = id;
+      const { provider, accessToken } = action.payload;
       state.provider = provider;
       state.accessToken = accessToken;
-      const loginInfo = { id, provider, accessToken };
+      const loginInfo = { provider, accessToken };
       localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
     },
     logout(state) {
