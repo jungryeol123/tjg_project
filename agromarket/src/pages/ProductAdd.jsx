@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { setDeliveryAPI } from "features/delivery/deliveryAPI";
-import { setProductData } from "features/product/productAPI";
 import { useSelector, useDispatch } from "react-redux";
-import { ImageUpload } from "./ImageUpload";
+import { ImageUploadList } from "./ImageUploadList";
+import { setProductData } from "../features/product/productAPI.js";
 import "./ProductAdd.css";
 
-export function ProductAdd() { 
+export function ProductAdd() {
   // 배송정보리스트
   const deliveryList = useSelector((state) => state.delivery.deliveryList);
+  const imageList = ["상품 이미지","속성 이미지","상세 이미지"];
+
   const dispatch = useDispatch();
 
   // form데이터용
@@ -48,29 +50,35 @@ export function ProductAdd() {
 
   // form데이터 입력시 이벤트
   const handleChange = (e) => {
-    const { name, value  } = e.target;
-    setFormData({ ...formData, [name]: value  });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
-
+  
   // 이미지 등록용
-  const [imageFile, setImageFile] = useState(null);
+  const [imageListFile, setImageListFile] = useState([]);
 
   // 이미지 등록 시 이벤트
-  const handleImageSelect = (file) => {
-    setImageFile(file);
+  const handleImagesSelect = (index, file) => {
+    // 이미지 등록 시 이벤트
+    setImageListFile((prevList) => {
+      const newList = [...prevList]; // 기존 배열 복사
+      newList[index] = file; // 해당 위치에 새 파일 저장 (기존 파일 존재시 교체)
+      return newList;
+    });
   };
 
   // 등록 버튼 클릭시 이벤트
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 이미지 미등록시
-    if (!imageFile) {
-      alert("이미지를 선택해주세요!");
-      return;
-    }
+      for (let i = 0; i < imageList.length; i++) {
+        if (!imageListFile[i]) {
+          alert(`${imageList[i]}를 등록하세요.`);
+          return; // 하나라도 누락되면 함수 종료
+        }
+      }
 
-    setProductData(formData, imageFile);
+    setProductData(formData, imageListFile);
   };
 
   return (
@@ -118,12 +126,7 @@ export function ProductAdd() {
               ))}
           </select>
         </div>
-
-        { /* 이미지 등록 */ }
-        <div className="full-width">
-          <ImageUpload onFileSelect={ handleImageSelect } />
-        </div>
-
+        <ImageUploadList onFileSelect={ handleImagesSelect } size={3} imageList={imageList}/>
         <button type="submit" className="submit-btn">등록</button>
       </form>
     </div>
