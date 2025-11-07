@@ -1,11 +1,11 @@
 import { getPayment } from 'features/payment/paymentAPI';
-import './checkoutinfo.css'
+import './CheckOutInfo.css'
 import { useSelector } from "react-redux";
 import { useState } from 'react';
 
 // import { getPayment } from '../feature/payment/paymentAPI.js';
 
-export function CheckOutInfo() {   
+export function CheckoutInfo() {   
     // const cartList = useSelector((state)=>state.cart.cartList);
     // const totalPrice = useSelector((state)=>state.cart.totalPrice);
    const [cartList, setCartList] = useState([

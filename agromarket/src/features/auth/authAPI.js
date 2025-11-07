@@ -4,6 +4,7 @@ import { axiosPost } from "./dataFetch.js";
 import api, { setupApiInterceptors } from "./axios.js";
 import { setCartItem, getCartCount } from "../cart/cartSlice.js"
 import axios from "axios";
+import { parseJwt } from "features/auth/parseJwt";
 
 const plainAxios = axios.create({
   baseURL: "http://localhost:8080",
@@ -15,16 +16,22 @@ export const getLogin = (formData, param) => async (dispatch) => {
   try {
     const res = await plainAxios.post("/auth/login", { userId, password });
     const accessToken = res.data.accessToken;
-
+    
     if (accessToken) {
       dispatch(login({ provider: "local", accessToken }));
-      console.log("accessToken : ", accessToken);
-      // // 장바구니 리스트 설정
-	    // const url = "/cart/cartList";
-	    // const cartItem = { "user" : {"id":id} };
-	    // const cartData = await axiosPost(url, cartItem);
-	    // dispatch(setCartItem({"cartItem": cartData}));
-	    // dispatch(getCartCount());
+      // 토큰정보 취득
+      const payload = parseJwt(accessToken);
+      
+      // 장바구니 리스트 설정
+	    const url = "/cart/cartList";
+	    const cartItem = { "user" : {"id":payload.id} };
+      
+      // 장바구니 리스트 취득
+	    const cartData = await axiosPost(url, cartItem);
+      // 장바구니 리스트 설정
+	    dispatch(setCartItem({"cartItem": cartData}));
+      // 장바구니 카운트 설정
+	    dispatch(getCartCount());
 
       // ✅ 이제부터 인터셉터 활성화
       setupApiInterceptors();
