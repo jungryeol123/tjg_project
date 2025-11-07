@@ -47,7 +47,6 @@ export const cartSlice = createSlice({
 
       // 동일 상품 조회( 장바구니 리스트에 없을시 undefined )
       const flag = state.cartList.find( cart => String(cart.product.id) === String(cartItem.product.id) )
-      console.log(flag)
       // 동일 상품이 없을시
       if(!flag){
         // 장바구니 리스트에 상품 추가

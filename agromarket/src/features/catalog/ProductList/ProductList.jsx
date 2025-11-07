@@ -29,8 +29,7 @@ import { setProductListAPI } from "features/product/productAPI";
   //   } 
   // }, [dispatch, keyword]);
 
-
-    console.log("id", typeof id);
+    // console.log("id", typeof id);
    // ✅ 필터 조건 분기
   const productFilterList = useMemo(() => {
     if (!productList || productList.length === 0) return [];
@@ -55,13 +54,7 @@ import { setProductListAPI } from "features/product/productAPI";
     }
   }, [productList, keyword, limit]);
 
-
-
-
-
-
-console.log("productFilterList", productFilterList);
-
+// console.log("productFilterList", productFilterList);
 
   const stopMomentum = () => cancelAnimationFrame(momentumId.current);
 
@@ -185,7 +178,5 @@ console.log("productFilterList", productFilterList);
     </section>
   );
 }
-
-
 
 export default memo(ProductList);

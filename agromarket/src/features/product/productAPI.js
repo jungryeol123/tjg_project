@@ -7,9 +7,7 @@ import {
 } from "./productSlice";
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
-  console.log("keyword", keyword);
   const result = await axiosGet("/product/productList");
-  console.log("result", result);
   if (result !== null && Array.isArray(result)) {
     dispatch(setProductList({ result: result }));
   }
@@ -32,7 +30,6 @@ export const setProductReviewListAPI = () => async (dispatch) => {
     const result = await axiosGet(
       "/product/productReviewList"
     );
-    console.log("resultReview (before parse):", result);
 
     // ✅ 문자열 JSON → 실제 배열로 변환
     const parsed = result.map((item) => ({
@@ -41,8 +38,6 @@ export const setProductReviewListAPI = () => async (dispatch) => {
         typeof item.images === "string" ? JSON.parse(item.images) : item.images,
       tags: typeof item.tags === "string" ? JSON.parse(item.tags) : item.tags,
     }));
-
-    console.log("resultReview (after parse):", parsed);
 
     // ✅ Redux에 저장
     dispatch(setProductReviewList({ result: parsed }));
@@ -53,14 +48,12 @@ export const setProductReviewListAPI = () => async (dispatch) => {
 
 export const setProductQnAListAPI = () => async (dispatch) => {
   const result = await axiosGet("/product/productQnAList");
-  console.log("productQnAList", result);
   dispatch(setProductQnAList({"result" : result}));
 };
 
 
 export const setProductBestListAPI = async() =>  {
     const result = await axiosGet("/product/productBestList");
-    console.log("result12", result);
     return result;
 }
 
@@ -84,7 +77,12 @@ export const setProductData = async(formData, imageListFile) => {
   imageListFile.map( imageFile => data.append("files", imageFile));
 
   const result = await axiosPostFile(url, data);
-  console.log("result", result);
+
+  if (result) {
+      return true;
+  } else {
+      return false;
+  }
 }
 
 // // 상품 디테일 정보 취득

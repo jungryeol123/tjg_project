@@ -78,7 +78,13 @@ export function ProductAdd() {
         }
       }
 
-    setProductData(formData, imageListFile);
+    const result = setProductData(formData, imageListFile);
+
+    if(result){
+      alert("상품 등록 성공!");
+    } else {
+      alert("상품 등록 실패!");
+    }
   };
 
   return (

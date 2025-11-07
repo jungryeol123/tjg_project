@@ -21,7 +21,6 @@ export default function SuccessPage() {
       dispatch(socialApiLogin(provider, id, accessToken));
     }
 
-
       const timer = setTimeout(() => {
         navigate("/", { replace: true });
       }, 3000);

@@ -15,8 +15,7 @@ export default function SearchResult() {
 
   // 어떤 경로로 들어왔는지 확인 가능
   const isCheckRoot = location.pathname.includes("/brand");
-  console.log("location", location);
-  console.log(" isCheckRoot",  isCheckRoot);
+
   if(isCheckRoot){
       filtered = productList.filter((p) =>
       p.brandName == keyword);

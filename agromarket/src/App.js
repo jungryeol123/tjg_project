@@ -57,12 +57,6 @@ function App() {
   //   return <IntroAnimation />;
   // }
 
-
-
-
-
-
-
   return (
       <BrowserRouter>
         <Routes>

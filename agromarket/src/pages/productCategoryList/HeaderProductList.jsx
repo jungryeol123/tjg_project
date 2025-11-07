@@ -27,8 +27,6 @@ export function HeaderProductList() {
     if (id !== "deal") return [];
     return productList.filter((p) => p.hotDeal === true || p.memberSpecial === true);
   }, [id, productList]);
-  console.log("productList", productList);
-  console.log("hotOrSpecialProducts", hotOrSpecialProducts);
 
   // ✅ (3) 세일 상품 (sale): 할인율(dc)이 10% 이상
   const saleProducts = useMemo(() => {

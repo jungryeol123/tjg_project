@@ -97,7 +97,6 @@ export const getNaverPayment = async (receiver, paymentInfo, cartList) => {
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   const id = loginInfo.id;
-  console.log("id", id);
   // 1️⃣ 백엔드에 주문 생성 요청
   const data = {
     itemName: cartList[0].product.productName,
