@@ -91,8 +91,8 @@ export function CheckOut() {
     };
 
     return (
-        <div className="cart-container">
-            <h2 className="cart-header">주문/결제</h2>
+        <div className="checkout-container">
+            <h2 className="checkout-header">주문/결제</h2>
 
             {/* 🟢 구매자 정보 */}
             <div className="section">
@@ -150,7 +150,7 @@ export function CheckOut() {
                             </div>
                             <div className="label">배송주소</div>
                             <div className="value phone-input">
-                                <input type="text" name='address1' value={userFullAddress} onClick={handleClick} focusout={handleChangeValue}/>
+                                <input type="text" name='address1' value={userFullAddress} onClick={handleClick} readOnly/>
                                 <input type="text" name='address2' onChange={handleChangeValue} defaultValue={receiver.address2} />
                             </div>
                             <div className="label">연락처</div>

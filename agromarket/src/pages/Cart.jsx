@@ -3,6 +3,8 @@ import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { removeCart, showCart, updateCart } from "features/cart/cartAPI";
+import { parseJwt } from "features/auth/parseJwt";
+
 
 export function Cart() {
     const navigate = useNavigate();
@@ -10,9 +12,17 @@ export function Cart() {
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
+    const [userId, setUserId] = useState(null); // ✅ 테스트용 사용자 id (나중엔 토큰으로 대체)
 
     useEffect(() => {
-        dispatch(showCart());
+        const stored = localStorage.getItem("loginInfo");
+        if (stored) {
+            const { accessToken } = JSON.parse(stored);
+            const payload = parseJwt(accessToken);
+    
+            setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
+            dispatch(showCart(payload.id));
+        }
     }, [])
     
     return (

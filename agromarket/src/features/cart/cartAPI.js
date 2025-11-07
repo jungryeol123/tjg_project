@@ -43,9 +43,8 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
 }
 
 // 장바구니 정보 취득
-export const showCart = () => async(dispatch) => {
+export const showCart = (id) => async(dispatch) => {
     const url = "/cart/cartList";
-    const { id } = JSON.parse(localStorage.getItem("loginInfo"));
     const cartItem = { "user" : {"id":id} };
     const cartData = await axiosPost(url, cartItem);
     dispatch(setCartItem({"cartItem": cartData}));
