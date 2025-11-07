@@ -19,12 +19,12 @@ export const getLogin = (formData, param) => async (dispatch) => {
     if (accessToken) {
       dispatch(login({ provider: "local", accessToken }));
 
-      // 장바구니 리스트 설정
-	    const url = "/cart/cartList";
-	    const cartItem = { "user" : {"id":id} };
-	    const cartData = await axiosPost(url, cartItem);
-	    dispatch(setCartItem({"cartItem": cartData}));
-	    dispatch(getCartCount());
+      // // 장바구니 리스트 설정
+	    // const url = "/cart/cartList";
+	    // const cartItem = { "user" : {"id":id} };
+	    // const cartData = await axiosPost(url, cartItem);
+	    // dispatch(setCartItem({"cartItem": cartData}));
+	    // dispatch(getCartCount());
 
       // ✅ 이제부터 인터셉터 활성화
       setupApiInterceptors();
