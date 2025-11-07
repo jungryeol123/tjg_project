@@ -5,6 +5,7 @@ import {
   setProductReviewList,
   setProductQnAList
 } from "./productSlice";
+import { parseJwt } from "features/auth/parseJwt";
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
   const result = await axiosGet("/product/productList");
@@ -61,27 +62,36 @@ export const setProductBestListAPI = async() =>  {
 export const setProductData = async(formData, imageListFile) => {
   const url = "/product/productAdd";
 
-  // localStorage에서 user의id취득
-  const { id } = JSON.parse(localStorage.getItem("loginInfo"));
+  // 토큰 확인
+  const stored = localStorage.getItem("loginInfo");
   
-  // user의 id설정
-  formData = {...formData, "user": { "id": id }};
+  if (stored) {
+    // 토큰에서 user의 id취득
+    const { accessToken } = JSON.parse(stored);
+    const payload = parseJwt(accessToken);
 
-  // 이미지 전송을 위한 FormData
-  const data = new FormData();
+    console.log("afasdfsaf : ", payload.id);
+    // user의 id설정
+    formData = {...formData, "user": { "id": payload.id }};
 
-  // formData설정(String타입으로 전송)
-  data.append("product", JSON.stringify(formData));
+    // 이미지 전송을 위한 FormData
+    const data = new FormData();
 
-  // 이미지 파일 추가
-  imageListFile.map( imageFile => data.append("files", imageFile));
+    // formData설정(String타입으로 전송)
+    data.append("product", JSON.stringify(formData));
 
-  const result = await axiosPostFile(url, data);
+    // 이미지 파일 추가
+    imageListFile.map( imageFile => data.append("files", imageFile));
 
-  if (result) {
-      return true;
-  } else {
-      return false;
+    // 상품 정보 DB에 업로드
+    const result = await axiosPostFile(url, data);
+
+    // 업로드 성공시 메세지 출력
+    if (result) {
+        return true;
+    } else {
+        return false;
+    }
   }
 }
 
