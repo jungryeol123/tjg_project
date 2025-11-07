@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 // import { getPayment } from '../feature/payment/paymentAPI.js';
 
-export function CheckoutInfo() {   
+export function CheckOutInfo() {   
     // const cartList = useSelector((state)=>state.cart.cartList);
     // const totalPrice = useSelector((state)=>state.cart.totalPrice);
    const [cartList, setCartList] = useState([

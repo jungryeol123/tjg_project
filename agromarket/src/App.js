@@ -19,7 +19,7 @@ import { FindUserId } from 'pages/FindUserId';
 import { FindPassword } from 'pages/FindPassword';
 import { PayResult } from 'pages/PayResult';
 import { MyOrders } from 'pages/myOrders/MyOrders';
-import { CheckoutInfo } from 'pages/order/CheckoutInfo';
+import { CheckOutInfo } from 'pages/order/CheckOutInfo';
 import IntroAnimation from 'IntroAnimation';
 import SuccessPage from 'pages/successPage/SuccessPage';
 import { useDispatch } from 'react-redux';
@@ -75,7 +75,7 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/detail" element={<ProductDetail/>} />
           <Route path="/cart" element={<Cart />} />
-          <Route path='/checkout' element={<CheckoutInfo />} />
+          <Route path='/checkout' element={<CheckOutInfo />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           {/* <Route path="/pay" element={<PaymentButton/>} /> */}
           <Route path="/" element={<PaymentButton/>} />
