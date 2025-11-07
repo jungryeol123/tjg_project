@@ -1,5 +1,5 @@
 import { getPayment } from 'features/payment/paymentAPI';
-import './CheckOutInfo.css'
+import './checkoutinfo.css'
 import { useSelector } from "react-redux";
 import { useState } from 'react';
 
