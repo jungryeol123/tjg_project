@@ -20,8 +20,6 @@ export function ProductDetail() {
   // 현재 경로 확인용
   const location = useLocation();
 
-  // 장바구니 카운트
-  const cartCount = useSelector((state) => state.cart.cartCount);
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
@@ -80,9 +78,15 @@ export function ProductDetail() {
     // 로그인 상태 확인
     if(isLogin){
       // 로그인시 상품의 id와 qty 연계
-      await dispatch(addCart(id, count));
-      // 장바구니 확인
-      alert("장바구니에 등록이 완료되었습니다.");
+      const isNew = await dispatch(addCart(id, count));
+
+      // 신규 상품 등록시
+      if(isNew){
+        // 장바구니 확인
+        alert(product.productName + "가 장바구니에 등록이 완료되었습니다.");
+      } else {
+        alert(product.productName + "의 수량이 증가 되었습니다.");
+      }
     } else {
       // 로그인이 필요
       alert("로그인이 필요합니다.");
