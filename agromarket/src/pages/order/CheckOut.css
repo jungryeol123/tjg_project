@@ -196,6 +196,12 @@
   margin-right: 6px;
 }
 
+.checkout-container .order-info-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
 /* 결제 버튼 */
 .checkout-container .pay-button {
   width: 100%;
