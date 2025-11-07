@@ -14,7 +14,6 @@ export default function LogoSearch() {
 
   // 장바구니 카운트 갯수
   const cartCount = useSelector( state => state.cart.cartCount );
-  const cart = useSelector(state => state.cart.cartList);
 
   // ✅ 검색 버튼 클릭 시 이동
   const handleSearch = () => {

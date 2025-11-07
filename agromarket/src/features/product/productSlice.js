@@ -1,9 +1,7 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 
 // 전체 전역 변수
 const initialState = {
-  
     productList: [],
     product: {},
     productReviewList : [],
@@ -34,8 +32,6 @@ export const productSlice = createSlice({
       state.productQnAList = result;
     }
   }});
-
-
 
   export const {setProductList,setProduct, setProductReviewList, setProductQnAList} = productSlice.actions; 
   export default productSlice.reducer;

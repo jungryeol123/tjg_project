@@ -28,7 +28,6 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
 
     // 장바구니 설정
     const result = await axiosPost(url, cart);
-    console.log("result", result);
 
     if (result) {
         await dispatch(updateCartList({ "cartItem" : result }));
@@ -36,7 +35,6 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
 
         // // 최신 state 가져오기
         const isNew = getState().cart.isNew;
-        console.log(isNew)
         return isNew;
     } else {
         console.error("장바구니 저장 실패");
@@ -53,7 +51,6 @@ export const showCart = () => async(dispatch) => {
     dispatch(setCartItem({"cartItem": cartData}));
     dispatch(updateTotalPrice());
     dispatch(updateTotalDcPrice());
-    console.log(cartData);
     // return cartData;
 }
 

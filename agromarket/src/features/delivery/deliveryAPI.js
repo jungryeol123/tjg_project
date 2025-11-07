@@ -1,6 +1,5 @@
 import { axiosGet } from "shared/lib/axiosInstance";
 
-
 import {
   setDeliveryList,
 } from "./deliverySlice";

@@ -31,8 +31,6 @@ export async function axiosGet(url) {
 
 // post방식
 export async function axiosPost(url, params) {
-    console.log("url : ", url, params);
-
     try {
         const response = await axios.post(url, params);
         return response.data;

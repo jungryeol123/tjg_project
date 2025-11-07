@@ -18,7 +18,7 @@ export const getLogin = (formData, param) => async (dispatch) => {
 
     if (accessToken) {
       dispatch(login({ provider: "local", accessToken }));
-
+      console.log("accessToken : ", accessToken);
       // // 장바구니 리스트 설정
 	    // const url = "/cart/cartList";
 	    // const cartItem = { "user" : {"id":id} };
@@ -28,7 +28,6 @@ export const getLogin = (formData, param) => async (dispatch) => {
 
       // ✅ 이제부터 인터셉터 활성화
       setupApiInterceptors();
-
 
       return true;
     }
