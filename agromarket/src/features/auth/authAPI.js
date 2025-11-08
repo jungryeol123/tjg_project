@@ -1,22 +1,22 @@
 import { login, logout, socialLogin } from "./authSlice.js";
 import { validateFormCheck, validateSignupFormCheck } from "./validate.js";
 import { axiosPost } from "./dataFetch.js";
-import api, { setupApiInterceptors } from "./axios.js";
+import  { setupApiInterceptors } from "./axios.js";
 import { setCartItem, getCartCount } from "../cart/cartSlice.js"
 import axios from "axios";
 import { parseJwt } from "features/auth/parseJwt";
 
-const plainAxios = axios.create({
-  baseURL: "http://localhost:8080",
-});
+// const plainAxios = axios.create({
+//   baseURL: "/"
+// });
 
 export const getLogin = (formData, param) => async (dispatch) => {
   const { userId, password } = formData;
 
   try {
-    const res = await plainAxios.post("/auth/login", { userId, password });
+    const res = await axios.post("/auth/login", { userId, password });
     const accessToken = res.data.accessToken;
-    
+    console.log();
     if (accessToken) {
       dispatch(login({ provider: "local", accessToken }));
       // 토큰정보 취득
@@ -33,8 +33,8 @@ export const getLogin = (formData, param) => async (dispatch) => {
       // 장바구니 카운트 설정
 	    dispatch(getCartCount());
 
-      // ✅ 이제부터 인터셉터 활성화
-      setupApiInterceptors();
+      // // ✅ 이제부터 인터셉터 활성화
+      // setupApiInterceptors();
 
       return true;
     }

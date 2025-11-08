@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LuCandy } from "react-icons/lu";
 import { useDispatch,useSelector } from "react-redux";
 import { api } from "features/auth/axios";
+import axios from "axios";
 
 
 export default function TopBar() {
@@ -26,7 +27,7 @@ export default function TopBar() {
  const handleLogout = async () => {
   console.log("🚀 로그아웃 요청 시도");
   try {
-    await api.post("/auth/logout");
+    await api.post("/auth/logout",{},  {withCredentials: true});
     localStorage.removeItem("loginInfo");
     // window.location.href = "/";
   } catch (err) {
