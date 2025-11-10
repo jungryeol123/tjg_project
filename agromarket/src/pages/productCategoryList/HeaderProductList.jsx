@@ -90,7 +90,7 @@ export function HeaderProductList() {
           <div className="product-grid">
             {filteredProducts.map((item, idx) => (
               <Link
-                to={`/products/${item.pid}/${item.id}`}
+                to={`/products/${item.id}`}
                 key={idx}
               >
                   <ProductCard item={item} />

@@ -149,7 +149,7 @@ import { setProductListAPI } from "features/product/productAPI";
           <div className="slides">
             {productFilterList && productFilterList.map((item, idx) => (
               <Link
-                to={`/products/${item.pid}/${item.id}`}
+                to={`/products/${item.id}`}
                 className="slide"
                 key={idx}
                 draggable="false"

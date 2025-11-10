@@ -73,7 +73,7 @@ function App() {
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           {/* <Route path="/pay" element={<PaymentButton/>} /> */}
           <Route path="/" element={<PaymentButton/>} />
-          <Route path="/products/:pid/:id" element={<ProductDetail />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
           <Route path="/products/add" element={<ProductAdd />} />
            <Route path="/search/:keyword" element={<SearchResult />} />
