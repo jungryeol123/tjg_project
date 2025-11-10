@@ -29,7 +29,7 @@ export default function TopBar() {
   try {
     await api.post("/auth/logout",{},  {withCredentials: true});
     localStorage.removeItem("loginInfo");
-    window.location.href = "/";
+    // window.location.href = "/";
   } catch (err) {
     console.error("로그아웃 실패:", err);
   }

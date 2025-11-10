@@ -14,7 +14,7 @@ export const getLogin = (formData, param) => async (dispatch) => {
   const { userId, password } = formData;
 
   try {
-    const res = await axios.post("/auth/login", { userId, password });
+    const res = await axios.post("http://localhost:8080/auth/login", { userId, password },  { withCredentials: true });
     const accessToken = res.data.accessToken;
     console.log();
     if (accessToken) {
@@ -33,8 +33,8 @@ export const getLogin = (formData, param) => async (dispatch) => {
       // 장바구니 카운트 설정
 	    dispatch(getCartCount());
 
-      // // ✅ 이제부터 인터셉터 활성화
-      // setupApiInterceptors();
+      // ✅ 이제부터 인터셉터 활성화
+      setupApiInterceptors();
 
       return true;
     }

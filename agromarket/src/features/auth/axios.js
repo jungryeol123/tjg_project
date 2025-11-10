@@ -13,6 +13,12 @@ export function setupApiInterceptors() {
     if (loginInfo?.accessToken) {
       config.headers.Authorization = `Bearer ${loginInfo.accessToken}`;
     }
+
+    const csrf = document.cookie.split('; ')
+      .find(row => row.startsWith('XSRF-TOKEN='))
+      ?.split('=')[1];
+    if (csrf) config.headers['X-CSRF-Token'] = csrf;
+    
     return config;
   });
 

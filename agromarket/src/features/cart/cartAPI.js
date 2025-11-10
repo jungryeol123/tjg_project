@@ -1,6 +1,7 @@
 import { setCartItem, setCartCount, updateCartCount, updateCartList, updateTotalPrice, updateTotalDcPrice, getCartCount } from './cartSlice.js';
 import { axiosGet, axiosPost } from 'shared/lib/axiosInstance.js'
 import { parseJwt } from "features/auth/parseJwt";
+import { api } from 'features/auth/axios.js';
 
 export const getTotalPrice = () => (dispatch) => {
     // 총 금액 설정
@@ -52,7 +53,8 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
 export const showCart = (id) => async(dispatch) => {
     const url = "/cart/cartList";
     const cartItem = { "user" : {"id":id} };
-    const cartData = await axiosPost(url, cartItem);
+    // const cartData = await axiosPost(url, cartItem);
+    const cartData = await api.post(url, cartItem);
     dispatch(setCartItem({"cartItem": cartData}));
     dispatch(updateTotalPrice());
     dispatch(updateTotalDcPrice());
