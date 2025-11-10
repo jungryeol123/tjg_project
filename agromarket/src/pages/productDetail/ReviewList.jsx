@@ -3,7 +3,7 @@ import "./ReviewList.scss";
 import { axiosGet } from "shared/lib/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 
-export function ReviewList({ pid, id }) {
+export function ReviewList({ id }) {
   const reviewsAll = useSelector((state) => state.product.productReviewList);
   const [reviews, setReviews] = useState([]);
   const [reviewImages, setReviewImages] = useState([]);
