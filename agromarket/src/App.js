@@ -24,11 +24,16 @@ import SuccessPage from 'pages/successPage/SuccessPage';
 import { useDispatch } from 'react-redux';
 import { login } from 'features/auth/authSlice';
 import { CheckOut } from 'pages/order/CheckOut';
+import { api, setupApiInterceptors } from 'features/auth/axios';
+import axios from 'axios';
 function App() {
 
    const [isIntroFinished, setIsIntroFinished] = useState(false);
     const dispatch = useDispatch();
 
+  useEffect(() => {
+    setupApiInterceptors(); // ✅ 앱 시작 시 인터셉터 등록 (로그인 상태 유지)
+  }, []);
   useEffect(() => {
     const saved = localStorage.getItem("loginInfo");
     if (saved) {
@@ -51,6 +56,14 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
+
+
+  useEffect(() => {
+  // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
+  axios.get("/csrfToken", { withCredentials: true })
+    .then(() => console.log("✅ CSRF Token issued"))
+    .catch((err) => console.error("❌ CSRF Token init failed:", err));
+}, []);
 
   // // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
   // if (!isIntroFinished) {

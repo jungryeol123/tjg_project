@@ -49,17 +49,50 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
     }
 }
 
+// // 장바구니 정보 취득
+// export const showCart = (id) => async(dispatch) => {
+//     const url = "/cart/cartList";
+//     const cartItem = { "user" : {"id":id} };
+//     // const cartData = await axiosPost(url, cartItem);
+//     const cartData = await api.post(url, cartItem);
+    
+//     console.log("cartData", cartData);
+//     dispatch(setCartItem({"cartItem": cartData.data}));
+//     dispatch(updateTotalPrice());
+//     dispatch(updateTotalDcPrice());
+//     // return cartData;
+// }
+
 // 장바구니 정보 취득
-export const showCart = (id) => async(dispatch) => {
-    const url = "/cart/cartList";
-    const cartItem = { "user" : {"id":id} };
-    // const cartData = await axiosPost(url, cartItem);
+export const showCart = (id) => async (dispatch) => {
+  const url = "/cart/cartList";
+  const cartItem = { user: { id } };
+
+  try {
     const cartData = await api.post(url, cartItem);
-    dispatch(setCartItem({"cartItem": cartData}));
+
+    // ✅ 혹시라도 응답이 비었을 경우 방어
+    if (!cartData || !cartData.data) {
+      console.warn("⚠️ cartData 비어 있음 (토큰 갱신 중일 수 있음)");
+      return;
+    }
+
+    console.log("🛒 cartData", cartData);
+
+    // ✅ 정상 응답일 경우만 dispatch
+    dispatch(setCartItem({ cartItem: cartData.data }));
     dispatch(updateTotalPrice());
     dispatch(updateTotalDcPrice());
-    // return cartData;
-}
+  } catch (err) {
+    // ✅ axios 내부에서 401 처리 중일 수도 있으므로 그냥 로깅만
+    if (err.response?.status === 401) {
+      console.warn("🟡 토큰 만료 → refresh 중...");
+      return;
+    }
+    console.error("❌ showCart 에러:", err);
+  }
+};
+
 
 // 장바구니 테이블의 기존 항목 확인
 export const checkCart = async(pid, size, id) => {
