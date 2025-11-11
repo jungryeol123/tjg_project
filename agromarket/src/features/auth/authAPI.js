@@ -104,7 +104,9 @@ export const getSignup = (formData, param) => async (dispatch) => {
 */
 export const getLogout = () => async (dispatch) => {
   dispatch(logout());
-  return true;
+  const url = "/auth/logout"
+  axiosPost(url, {});
+  return false;
 };
 
 export const socialApiLogin = (provider, id, accessToken) => (dispatch) => {
