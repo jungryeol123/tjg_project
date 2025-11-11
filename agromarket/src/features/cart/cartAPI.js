@@ -1,20 +1,7 @@
-import { setCartItem, setCartCount, updateCartCount, updateCartList, updateTotalPrice, updateTotalDcPrice, getCartCount } from './cartSlice.js';
-import { axiosGet, axiosPost } from 'shared/lib/axiosInstance.js'
+import { setCartItem, updateCartList, updateTotalPrice, updateTotalDcPrice, getCartCount } from './cartSlice.js';
+import { axiosPost } from 'shared/lib/axiosInstance.js'
 import { parseJwt } from "features/auth/parseJwt";
 import { api } from 'features/auth/axios.js';
-
-export const getTotalPrice = () => (dispatch) => {
-    // 총 금액 설정
-    dispatch(updateTotalPrice());
-}
-
-// 장바구니 갯수 설정
-export const setCount = (id) => async(dispatch) => {
-    const url = "/cart/count";
-    const data = {"id": id}
-    const jsonData = await axiosGet(url, data);
-    dispatch(setCartCount({ "cartCount": jsonData.sumQty }));
-}
 
 // 장바구니 추가(신규일경우 레코드추가, 기존 레코드 존재시 qty 증가)
 export const addCart = (ppk, qty) => async(dispatch, getState) => {
@@ -71,6 +58,7 @@ export const showCart = (id) => async (dispatch) => {
   try {
     const cartData = await api.post(url, cartItem);
 
+
     // ✅ 혹시라도 응답이 비었을 경우 방어
     if (!cartData || !cartData.data) {
       console.warn("⚠️ cartData 비어 있음 (토큰 갱신 중일 수 있음)");
@@ -83,6 +71,7 @@ export const showCart = (id) => async (dispatch) => {
     dispatch(setCartItem({ cartItem: cartData.data }));
     dispatch(updateTotalPrice());
     dispatch(updateTotalDcPrice());
+    dispatch(getCartCount());
   } catch (err) {
     // ✅ axios 내부에서 401 처리 중일 수도 있으므로 그냥 로깅만
     if (err.response?.status === 401) {
@@ -94,32 +83,22 @@ export const showCart = (id) => async (dispatch) => {
 };
 
 
-// 장바구니 테이블의 기존 항목 확인
-export const checkCart = async(pid, size, id) => {
-    const url = "/cart/checkCart";
-    const cartItem = { "pid":pid, "size":size, "id":id };
-    const cartData = await axiosGet(url, cartItem);
-    return cartData;
-}
 
-export const updateCart = (cid, qty) => async(dispatch) => {
+export const updateCart = (cid, qty, id) => async(dispatch) => {
     const url = "/cart/updateQty";
     const cartData = { "cid": cid, "qty":qty };
     const rows = await axiosPost(url, cartData);
+    console.log(rows);
+    
     // 장바구니 아이템 재설정
-    dispatch(showCart());
+    dispatch(showCart(id));
     return rows;
 }
 
-export const removeCart = (cid) => async(dispatch) => {
+export const removeCart = (cid, id) => async(dispatch) => {
     const url = "/cart/deleteItem";
     const data = {"cid": cid};
     const rows = await axiosPost(url, data);
-    dispatch(showCart());
+    dispatch(showCart(id));
     return rows;
-}
-
-// 장바구니 추가
-export const addCartCount = (count) => (dispatch)=> {
-    dispatch(setCartCount({ "cartCount": count }));
 }

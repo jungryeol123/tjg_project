@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { ImageUpload } from "./ImageUpload";
 import "./ImageUpload.css";
 
-export function ImageUploadList({ onFileSelect, size, imageList}) {
+export function ImageUploadList({ onFileSelect, imageList, existingImages}) {
     return (
         <div className = "full-width">
         { imageList &&
             imageList.map(( text, idx ) => (
                 <ImageUpload onFileSelect={ onFileSelect } idx = { idx }
-                                                                text = { text }/>
+                                                                text = { text }
+                                                                existingImage= { existingImages?.[idx] }
+                                                                key = { idx } />
             ))
         }
         </div>

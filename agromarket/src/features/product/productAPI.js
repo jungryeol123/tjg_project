@@ -59,29 +59,45 @@ export const setProductBestListAPI = async() =>  {
 }
 
 // 상품 정보 등록
-export const setProductData = async(formData, imageListFile) => {
-  const url = "/product/productAdd";
-
+export const setProductData = async(formData, imageListFile, isNew, id, maxImagelength) => {
   // 토큰 확인
   const stored = localStorage.getItem("loginInfo");
   
   if (stored) {
+    let url ="";
+
     // 토큰에서 user의 id취득
     const { accessToken } = JSON.parse(stored);
     const payload = parseJwt(accessToken);
 
-    console.log("afasdfsaf : ", payload.id);
-    // user의 id설정
-    formData = {...formData, "user": { "id": payload.id }};
-
     // 이미지 전송을 위한 FormData
     const data = new FormData();
 
+    // user의 id설정
+    formData = {...formData, "user": { "id": payload.id } };
+
+    // 이미지 파일 추가    
+    for (let i = 0; i < maxImagelength; i++) {
+      if (imageListFile[i]) {
+        data.append("files", imageListFile[i]);
+      } else {
+        data.append("files", new Blob([]));
+      }
+    }
+
+    // 신규 등록일경우
+    if(isNew){
+      // 상품 등록 URL
+      url = "/product/productAdd";
+    } else {
+      // 상품 수정 URL
+      url = "/product/productUpdate";
+      // 상품의 id설정
+      formData = {...formData, "id": id  };
+    }
+
     // formData설정(String타입으로 전송)
     data.append("product", JSON.stringify(formData));
-
-    // 이미지 파일 추가
-    imageListFile.map( imageFile => data.append("files", imageFile));
 
     // 상품 정보 DB에 업로드
     const result = await axiosPostFile(url, data);

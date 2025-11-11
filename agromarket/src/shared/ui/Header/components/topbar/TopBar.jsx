@@ -6,6 +6,7 @@ import { LuCandy } from "react-icons/lu";
 import { useDispatch,useSelector } from "react-redux";
 import { api } from "features/auth/axios";
 import axios from "axios";
+import { getLogout } from "features/auth/authAPI";
 
 
 export default function TopBar() {
@@ -29,6 +30,7 @@ export default function TopBar() {
   try {
     await api.post("/auth/logout",{},  {withCredentials: true});
     localStorage.removeItem("loginInfo");
+    // dispatch(getLogout());
     window.location.href = "/";
   } catch (err) {
     console.error("로그아웃 실패:", err);
@@ -87,6 +89,9 @@ export default function TopBar() {
 
         {/* 상품등록 (로그인 시만) */}
         {isLogin && <li><Link to="/products/add">상품등록</Link></li>}
+        
+        {/* 상품편집 (로그인 시만) */}
+        {isLogin && <li><Link to="/productList/update">상품 편집</Link></li>}
       </ul>
     </div>
   </div>
