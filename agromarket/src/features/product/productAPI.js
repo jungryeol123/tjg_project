@@ -74,10 +74,7 @@ export const setProductData = async(formData, imageListFile, isNew, id, maxImage
     const data = new FormData();
 
     // user의 id설정
-    formData = {...formData, "user": { "id": payload.id }, "id": id };
-
-    // formData설정(String타입으로 전송)
-    data.append("product", JSON.stringify(formData));
+    formData = {...formData, "user": { "id": payload.id } };
 
     // 이미지 파일 추가    
     for (let i = 0; i < maxImagelength; i++) {
@@ -95,7 +92,12 @@ export const setProductData = async(formData, imageListFile, isNew, id, maxImage
     } else {
       // 상품 수정 URL
       url = "/product/productUpdate";
+      // 상품의 id설정
+      formData = {...formData, "id": id  };
     }
+
+    // formData설정(String타입으로 전송)
+    data.append("product", JSON.stringify(formData));
 
     // 상품 정보 DB에 업로드
     const result = await axiosPostFile(url, data);
