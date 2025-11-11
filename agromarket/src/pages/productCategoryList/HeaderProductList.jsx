@@ -6,11 +6,14 @@ import ProductCard from "shared/ui/productList/ProductCard";
 import { useParams } from "react-router-dom";
 import { setProductBestListAPI } from "features/product/productAPI";
 import { Link } from "react-router-dom";
+import { parseJwt } from "features/auth/parseJwt";
+
 export function HeaderProductList() {
   const { id } = useParams();
   const productList = useSelector((state) => state.product.productList);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isupdate, setIsUpdate] = useState(false);
 
   // ✅ (1) 신상품: 날짜 기준 최신순 정렬
   const sortedNewProducts = useMemo(() => {
@@ -35,7 +38,24 @@ export function HeaderProductList() {
     return productList.filter((p) => p.dc >= 10);
   }, [id, productList]);
 
-  // ✅ (4) 베스트 상품 (best): 백엔드 API 호출
+    // ✅ (4) 상품 편집 (update) : 등록 유저의 상품 표시
+  const updateProducts = useMemo(() => {
+    // 토큰에서 user의 id취득
+    const { accessToken } = JSON.parse(localStorage.getItem("loginInfo"));
+    const payload = parseJwt(accessToken);
+    // user의 id설정
+    const upk = payload.id;
+
+    // 상품 편집을 통해서 들어왔을 경우
+    if (id === "update") setIsUpdate(true);
+
+    if (!productList || productList.length === 0) return [];
+    if (id !== "update") return [];
+    
+    return productList.filter((p) => p.user.id == upk);
+  }, [id, productList]);
+
+  // ✅ (5) 베스트 상품 (best): 백엔드 API 호출
   useEffect(() => {
     const fetchBestProducts = async () => {
       if (id === "best") {
@@ -60,8 +80,10 @@ export function HeaderProductList() {
       setFilteredProducts(hotOrSpecialProducts);
     } else if (id === "sale") {
       setFilteredProducts(saleProducts);
+    } else if (id === "update"){
+      setFilteredProducts(updateProducts);
     }
-  }, [id, sortedNewProducts, hotOrSpecialProducts, saleProducts]);
+  }, [id, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts]);
 
   return (
     <div className="new-products-page">
@@ -72,6 +94,8 @@ export function HeaderProductList() {
           ? "세일 상품 (10% 이상)"
           : id === "deal"
           ? "특가/혜택 상품"
+          : id === "update"
+          ? "상품 편집"
           : "신상품"}
       </h1>
 
@@ -89,13 +113,22 @@ export function HeaderProductList() {
         ) : filteredProducts.length > 0 ? (
           <div className="product-grid">
             {filteredProducts.map((item, idx) => (
-              <Link
-                to={`/products/${item.id}`}
-                key={idx}
-              >
-                  <ProductCard item={item} />
-              </Link>
-              
+              // 상품 편집일 경우, 경로 변경
+              isupdate ? 
+                <Link
+                  to={`/products/add`}
+                  state={{ item }}
+                  key={idx}
+                >
+                    <ProductCard item={item} />
+                </Link>
+              :
+                <Link
+                  to={`/products/${item.id}`}
+                  key={idx}
+                >
+                    <ProductCard item={item} />
+                </Link>
             ))}
           </div>
         ) : (

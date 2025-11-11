@@ -67,7 +67,7 @@ function App() {
           <Route path="/find-user-id" element={<FindUserId />} />
           <Route path="/find-password" element={<FindPassword />} />
           <Route path="/signup" element={<Signup/>} />
-          <Route path="/detail" element={<ProductDetail/>} />
+          {/* <Route path="/detail" element={<ProductDetail/>} /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path='/checkout' element={<CheckOut />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />

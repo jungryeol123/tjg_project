@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { setDeliveryAPI } from "features/delivery/deliveryAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { ImageUploadList } from "./ImageUploadList";
@@ -8,26 +9,22 @@ import "./ProductAdd.css";
 export function ProductAdd() {
   // 배송정보리스트
   const deliveryList = useSelector((state) => state.delivery.deliveryList);
-  const imageList = ["상품 이미지","속성 이미지","상세 이미지"];
+  const imageList = ["상품 이미지", "속성 이미지", "상세 이미지"];
+  // 기존 이미지 URL 배열 (item.images: 서버에서 온 이미지 이름)
+  const [existingImages, setExistingImages] = useState([null, null, null]);
+
+  // 상품 편집 시 데이터
+  const location = useLocation();
+  // 기존 상품 정보 취득
+  const { item } = location.state || {};
 
   const dispatch = useDispatch();
 
   // form데이터용
-  const [formData, setFormData] = useState({
-    productName: "",
-    brandName: "",
-    seller: "",
-    origin: "",
-    unit: "",
-    weight: "",
-    count: "",
-    price: "",
-    dc: "",
-    allergyInfo: "",
-    description: "",
-    notes: "",
-    delType: ""
-  });
+  const [formData, setFormData] = useState({});
+
+  // 이미지 등록용
+  const [imageListFile, setImageListFile] = useState([]);
 
   // form필드
   const inputField = [
@@ -46,7 +43,54 @@ export function ProductAdd() {
 
   useEffect(() => {
     dispatch(setDeliveryAPI());
-  }, [dispatch]);
+
+    if(item) {
+      // 상품 편집시 formData 설정
+      setFormData(
+        {
+          productName: item.productName,
+          brandName: item.brandName,
+          seller: item.seller,
+          origin: item.origin,
+          unit: item.unit,
+          weight: item.weight,
+          count: item.count,
+          price: item.price,
+          dc: item.dc,
+          allergyInfo: item.allergyInfo,
+          description: item.description,
+          notes: item.notes,
+          delType: item.delType,
+        }
+      );
+
+    // 기존 이미지 설정
+    const urls = imageList.map((_, idx) => idx === 0 ? `/images/productImages/${item.imageUrl}`
+                                            : idx === 1 ? `/images/productInformation/${item.productInformationImage}`
+                                            : idx === 2 ? `/images/productDescription/${item.productDescriptionImage}`
+                                            : null);
+      setExistingImages(urls);
+    } else {
+      // 상품 등록시 formData 설정
+      setFormData(
+        {
+          productName: "",
+          brandName: "",
+          seller: "",
+          origin: "",
+          unit: "",
+          weight: "",
+          count: "",
+          price: "",
+          dc: "",
+          allergyInfo: "",
+          description: "",
+          notes: "",
+          delType: ""
+        }
+      );
+    }
+  }, []); 
 
   // form데이터 입력시 이벤트
   const handleChange = (e) => {
@@ -54,9 +98,6 @@ export function ProductAdd() {
     setFormData({ ...formData, [name]: value });
   };
   
-  // 이미지 등록용
-  const [imageListFile, setImageListFile] = useState([]);
-
   // 이미지 등록 시 이벤트
   const handleImagesSelect = (index, file) => {
     // 이미지 등록 시 이벤트
@@ -71,14 +112,15 @@ export function ProductAdd() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      for (let i = 0; i < imageList.length; i++) {
-        if (!imageListFile[i]) {
-          alert(`${imageList[i]}를 등록하세요.`);
-          return; // 하나라도 누락되면 함수 종료
-        }
+    for (let i = 0; i < imageList.length; i++) {
+      if (!imageListFile[i] && !existingImages[i]) {
+        alert(`${imageList[i]}를 등록하세요.`);
+        return; // 하나라도 누락되면 함수 종료
       }
+    }
 
-    const result = setProductData(formData, imageListFile);
+    // 신규 등록 : true, 상품 편집 : false
+    const result = setProductData(formData, imageListFile, !item ? true : false, item?.id, imageList.length);
 
     if(result){
       alert("상품 등록 성공!");
@@ -120,19 +162,20 @@ export function ProductAdd() {
           <label>배송정보:</label>
           <select
             name="delType"
-            value={ formData.deliveryInfo }
+            value={ formData.delType }
             onChange={ handleChange }
           >
             <option value="">배송 방법을 선택해주세요.</option>
             { deliveryList &&
               deliveryList.map((option, idx) => (
-                <option key={ idx  } value={ option.delType }>
+                <option key={ idx } value={ option.delType }>
                   { option.delName }
                 </option>
               ))}
           </select>
         </div>
-        <ImageUploadList onFileSelect={ handleImagesSelect } size={3} imageList={imageList}/>
+        <ImageUploadList onFileSelect={ handleImagesSelect }
+                         imageList={ imageList } existingImages= { existingImages }/>
         <button type="submit" className="submit-btn">등록</button>
       </form>
     </div>

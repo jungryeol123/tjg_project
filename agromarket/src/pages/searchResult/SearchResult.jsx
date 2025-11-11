@@ -33,7 +33,7 @@ export default function SearchResult() {
         <div className="product-grid">
           {filtered.map((item, idx) => (
              <Link
-                to={`/products/${item.pid}/${item.id}`}
+                to={`/products/${item.id}`}
                 key={idx}>
                     <ProductCard key={item.pid} item={item} />
                 </Link>

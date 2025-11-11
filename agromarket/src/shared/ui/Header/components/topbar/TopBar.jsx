@@ -87,6 +87,9 @@ export default function TopBar() {
 
         {/* 상품등록 (로그인 시만) */}
         {isLogin && <li><Link to="/products/add">상품등록</Link></li>}
+        
+        {/* 상품편집 (로그인 시만) */}
+        {isLogin && <li><Link to="/productList/update">상품 편집</Link></li>}
       </ul>
     </div>
   </div>
