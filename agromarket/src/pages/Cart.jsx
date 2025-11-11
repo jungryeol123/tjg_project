@@ -41,11 +41,11 @@ export function Cart() {
                                         <p className='cart-item-title cart-item-dcprice'>{parseInt((item.product.price)*(100-item.product.dc)*0.01).toLocaleString()}원</p>
                                     </div>
                                     <div className='cart-quantity'>
-                                        <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1))) : null}>-</button>
+                                        <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1), userId)) : null}>-</button>
                                         <input type="text" value={item.qty} readOnly/>
-                                        <button type='button' onClick={() => dispatch(updateCart(item.cid, (item.qty+1)))}>+</button>
+                                        <button type='button' onClick={() => dispatch(updateCart(item.cid, (item.qty+1), userId))}>+</button>
                                     </div>
-                                    <button className='cart-remove' onClick={()=>dispatch(removeCart(item.cid))}>제거</button>
+                                    <button className='cart-remove' onClick={()=>dispatch(removeCart(item.cid, userId))}>제거</button>
                                 </div>
 
                             </div>
