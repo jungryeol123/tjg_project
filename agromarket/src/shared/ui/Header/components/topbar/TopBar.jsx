@@ -29,7 +29,7 @@ export default function TopBar() {
   try {
     await api.post("/auth/logout",{},  {withCredentials: true});
     localStorage.removeItem("loginInfo");
-    window.location.href = "/";
+    // window.location.href = "/";
   } catch (err) {
     console.error("로그아웃 실패:", err);
   }
@@ -87,6 +87,9 @@ export default function TopBar() {
 
         {/* 상품등록 (로그인 시만) */}
         {isLogin && <li><Link to="/products/add">상품등록</Link></li>}
+        
+        {/* 상품편집 (로그인 시만) */}
+        {isLogin && <li><Link to="/productList/update">상품 편집</Link></li>}
       </ul>
     </div>
   </div>

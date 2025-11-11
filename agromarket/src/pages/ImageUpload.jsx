@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ImageUpload.css";
 
-export function ImageUpload({ onFileSelect , text, idx}) {
+export function ImageUpload({ onFileSelect , text, idx, existingImage }) {
     const [image, setImage] = useState(null);
+
+    useEffect(() => {
+      setImage(existingImage || null);
+    }, [existingImage]);
 
     // 이미지 파일 변경 시 이벤트
     const handleFileChange = (e) => { 
