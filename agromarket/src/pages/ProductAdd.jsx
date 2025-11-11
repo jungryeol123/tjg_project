@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setDeliveryAPI } from "features/delivery/deliveryAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { ImageUploadList } from "./ImageUploadList";
@@ -12,6 +12,7 @@ export function ProductAdd() {
   const imageList = ["상품 이미지", "속성 이미지", "상세 이미지"];
   // 기존 이미지 URL 배열 (item.images: 서버에서 온 이미지 이름)
   const [existingImages, setExistingImages] = useState([null, null, null]);
+  const navigate = useNavigate();
 
   // 상품 편집 시 데이터
   const location = useLocation();
@@ -97,6 +98,8 @@ export function ProductAdd() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  console.log("test",formData);
   
   // 이미지 등록 시 이벤트
   const handleImagesSelect = (index, file) => {
@@ -112,21 +115,71 @@ export function ProductAdd() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    for (let i = 0; i < imageList.length; i++) {
-      if (!imageListFile[i] && !existingImages[i]) {
-        alert(`${imageList[i]}를 등록하세요.`);
-        return; // 하나라도 누락되면 함수 종료
-      }
-    }
+    if (!validateForm(formData)) return;
 
     // 신규 등록 : true, 상품 편집 : false
     const result = setProductData(formData, imageListFile, !item ? true : false, item?.id, imageList.length);
 
+    // 등록 성공시
     if(result){
-      alert("상품 등록 성공!");
+      alert("✅ 상품 등록 성공!");
+      // 상품 편집 화면으로 이동
+      navigate("/productList/update");
     } else {
-      alert("상품 등록 실패!");
+      alert("❌ 상품 등록 실패!");
     }
+  };
+
+  
+  // 필수 항목 체크
+  const validateForm = () => {
+    // 각 항목 체크
+    for (const field of inputField) {
+      const value = formData[field.name];
+
+      // 값이 없거나 공백일 경우
+      if (value === null || value === undefined || String(value).trim() === "") {
+        alert(`⚠️ ${field.label}을(를) 입력해주세요.`);
+        return false;
+      }
+
+      // 숫자 타입인 경우 추가 검사
+      if (field.type === "number" && (isNaN(value) || Number(value) < 0)) {
+        alert(`⚠️ ${field.label}에는 0 이상의 숫자만 입력 가능합니다.`);
+        return false;
+      }
+    }
+
+    // 안내사항 검사
+    if (
+      formData.notes === null ||
+      formData.notes === undefined ||
+      String(formData.notes).trim() === ""
+    ) {
+      alert("⚠️ 안내사항을 입력해주세요.");
+      return false;
+    }
+
+    // 배송정보 검사
+    if (
+      formData.delType === null ||
+      formData.delType === undefined ||
+      String(formData.delType).trim() === ""
+    ) {
+      alert("⚠️ 배송정보를 선택해주세요.");
+      return false;
+    }
+
+    // 이미지 정보 체크
+    for (let i = 0; i < imageList.length; i++) {
+      // 신규 이미지등록 또는 기존 이미지 등록이 둘다 되있지 않으면 이미지등록 필요
+      if (!imageListFile[i] && !existingImages[i]) {
+        alert(`⚠️ ${imageList[i]}를 등록하세요.`);
+        return false; // 하나라도 누락되면 등록 불가
+      }
+    }
+
+    return true;
   };
 
   return (
