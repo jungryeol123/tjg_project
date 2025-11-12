@@ -71,8 +71,8 @@ export const getLogin = (formData, param) => async (dispatch) => {
 /**
     id중복 체크
 */
-export const getIdCheck = (id) => async (dispatch) => {
-  const data = { id: id };
+export const getIdCheck = (name, value) => async (dispatch) => {
+  const data = { [name]: value };
   const url = "/member/idcheck";
   const result = await axiosPost(url, data);
   return result;

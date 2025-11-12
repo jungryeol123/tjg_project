@@ -196,7 +196,12 @@
 }
 
 .signup-container .plusAfter {
-    display: none !important;
+    display: flex;
+}
+
+.signup-container .plusAfterSub span {
+    font-size: 12px;
+    color: #888;
 }
 
 .signup-container .agree > .left {
@@ -231,12 +236,15 @@
 .signup-container .sns {
     display: flex;
     justify-content: space-around;
-    padding-top: 5px;
+    padding-top: 15px;
+}
+
+.signup-container .agreeBenefit {
+    padding-bottom: 15px !important;
 }
 
 .signup-container .allAgree > div > span, 
 .signup-container .essential {
-    padding-left: 20px;
     font-size: 12px;
     color: #888;
 }
