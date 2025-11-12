@@ -15,7 +15,6 @@ export const getLogin = (formData, param) => async (dispatch) => {
 
   try {
     // ✅ 1. 로그인 전에 CSRF 토큰 먼저 요청
-    await axios.get("/csrf", { withCredentials: true });
     const res = await axios.post("/auth/login", { userId, password },  { withCredentials: true });
     const accessToken = res.data.accessToken;
     console.log();
@@ -27,14 +26,7 @@ export const getLogin = (formData, param) => async (dispatch) => {
       // 장바구니 리스트 설정
 	    const url = "/cart/cartList";
 	    const cartItem = { "user" : {"id":payload.id} };
-      
-      // // 장바구니 리스트 취득
-	    // const cartData = await axiosPost(url, cartItem);
-      // // 장바구니 리스트 설정
-	    // dispatch(setCartItem({"cartItem": cartData}));
-      // // 장바구니 카운트 설정
-	    // dispatch(getCartCount());
-
+    
       return true;
     }
   } catch (err) {
