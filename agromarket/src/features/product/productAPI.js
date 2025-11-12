@@ -6,6 +6,7 @@ import {
   setProductQnAList
 } from "./productSlice";
 import { parseJwt } from "features/auth/parseJwt";
+import { api } from "features/auth/axios";
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
   const result = await axiosGet("/product/productList");
@@ -18,7 +19,8 @@ export const setProductAPI = (id) => async (dispatch) => {
   const url = "/product/productDetail";
   const params = { "id" : id };
   
-  const jsonData = await axiosGetParams(url, { params });
+  // const jsonData = await axiosGetParams(url, { params });
+    const jsonData = await api.get(url, { params });
 
   // null이 아닐경우만 실행
   if(jsonData && Object.keys(jsonData).length > 0){
