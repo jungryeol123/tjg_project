@@ -19,11 +19,10 @@ export const setProductAPI = (id) => async (dispatch) => {
   const url = "/product/productDetail";
   const params = { "id" : id };
   
-  const jsonData = await axiosGetParams(url, { params });
-    // const jsonData = await api.get(url, { params });
-
-    console.log("jsonData ",jsonData);
-  // null이 아닐경우만 실행
+  // const jsonData = await axiosGetParams(url, { params });
+    const jsonData = await api.get(url, { params });
+    console.log(jsonData);
+    // null이 아닐경우만 실행
   if(jsonData && Object.keys(jsonData).length > 0){
     dispatch(setProduct({ product: jsonData.data }));
   }
