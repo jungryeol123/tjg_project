@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { getLogin } from "../features/auth/authAPI.js";
 import "../styles/utilities/login.css";
 import axios from "axios";
+import Swal from 'sweetalert2';
 // import KakaoLoginButton from 'features/auth/KakaoLoginButton.jsx';
 
 //로그인페이지
@@ -54,8 +55,13 @@ export function Login() {
     const succ = await dispatch(getLogin(formData, param)); //비동기식 처리 후 isLogin 변경
 
     if (succ) {
-      alert("로그인 성공!!");
-      navigate(from, { replace: true });
+      Swal.fire({
+          icon: 'success',
+          title: '✅ 로그인 성공',
+          confirmButtonText: '확인',
+      }).then(() => {
+          navigate(from, { replace: true });
+      });
     } else {
       setFormData({ userId: "", password: "" });
       idRef.current.focus();

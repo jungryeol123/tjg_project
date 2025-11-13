@@ -4,6 +4,7 @@ import { getIdCheck, getSignup } from 'features/auth/authAPI';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import Swal from 'sweetalert2';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay", "recommendation"];
@@ -117,10 +118,19 @@ export function Signup() {
         const result = await dispatch(getSignup(formData, param));
         
         if(result) {
-            alert("회원가입 성공!");
-            navigate("/login");
+            Swal.fire({
+                icon: 'success',
+                title: '✅ 회원가입 성공',
+                confirmButtonText: '확인',
+            }).then(() => {
+                navigate("/login");
+            });
         } else {
-            alert("회원가입 실패!");
+            Swal.fire({
+                icon: 'error',
+                title: '❌ 회원가입 실패',
+                confirmButtonText: '확인',
+            });
         }
     }
     
@@ -159,9 +169,19 @@ export function Signup() {
         const {name, value} = e.target;
         const result = await dispatch(getIdCheck(name, value));
         if(result) {
-            alert("존재하는 아이디입니다.")
+            Swal.fire({
+                icon: 'error',
+                title: '중복체크 결과',
+                text: "❌ 존재하는 아이디입니다.",
+                confirmButtonText: '확인',
+            });
         } else {
-            alert("존재하지 않는 아이디입니다.")
+                        Swal.fire({
+                icon: 'success',
+                title: '중복체크 결과',
+                text: "✅ 사용가능한 아이디입니다.",
+                confirmButtonText: '확인',
+            });
         }
     }
 
