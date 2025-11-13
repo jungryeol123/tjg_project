@@ -57,8 +57,10 @@ export function Login() {
     if (succ) {
       Swal.fire({
           icon: 'success',
+          timer: 1000, // 1초 후 자동 확인버튼클릭
+          timerProgressBar: true, // 타이머 바
           title: '✅ 로그인 성공',
-          confirmButtonText: '확인',
+          confirmButtonText: '확인'
       }).then(() => {
           navigate(from, { replace: true });
       });
