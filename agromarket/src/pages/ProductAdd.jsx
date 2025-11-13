@@ -4,6 +4,7 @@ import { setDeliveryAPI } from "features/delivery/deliveryAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { ImageUploadList } from "./ImageUploadList";
 import { setProductData } from "../features/product/productAPI.js";
+import Swal from 'sweetalert2';
 import "./ProductAdd.css";
 
 export function ProductAdd() {
@@ -122,11 +123,20 @@ export function ProductAdd() {
 
     // 등록 성공시
     if(result){
-      alert("✅ 상품 등록 성공!");
-      // 상품 편집 화면으로 이동
-      navigate("/productList/update");
+      Swal.fire({
+          icon: 'success',
+          title: '✅ 상품 등록 성공!',
+          text: '상품이 성공적으로 등록되었습니다.',
+          confirmButtonText: '확인',
+        }).then(() => {
+          navigate("/productList/update");
+      });
     } else {
-      alert("❌ 상품 등록 실패!");
+      Swal.fire({
+        icon: 'error',
+        title: '❌ 상품 등록 실패!',
+        text: '다시 시도해주세요.',
+      });
     }
   };
 
