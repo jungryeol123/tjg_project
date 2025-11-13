@@ -26,6 +26,13 @@ export const getLogin = (formData, param) => async (dispatch) => {
       // 장바구니 리스트 설정
 	    const url = "/cart/cartList";
 	    const cartItem = { "user" : {"id":payload.id} };
+      
+      // 장바구니 리스트 취득
+	    const cartData = await axiosPost(url, cartItem);
+      // 장바구니 리스트 설정
+	    dispatch(setCartItem({"cartItem": cartData}));
+      // 장바구니 카운트 설정
+	    dispatch(getCartCount());
     
       return true;
     }
