@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useEffect } from 'react';
 import '../styles/components/Signup.css';
 import { getIdCheck, getSignup } from 'features/auth/authAPI';
 import { useDispatch } from 'react-redux';
@@ -12,6 +12,12 @@ export function Signup() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isPlusAfer, setIsPlusAfter] = useState(true);
+
+    // 약관 토글
+    const [showAgree1, setShowAgree1] = useState(false);
+    const [showAgree2, setShowAgree2] = useState(false);
+    const [showAgree3, setShowAgree3] = useState(false);
+    const [termList, setTermList] = useState([]);
 
     const [agree, setAgree] = useState({
         all: false,
@@ -380,18 +386,38 @@ export function Signup() {
                                         <span>이용약관 동의</span>
                                         <span>(필수)</span>
                                     </div>
-                                    <div>
-                                        <span>약관보기</span>
+                                    <div className='agree-hover-area' onMouseEnter={() => setShowAgree1(true)} onMouseLeave={() => setShowAgree1(false)}>
+                                        <span className='agree-text'>약관보기</span>
+                                        {showAgree1 && (
+                                            <div className="agree-box">
+                                                <h4 className="agree-title">이용약관 동의(필수)</h4>
+                                                <ol className="agree-list">
+                                                <li>회원은 서비스를 올바르게 사용해야 합니다.</li>
+                                                <li>타인의 권리를 침해해서는 안 됩니다.</li>
+                                                <li>서비스 이용 중 발생한 문제는 책임이 사용자에게 있습니다.</li>
+                                                </ol>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
                                     <div>
                                         <input type="checkbox" name="privacy" checked={agree.privacy} onChange={handleAgreeChange} />
-                                        <span>개인정보 수집 이용 동의 동의</span>
+                                        <span>개인정보 수집 이용 동의</span>
                                         <span>(필수)</span>
                                     </div>
-                                    <div>
-                                        <span>약관보기</span>
+                                    <div className='agree-hover-area' onMouseEnter={() => setShowAgree2(true)} onMouseLeave={() => setShowAgree2(false)}>
+                                        <span className='agree-text'>약관보기</span>
+                                        {showAgree2 && (
+                                            <div className="agree-box">
+                                                <h4 className="agree-title">개인정보 수집 이용 동의(필수)</h4>
+                                                <ol className="agree-list">
+                                                <li>회사는 개인정보를 안전하게 관리합니다.</li>
+                                                <li>목적 외 사용은 금지됩니다.</li>
+                                                <li>개인정보 유출 시 즉시 통지합니다.</li>
+                                                </ol>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
@@ -400,8 +426,18 @@ export function Signup() {
                                         <span>마케팅 광고 활용을 위한 수집 및 이용 동의</span>
                                         <span>(선택)</span>
                                     </div>
-                                    <div>
-                                        <span>약관보기</span>
+                                    <div className='agree-hover-area' onMouseEnter={() => setShowAgree3(true)} onMouseLeave={() => setShowAgree3(false)}>
+                                        <span className='agree-text'>약관보기</span>
+                                        {showAgree3 && (
+                                            <div className="agree-box">
+                                                <h4 className="agree-title">마켓팅 광고 활용을 위한 수집 및 이용 동의(선택)</h4>
+                                                <ol className="agree-list">
+                                                <li>회원은 마케팅 정보를 받을 수 있습니다.</li>
+                                                <li>수신 거부는 언제든 가능합니다.</li>
+                                                <li>광고 내용은 변경될 수 있습니다.</li>
+                                                </ol>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div className='agreeBenefit'>
