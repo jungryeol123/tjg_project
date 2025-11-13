@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addCart } from "features/cart/cartAPI.js";
 import { ReviewList } from "./productDetail/ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
+import Swal from 'sweetalert2';
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
@@ -83,15 +84,30 @@ export function ProductDetail() {
       // 신규 상품 등록시
       if(isNew){
         // 장바구니 확인
-        alert(product.productName + "가 장바구니에 등록이 완료되었습니다.");
+        Swal.fire({
+            icon: 'success',
+            title: '✅ 장바구니 등록',
+            text: product.productName + "가 장바구니에 등록이 완료되었습니다.",
+            confirmButtonText: '확인',
+          });
       } else {
-        alert(product.productName + "의 수량이 증가 되었습니다.");
+        Swal.fire({
+            icon: 'success',
+            title: '✅ 장바구니 등록',
+            text: product.productName + "의 수량이 증가 되었습니다.",
+            confirmButtonText: '확인'
+          });
       }
     } else {
-      // 로그인이 필요
-      alert("로그인이 필요합니다.");
+      // 로그인 필요시
+      Swal.fire({
+        icon: 'error',
+        title: '❌ 로그인 화면으로',
+        text: "로그인이 필요합니다.",
+        confirmButtonText: '확인'
+      })
       // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
-      navigate("/login", { state: { from: location.pathname } });
+      .then(() => { navigate("/login", { state: { from: location.pathname } }) });
     }
   };
 

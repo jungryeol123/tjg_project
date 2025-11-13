@@ -149,13 +149,23 @@ export function ProductAdd() {
 
       // 값이 없거나 공백일 경우
       if (value === null || value === undefined || String(value).trim() === "") {
-        alert(`⚠️ ${field.label}을(를) 입력해주세요.`);
+        Swal.fire({
+            icon: 'warning',
+            title: '필수 항목 미입력',
+            text: `${field.label}을(를) 입력해주세요.`,
+            confirmButtonText: '확인'
+          });
         return false;
       }
 
       // 숫자 타입인 경우 추가 검사
       if (field.type === "number" && (isNaN(value) || Number(value) < 0)) {
-        alert(`⚠️ ${field.label}에는 0 이상의 숫자만 입력 가능합니다.`);
+          Swal.fire({
+            icon: 'warning',
+            title: '필수 항목 미입력',
+            text: `${field.label}에는 0 이상의 숫자만 입력 가능합니다.`,
+            confirmButtonText: '확인'
+          });
         return false;
       }
     }
@@ -166,7 +176,12 @@ export function ProductAdd() {
       formData.notes === undefined ||
       String(formData.notes).trim() === ""
     ) {
-      alert("⚠️ 안내사항을 입력해주세요.");
+        Swal.fire({
+          icon: 'warning',
+          title: '필수 항목 미입력',
+          text: "안내사항을 입력해주세요.",
+          confirmButtonText: '확인'
+        });
       return false;
     }
 
@@ -176,7 +191,12 @@ export function ProductAdd() {
       formData.delType === undefined ||
       String(formData.delType).trim() === ""
     ) {
-      alert("⚠️ 배송정보를 선택해주세요.");
+        Swal.fire({
+          icon: 'warning',
+          title: '필수 항목 미입력',
+          text: "배송정보를 선택해주세요.",
+          confirmButtonText: '확인'
+        });
       return false;
     }
 
@@ -184,7 +204,12 @@ export function ProductAdd() {
     for (let i = 0; i < imageList.length; i++) {
       // 신규 이미지등록 또는 기존 이미지 등록이 둘다 되있지 않으면 이미지등록 필요
       if (!imageListFile[i] && !existingImages[i]) {
-        alert(`⚠️ ${imageList[i]}를 등록하세요.`);
+          Swal.fire({
+            icon: 'warning',
+            title: '필수 항목 미입력',
+            text: `${imageList[i]}를 등록하세요.`,
+            confirmButtonText: '확인'
+          });
         return false; // 하나라도 누락되면 등록 불가
       }
     }
