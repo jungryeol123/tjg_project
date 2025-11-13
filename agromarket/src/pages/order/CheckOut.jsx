@@ -35,9 +35,10 @@ export function CheckOut() {
             phone: cartList[0].user.phone,
             address1: cartList[0].user.address,
             address2: "",
-            zipcode: "",
+            zipcode: cartList[0].user.zonecode,
             memo: "문앞에 놔주세요"
         });
+        setUserZoneCode(cartList[0].user.zonecode);
     }, [])
 
     /** ✅ 결제 실행 */
@@ -61,7 +62,6 @@ export function CheckOut() {
     
     const [userFullAddress, setFullAddress] = useState(cartList[0].user.address); //유저 주소
     const [userZoneCode, setUserZoneCode] = useState(""); //유저 우편번호
-    const [isDaumPostcodeOpen, setIsDaumPostcodeOpen] = useState(false);
     //다음 우편번호 찾기 API사용
     const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
 
@@ -83,11 +83,11 @@ export function CheckOut() {
 
         setFullAddress(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
         setUserZoneCode(zonecode);
+        setReceiver({...receiver, "address1": fullAddress, "zipcode": zonecode});
     };
     
     const handleClick = () => {
         open({ onComplete: handleComplete });
-        setReceiver({...receiver, "address1": userFullAddress, "zipcode": userZoneCode});
     };
 
     return (
@@ -131,7 +131,7 @@ export function CheckOut() {
 
                             <div className="label">배송주소</div>
                             <div className="value">
-                                {userZoneCode==="" ? <></> : <>{userZoneCode} /</> } {userFullAddress} {receiver.address2}
+                               {userFullAddress} {receiver.address2} ({userZoneCode})
                             </div>
 
                             <div className="label">연락처</div>

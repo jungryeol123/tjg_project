@@ -65,8 +65,6 @@ export const showCart = (id) => async (dispatch) => {
       return;
     }
 
-    console.log("🛒 cartData", cartData);
-
     // ✅ 정상 응답일 경우만 dispatch
     dispatch(setCartItem({ cartItem: cartData.data }));
     dispatch(updateTotalPrice());
