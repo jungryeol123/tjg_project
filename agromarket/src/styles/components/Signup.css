@@ -276,7 +276,66 @@
     color: #888;
 }
 
-.address-hide {
+.signup-container .address-hide {
     display: flex;
     flex-direction: column;
+}
+
+/* 약관 설명 박스 (호버 시 표시) */
+.signup-container .agree-box {
+  position: absolute;
+  top: 24px;
+  right: 0;
+  width: 520px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 14px 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  line-height: 1.6;
+  z-index: 10;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.agree-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.agree-list {
+  padding-left: 18px;
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.agree-list li {
+  list-style-type: decimal;
+  margin-bottom: 4px;
+}
+
+/* 약관 */
+.signup-container .agree-hover-area {
+  position: relative;
+  display: inline-block;
+}
+
+.signup-container .agree-text {
+  color: #777;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.signup-container .agree-text:hover {
+  color: #8c2de1;
+  text-decoration: underline;
+}
+
+.signup-container .agree-text.active {
+  color: #a13bea;
+  text-decoration: underline;
 }
