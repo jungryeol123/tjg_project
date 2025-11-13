@@ -7,7 +7,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import Swal from 'sweetalert2';
 
 export function Signup() {
-    const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay", "recommendation"];
+    const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
     const numericOnly = ["phone", "dateYear", "dateMonth", "dateDay"];
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -158,6 +158,7 @@ export function Signup() {
 
         setFullAddress(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
         setUserZoneCode(zonecode);
+        setForm({...form, zonecode:zonecode});
     };
 
     const handleClick = () => {
@@ -168,20 +169,38 @@ export function Signup() {
     const handleIdCheck = async(e) => {
         const {name, value} = e.target;
         const result = await dispatch(getIdCheck(name, value));
-        if(result) {
-            Swal.fire({
-                icon: 'error',
-                title: '중복체크 결과',
-                text: "❌ 존재하는 아이디입니다.",
-                confirmButtonText: '확인',
-            });
-        } else {
-                        Swal.fire({
-                icon: 'success',
-                title: '중복체크 결과',
-                text: "✅ 사용가능한 아이디입니다.",
-                confirmButtonText: '확인',
-            });
+        if(name === "userId") {
+            if(result) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '중복체크 결과',
+                    text: "❌ 존재하는 아이디입니다.",
+                    confirmButtonText: '확인',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: '중복체크 결과',
+                    text: "✅ 사용가능한 아이디입니다.",
+                    confirmButtonText: '확인',
+                });
+            }
+        } else if(name === "recommendation") {
+            if(result) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '추천인 확인 결과',
+                    text: "✅ 존재하는 아이디입니다.",
+                    confirmButtonText: '확인',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '추천인 확인 결과',
+                    text: "❌ 존재하지 않는 아이디입니다.",
+                    confirmButtonText: '확인',
+                });
+            }
         }
     }
 
