@@ -413,7 +413,7 @@ export function Signup() {
                                 <div className='agreeBenefit'>
                                     <div>
                                         <input type="checkbox" name="benefit" checked={agree.benefit} onChange={handleAgreeChange} />
-                                        <span>무료배송, 할인쿠폰 등 해택/정보 수신 동의</span>
+                                        <span>무료배송, 할인쿠폰 등 해택/정보 수신 동의 </span>
                                         <span>(선택)</span>
                                         <div className='sns'>
                                             <div>
@@ -430,7 +430,7 @@ export function Signup() {
                                 <div>
                                     <div>
                                         <input type="checkbox" name="age" checked={agree.age} onChange={handleAgreeChange} />
-                                        <span>본인은 만 14세 이상입니다.</span>
+                                        <span>본인은 만 14세 이상입니다 </span>
                                         <span>(필수)</span>
                                     </div>
                                     <div>
