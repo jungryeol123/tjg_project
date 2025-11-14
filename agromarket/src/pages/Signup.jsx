@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import Swal from 'sweetalert2';
+import { axiosGet } from "shared/lib/axiosInstance";
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
@@ -14,9 +15,7 @@ export function Signup() {
     const [isPlusAfer, setIsPlusAfter] = useState(true);
 
     // 약관 토글
-    const [showAgree1, setShowAgree1] = useState(false);
-    const [showAgree2, setShowAgree2] = useState(false);
-    const [showAgree3, setShowAgree3] = useState(false);
+    const [hoveredId, setHoveredId] = useState(null);
     const [termList, setTermList] = useState([]);
 
     const [agree, setAgree] = useState({
@@ -209,6 +208,13 @@ export function Signup() {
             }
         }
     }
+    useEffect(() => {
+        const load = async() => {
+            const {terms} = await axiosGet('/data/terms.json');
+            setTermList(terms);
+        }
+        load();
+    }, [])
 
     return (
         <div className="signup-container">
@@ -324,20 +330,19 @@ export function Signup() {
                         <ul className='part date'>
                             <li className='left'><span>생년월일</span></li>
                             <li className='middle'>
-                                <div>
-                                    <input className="input-field input-date" ref={refs.dateYearRef} type="text" maxLength={4} placeholder='YYYY' name='dateYear' value={form.dateYear} onChange={handleChangeForm} />
-                                </div>
-                                <div>
-                                    <span>/</span>
-                                </div>
-                                <div>
-                                    <input className="input-field input-date" ref={refs.dateMonthRef} type="text" maxLength={2} placeholder='MM' name='dateMonth' value={form.dateMonth} onChange={handleChangeForm} />
-                                </div>
-                                <div>
-                                    <span>/</span>
-                                </div>
-                                <div>
-                                    <input className="input-field input-date" ref={refs.dateDayRef} type="text" maxLength={2} placeholder='DD' name='dateDay' value={form.dateDay} onChange={handleChangeForm} />
+                                <div className="date-wrapper">
+                                    <input className="date-input" type="text" maxLength={4} placeholder='YYYY' 
+                                        name='dateYear' value={form.dateYear} ref={refs.dateYearRef} onChange={handleChangeForm} />
+
+                                    <span className="date-slash">/</span>
+
+                                    <input className="date-input" type="text" maxLength={2} placeholder='MM' 
+                                        name='dateMonth' value={form.dateMonth} ref={refs.dateMonthRef} onChange={handleChangeForm} />
+
+                                    <span className="date-slash">/</span>
+
+                                    <input className="date-input" type="text" maxLength={2} placeholder='DD' 
+                                        name='dateDay' value={form.dateDay} ref={refs.dateDayRef} onChange={handleChangeForm} />
                                 </div>
                             </li>
                         </ul>
@@ -380,66 +385,31 @@ export function Signup() {
                                         <span>선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.</span>
                                     </div>
                                 </div>
-                                <div>
+                                {termList && termList.map((item, index) => 
+                                <div key={index}>
                                     <div>
-                                        <input type="checkbox" name="terms" checked={agree.terms} onChange={handleAgreeChange} />
-                                        <span>이용약관 동의</span>
-                                        <span>(필수)</span>
+                                        <input type="checkbox" name={item.id} checked={agree[item.id]} onChange={handleAgreeChange} />
+                                        <span>{item.title}</span>
+                                        <span> ({item.importance})</span>
                                     </div>
-                                    <div className='agree-hover-area' onMouseEnter={() => setShowAgree1(true)} onMouseLeave={() => setShowAgree1(false)}>
+                                    <div className='agree-hover-area' onMouseEnter={() => setHoveredId(item.id)} onMouseLeave={() => setHoveredId(null)}>
                                         <span className='agree-text'>약관보기</span>
-                                        {showAgree1 && (
+                                        {hoveredId === item.id && (
                                             <div className="agree-box">
                                                 <h4 className="agree-title">이용약관 동의(필수)</h4>
                                                 <ol className="agree-list">
-                                                <li>회원은 서비스를 올바르게 사용해야 합니다.</li>
-                                                <li>타인의 권리를 침해해서는 안 됩니다.</li>
-                                                <li>서비스 이용 중 발생한 문제는 책임이 사용자에게 있습니다.</li>
+                                                {item.content.map((contentItem, index) => 
+                                                    <div className='term-total' key={index}>
+                                                        <li className='term-title'>{contentItem.title}</li>
+                                                        <li className='term-body'>{contentItem.body}</li>
+                                                    </div>
+                                                )}
                                                 </ol>
                                             </div>
                                         )}
                                     </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <input type="checkbox" name="privacy" checked={agree.privacy} onChange={handleAgreeChange} />
-                                        <span>개인정보 수집 이용 동의</span>
-                                        <span>(필수)</span>
-                                    </div>
-                                    <div className='agree-hover-area' onMouseEnter={() => setShowAgree2(true)} onMouseLeave={() => setShowAgree2(false)}>
-                                        <span className='agree-text'>약관보기</span>
-                                        {showAgree2 && (
-                                            <div className="agree-box">
-                                                <h4 className="agree-title">개인정보 수집 이용 동의(필수)</h4>
-                                                <ol className="agree-list">
-                                                <li>회사는 개인정보를 안전하게 관리합니다.</li>
-                                                <li>목적 외 사용은 금지됩니다.</li>
-                                                <li>개인정보 유출 시 즉시 통지합니다.</li>
-                                                </ol>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <input type="checkbox" name="marketing" checked={agree.marketing} onChange={handleAgreeChange} />
-                                        <span>마케팅 광고 활용을 위한 수집 및 이용 동의</span>
-                                        <span>(선택)</span>
-                                    </div>
-                                    <div className='agree-hover-area' onMouseEnter={() => setShowAgree3(true)} onMouseLeave={() => setShowAgree3(false)}>
-                                        <span className='agree-text'>약관보기</span>
-                                        {showAgree3 && (
-                                            <div className="agree-box">
-                                                <h4 className="agree-title">마켓팅 광고 활용을 위한 수집 및 이용 동의(선택)</h4>
-                                                <ol className="agree-list">
-                                                <li>회원은 마케팅 정보를 받을 수 있습니다.</li>
-                                                <li>수신 거부는 언제든 가능합니다.</li>
-                                                <li>광고 내용은 변경될 수 있습니다.</li>
-                                                </ol>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
+                                </div>)
+                                }
                                 <div className='agreeBenefit'>
                                     <div>
                                         <input type="checkbox" name="benefit" checked={agree.benefit} onChange={handleAgreeChange} />
