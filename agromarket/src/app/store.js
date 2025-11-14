@@ -5,6 +5,7 @@ import authSlice from 'features/auth/authSlice.js'
 // import orderSlice from 'features/order/orderSlice.js'
 import noticeSlice from 'features/catalog/notice/noticeSlice.js'
 import deliverySlice from 'features/delivery/deliverySlice.js'
+import categorySlice from 'features/category/categorySlice.js'
 
 // // 액션 로깅 처리 담당 미들웨어
 // // store => next => action
@@ -38,9 +39,9 @@ export const store = configureStore({
     product : productSlice,
     // order : orderSlice,
     notice : noticeSlice,
-    // "product": productSlice,
     auth:authSlice,
-    delivery : deliverySlice
+    delivery : deliverySlice,
+    category : categorySlice
   },
 
 //  // 액션 로깅 처리 담당 미들웨어

@@ -21,7 +21,6 @@ export const setProductAPI = (id) => async (dispatch) => {
   
   // const jsonData = await axiosGetParams(url, { params });
     const jsonData = await api.get(url, { params });
-    console.log(jsonData);
     // null이 아닐경우만 실행
   if(jsonData && Object.keys(jsonData).length > 0){
     dispatch(setProduct({ product: jsonData.data }));
@@ -64,7 +63,7 @@ export const setProductBestListAPI = async() =>  {
 export const setProductData = async(formData, imageListFile, isNew, id, maxImagelength) => {
   // 토큰 확인
   const stored = localStorage.getItem("loginInfo");
-  
+
   if (stored) {
     let url ="";
 

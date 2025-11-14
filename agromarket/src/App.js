@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import PaymentButton from 'features/order/PaymentButton';
 import { ProductDetail } from 'pages/ProductDetail';
 import { ProductAdd } from 'pages/ProductAdd';
+import { ProductUpdate } from 'pages/ProductUpdate';
 import { HeaderProductList } from 'pages/productCategoryList/HeaderProductList';
 import SearchResult from 'pages/searchResult/SearchResult';
 import CustomerService from 'pages/customerService/CustomerService';
@@ -89,14 +90,15 @@ function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
           <Route path="/products/add" element={<ProductAdd />} />
-           <Route path="/search/:keyword" element={<SearchResult />} />
-           <Route path="/brand/:keyword" element={<SearchResult />} />
-             <Route path="/support" element={<CustomerService />} />
-             <Route path="/notice" element={<NoticeList />} />
-                <Route path="/notice/:id" element={<NoticeDetail />} />
-                 <Route path="/payResult" element={<PayResult />} />
-                  <Route path="/mypage" element={<MyOrders />} />
-                   <Route path="/oauth/success" element={<SuccessPage />} />
+          <Route path="/products/update" element={<ProductUpdate />} />
+          <Route path="/search/:keyword" element={<SearchResult />} />
+          <Route path="/brand/:keyword" element={<SearchResult />} />
+          <Route path="/support" element={<CustomerService />} />
+          <Route path="/notice" element={<NoticeList />} />
+          <Route path="/notice/:id" element={<NoticeDetail />} />
+          <Route path="/payResult" element={<PayResult />} />
+          <Route path="/mypage" element={<MyOrders />} />
+          <Route path="/oauth/success" element={<SuccessPage />} />
         </Route>
         </Routes>
       </BrowserRouter>

@@ -24,7 +24,7 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-
+  
   // 레시피 토글
   const [showRecipe, setShowRecipe] = useState(false);
   
