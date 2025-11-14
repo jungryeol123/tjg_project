@@ -10,21 +10,34 @@ export default function SearchResult() {
   const productList = useSelector((state) => state.product.productList);
   // 현재 경로 취득
   const location = useLocation();
-  
+
   let filtered;
 
   // 어떤 경로로 들어왔는지 확인 가능
-  const isCheckRoot = location.pathname.includes("/brand");
+  const isCheckRoot = location.pathname.includes("/search");
+  // 서브 카테고리 아이디(브랜드로 왔을경우 "brand"가 설정되어 넘어옴)
+  const subCategoryId = location.state || {};
 
+  console.log("subCate", subCategoryId);
+
+  // 검색 기능 경로로 왔을 경우
   if(isCheckRoot){
+    filtered = productList.filter((p) =>
+    p.description.toLowerCase().includes(keyword.toLowerCase()));
+  }
+  else {
+    // 브랜드 클릭 경로로 왔을경우
+    if(subCategoryId === "brand") {
       filtered = productList.filter((p) =>
       p.brandName == keyword);
-  } else {
-     filtered = productList.filter((p) =>
-      p.description.toLowerCase().includes(keyword.toLowerCase())
-    );
-
+    } else {
+      // 카테고리 클릭 경로로 왔을경우
+      filtered = productList.filter((p) =>
+      p.categorySub.id == subCategoryId);
+    }
   }
+
+  console.log("filltered", filtered);
 
   return (
     <div className="search-result-page">

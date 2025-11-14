@@ -165,8 +165,8 @@ export function ProductDetail() {
           <div className="product-info">
             <div className="product-info-top">
               <div className="product-info-left">
-                {product.productName} ㅣ{" "}
-                <Link to={`/brand/${product.brandName}`} className="product-brand">
+                {product.productName} ㅣ {" "}
+                <Link to={`/brand/${product.brandName}`} state ={ "brand" } className="product-brand">
                   {product.brandName}
                 </Link>
               </div>

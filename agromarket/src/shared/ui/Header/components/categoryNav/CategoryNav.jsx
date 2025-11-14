@@ -1,12 +1,32 @@
 import React from "react";
 import "./CategoryNav.scss";
+import { useSelector } from "react-redux";
 import { FiMenu } from "react-icons/fi";
 import { Link } from "react-router-dom";
 export default function CategoryNav() {
+  // 카테고리(대분류) 리스트
+  const categoryList = useSelector((state) => state.category.categoryList);
+
   return (
     <nav className="category-nav">
       <ul className="category-nav__list">
-        <li className="category-first"><FiMenu /><span>카테고리</span></li>
+        <li className="category-first"><FiMenu /><span>카테고리</span>
+          <ul className="main-category-list">
+              {categoryList.map((main) => (
+                <li key={main.id} className="main-category-item">
+                  {main.name}
+                  {/* 서브 카테고리는 여기서 필요하면 추가 가능 */}
+                  {main.subCategories && main.subCategories.length > 0 && (
+                    <ul className="sub-category-list">
+                      {main.subCategories.map((sub) => (
+                        <li key={ sub.id }><Link to={`/category/${encodeURIComponent(sub.name)}`} state ={ sub.id } >{ sub.name }</Link></li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+          </ul>
+        </li>
         <li>
           <ul>
             <li><Link to="/productList/new">신상품</Link></li>
