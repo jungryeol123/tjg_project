@@ -20,7 +20,7 @@ export default function CategoryNav() {
                   { main.subCategories && main.subCategories.length > 0 && (
                     <ul className="sub-category-list">
                       { main.subCategories.map((sub) => (
-                        <li key={ sub.id }><Link to={`/category/${encodeURIComponent(sub.name)}`} state ={ sub.id } >{ sub.name }</Link></li>
+                        <Link to={`/category/${encodeURIComponent(sub.name)}`} state ={ sub.id } ><li key={ sub.id }>{ sub.name }</li></Link>
                       ))}
                     </ul>
                   )}
