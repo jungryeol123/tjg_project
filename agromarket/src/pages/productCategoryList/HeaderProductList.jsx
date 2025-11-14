@@ -118,7 +118,7 @@ export function HeaderProductList() {
               // 상품 편집일 경우, 경로 변경
               isupdate ? 
                 <Link
-                  to={`/products/add`}
+                  to={`/products/update`}
                   state={{ item }}
                   key={idx}
                 >

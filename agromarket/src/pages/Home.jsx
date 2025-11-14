@@ -1,5 +1,6 @@
 import ProductList from "features/catalog/ProductList/ProductList";
 import { setProductListAPI, setProductReviewListAPI, setProductQnAListAPI } from "features/product/productAPI";
+import { setCategoryListAPI } from "features/category/categoryAPI.js";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAutoSlider } from "shared/hooks/useAutoSlider";
@@ -19,6 +20,7 @@ const dispatch = useDispatch();
       dispatch(setProductListAPI());
       dispatch(setProductReviewListAPI());
       dispatch(setProductQnAListAPI());
+      dispatch(setCategoryListAPI());
       fetchData();
     }, [dispatch]);
   return (
