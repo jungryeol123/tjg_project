@@ -12,13 +12,14 @@ export default function CategoryNav() {
       <ul className="category-nav__list">
         <li className="category-first"><FiMenu /><span>카테고리</span>
           <ul className="main-category-list">
-              {categoryList.map((main) => (
-                <li key={main.id} className="main-category-item">
-                  {main.name}
-                  {/* 서브 카테고리는 여기서 필요하면 추가 가능 */}
-                  {main.subCategories && main.subCategories.length > 0 && (
+              { categoryList.map((main) => (
+                <li key={ main.id } className="main-category-item">
+                  {/* 메인 카테고리 표시 */}
+                  { main.name }
+                  {/* 서브 카테고리는 표시 */}
+                  { main.subCategories && main.subCategories.length > 0 && (
                     <ul className="sub-category-list">
-                      {main.subCategories.map((sub) => (
+                      { main.subCategories.map((sub) => (
                         <li key={ sub.id }><Link to={`/category/${encodeURIComponent(sub.name)}`} state ={ sub.id } >{ sub.name }</Link></li>
                       ))}
                     </ul>

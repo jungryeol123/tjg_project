@@ -39,11 +39,11 @@
         }
       }
 
-        // 대분류 메뉴
+      // 카테고리 대분류 메뉴
       .main-category-list {
         display: none; // 기본 숨김
         position: absolute;
-        top: 100%; // category-first 바로 아래
+        top: 100%; // category-first 바로 아래 표시
         left: 0;
         background-color: #4949b1ff;
         border: 1px solid #ddd;
@@ -62,13 +62,13 @@
           &:hover {
             background-color: #ff3b6a;
 
-            // 서브 카테고리 나타나도록
+            // 마우스 hover시 서브 카테고리 리스트가 표시
             .sub-category-list {
               display: block;
             }
           }
 
-          // 서브 카테고리
+          // 카테고리 중분류 메뉴
           .sub-category-list {
             display: none;
             position: absolute;

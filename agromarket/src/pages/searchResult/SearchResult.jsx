@@ -18,8 +18,6 @@ export default function SearchResult() {
   // 서브 카테고리 아이디(브랜드로 왔을경우 "brand"가 설정되어 넘어옴)
   const subCategoryId = location.state || {};
 
-  console.log("subCate", subCategoryId);
-
   // 검색 기능 경로로 왔을 경우
   if(isCheckRoot){
     filtered = productList.filter((p) =>
@@ -36,8 +34,6 @@ export default function SearchResult() {
       p.categorySub.id == subCategoryId);
     }
   }
-
-  console.log("filltered", filtered);
 
   return (
     <div className="search-result-page">
