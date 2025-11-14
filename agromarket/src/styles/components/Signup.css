@@ -286,11 +286,11 @@
   position: absolute;
   top: 24px;
   right: 0;
-  width: 520px;
+  width: 560px;
   background-color: #fafafa;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 14px 18px;
+  padding: 10px 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   line-height: 1.6;
   z-index: 10;
@@ -300,6 +300,7 @@
 .agree-title {
   font-size: 16px;
   font-weight: 700;
+  padding-left: 10px;
   margin-bottom: 8px;
   color: #444;
 }
@@ -338,4 +339,46 @@
 .signup-container .agree-text.active {
   color: #a13bea;
   text-decoration: underline;
+}
+
+.signup-container .term-title {
+    font-weight: 600;
+}
+
+/* 생년월일 전체 wrapper */
+.signup-container .date-wrapper {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: #fff;
+    gap: 10px;
+}
+
+/* input 공통 스타일 (배경 제거 + 테두리 제거) */
+.signup-container .date-wrapper .date-input {
+    width: 60px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 14px;
+    background: transparent;
+}
+
+/* placeholder 색상 */
+.signup-container .date-wrapper .date-input::placeholder {
+    color: #aaa;
+}
+
+/* 슬래시 스타일 */
+.signup-container .date-wrapper .date-slash {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* wrapper focus 효과 */
+.signup-container .date-wrapper:focus-within {
+    border-color: #4949b1ff;
 }

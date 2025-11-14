@@ -1,8 +1,9 @@
 {
   "terms": [
     {
-      "id": "service_terms",
-      "title": "이용약관",
+      "importance" : "필수",
+      "id": "terms",
+      "title": "이용약관 동의",
       "content": [
         {
           "title": "제1조 (목적)",
@@ -31,7 +32,8 @@
       ]
     },
     {
-      "id": "privacy_terms",
+      "importance" : "필수",
+      "id": "privacy",
       "title": "개인정보 수집 및 이용 동의",
       "content": [
         {
@@ -53,7 +55,8 @@
       ]
     },
     {
-      "id": "marketing_terms",
+      "importance" : "선택",
+      "id": "marketing",
       "title": "마케팅 및 광고 활용 동의",
       "content": [
         {
