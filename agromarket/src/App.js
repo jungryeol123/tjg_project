@@ -93,6 +93,7 @@ function App() {
           <Route path="/products/update" element={<ProductUpdate />} />
           <Route path="/search/:keyword" element={<SearchResult />} />
           <Route path="/brand/:keyword" element={<SearchResult />} />
+          <Route path="/category/:keyword" element={<SearchResult />} />
           <Route path="/support" element={<CustomerService />} />
           <Route path="/notice" element={<NoticeList />} />
           <Route path="/notice/:id" element={<NoticeDetail />} />
