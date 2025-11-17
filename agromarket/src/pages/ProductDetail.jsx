@@ -31,7 +31,7 @@ export function ProductDetail() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(id));
-  }, [dispatch, id]);
+  }, [id]);
 
   // 좋아요 버튼 클릭 이벤트
   const toggleWish = () => {

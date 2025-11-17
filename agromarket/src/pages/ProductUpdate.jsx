@@ -59,8 +59,6 @@ export function ProductUpdate() {
   // 이미지리스트
   const imageList = ["상품 이미지", "속성 이미지", "상세 이미지"];
 
-  console.log("item : ", item);
-  console.log("cateList : ", categoryList);
   useEffect(() => {
     dispatch(setDeliveryAPI());
 

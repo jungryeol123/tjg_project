@@ -16,6 +16,19 @@
     }
   }
 
+  .product-filter {
+    display: flex;
+    gap: 24px;
+    padding-bottom: 24px;
+    justify-content: right;
+
+    .item{
+        &:hover {
+          cursor: pointer;
+      }
+    }
+  }
+
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

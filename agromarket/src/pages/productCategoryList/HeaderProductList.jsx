@@ -47,12 +47,7 @@ export function HeaderProductList() {
       // user의 id설정
       const upk = payload.id;
 
-      // 상품 편집을 통해서 들어왔을 경우
-      if (id === "update") setIsUpdate(true);
-
       if (!productList || productList.length === 0) return [];
-      if (id !== "update") return [];
-      
       return productList.filter((p) => p.user.id == upk);
     }  
   }, [id, productList]);
@@ -83,6 +78,8 @@ export function HeaderProductList() {
     } else if (id === "sale") {
       setFilteredProducts(saleProducts);
     } else if (id === "update"){
+      // 상품 편집을 통해서 들어왔을 경우
+      setIsUpdate(true);
       setFilteredProducts(updateProducts);
     }
   }, [id, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts]);

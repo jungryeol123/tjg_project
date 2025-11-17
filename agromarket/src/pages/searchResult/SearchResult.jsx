@@ -1,5 +1,5 @@
 // src/pages/SearchResult.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProductCard from "shared/ui/productList/ProductCard";
@@ -10,11 +10,11 @@ export default function SearchResult() {
   const productList = useSelector((state) => state.product.productList);
   // 카테고리(대분류) 리스트
   const categoryList = useSelector((state) => state.category.categoryList);
+  // 화면에 표시하는 필터리스트
+  const [filterList, setFilterList] = useState([]);
 
   // 현재 경로 취득
   const location = useLocation();
-
-  let filtered;
 
   // 어떤 경로로 들어왔는지 확인 가능
   const pathName = location.pathname;
@@ -22,41 +22,80 @@ export default function SearchResult() {
   // 카테고리 분류(대분류인지 중분류인지 확인)
   const categoryData = location.state || {};
 
-  // 검색 기능 경로로 왔을 경우
-  if(pathName.includes("/search")){
-    filtered = productList.filter((p) =>
-    p.description.toLowerCase().includes(keyword.toLowerCase()));
-  }
-  // 브랜드 클릭 경로로 왔을경우
-  else if (pathName.includes("/brand")){
-    filtered = productList.filter((p) =>
-    p.brandName === keyword);
-  }
-  // 카테고리 클릭 경로로 왔을경우
-  else {
-    // 대분류로 검색
-    if(categoryData.type === "main"){
-      // 대분류 추출
-      const category = categoryList.find( (category) => category.id === categoryData.id );
+  useEffect( () => {
+    let filtered = [];
 
-      // 대분류 별 필터 설정
+    // 검색 기능 경로로 왔을 경우
+    if(pathName.includes("/search")){
       filtered = productList.filter((p) =>
-        category.subCategories.some(sub => sub.id === p.categorySub.id)
-      );
-    // 중분류로 검색
-    } else {
-      // 중분류 별 필터 설정
-      filtered = productList.filter((p) =>
-      p.categorySub.id === categoryData.id);
+      p.description.toLowerCase().includes(keyword.toLowerCase()));
+
+      setFilterList(filtered);
     }
+    // 브랜드 클릭 경로로 왔을경우
+    else if (pathName.includes("/brand")){
+      filtered = productList.filter((p) =>
+      p.brandName === keyword);
+
+      setFilterList(filtered);
+    }
+    // 카테고리 클릭 경로로 왔을경우
+    else {
+      // 대분류로 검색
+      if(categoryData.type === "main"){
+        // 대분류 추출
+        const category = categoryList.find( (category) => category.id === categoryData.id );
+
+        // 대분류 별 필터 설정
+        filtered = productList.filter((p) =>
+          category.subCategories.some(sub => sub.id === p.categorySub.id)
+        );
+      // 중분류로 검색
+      } else {
+        // 중분류 별 필터 설정
+        filtered = productList.filter((p) =>
+        p.categorySub.id === categoryData.id);
+      }
+            
+      setFilterList(filtered);
+    }
+  },[pathName]);
+
+  const handleFilter = (keyword) => {
+    let filtered = [];
+    // 최신순 클릭 :::::::: 미완성
+    if(keyword === "new") {
+      filtered = filterList.toSorted(
+        (a, b) => a.price - b.price
+      );
+    }
+    // 가격순 클릭
+    else if(keyword === "pricehigh") {
+      filtered = filterList.toSorted(
+        (a, b) => a.price - b.price
+      );
+    }
+    // 구매순 클릭
+    else if(keyword === "pricerow") {
+      filtered = filterList.toSorted(
+        (a, b) => b.price - a.price
+      );
+    }
+
+    setFilterList(filtered);
   }
 
   return (
     <div className="search-result-page">
       <h2>검색 결과: "{keyword}"</h2>
-      {filtered.length > 0 ? (
+      <ul className="product-filter">
+        <li className="item" onClick={ ()=> { handleFilter("new") }}><a>최신순</a></li>
+        <li className="item" onClick={ ()=> { handleFilter("pricehigh") }}><a>높은가격순</a></li>
+        <li className="item" onClick={ ()=> { handleFilter("pricerow") }}><a>낮은가격순</a></li>
+      </ul>
+      {filterList?.length > 0 ? (
         <div className="product-grid">
-          {filtered.map((item, idx) => (
+          {filterList?.map((item, idx) => (
              <Link
                 to={`/products/${encodeURIComponent(item.id)}`}
                 key={idx}>
