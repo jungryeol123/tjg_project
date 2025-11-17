@@ -346,7 +346,7 @@
 }
 
 /* 생년월일 전체 wrapper */
-.signup-container .date-wrapper {
+.signup-container .date-wrapper{
     display: flex;
     flex-direction: row !important;
     align-items: center;
@@ -382,3 +382,36 @@
 .signup-container .date-wrapper:focus-within {
     border-color: #4949b1ff;
 }
+
+.signup-container .email .email-middle{
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 0px;
+    border-radius: 6px;
+    background-color: #fff;
+    position: relative;
+}
+
+.signup-container .email .input-field {
+    border: none;
+    width: 123px;
+}
+
+.signup-container .domain {
+    width: 130px !important;
+    position: absolute;
+    background-color: #fff;
+    top: -2px;
+    right: 1px;
+    padding: 0;
+    z-index: 5;
+}
+
+.signup-container .domain-input {
+    z-index: 20;
+    width: 110px !important;
+}
+

@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { axiosGet } from "shared/lib/axiosInstance";
 
 export function Signup() {
-    const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
+    const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "emailDomainInput", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
     const numericOnly = ["phone", "dateYear", "dateMonth", "dateDay"];
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -76,7 +76,7 @@ export function Signup() {
         }, {});
     } 
     
-    const [form, setForm] = useState({...initForm(initArray), emailDomain: "default"});
+    const [form, setForm] = useState({...initForm(initArray), emailDomain: "선택하기"});
     const [errors, setErrors] = useState({...initForm(initArray), emailDomain: ""});
     
     const refs = useMemo(() => {    //Hooks 비동기식 처리 진행
@@ -112,14 +112,26 @@ export function Signup() {
             refs: refs,
             setErrors: setErrors
         };
-        const formData = {
-            ...form, 
-            "email":form.emailName.concat(form.emailDomain),  
-            "birthday":form.dateYear.concat('-', form.dateMonth, '-', form.dateDay),
-            "phone":form.phone.slice(0,3).concat('-', form.phone.slice(3,7), '-', form.phone.slice(7,11)),
-            "address":userFullAddress.concat(" ", form.addressDetail)
-        };
-        console.log(formData);
+        
+        let formData;
+
+        if(form.emailDomain === "") {
+            formData = {
+                ...form, 
+                "email":form.emailName.concat(form.emailDomainInput),  
+                "birthday":form.dateYear.concat('-', form.dateMonth, '-', form.dateDay),
+                "phone":form.phone.slice(0,3).concat('-', form.phone.slice(3,7), '-', form.phone.slice(7,11)),
+                "address":userFullAddress.concat(" ", form.addressDetail)
+            };
+        } else {
+            formData = {
+                ...form, 
+                "email":form.emailName.concat(form.emailDomain),  
+                "birthday":form.dateYear.concat('-', form.dateMonth, '-', form.dateDay),
+                "phone":form.phone.slice(0,3).concat('-', form.phone.slice(3,7), '-', form.phone.slice(7,11)),
+                "address":userFullAddress.concat(" ", form.addressDetail)
+            };
+        }
         const result = await dispatch(getSignup(formData, param));
         
         if(result) {
@@ -252,12 +264,16 @@ export function Signup() {
                     <li>
                         <ul className='part email'>
                             <li className='left'><span>이메일</span><span className='red-star'>* </span></li>
-                            <li>
+                            <li className='email-middle'>
                                 <input className="input-field" type="text" placeholder='예:marketcandy' name='emailName' value={form.emailName} ref={refs.emailNameRef} onChange={handleChangeForm} />
-                            </li>
-                            <li>
-                                <select className="input-field" name='emailDomain' value={form.emailDomain} ref={refs.emailDomainRef} onChange={handleChangeForm} >
-                                    <option value="default">선택하기</option>
+                                {
+                                    form.emailDomain === ""
+                                    ? <input className="input-field domain-input" type="text" placeholder='@직접 입력' name='emailDomainInput' value={form.emailDomainInput} ref={refs.emailDomainInputRef} onChange={handleChangeForm} />
+                                    : <input className="input-field domain-input" type="text" name='emailDomain' value={form.emailDomain} ref={refs.emailDomainRef} onChange={handleChangeForm} readOnly/>
+                                }
+                                
+                                <select className="input-field domain" name='emailDomain' value={form.emailDomain} ref={refs.emailDomainRef} onChange={handleChangeForm} >
+                                    <option value="선택하기">선택하기</option>
                                     <option value="@naver.com">@naver.com</option>
                                     <option value="@gmail.com">@gmail.com</option>
                                     <option value="@hanmail.net">@hanmail.net</option>
