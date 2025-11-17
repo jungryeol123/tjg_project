@@ -30,23 +30,24 @@ export default function SearchResult() {
   // 브랜드 클릭 경로로 왔을경우
   else if (pathName.includes("/brand")){
     filtered = productList.filter((p) =>
-    p.brandName == keyword);
+    p.brandName === keyword);
   }
   // 카테고리 클릭 경로로 왔을경우
   else {
+    // 대분류로 검색
     if(categoryData.type === "main"){
       // 대분류 추출
-      const category = categoryList.find( (category) => category.id == categoryData.id );
+      const category = categoryList.find( (category) => category.id === categoryData.id );
 
       // 대분류 별 필터 설정
       filtered = productList.filter((p) =>
-        category.subCategories.some(sub => sub.id == p.categorySub.id)
+        category.subCategories.some(sub => sub.id === p.categorySub.id)
       );
-
+    // 중분류로 검색
     } else {
       // 중분류 별 필터 설정
       filtered = productList.filter((p) =>
-      p.categorySub.id == categoryData.id);
+      p.categorySub.id === categoryData.id);
     }
   }
 
