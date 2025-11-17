@@ -8,30 +8,45 @@ import { Link } from "react-router-dom";
 export default function SearchResult() {
   const { keyword } = useParams();
   const productList = useSelector((state) => state.product.productList);
+  // 카테고리(대분류) 리스트
+  const categoryList = useSelector((state) => state.category.categoryList);
+
   // 현재 경로 취득
   const location = useLocation();
 
   let filtered;
 
   // 어떤 경로로 들어왔는지 확인 가능
-  const isCheckRoot = location.pathname.includes("/search");
-  // 서브 카테고리 아이디(브랜드로 왔을경우 "brand"가 설정되어 넘어옴)
-  const subCategoryId = location.state || {};
+  const pathName = location.pathname;
+
+  // 카테고리 분류(대분류인지 중분류인지 확인)
+  const categoryData = location.state || {};
 
   // 검색 기능 경로로 왔을 경우
-  if(isCheckRoot){
+  if(pathName.includes("/search")){
     filtered = productList.filter((p) =>
     p.description.toLowerCase().includes(keyword.toLowerCase()));
   }
+  // 브랜드 클릭 경로로 왔을경우
+  else if (pathName.includes("/brand")){
+    filtered = productList.filter((p) =>
+    p.brandName == keyword);
+  }
+  // 카테고리 클릭 경로로 왔을경우
   else {
-    // 브랜드 클릭 경로로 왔을경우
-    if(subCategoryId === "brand") {
+    if(categoryData.type === "main"){
+      // 대분류 추출
+      const category = categoryList.find( (category) => category.id == categoryData.id );
+
+      // 대분류 별 필터 설정
       filtered = productList.filter((p) =>
-      p.brandName == keyword);
+        category.subCategories.some(sub => sub.id == p.categorySub.id)
+      );
+
     } else {
-      // 카테고리 클릭 경로로 왔을경우
+      // 중분류 별 필터 설정
       filtered = productList.filter((p) =>
-      p.categorySub.id == subCategoryId);
+      p.categorySub.id == categoryData.id);
     }
   }
 
