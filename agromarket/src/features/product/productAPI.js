@@ -20,8 +20,8 @@ export const setProductAPI = (id) => async (dispatch) => {
   const params = { "id" : id };
   
   // const jsonData = await axiosGetParams(url, { params });
-    const jsonData = await api.get(url, { params });
-    // null이 아닐경우만 실행
+  const jsonData = await api.get(url, { params });
+  // null이 아닐경우만 실행
   if(jsonData && Object.keys(jsonData).length > 0){
     dispatch(setProduct({ product: jsonData.data }));
   }
@@ -67,15 +67,14 @@ export const setProductData = async(formData, imageListFile, isNew, id, maxImage
   if (stored) {
     let url ="";
 
-    // 토큰에서 user의 id취득
-    const { accessToken } = JSON.parse(stored);
-    const payload = parseJwt(accessToken);
+    // 토큰에서 유저id취득
+    const userId = getUserId(stored);
 
     // 이미지 전송을 위한 FormData
     const data = new FormData();
 
     // user의 id설정
-    formData = {...formData, "user": { "id": payload.id } };
+    formData = {...formData, "user": { "id": userId } };
 
     // 이미지 파일 추가    
     for (let i = 0; i < maxImagelength; i++) {
@@ -110,6 +109,28 @@ export const setProductData = async(formData, imageListFile, isNew, id, maxImage
         return false;
     }
   }
+}
+
+// 상품 정보 등록
+export const delProductData = async(productId) => {
+  // 토큰 확인
+  const stored = localStorage.getItem("loginInfo");
+
+  if (stored) {
+    const url = "/product/productDelete";
+    const params = { "id" : productId };
+
+    // 상품 정보 DB에 업로드
+    const result = await api.get(url, { params });
+    
+    return result;
+  }
+}
+
+function getUserId(stored) {
+    // 토큰에서 user의 id취득
+    const { accessToken } = JSON.parse(stored);
+    return parseJwt(accessToken);
 }
 
 // // 상품 디테일 정보 취득
