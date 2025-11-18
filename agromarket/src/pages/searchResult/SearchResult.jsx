@@ -63,7 +63,7 @@ export default function SearchResult() {
 
   const handleFilter = (keyword) => {
     let filtered = [];
-    console.log("filterlist", filterList);
+
     // 최신순 클릭
     if(keyword === "new") {
       filtered = filterList.toSorted(
@@ -82,7 +82,7 @@ export default function SearchResult() {
         (a, b) => b.price - a.price
       );
     }
-
+    // 필터 결과 설정
     setFilterList(filtered);
   }
 
