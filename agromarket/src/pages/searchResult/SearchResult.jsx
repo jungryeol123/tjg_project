@@ -63,20 +63,21 @@ export default function SearchResult() {
 
   const handleFilter = (keyword) => {
     let filtered = [];
-    // 최신순 클릭 :::::::: 미완성
+    console.log("filterlist", filterList);
+    // 최신순 클릭
     if(keyword === "new") {
       filtered = filterList.toSorted(
-        (a, b) => a.price - b.price
+        (a, b) => new Date(b.productDate) - new Date(a.productDate)
       );
     }
     // 가격순 클릭
-    else if(keyword === "pricehigh") {
+    else if(keyword === "priceHigh") {
       filtered = filterList.toSorted(
         (a, b) => a.price - b.price
       );
     }
     // 구매순 클릭
-    else if(keyword === "pricerow") {
+    else if(keyword === "priceRow") {
       filtered = filterList.toSorted(
         (a, b) => b.price - a.price
       );
@@ -90,8 +91,8 @@ export default function SearchResult() {
       <h2>검색 결과: "{keyword}"</h2>
       <ul className="product-filter">
         <li className="item" onClick={ ()=> { handleFilter("new") }}><a>최신순</a></li>
-        <li className="item" onClick={ ()=> { handleFilter("pricehigh") }}><a>높은가격순</a></li>
-        <li className="item" onClick={ ()=> { handleFilter("pricerow") }}><a>낮은가격순</a></li>
+        <li className="item" onClick={ ()=> { handleFilter("priceHigh") }}><a>높은가격순</a></li>
+        <li className="item" onClick={ ()=> { handleFilter("priceRow") }}><a>낮은가격순</a></li>
       </ul>
       {filterList?.length > 0 ? (
         <div className="product-grid">
