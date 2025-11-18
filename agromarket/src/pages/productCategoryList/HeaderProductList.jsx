@@ -15,7 +15,7 @@ export function HeaderProductList() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   
-  // 상품 리스트 최신화(상품)
+  // 상품 리스트 최신화
   useEffect(() => {
     dispatch(setProductListAPI());
   }, []);
@@ -54,7 +54,7 @@ export function HeaderProductList() {
 
       if (!productList || productList.length === 0) return [];
       return productList.filter((p) => p.user.id == upk);
-    }  
+    }
   }, [id, productList]);
 
   // ✅ (5) 베스트 상품 (best): 백엔드 API 호출
@@ -76,7 +76,7 @@ export function HeaderProductList() {
   },[id]);
 
   // ✅ 즉시 반영되는 필터들
-  useEffect(() =>{ 
+  useEffect(() =>{
     if (id === "new") {
       setFilteredProducts(sortedNewProducts);
     } else if (id === "deal") {

@@ -6,7 +6,7 @@ import {
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
 import "./ProductList.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductListAPI } from "features/product/productAPI";
 
@@ -22,6 +22,7 @@ import { setProductListAPI } from "features/product/productAPI";
   const totalMoved = useRef(0);
   const dragPreventClick = useRef(false);
   const dragThreshold = 5; // 클릭으로 인식할 최대 이동 거리(px)
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   if(keyword) {
@@ -43,7 +44,7 @@ import { setProductListAPI } from "features/product/productAPI";
           )
           .slice(0, limit);
 
-      case "dc": // 할인율 10% 이상
+      case "sale": // 할인율 10% 이상
         return productList
           .filter((item) => item.dc >= 10)
           .sort((a, b) => b.dc - a.dc)
@@ -120,13 +121,20 @@ import { setProductListAPI } from "features/product/productAPI";
       behavior: "smooth",
     });
   };
+  
+  // 전체보기
+  const handleAllView = () => {
+    // url 설정
+    const url = "/productList/" + keyword;
+    navigate(url);
+  }
 
   return (
     <section className="home-page">
       <div className="section-header">
         <div></div>
         <h2 className="section-title">{title}</h2>
-        <button className="view-all-btn">전체보기 &gt;</button>
+        <button className="view-all-btn" onClick={ handleAllView }>전체보기 &gt;</button>
       </div>
 
       <div className="slider-wrapper">
