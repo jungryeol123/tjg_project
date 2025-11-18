@@ -73,13 +73,13 @@ export default function SearchResult() {
     // 가격순 클릭
     else if(keyword === "priceHigh") {
       filtered = filterList.toSorted(
-        (a, b) => a.price - b.price
+        (a, b) => b.price - a.price
       );
     }
     // 구매순 클릭
     else if(keyword === "priceRow") {
       filtered = filterList.toSorted(
-        (a, b) => b.price - a.price
+        (a, b) => a.price - b.price
       );
     }
     // 필터 결과 설정
