@@ -99,7 +99,7 @@ export function ProductAdd() {
   };
 
   // 등록 버튼 클릭시 이벤트
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     // 필수 입력 체크시 미입력 항목이 존재하는 경우
@@ -125,7 +125,8 @@ export function ProductAdd() {
       }
     }
 
-    const result = setProductData(formData, imageListFile);
+    // 신규 등록 : true, 상품 편집 : false
+    const result = await setProductData(formData, imageListFile, true, "", imageList.length);
 
     // 등록 성공시
     if(result){
