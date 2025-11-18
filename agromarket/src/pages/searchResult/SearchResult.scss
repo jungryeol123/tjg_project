@@ -9,7 +9,6 @@
   h2 {
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 24px;
     text-align: left;
     span {
       color: #2a7de1; /* 강조 색상 */
@@ -18,13 +17,28 @@
 
   .product-filter {
     display: flex;
-    gap: 24px;
     padding-bottom: 24px;
     justify-content: right;
+    list-style: none;
 
     .item{
-        &:hover {
-          cursor: pointer;
+      padding: 0 10px;
+      cursor: pointer;
+      font-size: 16px;
+      border-right: 1px solid #ccc; // 구분선
+
+      a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      &:last-child {
+        border-right: none; // 마지막 요소는 선 제거
+      }
+
+      &:hover a {
+        color: #000;
+        font-weight: 600;
       }
     }
   }
