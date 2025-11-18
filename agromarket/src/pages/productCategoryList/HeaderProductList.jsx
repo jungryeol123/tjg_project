@@ -13,8 +13,12 @@ export function HeaderProductList() {
   const productList = useSelector((state) => state.product.productList);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isupdate, setIsUpdate] = useState(false);
   const dispatch = useDispatch();
+  
+  // 상품 리스트 최신화(상품)
+  useEffect(() => {
+    dispatch(setProductListAPI());
+  }, []);
 
   // ✅ (1) 신상품: 날짜 기준 최신순 정렬
   const sortedNewProducts = useMemo(() => {
@@ -55,8 +59,8 @@ export function HeaderProductList() {
 
   // ✅ (5) 베스트 상품 (best): 백엔드 API 호출
   useEffect(() => {
+    if(id !== "best") return;
     const fetchBestProducts = async () => {
-      if (id === "best") {
         setLoading(true);
         try {
           const result = await setProductBestListAPI();
@@ -67,32 +71,22 @@ export function HeaderProductList() {
         } finally {
           setLoading(false);
         }
-      }
     };
     fetchBestProducts();
+  },[id]);
 
-    dispatch(setProductListAPI());
-
-    // ✅ 즉시 반영되는 필터들
+  // ✅ 즉시 반영되는 필터들
+  useEffect(() =>{ 
     if (id === "new") {
       setFilteredProducts(sortedNewProducts);
     } else if (id === "deal") {
       setFilteredProducts(hotOrSpecialProducts);
     } else if (id === "sale") {
       setFilteredProducts(saleProducts);
-    } else if (id === "update"){
-      // 상품 편집을 통해서 들어왔을 경우
-      setIsUpdate(true);
+    } else if (id === "update") {
       setFilteredProducts(updateProducts);
     }
-  }, [id, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts]);
-
-  // 상품 업데이트 시 최신버전으로 변경
-  useEffect(() => {
-  if (id === "update") {
-      setFilteredProducts(updateProducts);
-    }
-  }, [productList]);
+  }, [id, productList, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts]);
 
   return (
     <div className="new-products-page">
@@ -123,7 +117,7 @@ export function HeaderProductList() {
           <div className="product-grid">
             {filteredProducts.map((item, idx) => (
               // 상품 편집일 경우, 경로 변경
-              isupdate ? 
+              id === "update" ? 
                 <Link
                   to={`/products/update`}
                   state={{ item }}
