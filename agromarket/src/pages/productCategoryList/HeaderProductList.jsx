@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./HeaderProductList.scss";
 import ProductCard from "shared/ui/productList/ProductCard";
 import { useParams } from "react-router-dom";
-import { setProductBestListAPI } from "features/product/productAPI";
+import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
 import { Link } from "react-router-dom";
 import { parseJwt } from "features/auth/parseJwt";
 
@@ -14,6 +14,7 @@ export function HeaderProductList() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isupdate, setIsUpdate] = useState(false);
+  const dispatch = useDispatch();
 
   // ✅ (1) 신상품: 날짜 기준 최신순 정렬
   const sortedNewProducts = useMemo(() => {
@@ -70,6 +71,8 @@ export function HeaderProductList() {
     };
     fetchBestProducts();
 
+    dispatch(setProductListAPI());
+
     // ✅ 즉시 반영되는 필터들
     if (id === "new") {
       setFilteredProducts(sortedNewProducts);
@@ -83,6 +86,13 @@ export function HeaderProductList() {
       setFilteredProducts(updateProducts);
     }
   }, [id, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts]);
+
+  // 상품 업데이트 시 최신버전으로 변경
+  useEffect(() => {
+  if (id === "update") {
+      setFilteredProducts(updateProducts);
+    }
+  }, [productList]);
 
   return (
     <div className="new-products-page">
