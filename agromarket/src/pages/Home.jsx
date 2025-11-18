@@ -27,8 +27,8 @@ const dispatch = useDispatch();
     <>
     <SlideContainer images={images} index={index} setIndex={setIndex} />
     <ProductList title="마감 임박! 원더특가 ~66%" keyword="time" limit={12}/>
-    <ProductList title="실시간 인기 랭킹" keyword="dc" limit={12}/> 
-    <ProductList title="할인을 잡아라!!" keyword="dc" limit={12}/>
+    <ProductList title="실시간 인기 랭킹" keyword="sale" limit={12}/> 
+    <ProductList title="할인을 잡아라!!" keyword="sale" limit={12}/>
     </>
   );
 }
