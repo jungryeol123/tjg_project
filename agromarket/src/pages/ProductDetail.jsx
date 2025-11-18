@@ -88,7 +88,7 @@ export function ProductDetail() {
             icon: 'success',
             title: '✅ 장바구니 등록',
             text: product.productName + "가 장바구니에 등록이 완료되었습니다.",
-            confirmButtonText: '확인',
+            confirmButtonText: '확인'
           });
       } else {
         Swal.fire({
@@ -112,14 +112,7 @@ export function ProductDetail() {
   };
 
   // 탭 화면 표시용
-  const tabLabels = [
-    "속성정보",
-    "상세정보",
-    "구매후기",
-    "상품문의",
-    "배송/반품/교환정보",
-  ];
-
+  const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
   // 탭 이벤트용 변수명
   const tabEventNames = ["item", "detail", "review", "qna", "return"];
   
@@ -129,7 +122,7 @@ export function ProductDetail() {
     detail: useRef(null),
     review: useRef(null),
     qna: useRef(null),
-    return: useRef(null),
+    return: useRef(null)
   };
 
   // 탭 클릭 이벤트
