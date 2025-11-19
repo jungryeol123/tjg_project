@@ -36,20 +36,6 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
     }
 }
 
-// // 장바구니 정보 취득
-// export const showCart = (id) => async(dispatch) => {
-//     const url = "/cart/cartList";
-//     const cartItem = { "user" : {"id":id} };
-//     // const cartData = await axiosPost(url, cartItem);
-//     const cartData = await api.post(url, cartItem);
-    
-//     console.log("cartData", cartData);
-//     dispatch(setCartItem({"cartItem": cartData.data}));
-//     dispatch(updateTotalPrice());
-//     dispatch(updateTotalDcPrice());
-//     // return cartData;
-// }
-
 // 장바구니 정보 취득
 export const showCart = (id) => async (dispatch) => {
   const url = "/cart/cartList";
@@ -79,8 +65,6 @@ export const showCart = (id) => async (dispatch) => {
     console.error("❌ showCart 에러:", err);
   }
 };
-
-
 
 export const updateCart = (cid, qty, id) => async(dispatch) => {
     const url = "/cart/updateQty";

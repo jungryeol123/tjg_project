@@ -19,5 +19,5 @@ export const deliverySlice = createSlice({
     }
   }});
 
-  export const { setDeliveryList } = deliverySlice.actions; 
-  export default deliverySlice.reducer;
+export const { setDeliveryList } = deliverySlice.actions; 
+export default deliverySlice.reducer;

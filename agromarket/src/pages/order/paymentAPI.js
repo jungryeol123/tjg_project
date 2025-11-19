@@ -1,4 +1,4 @@
-// import { axiosPost } from './dataFetch.js';
+// import { axiosPost } from '../../utils/dataFetch.js';
 
 // export const getPayment = async(receiver, paymentInfo, cartList) => {
 // console.log(cartList);
@@ -31,7 +31,7 @@
 //     }
 // }
 
-// import { axiosPost } from "./dataFetch.js";
+// import { axiosPost } from "../../utils/dataFetch.js";
 
 // /** ✅ 카카오페이 */
 // export const getPayment = async (receiver, paymentInfo, cartList) => {
@@ -58,7 +58,7 @@
 //   }
 // };
 
-import { axiosPost } from "./dataFetch.js";
+import { axiosPost } from "../../utils/dataFetch.js";
 import { loadNaverPaySDK } from "../../utils/loadNaverSDK.js";
 import { parseJwt } from "features/auth/parseJwt.js";
 /** ✅ 카카오페이 결제 */
