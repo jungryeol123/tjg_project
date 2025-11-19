@@ -198,7 +198,7 @@ export function ProductUpdate() {
       // 삭제 버튼 클릭시
       if (result.isConfirmed) {
         // 삭제 성공시
-        if(delProductData(item.id)){
+        if(dispatch(delProductData(item.id))){
           Swal.fire({
             icon: 'success',
             title: '✅ 상품 삭제 성공!',

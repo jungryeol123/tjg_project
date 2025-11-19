@@ -1,4 +1,3 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 
 // 전체 전역 변수
@@ -17,10 +16,7 @@ export const noticeSlice = createSlice({
       const {result} = action.payload;
         state.noticeList = result;
     }
-
 }});
 
-
-
-  export const {setNoticeList} = noticeSlice.actions; 
-  export default noticeSlice.reducer;
+export const {setNoticeList} = noticeSlice.actions; 
+export default noticeSlice.reducer;

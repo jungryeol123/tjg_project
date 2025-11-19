@@ -1,4 +1,4 @@
-import { axiosGet, axiosGetParams, axiosPostFile } from "shared/lib/axiosInstance";
+import { axiosGet, axiosPostFile } from "shared/lib/axiosInstance";
 import {
   setProductList,
   setProduct,
@@ -8,6 +8,7 @@ import {
 } from "./productSlice";
 import { parseJwt } from "features/auth/parseJwt";
 import { api } from "features/auth/axios";
+import { showCart } from "features/cart/cartAPI";
 
 export const setProductListAPI = (keyword) => async (dispatch) => {
   const result = await axiosGet("/product/productList");
@@ -16,6 +17,7 @@ export const setProductListAPI = (keyword) => async (dispatch) => {
   }
 };
 
+// 선택 상품 정보 취득
 export const setProductAPI = (id) => async (dispatch) => {
   const url = "/product/productDetail";
   const params = { "id" : id };
@@ -114,7 +116,7 @@ export const setProductData = async(formData, imageListFile, isNew, id, maxImage
 }
 
 // 상품 정보 등록
-export const delProductData = async(productId) => {
+export const delProductData = (productId) => async(dispatch) => {
   // 토큰 확인
   const stored = localStorage.getItem("loginInfo");
 
@@ -124,7 +126,14 @@ export const delProductData = async(productId) => {
 
     // 상품 정보 DB에 업로드
     const result = await api.get(url, { params });
-    
+
+    // 상품 정보 삭제시, 장바구니 리스트 갱신(장바구니에 해당 상품이 있을경우 대비)
+    if(result) {
+      const { accessToken } = JSON.parse(stored);
+      const payload = parseJwt(accessToken);
+      dispatch(showCart(payload.id));
+    }
+
     return result;
   }
 }

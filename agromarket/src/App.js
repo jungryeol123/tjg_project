@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from 'layouts/Layout';
 import Home from 'pages/Home';
 import { Delivery } from 'pages/Delivery';
+import { Coupon } from 'pages/Coupon';
 import { Login } from 'pages/Login';
 import { Signup } from 'pages/Signup';
 import KakaoCallback from 'features/auth/Kakao';
@@ -25,12 +26,11 @@ import SuccessPage from 'pages/successPage/SuccessPage';
 import { useDispatch } from 'react-redux';
 import { login } from 'features/auth/authSlice';
 import { CheckOut } from 'pages/order/CheckOut';
-import { api, setupApiInterceptors } from 'features/auth/axios';
-import axios from 'axios';
+import { setupApiInterceptors } from 'features/auth/axios';
 function App() {
 
-   const [isIntroFinished, setIsIntroFinished] = useState(false);
-    const dispatch = useDispatch();
+  const [isIntroFinished, setIsIntroFinished] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setupApiInterceptors(); // ✅ 앱 시작 시 인터셉터 등록 (로그인 상태 유지)
@@ -72,10 +72,11 @@ function App() {
   // }
 
   return (
-      <BrowserRouter>
-        <Routes>
+    <BrowserRouter>
+      <Routes>
         <Route  path="/" element={<Layout />}>
           <Route index element={<Home/>}/>
+          <Route path="/coupon" element={<Coupon/>}/>
           <Route path="/delivery" element={<Delivery/>}/>
           <Route path="/login" element={<Login/>} />
           <Route path="/find-user-id" element={<FindUserId />} />
@@ -101,8 +102,8 @@ function App() {
           <Route path="/mypage" element={<MyOrders />} />
           <Route path="/oauth/success" element={<SuccessPage />} />
         </Route>
-        </Routes>
-      </BrowserRouter>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

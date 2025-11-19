@@ -1,10 +1,11 @@
 // src/pages/SearchResult.jsx
-import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useParams, useLocation, Link } from "react-router-dom";
 import ProductCard from "shared/ui/productList/ProductCard";
+import { FilterItem } from "../../shared/constants/FilterItem";
 import "./SearchResult.scss";
-import { Link } from "react-router-dom";
+
 export default function SearchResult() {
   const { keyword } = useParams();
   const productList = useSelector((state) => state.product.productList);
@@ -12,6 +13,8 @@ export default function SearchResult() {
   const categoryList = useSelector((state) => state.category.categoryList);
   // 화면에 표시하는 필터리스트
   const [filterList, setFilterList] = useState([]);
+  // 선택된 필터라벨
+  const [activeFilter, setActiveFilter] = useState("");
 
   // 현재 경로 취득
   const location = useLocation();
@@ -22,13 +25,23 @@ export default function SearchResult() {
   // 카테고리 분류(대분류인지 중분류인지 확인)
   const categoryData = location.state || {};
 
+  // 필터 분류
+  const filterLabel = [
+    { label: "최신순", value: "new" },
+    { label: "높은가격순", value: "priceHigh" },
+    { label: "낮은가격순", value: "priceLow" }
+  ];
+
   useEffect( () => {
     let filtered = [];
 
-    // 검색 기능 경로로 왔을 경우
+    // 검색 기능 경로로 왔을 경우(상품명, 브랜드명, 안내사항에 포함될경우 출력)
     if(pathName.includes("/search")){
       filtered = productList.filter((p) =>
-      p.description.toLowerCase().includes(keyword.toLowerCase()));
+      p.description.toLowerCase().includes(keyword.toLowerCase()) ||
+      p.productName.toLowerCase().includes(keyword.toLowerCase()) ||
+      p.brandName.toLowerCase().includes(keyword.toLowerCase())
+    );
 
       setFilterList(filtered);
     }
@@ -61,23 +74,26 @@ export default function SearchResult() {
     }
   },[pathName]);
 
-  const handleFilter = (keyword) => {
+  // 필터 클릭시 이벤트
+  const handleFilter = (type) => {
     let filtered = [];
+    // 클릭한 필터 활성화
+    setActiveFilter(type);
 
     // 최신순 클릭
-    if(keyword === "new") {
+    if(type === "new") {
       filtered = filterList.toSorted(
         (a, b) => new Date(b.productDate) - new Date(a.productDate)
       );
     }
     // 가격순 클릭
-    else if(keyword === "priceHigh") {
+    else if(type === "priceHigh") {
       filtered = filterList.toSorted(
         (a, b) => b.price - a.price
       );
     }
     // 구매순 클릭
-    else if(keyword === "priceRow") {
+    else if(type === "priceLow") {
       filtered = filterList.toSorted(
         (a, b) => a.price - b.price
       );
@@ -90,9 +106,15 @@ export default function SearchResult() {
     <div className="search-result-page">
       <h2>검색 결과: "{keyword}"</h2>
       <ul className="product-filter">
-        <li className="item" onClick={ ()=> { handleFilter("new") }}><a>최신순</a></li>
-        <li className="item" onClick={ ()=> { handleFilter("priceHigh") }}><a>높은가격순</a></li>
-        <li className="item" onClick={ ()=> { handleFilter("priceRow") }}><a>낮은가격순</a></li>
+        {filterLabel.map((item) => (
+          <FilterItem
+            key={item.value}
+            label={item.label}
+            value={item.value}
+            activeFilter={activeFilter}
+            onClick={handleFilter}
+          />
+        ))}
       </ul>
       {filterList?.length > 0 ? (
         <div className="product-grid">

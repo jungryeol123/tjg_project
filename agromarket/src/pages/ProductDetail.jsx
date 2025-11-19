@@ -5,11 +5,11 @@ import { Item } from "./productDetail/Item.jsx";
 import { Detail } from "./productDetail/Detail.jsx";
 import { QnA } from "./productDetail/QnA.jsx";
 import { Return } from "./productDetail/Return.jsx";
-import "../styles/components/ProductDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addCart } from "features/cart/cartAPI.js";
 import { ReviewList } from "./productDetail/ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
+import "../styles/components/ProductDetail.css";
 import Swal from 'sweetalert2';
 import { parseJwt } from "features/auth/parseJwt.js";
 import { api } from "features/auth/axios.js";
@@ -127,8 +127,8 @@ useEffect(() => {
     } else {
       // 로그인 필요시
       Swal.fire({
-        icon: 'error',
-        title: '❌ 로그인 화면으로',
+        icon: 'warning',
+        title: '⚠ 로그인 화면으로',
         text: "로그인이 필요합니다.",
         confirmButtonText: '확인'
       })

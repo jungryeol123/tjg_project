@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { removeCart, showCart, updateCart } from "features/cart/cartAPI";
 import { parseJwt } from "features/auth/parseJwt";
-
+import "../styles/components/Cart.css";
 
 export function Cart() {
     const navigate = useNavigate();

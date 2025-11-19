@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./ReviewList.scss";
-import { axiosGet } from "shared/lib/axiosInstance";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export function ReviewList({ id }) {
   const reviewsAll = useSelector((state) => state.product.productReviewList);

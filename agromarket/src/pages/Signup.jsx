@@ -1,11 +1,11 @@
-import React, { useRef, useState, useMemo, useEffect } from 'react';
-import '../styles/components/Signup.css';
+import React, { useState, useMemo, useEffect } from 'react';
 import { getIdCheck, getSignup } from 'features/auth/authAPI';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import Swal from 'sweetalert2';
 import { axiosGet } from "shared/lib/axiosInstance";
+import '../styles/components/Signup.css';
+import Swal from 'sweetalert2';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "emailDomainInput", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];

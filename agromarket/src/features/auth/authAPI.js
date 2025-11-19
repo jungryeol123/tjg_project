@@ -1,6 +1,6 @@
 import { login, logout, socialLogin } from "./authSlice.js";
 import { validateFormCheck, validateSignupFormCheck } from "./validate.js";
-import { axiosPost } from "./dataFetch.js";
+import { axiosPost } from "../../utils/dataFetch.js";
 import  { setupApiInterceptors } from "./axios.js";
 import { setCartItem, getCartCount } from "../cart/cartSlice.js"
 import axios from "axios";
