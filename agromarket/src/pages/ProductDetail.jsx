@@ -101,8 +101,8 @@ export function ProductDetail() {
     } else {
       // 로그인 필요시
       Swal.fire({
-        icon: 'error',
-        title: '❌ 로그인 화면으로',
+        icon: 'warning',
+        title: '⚠ 로그인 화면으로',
         text: "로그인이 필요합니다.",
         confirmButtonText: '확인'
       })
