@@ -35,10 +35,13 @@ export default function SearchResult() {
   useEffect( () => {
     let filtered = [];
 
-    // 검색 기능 경로로 왔을 경우
+    // 검색 기능 경로로 왔을 경우(상품명, 브랜드명, 안내사항에 포함될경우 출력)
     if(pathName.includes("/search")){
       filtered = productList.filter((p) =>
-      p.description.toLowerCase().includes(keyword.toLowerCase()));
+      p.description.toLowerCase().includes(keyword.toLowerCase()) ||
+      p.productName.toLowerCase().includes(keyword.toLowerCase()) ||
+      p.brandName.toLowerCase().includes(keyword.toLowerCase())
+    );
 
       setFilterList(filtered);
     }
