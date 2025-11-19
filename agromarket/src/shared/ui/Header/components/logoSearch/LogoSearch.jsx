@@ -1,5 +1,6 @@
 // src/ui/Header/components/logoSearch/LogoSearch.jsx
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./LogoSearch.scss";
 import { CiLocationOn } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa";
@@ -10,6 +11,9 @@ import { Link } from "react-router-dom";
 export default function LogoSearch() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
+
+  // 장바구니 카운트 갯수
+  const cartCount = useSelector( state => state.cart.cartCount );
 
   // ✅ 검색 버튼 클릭 시 이동
   const handleSearch = () => {
@@ -47,8 +51,9 @@ export default function LogoSearch() {
         <span>
           <FaRegHeart />
         </span>
-        <span>
+        <span className="etc__cart-link">
           <Link to="/cart"><IoCartOutline /></Link>
+          <span className="etc__cart-count">{cartCount}</span>
         </span>
       </div>
     </div>

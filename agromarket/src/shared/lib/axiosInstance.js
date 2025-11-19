@@ -31,10 +31,20 @@ export async function axiosGet(url) {
 
 // post방식
 export async function axiosPost(url, params) {
-    console.log("url : ", url, params);
-
     try {
         const response = await axios.post(url, params);
+        return response.data;
+    } catch (error) {
+        console.error("데이터 오류", error);
+        throw error;
+    }
+}
+
+// post방식(파일 전송)
+export async function axiosPostFile(url, params) {
+    try {
+        const response = await axios.post(url, params);
+
         return response.data;
     } catch (error) {
         console.error("데이터 오류", error);

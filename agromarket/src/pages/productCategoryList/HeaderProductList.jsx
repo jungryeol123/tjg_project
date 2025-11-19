@@ -4,13 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import "./HeaderProductList.scss";
 import ProductCard from "shared/ui/productList/ProductCard";
 import { useParams } from "react-router-dom";
-import { setProductBestListAPI } from "features/product/productAPI";
+import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
 import { Link } from "react-router-dom";
+import { parseJwt } from "features/auth/parseJwt";
+
 export function HeaderProductList() {
   const { id } = useParams();
   const productList = useSelector((state) => state.product.productList);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  
+  // 상품 리스트 최신화
+  useEffect(() => {
+    dispatch(setProductListAPI());
+  }, []);
 
   // ✅ (1) 신상품: 날짜 기준 최신순 정렬
   const sortedNewProducts = useMemo(() => {
@@ -27,20 +35,41 @@ export function HeaderProductList() {
     if (id !== "deal") return [];
     return productList.filter((p) => p.hotDeal === true || p.memberSpecial === true);
   }, [id, productList]);
-  console.log("productList", productList);
-  console.log("hotOrSpecialProducts", hotOrSpecialProducts);
 
   // ✅ (3) 세일 상품 (sale): 할인율(dc)이 10% 이상
   const saleProducts = useMemo(() => {
     if (!productList || productList.length === 0) return [];
     if (id !== "sale") return [];
-    return productList.filter((p) => p.dc >= 10);
+    return productList.filter((p) => p.dc >= 10).sort((a, b) => b.dc - a.dc);
   }, [id, productList]);
 
-  // ✅ (4) 베스트 상품 (best): 백엔드 API 호출
+  // ✅ (4) 상품 편집 (update) : 등록 유저의 상품 표시
+  const updateProducts = useMemo(() => {
+    if(localStorage.getItem("loginInfo")){
+      // 토큰에서 user의 id취득
+      const { accessToken } = JSON.parse(localStorage.getItem("loginInfo"));
+      const payload = parseJwt(accessToken);
+      // user의 id설정
+      const upk = payload.id;
+
+      if (!productList || productList.length === 0) return [];
+      return productList.filter((p) => p.user.id == upk);
+    }
+  }, [id, productList]);
+
+  // ✅ (5) 마감 상품 (time) : 날짜 기준 오래된 순서
+  const timeProducts = useMemo(() => {
+    if (!productList || productList.length === 0) return [];
+    if (id !== "time") return [];
+    return [...productList]
+      .filter((p) => !!p.productDate)
+      .sort((a, b) => new Date(a.productDate) - new Date(b.productDate));
+  }, [id, productList]);
+
+  // ✅ (6) 베스트 상품 (best): 백엔드 API 호출
   useEffect(() => {
+    if(id !== "best") return;
     const fetchBestProducts = async () => {
-      if (id === "best") {
         setLoading(true);
         try {
           const result = await setProductBestListAPI();
@@ -51,19 +80,24 @@ export function HeaderProductList() {
         } finally {
           setLoading(false);
         }
-      }
     };
     fetchBestProducts();
+  },[id]);
 
-    // ✅ 즉시 반영되는 필터들
+  // ✅ 즉시 반영되는 필터들
+  useEffect(() =>{
     if (id === "new") {
       setFilteredProducts(sortedNewProducts);
     } else if (id === "deal") {
       setFilteredProducts(hotOrSpecialProducts);
     } else if (id === "sale") {
       setFilteredProducts(saleProducts);
+    } else if (id === "update") {
+      setFilteredProducts(updateProducts);
+    } else if (id === "time") {
+      setFilteredProducts(timeProducts);
     }
-  }, [id, sortedNewProducts, hotOrSpecialProducts, saleProducts]);
+  }, [id, productList, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts, timeProducts]);
 
   return (
     <div className="new-products-page">
@@ -74,6 +108,10 @@ export function HeaderProductList() {
           ? "세일 상품 (10% 이상)"
           : id === "deal"
           ? "특가/혜택 상품"
+          : id === "update"
+          ? "상품 편집"
+          : id === "time"
+          ? "마감 임박 상품" 
           : "신상품"}
       </h1>
 
@@ -91,13 +129,22 @@ export function HeaderProductList() {
         ) : filteredProducts.length > 0 ? (
           <div className="product-grid">
             {filteredProducts.map((item, idx) => (
-              <Link
-                to={`/products/${item.pid}/${item.id}`}
-                key={idx}
-              >
-                  <ProductCard item={item} />
-              </Link>
-              
+              // 상품 편집일 경우, 경로 변경
+              id === "update" ? 
+                <Link
+                  to={`/products/update`}
+                  state={{ item }}
+                  key={idx}
+                >
+                    <ProductCard item={item} />
+                </Link>
+              :
+                <Link
+                  to={`/products/${item.id}`}
+                  key={idx}
+                >
+                    <ProductCard item={item} />
+                </Link>
             ))}
           </div>
         ) : (

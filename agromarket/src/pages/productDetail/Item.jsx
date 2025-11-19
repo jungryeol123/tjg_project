@@ -1,5 +1,4 @@
 export function Item({images}) {
-  console.log(images);
   return (
     <div>
       <h2>상품 정보</h2>

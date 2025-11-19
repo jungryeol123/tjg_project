@@ -30,19 +30,35 @@
         background-color: rgb(9, 9, 173)
       }
     }
-
-
   }
 
-  
+  .etc {
+    display: flex;
+    align-content: center;
+    gap: 15px;
+    font-size: 23px;
+    margin-right: 10px;
 
-    .etc {
-      display: flex;
-      align-content: center;
-      gap: 15px;
-      font-size: 23px;
-      margin-right: 10px;
+    &__cart-link {
+          position: relative;
+          margin-right: 15px;
+        }
+        
+      &__cart-count {
+        width: 20px;
+        height:20px;
+        position: absolute;
+        top: -5px;
+        left: 25px;
+        font-size: 0.8rem;
+        color: white;
+        /* padding: 3px; */
+        border-radius: 100%;
+        /* border: 1px solid rgb(55, 0, 255); */
+        background-color: red;
+        text-align: center;
+        align-content: center;
+      }
     }
+}
 
-    
-  }

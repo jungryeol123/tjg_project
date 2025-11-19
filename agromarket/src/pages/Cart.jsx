@@ -2,29 +2,29 @@ import { useDispatch, useSelector } from "react-redux";
 import "../styles/components/Cart.css";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { showCart } from "features/cart/cartAPI";
-// import { useSelector } from "react-redux";
+import { removeCart, showCart, updateCart } from "features/cart/cartAPI";
+import { parseJwt } from "features/auth/parseJwt";
+
 
 export function Cart() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const cartList = [{"cid":"testCid", "image":"/productImages/productImage5.png", "qty":"1", "size":"XL", "name":"testName", "price":15000, }];
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
-    // const [cartList,setCartList] = useState([]);
+    const [userId, setUserId] = useState(null); // ✅ 테스트용 사용자 id (나중엔 토큰으로 대체)
 
-    // useEffect(() => {
-    //     const fetchCart = async () => {
-    //     const data = await dispatch(showCart());
-    //     setCartList(data);
-    // };
-    // fetchCart();
-    // }, []);
     useEffect(() => {
-        dispatch(showCart());
+        const stored = localStorage.getItem("loginInfo");
+        if (stored) {
+            const { accessToken } = JSON.parse(stored);
+            const payload = parseJwt(accessToken);
+    
+            setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
+            dispatch(showCart(payload.id));
+        }
     }, [])
-
+    
     return (
         <div className='cart-container'>
             <h2 className='cart-header'>장바구니</h2>
@@ -37,14 +37,15 @@ export function Cart() {
                                     <img src={`/images/productImages/${item.product.imageUrl}`} alt='product img' />
                                     <div className='cart-item-details'>
                                         <p className='cart-item-title'>{item.product.productName}</p>
-                                        <p className='cart-item-title'>{parseInt(item.product.price).toLocaleString()}원</p>
+                                        <p className='cart-item-title cart-item-price'>{parseInt(item.product.price).toLocaleString()}원</p>
+                                        <p className='cart-item-title cart-item-dcprice'>{parseInt((item.product.price)*(100-item.product.dc)*0.01).toLocaleString()}원</p>
                                     </div>
                                     <div className='cart-quantity'>
-                                        <button type='button'>-</button>
+                                        <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1), userId)) : null}>-</button>
                                         <input type="text" value={item.qty} readOnly/>
-                                        <button type='button'>+</button>
+                                        <button type='button' onClick={() => dispatch(updateCart(item.cid, (item.qty+1), userId))}>+</button>
                                     </div>
-                                    <button className='cart-remove'>제거</button>
+                                    <button className='cart-remove' onClick={()=>dispatch(removeCart(item.cid, userId))}>제거</button>
                                 </div>
 
                             </div>

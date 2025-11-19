@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from 'sweetalert2';
 
 const PaymentButton = () => {
   // 결제 버튼 클릭 시 실행되는 함수
@@ -23,10 +24,20 @@ const PaymentButton = () => {
     // 결제 요청
     IMP.request_pay(data, (rsp) => {
       if (rsp.success) {
-        alert("✅ 결제 성공 (테스트 모드)");
+        Swal.fire({
+            icon: 'success',
+            title: '✅ 결제 성공',
+            text: '결제 성공 (테스트 모드)!!',
+            confirmButtonText: '확인',
+        });
         console.log("결제 성공 정보:", rsp);
       } else {
-        alert("❌ 결제 실패: " + rsp.error_msg);
+        Swal.fire({
+            icon: 'error',
+            title: '❌ 결제 실패',
+            text: "에러 내용 : " + rsp.error_msg,
+            confirmButtonText: '확인',
+        });
       }
     });
   };

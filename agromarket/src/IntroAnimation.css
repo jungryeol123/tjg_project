@@ -1,0 +1,21 @@
+/* IntroAnimation.css */
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #d5c7f5, #cfc0f3);
+  font-family: 'Pretendard', sans-serif;
+}
+
+.intro-character {
+  width: 220px;
+  height: 220px;
+}
+
+h1 {
+  font-size: 28px;
+  color: #ff7aa2;
+  margin-top: -10px;
+}

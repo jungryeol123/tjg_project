@@ -4,7 +4,7 @@ import "./ProductCard.scss";
 export default function ProductCard({ item }) {
   // 할인된 가격 계산
   const discountedPrice = item.dc
-    ? Math.floor(item.price * (1 - item.dc / 100))
+    ? Math.floor(item.price * ((100 - item.dc) / 100))
     : null;
 
   return (

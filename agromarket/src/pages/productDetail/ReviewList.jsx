@@ -3,7 +3,7 @@ import "./ReviewList.scss";
 import { axiosGet } from "shared/lib/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 
-export function ReviewList({ pid, id }) {
+export function ReviewList({ id }) {
   const reviewsAll = useSelector((state) => state.product.productReviewList);
   const [reviews, setReviews] = useState([]);
   const [reviewImages, setReviewImages] = useState([]);
@@ -12,7 +12,6 @@ export function ReviewList({ pid, id }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const isFirstRender = useRef(true);
-  console.log("ReviewsAll ", reviewsAll );
   // ✅ 부모요소 ref 추가
   const containerRef = useRef(null);
 
@@ -34,8 +33,6 @@ export function ReviewList({ pid, id }) {
     return reviewsAll.filter((review) => review.ppk ===  Number(id));
   }, [reviewsAll, id]);
 
-
-  console.log("productReviews ", productReviews );
   // ✅ 리뷰에서 이미지만 추출
   useEffect(() => {
     if (productReviews.length > 0) {
@@ -48,9 +45,6 @@ export function ReviewList({ pid, id }) {
       setReviewImages([]);
     }
   }, [productReviews]);
-
-
-
 
   useEffect(() => {
   if (isFirstRender.current) {
@@ -65,8 +59,6 @@ export function ReviewList({ pid, id }) {
     });
   }
 }, [currentPage]);
-
-
 
   const handleNext = () => {
     setCurrentPage((prev) =>

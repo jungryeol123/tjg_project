@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Item } from "./productDetail/Item.jsx";
@@ -10,9 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { addCart } from "features/cart/cartAPI.js";
 import { ReviewList } from "./productDetail/ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
+import Swal from 'sweetalert2';
 
 export function ProductDetail() {
-  const { pid, id } = useParams(); // 선택한 상품의 상품번호(primarykey)
+  const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
   const [isWished, setIsWished] = useState(false); // 찜 상태 관리
   const [count, setCount] = useState(1); // 수량 관리
   const isLogin = useSelector((state) => state.auth.isLogin);
@@ -20,16 +21,17 @@ export function ProductDetail() {
   // 현재 경로 확인용
   const location = useLocation();
 
-  // 장바구니 카운트
-  const cartCount = useSelector((state) => state.cart.cartCount);
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-
+  
+  // 레시피 토글
+  const [showRecipe, setShowRecipe] = useState(false);
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(id));
-  }, [dispatch, id]);
+  }, [id]);
 
   // 좋아요 버튼 클릭 이벤트
   const toggleWish = () => {
@@ -73,28 +75,44 @@ export function ProductDetail() {
   };
 
   // 장바구니 클릭
-  const handleAddCart = () => {
+  const handleAddCart = async () => {
     // 로그인 상태 확인
     if(isLogin){
       // 로그인시 상품의 id와 qty 연계
-      dispatch(addCart(id, count));
+      const isNew = await dispatch(addCart(id, count));
+
+      // 신규 상품 등록시
+      if(isNew){
+        // 장바구니 확인
+        Swal.fire({
+            icon: 'success',
+            title: '✅ 장바구니 등록',
+            text: product.productName + "가 장바구니에 등록이 완료되었습니다.",
+            confirmButtonText: '확인'
+          });
+      } else {
+        Swal.fire({
+            icon: 'success',
+            title: '✅ 장바구니 등록',
+            text: product.productName + "의 수량이 증가 되었습니다.",
+            confirmButtonText: '확인'
+          });
+      }
     } else {
-      // 로그인이 필요
-      alert("로그인이 필요합니다.");
+      // 로그인 필요시
+      Swal.fire({
+        icon: 'warning',
+        title: '⚠ 로그인 화면으로',
+        text: "로그인이 필요합니다.",
+        confirmButtonText: '확인'
+      })
       // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
-      navigate("/login", { state: { from: location.pathname } });
+      .then(() => { navigate("/login", { state: { from: location.pathname } }) });
     }
   };
 
   // 탭 화면 표시용
-  const tabLabels = [
-    "속성정보",
-    "상세정보",
-    "구매후기",
-    "상품문의",
-    "배송/반품/교환정보",
-  ];
-
+  const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
   // 탭 이벤트용 변수명
   const tabEventNames = ["item", "detail", "review", "qna", "return"];
   
@@ -104,7 +122,7 @@ export function ProductDetail() {
     detail: useRef(null),
     review: useRef(null),
     qna: useRef(null),
-    return: useRef(null),
+    return: useRef(null)
   };
 
   // 탭 클릭 이벤트
@@ -115,16 +133,8 @@ export function ProductDetail() {
     }
   };
 
-  // 화면 표시용 가격 표시 : 9,999원
-  const price = parseInt(product.price).toLocaleString() + "원";
-  // 화면 표시용 할인가 : 9,999원
-  const dc = parseInt(product.price / product.dc).toLocaleString() + "원";
-  // 화면 표시용 할인가 적용 가격 : 9,999원
-  const salesPrice =
-    (
-      parseInt(product.price) - parseInt(product.price / product.dc)
-    ).toLocaleString() + "원";
-    console.log("safsdafsdafsdafsdafdsfs : ", product);
+  // 화면 표시용 할인가 적용 가격 : 9,999
+  const salesPrice = Math.floor(product.price * ((100 - product.dc) / 100));
   return (
     <div className="product-container">
       <div className="product-detail">
@@ -146,19 +156,45 @@ export function ProductDetail() {
           </div>
 
           <div className="product-info">
-            <div>
-              {product.productName} ㅣ <Link to={`/brand/${product.brandName}`} className="product-brand">{product.brandName}</Link>
+            <div className="product-info-top">
+              <div className="product-info-left">
+                {product.productName} ㅣ {" "}
+                <Link to={`/brand/${encodeURIComponent(product.brandName)}`} className="product-brand">
+                  {product.brandName}
+                </Link>
+              </div>
+
+              {/* 레시피 글자 */}
+              <div
+                className="recipe-hover-area"
+                onMouseEnter={() => setShowRecipe(true)}
+                onMouseLeave={() => setShowRecipe(false)}
+              >
+                <span className="recipe-text">레시피</span>
+
+                {showRecipe && (
+                  <div className="recipe-box">
+                    <h4 className="recipe-title">레시피 보기</h4>
+                    <ol className="recipe-list">
+                      <li>팬에 식용유를 두르고 주꾸미를 볶습니다.</li>
+                      <li>양념장을 넣고 3분간 더 볶습니다.</li>
+                      <li>통깨를 뿌리고 완성!</li>
+                    </ol>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="product-title">
-              [{product.brandName}] {product.productName}
+              [{ product.brandName }] { product.productName }
             </div>
 
+            {/* 할인 정보 */}
             <div className="product-discount red">
-              {dc} 할인{" "}
-              <span className="product-price-original line">{price}</span>
+              { Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원" } 할인
+              <span className="product-price-original line">{ (product.price)?.toLocaleString() + "원" }</span>
             </div>
 
-            <div className="product-price-final">{salesPrice}</div>
+            <div className="product-price-final">{ salesPrice?.toLocaleString() + "원" }</div>
             <div className="product-period red">
               행사 기간 2025-09-10 ~ 2025-10-20
             </div>
@@ -181,31 +217,31 @@ export function ProductDetail() {
             </ul>
             <ul className="product-meta">
               <li>판매자</li>
-              <li>컬리</li>
+              <li>{ product.seller }</li>
             </ul>
             <ul className="product-meta">
               <li>원산지</li>
-              <li>{product.origin}</li>
+              <li>{ product.origin }</li>
             </ul>
             <ul className="product-meta">
               <li>판매단위</li>
-              <li>1팩</li>
+              <li>{ product.unit }</li>
             </ul>
             <ul className="product-meta">
               <li>중량/용량</li>
-              <li>1KG</li>
+              <li>{ product.weight }</li>
             </ul>
             <ul className="product-meta">
               <li>총 수량</li>
-              <li>{product.count}개</li>
+              <li>{ product.count }개</li>
             </ul>
             <ul className="product-meta">
               <li>알레르기정보</li>
-              <li>소고기,대두,밀</li>
+              <li>{ product.allergyInfo }</li>
             </ul>
             <ul className="product-meta">
               <li>안내사항</li>
-              <li>{product.description}</li>
+              <li>{ product.description }</li>
             </ul>
             <hr />
 
@@ -216,16 +252,16 @@ export function ProductDetail() {
                 </li>
                 <li>
                   <div className="product-qty-control">
-                    <button className="qty-btn" onClick={handleDecrease}>
+                    <button className="qty-btn" onClick={ handleDecrease }>
                       -
                     </button>
                     <input
                       className="qty-input"
                       type="text"
-                      value={count}
-                      onChange={handleChange}
+                      value={ count }
+                      onChange={ handleChange }
                     />
-                    <button className="qty-btn" onClick={handleIncrease}>
+                    <button className="qty-btn" onClick={ handleIncrease }>
                       +
                     </button>
                   </div>
@@ -235,12 +271,12 @@ export function ProductDetail() {
                 <li>
                   총금액 <span>(부가세포함)</span>
                 </li>
-                <li>30,000원</li>
+                <li>{ (salesPrice * count)?.toLocaleString() + "원" }</li>
               </ul>
             </div>
             <div className="product-buttons">
               <button
-                className={`btn-wish ${isWished ? "active" : ""}`}
+                className={ `btn-wish ${isWished ? "active" : ""}` }
                 onClick={toggleWish}
               >
                 {isWished ? (
@@ -249,7 +285,7 @@ export function ProductDetail() {
                   <AiOutlineHeart size={20} />
                 )}
               </button>
-              <button className="btn-cart" onClick={handleAddCart}>
+              <button className="btn-cart" onClick={ handleAddCart }>
                 장바구니
               </button>
             </div>
@@ -287,7 +323,7 @@ export function ProductDetail() {
           ref={sectionRefs.review}
           id="review"
         >
-          <ReviewList pid={pid} id={id} />
+          <ReviewList id={id} />
         </section>
 
         <section className="product-section" ref={sectionRefs.qna} id="qna">

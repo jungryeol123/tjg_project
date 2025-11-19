@@ -1,0 +1,227 @@
+.checkout-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #333;
+}
+
+.checkout-container .checkout-header {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #4949b1ff;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.checkout-container .section {
+  margin-bottom: 35px;
+}
+
+.checkout-container .section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-left: 5px solid #4949b1ff;
+  padding-left: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkout-container .section-title button {
+  background-color: transparent;
+  color: #4949b1ff;
+  border: 1px solid #4949b1ff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkout-container .section-title button:hover {
+  background-color: #4949b1ff;
+  color: #fff;
+}
+
+.checkout-container .info-box {
+  background-color: #f8f8ff;
+  border: 1px solid #e2e2f7;
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.checkout-container .info-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  row-gap: 12px;
+  column-gap: 20px;
+}
+
+.checkout-container .label {
+  font-weight: 600;
+  color: #444;
+}
+
+.checkout-container .value {
+  color: #555;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.checkout-container .value img {
+  border-radius: 4px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+}
+
+.checkout-container .phone-input input[type="text"] {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.checkout-container .phone-input .btn {
+  background-color: #4949b1ff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkout-container .phone-input .btn:hover {
+  background-color: #3a3a97;
+}
+
+/* 결제 테이블 */
+.checkout-container .payment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.checkout-container .payment-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.checkout-container .payment-table td:first-child {
+  font-weight: 600;
+  color: #444;
+}
+
+.checkout-container .payment-table .price {
+  text-align: right;
+  color: #333;
+}
+
+.checkout-container .payment-table .discount {
+  text-align: right;
+  color: #e63946;
+}
+
+.checkout-container .payment-table .coupon {
+  text-align: right;
+}
+
+.checkout-container .payment-table .info {
+  font-size: 0.8rem;
+  color: #888;
+  margin-left: 6px;
+}
+
+.checkout-container .payment-table .total {
+  font-weight: bold;
+  background-color: #f3f3ff;
+}
+
+.checkout-container .payment-table .total-price {
+  text-align: right;
+  font-size: 1.2rem;
+  color: #4949b1ff;
+}
+
+/* 결제수단 */
+.checkout-container .payment-method {
+  margin-bottom: 12px;
+}
+
+.checkout-container .radio-label {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.checkout-container .radio-label input {
+  margin-right: 8px;
+  accent-color: #4949b1ff;
+}
+
+.checkout-container .badge {
+  background-color: #4949b1ff;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 3px 6px;
+  border-radius: 5px;
+  margin-left: 8px;
+}
+
+.checkout-container .arrow {
+  font-size: 0.8rem;
+  margin-left: 4px;
+  color: #666;
+}
+
+/* 약관 */
+.checkout-container .terms {
+  border-top: 1px solid #eaeaea;
+  padding-top: 15px;
+  margin-top: 25px;
+  font-size: 0.9rem;
+}
+
+.checkout-container .terms input[type="checkbox"] {
+  accent-color: #4949b1ff;
+  margin-right: 6px;
+}
+
+.checkout-container .order-info-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+/* 결제 버튼 */
+.checkout-container .pay-button {
+  width: 100%;
+  background-color: #4949b1ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.checkout-container .pay-button:hover {
+  background-color: #3a3a97;
+  transform: translateY(-2px);
+}
+
+.checkout-container .pay-button:active {
+  transform: translateY(0);
+}
