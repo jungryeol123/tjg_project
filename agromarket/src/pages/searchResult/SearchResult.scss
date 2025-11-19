@@ -32,6 +32,13 @@
         color: #333;
       }
 
+      &.active {
+        a {
+          font-weight: bold;
+          color: #333;
+        }
+      }
+
       &:last-child {
         border-right: none; // 마지막 요소는 선 제거
       }

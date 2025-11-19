@@ -40,10 +40,10 @@ export function HeaderProductList() {
   const saleProducts = useMemo(() => {
     if (!productList || productList.length === 0) return [];
     if (id !== "sale") return [];
-    return productList.filter((p) => p.dc >= 10);
+    return productList.filter((p) => p.dc >= 10).sort((a, b) => b.dc - a.dc);
   }, [id, productList]);
 
-    // ✅ (4) 상품 편집 (update) : 등록 유저의 상품 표시
+  // ✅ (4) 상품 편집 (update) : 등록 유저의 상품 표시
   const updateProducts = useMemo(() => {
     if(localStorage.getItem("loginInfo")){
       // 토큰에서 user의 id취득
@@ -57,7 +57,16 @@ export function HeaderProductList() {
     }
   }, [id, productList]);
 
-  // ✅ (5) 베스트 상품 (best): 백엔드 API 호출
+  // ✅ (5) 마감 상품 (time) : 날짜 기준 오래된 순서
+  const timeProducts = useMemo(() => {
+    if (!productList || productList.length === 0) return [];
+    if (id !== "time") return [];
+    return [...productList]
+      .filter((p) => !!p.productDate)
+      .sort((a, b) => new Date(a.productDate) - new Date(b.productDate));
+  }, [id, productList]);
+
+  // ✅ (6) 베스트 상품 (best): 백엔드 API 호출
   useEffect(() => {
     if(id !== "best") return;
     const fetchBestProducts = async () => {
@@ -85,8 +94,10 @@ export function HeaderProductList() {
       setFilteredProducts(saleProducts);
     } else if (id === "update") {
       setFilteredProducts(updateProducts);
+    } else if (id === "time") {
+      setFilteredProducts(timeProducts);
     }
-  }, [id, productList, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts]);
+  }, [id, productList, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts, timeProducts]);
 
   return (
     <div className="new-products-page">
@@ -99,6 +110,8 @@ export function HeaderProductList() {
           ? "특가/혜택 상품"
           : id === "update"
           ? "상품 편집"
+          : id === "time"
+          ? "마감 임박 상품" 
           : "신상품"}
       </h1>
 
