@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // 전체 전역 변수
 const initialState = {
-    productList: [],
-    product: {},
-    productReviewList : [],
-    productQnAList : []
+  productList: [],
+  product: {},
+  productReviewList: [],
+  productQnAList: [],
+  recentSubCategory: null
 };
 
 // Slice reducers 설정( 함수 설정 )
@@ -14,24 +15,28 @@ const initialState = {
 export const productSlice = createSlice({
   name: 'product',
   initialState,
-  reducers : {
+  reducers: {
     setProductList(state, action) {
-      const {result} = action.payload;
-        state.productList = result;
+      const { result } = action.payload;
+      state.productList = result;
     },
     setProduct(state, action) {
-        const {product} = action.payload;
+      const { product } = action.payload;
       state.product = product;
     },
     setProductReviewList(state, action) {
-      const {result} = action.payload;
+      const { result } = action.payload;
       state.productReviewList = result;
     },
     setProductQnAList(state, action) {
-      const {result} = action.payload;
+      const { result } = action.payload;
       state.productQnAList = result;
+    },
+    setRecentSubCategory(state, action) {
+      state.recentSubCategory = action.payload;  // ← 요것도 추가
     }
-  }});
+  }
+});
 
-  export const {setProductList,setProduct, setProductReviewList, setProductQnAList} = productSlice.actions; 
-  export default productSlice.reducer;
+export const { setProductList, setProduct, setProductReviewList, setProductQnAList, setRecentSubCategory } = productSlice.actions;
+export default productSlice.reducer;

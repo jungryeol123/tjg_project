@@ -29,6 +29,8 @@ import { useSelector } from "react-redux";
 
     // console.log("id", typeof id);
    // ✅ 필터 조건 분기
+
+   console.log("productList", productList);
   const productFilterList = useMemo(() => {
     if (!productList || productList.length === 0) return [];
 

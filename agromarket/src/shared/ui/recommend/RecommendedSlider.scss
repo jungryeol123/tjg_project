@@ -1,0 +1,69 @@
+.recommend-section {
+  margin: 40px 0;
+}
+
+.recommend-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.recommend-slider {
+  overflow: hidden;
+  white-space: nowrap;   // ★ 트랙을 한 줄로 유지
+}
+
+.recommend-track {
+  display: inline-flex;   // ★ 핵심
+  gap: 20px;
+  white-space: nowrap;
+}
+
+.recommend-item {
+  flex: 0 0 auto;
+  width: 165px;        // 🔥 전체 너비를 ProductList 대비 20% 축소
+}
+
+.clone {
+  opacity: 0.9;
+}
+
+/* ---------------------------- */
+/* 🔥 추천 슬라이더 카드 전용 조절 */
+/* ---------------------------- */
+
+.recommend-item .product-card {
+  width: 100%;
+}
+
+/* 이미지 크기 줄임 (비율 유지) */
+.recommend-item .product-image {
+  height: 180px;       // 🔥 ProductList 대비 작게
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* 텍스트 줄이되 보기 좋게 유지 */
+.recommend-item .product-name {
+    display: flex;
+    flex-direction: column;
+  font-size: 0.8rem;  // 🔥 ProductList보다 약간만 작게
+}
+
+.recommend-item .discounted-price {
+  font-size: 0.9rem;
+}
+
+.recommend-item .original-price {
+  font-size: 0.75rem;
+}
+
+.recommend-item .discount {
+  font-size: 0.8rem;
+}
+
+/* 가격 영역 간격 축소 */
+.recommend-item .price-wrap {
+  margin-top: 4px;
+}

@@ -11,10 +11,13 @@ import { ReviewList } from "./productDetail/ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
 import "../styles/components/ProductDetail.css";
 import Swal from 'sweetalert2';
+import { parseJwt } from "features/auth/parseJwt.js";
+import { api } from "features/auth/axios.js";
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
   const [isWished, setIsWished] = useState(false); // 찜 상태 관리
+  const [sentViewLog, setSentViewLog] = useState(false);
   const [count, setCount] = useState(1); // 수량 관리
   const isLogin = useSelector((state) => state.auth.isLogin);
   const navigate = useNavigate();
@@ -24,10 +27,33 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-  
+  console.log("product",product);
+
+useEffect(() => {
+  const stored = localStorage.getItem("loginInfo");
+  if (!stored) return;
+
+  // product가 로딩되면 실행해야하지만, 한 번만 해야 함
+  if (!product || !product.categorySubId) return;
+
+  if (sentViewLog) return; // ⛔ 두 번째 실행 차단
+
+  setSentViewLog(true); // 🔥 한 번만 실행하도록 플래그 ON
+
+  const { accessToken } = JSON.parse(stored);
+  const payload = parseJwt(accessToken);
+
+  api.post("/view/log", {
+    upk: payload.id,
+    ppk: Number(id),
+    categorySubId: product.categorySubId
+  });
+
+}, [id, product]);
+
   // 레시피 토글
   const [showRecipe, setShowRecipe] = useState(false);
-  
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     dispatch(setProductAPI(id));
@@ -77,26 +103,26 @@ export function ProductDetail() {
   // 장바구니 클릭
   const handleAddCart = async () => {
     // 로그인 상태 확인
-    if(isLogin){
+    if (isLogin) {
       // 로그인시 상품의 id와 qty 연계
       const isNew = await dispatch(addCart(id, count));
 
       // 신규 상품 등록시
-      if(isNew){
+      if (isNew) {
         // 장바구니 확인
         Swal.fire({
-            icon: 'success',
-            title: '✅ 장바구니 등록',
-            text: product.productName + "가 장바구니에 등록이 완료되었습니다.",
-            confirmButtonText: '확인'
-          });
+          icon: 'success',
+          title: '✅ 장바구니 등록',
+          text: product.productName + "가 장바구니에 등록이 완료되었습니다.",
+          confirmButtonText: '확인'
+        });
       } else {
         Swal.fire({
-            icon: 'success',
-            title: '✅ 장바구니 등록',
-            text: product.productName + "의 수량이 증가 되었습니다.",
-            confirmButtonText: '확인'
-          });
+          icon: 'success',
+          title: '✅ 장바구니 등록',
+          text: product.productName + "의 수량이 증가 되었습니다.",
+          confirmButtonText: '확인'
+        });
       }
     } else {
       // 로그인 필요시
@@ -106,8 +132,8 @@ export function ProductDetail() {
         text: "로그인이 필요합니다.",
         confirmButtonText: '확인'
       })
-      // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
-      .then(() => { navigate("/login", { state: { from: location.pathname } }) });
+        // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
+        .then(() => { navigate("/login", { state: { from: location.pathname } }) });
     }
   };
 
@@ -115,7 +141,7 @@ export function ProductDetail() {
   const tabLabels = ["속성정보", "상세정보", "구매후기", "상품문의", "배송/반품/교환정보"];
   // 탭 이벤트용 변수명
   const tabEventNames = ["item", "detail", "review", "qna", "return"];
-  
+
   // 탭 클릭시 위치 설정
   const sectionRefs = {
     item: useRef(null),
@@ -141,9 +167,8 @@ export function ProductDetail() {
         <div className="product-detail-main">
           <div className="product-image">
             <div
-              className={`badge-container ${
-                product.hotDeal && product.memberSpecial ? "multi" : ""
-              }`}
+              className={`badge-container ${product.hotDeal && product.memberSpecial ? "multi" : ""
+                }`}
             >
               {product.hotDeal && <span className="badge hot">원딜핫딜</span>}
               {product.memberSpecial && <span className="badge member">멤버특가</span>}
@@ -185,16 +210,16 @@ export function ProductDetail() {
               </div>
             </div>
             <div className="product-title">
-              [{ product.brandName }] { product.productName }
+              [{product.brandName}] {product.productName}
             </div>
 
             {/* 할인 정보 */}
             <div className="product-discount red">
-              { Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원" } 할인
-              <span className="product-price-original line">{ (product.price)?.toLocaleString() + "원" }</span>
+              {Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원"} 할인
+              <span className="product-price-original line">{(product.price)?.toLocaleString() + "원"}</span>
             </div>
 
-            <div className="product-price-final">{ salesPrice?.toLocaleString() + "원" }</div>
+            <div className="product-price-final">{salesPrice?.toLocaleString() + "원"}</div>
             <div className="product-period red">
               행사 기간 2025-09-10 ~ 2025-10-20
             </div>
@@ -206,7 +231,7 @@ export function ProductDetail() {
             <ul className="product-meta">
               <li>배송</li>
               <li>
-                {product.delName}<br/>
+                {product.delName}<br />
                 {product.delDescription && product.delDescription.split("\n").map((line, i) => (
                   <React.Fragment key={i}>
                     {line}
@@ -217,31 +242,31 @@ export function ProductDetail() {
             </ul>
             <ul className="product-meta">
               <li>판매자</li>
-              <li>{ product.seller }</li>
+              <li>{product.seller}</li>
             </ul>
             <ul className="product-meta">
               <li>원산지</li>
-              <li>{ product.origin }</li>
+              <li>{product.origin}</li>
             </ul>
             <ul className="product-meta">
               <li>판매단위</li>
-              <li>{ product.unit }</li>
+              <li>{product.unit}</li>
             </ul>
             <ul className="product-meta">
               <li>중량/용량</li>
-              <li>{ product.weight }</li>
+              <li>{product.weight}</li>
             </ul>
             <ul className="product-meta">
               <li>총 수량</li>
-              <li>{ product.count }개</li>
+              <li>{product.count}개</li>
             </ul>
             <ul className="product-meta">
               <li>알레르기정보</li>
-              <li>{ product.allergyInfo }</li>
+              <li>{product.allergyInfo}</li>
             </ul>
             <ul className="product-meta">
               <li>안내사항</li>
-              <li>{ product.description }</li>
+              <li>{product.description}</li>
             </ul>
             <hr />
 
@@ -252,16 +277,16 @@ export function ProductDetail() {
                 </li>
                 <li>
                   <div className="product-qty-control">
-                    <button className="qty-btn" onClick={ handleDecrease }>
+                    <button className="qty-btn" onClick={handleDecrease}>
                       -
                     </button>
                     <input
                       className="qty-input"
                       type="text"
-                      value={ count }
-                      onChange={ handleChange }
+                      value={count}
+                      onChange={handleChange}
                     />
-                    <button className="qty-btn" onClick={ handleIncrease }>
+                    <button className="qty-btn" onClick={handleIncrease}>
                       +
                     </button>
                   </div>
@@ -271,12 +296,12 @@ export function ProductDetail() {
                 <li>
                   총금액 <span>(부가세포함)</span>
                 </li>
-                <li>{ (salesPrice * count)?.toLocaleString() + "원" }</li>
+                <li>{(salesPrice * count)?.toLocaleString() + "원"}</li>
               </ul>
             </div>
             <div className="product-buttons">
               <button
-                className={ `btn-wish ${isWished ? "active" : ""}` }
+                className={`btn-wish ${isWished ? "active" : ""}`}
                 onClick={toggleWish}
               >
                 {isWished ? (
@@ -285,7 +310,7 @@ export function ProductDetail() {
                   <AiOutlineHeart size={20} />
                 )}
               </button>
-              <button className="btn-cart" onClick={ handleAddCart }>
+              <button className="btn-cart" onClick={handleAddCart}>
                 장바구니
               </button>
             </div>
@@ -327,7 +352,7 @@ export function ProductDetail() {
         </section>
 
         <section className="product-section" ref={sectionRefs.qna} id="qna">
-          <QnA id={id}/>
+          <QnA id={id} />
         </section>
 
         <section

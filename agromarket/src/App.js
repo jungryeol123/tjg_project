@@ -59,12 +59,12 @@ function App() {
   }, []);
 
 
-//   useEffect(() => {
-//   // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
-//   axios.get("/csrfToken", { withCredentials: true })
-//     .then(() => console.log("✅ CSRF Token issued"))
-//     .catch((err) => console.error("❌ CSRF Token init failed:", err));
-// }, []);
+  useEffect(() => {
+  // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
+  axios.get("/csrf", { withCredentials: true })
+    .then(() => console.log("✅ CSRF Token issued"))
+    .catch((err) => console.error("❌ CSRF Token init failed:", err));
+}, []);
 
   // // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
   // if (!isIntroFinished) {

@@ -51,7 +51,7 @@ export function Login() {
       errors: errors,
     };
     // ✅ 1. 로그인 전에 CSRF 토큰 먼저 요청
-    await axios.get("/csrf", { withCredentials: true });
+    // await axios.get("/csrf", { withCredentials: true });
     const succ = await dispatch(getLogin(formData, param)); //비동기식 처리 후 isLogin 변경
 
     if (succ) {
