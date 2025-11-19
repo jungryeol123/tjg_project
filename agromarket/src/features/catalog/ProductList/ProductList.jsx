@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo, memo } from "react";
-import { axiosGet } from "shared/lib/axiosInstance";
+import React, { useRef, useMemo, memo } from "react";
 import ProductCard from "shared/ui/productList/ProductCard";
 import {
   MdOutlineArrowForwardIos,
@@ -7,12 +6,10 @@ import {
 } from "react-icons/md";
 import "./ProductList.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setProductListAPI } from "features/product/productAPI";
+import { useSelector } from "react-redux";
 
  function ProductList({ title = "오늘의 특가", limit = 20, keyword }) {
   const productList = useSelector((state) => state.product.productList );
-  const dispatch = useDispatch();
   // const [items, setItems] = useState([]);
   const sliderRef = useRef(null);
   const isDragging = useRef(false);

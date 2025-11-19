@@ -1,4 +1,4 @@
-import { axiosGet, axiosGetParams, axiosPostFile } from "shared/lib/axiosInstance";
+import { axiosGet, axiosPostFile } from "shared/lib/axiosInstance";
 import {
   setProductList,
   setProduct,
@@ -16,6 +16,7 @@ export const setProductListAPI = (keyword) => async (dispatch) => {
   }
 };
 
+// 선택 상품 정보 취득
 export const setProductAPI = (id) => async (dispatch) => {
   const url = "/product/productDetail";
   const params = { "id" : id };
@@ -135,11 +136,3 @@ export const delProductData = (productId) => async(dispatch) => {
     return result;
   }
 }
-
-// // 상품 디테일 정보 취득
-// export const getProductDetail = (pid) => async (dispatch) => {
-//   const url = "/product/detail";
-//   const param = { pid: pid };
-//   // const jsonData = await axiosGet(url, param); // detail 연동
-//   // dispatch(setProduct());
-// };

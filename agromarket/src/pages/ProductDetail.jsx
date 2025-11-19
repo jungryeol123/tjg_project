@@ -5,11 +5,11 @@ import { Item } from "./productDetail/Item.jsx";
 import { Detail } from "./productDetail/Detail.jsx";
 import { QnA } from "./productDetail/QnA.jsx";
 import { Return } from "./productDetail/Return.jsx";
-import "../styles/components/ProductDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addCart } from "features/cart/cartAPI.js";
 import { ReviewList } from "./productDetail/ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
+import "../styles/components/ProductDetail.css";
 import Swal from 'sweetalert2';
 
 export function ProductDetail() {
