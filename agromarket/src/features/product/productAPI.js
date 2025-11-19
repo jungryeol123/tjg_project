@@ -3,7 +3,8 @@ import {
   setProductList,
   setProduct,
   setProductReviewList,
-  setProductQnAList
+  setProductQnAList,
+  setRecentSubCategory
 } from "./productSlice";
 import { parseJwt } from "features/auth/parseJwt";
 import { api } from "features/auth/axios";
@@ -128,10 +129,12 @@ export const delProductData = async(productId) => {
   }
 }
 
-// // 상품 디테일 정보 취득
-// export const getProductDetail = (pid) => async (dispatch) => {
-//   const url = "/product/detail";
-//   const param = { pid: pid };
-//   // const jsonData = await axiosGet(url, param); // detail 연동
-//   // dispatch(setProduct());
-// };
+export const fetchRecentSubCategory = (upk) => async (dispatch) => {
+  try {
+    const res = await api.get(`/view/recent-subcat/${upk}`);
+    console.log("res", res);
+    dispatch(setRecentSubCategory(res.data.recentSubCategory));
+  } catch (err) {
+    console.error("추천 subCategory 가져오기 실패:", err);
+  }
+};
