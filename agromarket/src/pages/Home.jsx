@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useAutoSlider } from "shared/hooks/useAutoSlider";
 import { getData } from "shared/lib/axiosInstance";
 import { SlideContainer } from "shared/ui/slider/SlideContainer";
+import Popup from "./popup/Popup.jsx";
 
 
 export default function Home() {
@@ -21,8 +22,24 @@ const dispatch = useDispatch();
       dispatch(setProductQnAListAPI());
       fetchData();
     }, [dispatch]);
+
+     //홈화면 팝업 창 띄우기
+    const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const isShown = localStorage.getItem("coupon_popup_shown");
+    if (!isShown) {
+      setShowPopup(true);
+    }
+  }, []);
+
+  const handleClosePopup = () => {
+    localStorage.setItem("coupon_popup_shown", "true"); 
+    setShowPopup(false);
+  };
   return (
     <>
+    {showPopup && <Popup onClose={handleClosePopup} />}
     <SlideContainer images={images} index={index} setIndex={setIndex} />
     <ProductList title="마감 임박! 원더특가 ~66%" keyword="time" limit={12}/>
     <ProductList title="실시간 인기 랭킹" keyword="dc" limit={12}/> 
