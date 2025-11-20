@@ -73,6 +73,8 @@ export default function SearchResult() {
             
       setFilterList(filtered);
     }
+
+    setActiveFilter("");
   },[pathName]);
 
   // 필터 클릭시 이벤트

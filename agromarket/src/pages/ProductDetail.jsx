@@ -28,7 +28,6 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-  console.log("product",product);
 
   // product 최신화
   useEffect(() => {
@@ -367,7 +366,7 @@ export function ProductDetail() {
         </section>
 
         <section className="product-section" ref={sectionRefs.qna} id="qna">
-          <QnA id={id} />
+          <QnA id={ id } product={ product } />
         </section>
 
         <section

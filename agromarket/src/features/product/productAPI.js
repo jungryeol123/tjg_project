@@ -1,4 +1,4 @@
-import { axiosGet, axiosPostFile } from "shared/lib/axiosInstance";
+import { axiosGet, axiosPost, axiosPostFile } from "shared/lib/axiosInstance";
 import {
   setProductList,
   setProduct,
@@ -147,3 +147,27 @@ export const fetchRecentSubCategory = (upk) => async (dispatch) => {
     console.error("추천 subCategory 가져오기 실패:", err);
   }
 };
+
+// 상품 Q&A 등록
+export const addProductQnA = (qnaData) => async(dispatch) => {
+  // 토큰 확인
+  const stored = localStorage.getItem("loginInfo");
+
+  if (stored) {
+    // 토큰에서 user의 id취득
+    const { accessToken } = JSON.parse(stored);
+    const payload = parseJwt(accessToken);
+
+    const url = "/product/addQnA";
+    const params = {...qnaData, "upk" : payload.id };
+
+    const result = await axiosPost(url, params);
+
+    if (result) {
+      await dispatch(setProductQnAListAPI());
+      return true;
+    } else {
+      return false;
+    }
+  }
+} 
