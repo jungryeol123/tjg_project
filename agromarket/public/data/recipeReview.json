@@ -1,0 +1,72 @@
+[
+  {
+    "recipeId": 1,
+    "userId": 6,
+    "rating": 5,
+    "content": "고기가 진짜 부드럽고 양념이 딱 맞아요. 밥 두 공기 뚝딱했습니다!",
+    "createdAt": "2025-01-05T14:20:11"
+  },
+  {
+    "recipeId": 1,
+    "userId": 6,
+    "rating": 4.5,
+    "content": "맛있는데 저는 고춧가루를 좀 더 넣었어요. 칼칼하니 끝내줍니다.",
+    "createdAt": "2025-01-12T09:55:42"
+  },
+  {
+    "recipeId": 1,
+    "userId": 6,
+    "rating": 4.8,
+    "content": "레시피대로 하니까 실패할 수가 없네요! 신김치만 맛있으면 끝!",
+    "createdAt": "2025-02-01T18:10:33"
+  },
+  {
+    "recipeId": 2,
+    "userId": 6,
+    "rating": 4.6,
+    "content": "담백하고 깊은 맛이 나요. 속 편한 한 끼로 최고입니다.",
+    "createdAt": "2025-01-20T12:41:02"
+  },
+  {
+    "recipeId": 2,
+    "userId": 6,
+    "rating": 4.9,
+    "content": "엄마가 해준 것 같은 맛… 미역국은 이 레시피가 국룰입니다.",
+    "createdAt": "2025-02-16T10:22:14"
+  },
+  {
+    "recipeId": 3,
+    "userId": 6,
+    "rating": 5,
+    "content": "빠르게 만들기 좋아요. 토마토랑 계란 조합은 진짜 미쳤습니다.",
+    "createdAt": "2025-01-28T21:10:44"
+  },
+  {
+    "recipeId": 3,
+    "userId": 6,
+    "rating": 4.7,
+    "content": "저는 설탕 조금 덜 넣었는데 더 담백해서 좋더라구요!",
+    "createdAt": "2025-02-10T13:55:17"
+  },
+  {
+    "recipeId": 4,
+    "userId": 6,
+    "rating": 4.9,
+    "content": "진짜 분식집 맛! 떡도 쫄깃하고 양념도 딱 맞아서 너무 좋았어요.",
+    "createdAt": "2025-01-18T17:25:30"
+  },
+  {
+    "recipeId": 4,
+    "userId": 6,
+    "rating": 4.5,
+    "content": "치즈 추가하니까 고소함이 배가됩니다. 강력추천!",
+    "createdAt": "2025-02-05T08:15:22"
+  },
+  {
+    "recipeId": 5,
+    "userId": 6,
+    "rating": 4.8,
+    "content": "파전이 겉바속촉으로 완성됩니다. 바삭함 미쳤어요.",
+    "createdAt": "2025-01-25T15:12:08"
+  }
+]
