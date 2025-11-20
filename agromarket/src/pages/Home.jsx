@@ -8,6 +8,7 @@ import { getData } from "shared/lib/axiosInstance";
 import { SlideContainer } from "shared/ui/slider/SlideContainer";
 import { parseJwt } from "features/auth/parseJwt";
 import RecommendedSlider from "shared/ui/recommend/RecommendedSlider";
+import Popup from "shared/ui/popup/Popup";
 
 
 export default function Home() {
@@ -35,8 +36,24 @@ export default function Home() {
 
     dispatch(fetchRecentSubCategory(payload.id));
   }, []);
+
+  //홈화면 팝업 창 띄우기
+    const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const isShown = localStorage.getItem("coupon_popup_shown");
+    if (!isShown) {
+      setShowPopup(true);
+    }
+  }, []);
+
+  const handleClosePopup = () => {
+    localStorage.setItem("coupon_popup_shown", "true"); 
+    setShowPopup(false);
+  };
   return (
     <>
+      {showPopup && <Popup onClose={handleClosePopup} />}
       <SlideContainer images={images} index={index} setIndex={setIndex} />
       <RecommendedSlider title="좋아할만한 브랜드 상품" limit={15} />
       <ProductList title="마감 임박! 원더특가 ~66%" keyword="time" limit={12} />

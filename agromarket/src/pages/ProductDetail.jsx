@@ -17,6 +17,7 @@ import { api } from "features/auth/axios.js";
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
   const [isWished, setIsWished] = useState(false); // 찜 상태 관리
+  const [isFirstEffectComplete, setIsFirstEffectComplete] = useState(false);
   const [sentViewLog, setSentViewLog] = useState(false);
   const [count, setCount] = useState(1); // 수량 관리
   const isLogin = useSelector((state) => state.auth.isLogin);
@@ -27,37 +28,50 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-  console.log("product",product);
 
-useEffect(() => {
-  const stored = localStorage.getItem("loginInfo");
-  if (!stored) return;
+  // product 최신화
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(setProductAPI(id));
+      // 두번째 useEffect 활성화플래그
+      setIsFirstEffectComplete(true);
+    };
 
-  // product가 로딩되면 실행해야하지만, 한 번만 해야 함
-  if (!product || !product.categorySubId) return;
+    fetchData();
+  }, [id]);
 
-  if (sentViewLog) return; // ⛔ 두 번째 실행 차단
+  useEffect(() => {
+    if (!isFirstEffectComplete) return;
 
-  setSentViewLog(true); // 🔥 한 번만 실행하도록 플래그 ON
+    const handleViewLog = async () => {
+      const stored = localStorage.getItem("loginInfo");
 
-  const { accessToken } = JSON.parse(stored);
-  const payload = parseJwt(accessToken);
+      if (!stored) return;
 
-  api.post("/view/log", {
-    upk: payload.id,
-    ppk: Number(id),
-    categorySubId: product.categorySubId
-  });
+      // product가 로딩되면 실행해야하지만, 한 번만 해야 함
+      if (!product || !product.categorySubId) return;
 
-}, [id, product]);
+      if (sentViewLog) return; // ⛔ 두 번째 실행 차단
+      
+      setSentViewLog(true); // 🔥 한 번만 실행하도록 플래그 ON
+
+      window.scrollTo({ top: 0, behavior: "auto" });
+
+      const { accessToken } = JSON.parse(stored);
+      const payload = parseJwt(accessToken);
+
+      api.post("/view/log", {
+        upk: payload.id,
+        ppk: Number(id),
+        categorySubId: product.categorySubId
+      });
+    }
+    handleViewLog();
+
+  }, [id, product, isFirstEffectComplete, sentViewLog]);
 
   // 레시피 토글
   const [showRecipe, setShowRecipe] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-    dispatch(setProductAPI(id));
-  }, [id]);
 
   // 좋아요 버튼 클릭 이벤트
   const toggleWish = () => {
@@ -352,7 +366,7 @@ useEffect(() => {
         </section>
 
         <section className="product-section" ref={sectionRefs.qna} id="qna">
-          <QnA id={id} />
+          <QnA id={ id } product={ product } />
         </section>
 
         <section

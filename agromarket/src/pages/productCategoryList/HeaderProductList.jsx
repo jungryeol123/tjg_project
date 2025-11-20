@@ -1,12 +1,14 @@
 // src/pages/NewProducts.jsx
 import React, { useMemo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./HeaderProductList.scss";
 import ProductCard from "shared/ui/productList/ProductCard";
 import { useParams } from "react-router-dom";
 import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
 import { Link } from "react-router-dom";
 import { parseJwt } from "features/auth/parseJwt";
+import { FilterItem } from "shared/constants/FilterItem";
+import "./HeaderProductList.scss";
+import "../../styles/components/filter.scss";
 
 export function HeaderProductList() {
   const { id } = useParams();
@@ -18,6 +20,7 @@ export function HeaderProductList() {
   // 상품 리스트 최신화
   useEffect(() => {
     dispatch(setProductListAPI());
+    setActiveFilter("");
   }, []);
 
   // ✅ (1) 신상품: 날짜 기준 최신순 정렬
@@ -99,6 +102,44 @@ export function HeaderProductList() {
     }
   }, [id, productList, sortedNewProducts, hotOrSpecialProducts, saleProducts, updateProducts, timeProducts]);
 
+  // 선택된 필터라벨
+  const [activeFilter, setActiveFilter] = useState("");
+
+  // 필터 분류
+  const filterLabel = [
+    { label: "최신순", value: "new" },
+    { label: "높은가격순", value: "priceHigh" },
+    { label: "낮은가격순", value: "priceLow" }
+  ];
+
+  // 필터 클릭시 이벤트
+  const handleFilter = (type) => {
+    let filtered = [];
+    // 클릭한 필터 활성화
+    setActiveFilter(type);
+
+    // 최신순 클릭
+    if(type === "new") {
+      filtered = filteredProducts.toSorted(
+        (a, b) => new Date(b.productDate) - new Date(a.productDate)
+      );
+    }
+    // 가격순 클릭
+    else if(type === "priceHigh") {
+      filtered = filteredProducts.toSorted(
+        (a, b) => b.price - a.price
+      );
+    }
+    // 구매순 클릭
+    else if(type === "priceLow") {
+      filtered = filteredProducts.toSorted(
+        (a, b) => a.price - b.price
+      );
+    }
+    // 필터 결과 설정
+    setFilteredProducts(filtered);
+  }
+
   return (
     <div className="new-products-page">
       <h1 className="page-title">
@@ -122,7 +163,18 @@ export function HeaderProductList() {
         <button className={id === "sale" ? "active" : ""}>세일상품</button>
         <button className={id === "deal" ? "active" : ""}>특가/혜택</button>
       </div> */}
-
+      {/* 필터 */}
+      <ul className="product-filter">
+        {filterLabel.map((item) => (
+          <FilterItem
+            key={item.value}
+            label={item.label}
+            value={item.value}
+            activeFilter={activeFilter}
+            onClick={handleFilter}
+          />
+        ))}
+      </ul>
       <div className="product-list-container">
         {loading ? (
           <p className="loading">로딩 중...</p>

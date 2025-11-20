@@ -1,12 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
+import Swal from 'sweetalert2';
+import { useSelector, useDispatch } from "react-redux";
+import AddQnA from "shared/ui/QnA/AddQnA";
+import { addProductQnA } from "features/product/productAPI";
 import "./QnA.scss";
-import { useSelector } from "react-redux";
 
-export function QnA({id}) {
+export function QnA({id, product}) {
   const qnaAll = useSelector((state) => state.product.productQnAList);
   // const [qnaList, setQnaList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   fetch("/data/productQnA.json")
@@ -19,7 +23,7 @@ export function QnA({id}) {
   const qnaList = useMemo(() => {
     if (!qnaAll || qnaAll.length === 0) return [];
     // 🔥 숫자/문자열 타입이 다를 수 있으니 Number()로 변환
-    return qnaAll.filter((item) => Number(item.ppk) === Number(id));
+    return qnaAll.filter((item) => Number(item.ppk) === Number(id)).sort((a,b)=> new Date(b.date) - new Date(a.date));
   }, [qnaAll, id]);
 
   const handleNext = () => {
@@ -38,9 +42,44 @@ export function QnA({id}) {
     currentPage * itemsPerPage
   );
 
+  const [isClickQnA, setIsClickQnA] = useState(false);
+
+  const handleQnA = () => {
+    setIsClickQnA(true)
+  }
+
+  const handleCloseQnA = () => {
+    setIsClickQnA(false);
+  };
+
+  const handleAddQnA = async (qnaData) => {
+    const result = await dispatch(addProductQnA(qnaData));
+
+    if(result){
+      Swal.fire({
+          icon: 'success',
+          title: '✅ 문의 등록 성공!',
+          text: '문의가 등록되었습니다.',
+          confirmButtonText: '확인',
+        }).then(() => {
+          setIsClickQnA(false);
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '❌ 문의 등록 실패!',
+        text: '다시 시도해주세요.',
+      });
+    }
+  };
+
   return (
     <div className="qna-section">
-      <h2>상품 문의</h2>
+      <div className="title-area">
+        <h2>상품 문의</h2>
+        <button onClick={ handleQnA }>문의하기</button>
+        { isClickQnA ? <AddQnA onAddQnA = { handleAddQnA } onClose={ handleCloseQnA } product= { product }/> : ""}
+      </div>
       <p className="qna-desc">
         상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 이동될 수 있습니다. <br />
         배송관련, 주문(취소/교환/환불) 관련 문의 및 요청사항은{" "}
@@ -60,12 +99,11 @@ export function QnA({id}) {
           {currentItems.map((item, index) => (
             <tr key={index}>
               <td>
-                {item.title}{" "}
-                {item.isPrivate && <span className="lock-icon">🔒</span>}
+                {item.is_private ? <div>비밀글 입니다. <span className="lock-icon">🔒</span></div> : item.title}
               </td>
               <td>{item.writer}</td>
-              <td>{item.date}</td>
-              <td className="status">{item.status}</td>
+              <td>{new Date(item.date).toLocaleDateString("ko-KR")}</td>
+              <td className= {`status ${item.status === "답변대기" ? "wait" : "" }`}>{item.status}</td>
             </tr>
           ))}
         </tbody>
