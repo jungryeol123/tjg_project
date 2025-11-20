@@ -1,0 +1,422 @@
+.recipe-detail-container {
+  width: 900px;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+
+  @media (max-width: 1024px) {
+    width: 90%;
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔥 메인 이미지                                      */
+/* -------------------------------------------------- */
+.detail-img {
+  width: 55%;
+  display: block;
+  margin: 0 auto 30px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+
+/* 제목 */
+.detail-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* 요약 */
+.detail-summary {
+  font-size: 17px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* -------------------------------------------------- */
+/* 🔥 평점 / 시간 / 난이도 박스                       */
+/* -------------------------------------------------- */
+.detail-info-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgb(228, 228, 255);
+  border: 1px solid #eee;
+  padding: 18px 22px;
+  border-radius: 12px;
+  margin: 20px 0 35px;
+  gap: 25px;
+
+  .info-item {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4a3b63;
+    white-space: nowrap;
+  }
+
+  .info-divider {
+    width: 1px;
+    height: 18px;
+    background: #ccc;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+    .info-divider {
+      display: none;
+    }
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔥 섹션 제목                                        */
+/* -------------------------------------------------- */
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 40px 0 18px;
+  color: #333;
+}
+
+/* -------------------------------------------------- */
+/* 🔥 재료                                             */
+/* -------------------------------------------------- */
+.ingredient-list {
+  padding-left: 5px;
+  margin-bottom: 35px;
+
+  li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #444;
+    padding-left: 20px;
+    line-height: 1.55;
+    position: relative;
+
+    &::before {
+      content: "•";
+      position: absolute;
+      left: 0px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5f0080;
+      font-size: 17px;
+      font-weight: bold;
+    }
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔥 조리 단계                                        */
+/* -------------------------------------------------- */
+.step-list {
+  counter-reset: step-counter;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 22px;
+
+    &::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgb(152, 152, 248);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 16px;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(95, 0, 128, 0.25);
+      flex-shrink: 0;
+    }
+  }
+}
+
+.step-text {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #333;
+}
+
+/* -------------------------------------------------- */
+/* 🔥 팁 박스                                          */
+/* -------------------------------------------------- */
+.tip-box {
+  background: #faf6ff;
+  border-left: 5px solid #5f0080;
+  padding: 18px 22px;
+  border-radius: 10px;
+  line-height: 1.7;
+  font-size: 16px;
+  margin: 40px 0;
+  color: #4a3b63;
+  box-shadow: 0 2px 10px rgba(95, 0, 128, 0.1);
+}
+
+/* -------------------------------------------------- */
+/* 🔥 필요한 상품                                      */
+/* -------------------------------------------------- */
+.related-product-list {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  margin: 20px 0 40px;
+  padding-bottom: 8px;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+  }
+}
+
+.related-product-card {
+  width: 120px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .product-name {
+    font-size: 13px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    color: #333;
+
+    height: 32px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .product-price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔥 유튜브 영상                                      */
+/* -------------------------------------------------- */
+.youtube-box {
+  margin-top: 50px;
+
+  iframe {
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔥 후기 작성 박스                                   */
+/* -------------------------------------------------- */
+.review-write-box {
+  border: 1px solid #e5e5e5;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 35px 0;
+  background: #fafafa;
+
+  .review-write-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .write-stars {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+
+    .star {
+      font-size: 30px;
+      cursor: pointer;
+      color: #ccc;
+      transition: 0.2s;
+
+      &.active {
+        color: #ffcc00;
+      }
+
+      &:hover {
+        color: #ffdd55;
+      }
+    }
+  }
+
+  .write-textarea {
+    width: 100%;
+    height: 90px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    resize: none;
+    font-size: 15px;
+    margin-bottom: 12px;
+
+    &:focus {
+      border-color: #888;
+    }
+  }
+
+  .write-submit-btn {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 10px;
+    background: #5f0080;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background: #7a12a8;
+    }
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔥 후기 리스트                                       */
+/* -------------------------------------------------- */
+.review-list {
+  margin-top: 25px;
+
+  .review-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-weight: 600;
+
+      .review-user {
+        color: #333;
+      }
+      .review-rating {
+        color: #ffb300;
+      }
+    }
+
+    .review-content {
+      margin-bottom: 6px;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .review-date {
+      font-size: 13px;
+      color: #777;
+    }
+  }
+}
+
+/* -------------------------------------------------- */
+/* 🔥 후기 페이지네이션                                */
+/* -------------------------------------------------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0 50px;
+  gap: 12px;
+
+  .page-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+      background: #f7f7ff;
+      border-color: #bbb;
+    }
+
+    &:disabled {
+      background: #f3f3f3;
+      color: #aaa;
+      cursor: default;
+      border-color: #eee;
+    }
+  }
+
+  .page-info {
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
+  }
+}
+
+
+/* 로그인 필요 안내 박스 */
+.review-login-needed {
+  margin-top: 20px;
+  padding: 22px;
+  text-align: center;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  p {
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #555;
+  }
+
+  .goto-login-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #5f0080;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #4a0066;
+    }
+  }
+
+  &:hover {
+    background: #f3f3f3;
+  }
+}

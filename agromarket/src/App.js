@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Layout } from 'layouts/Layout';
 import Home from 'pages/Home';
 import { Delivery } from 'pages/Delivery';
-import { Coupon } from 'pages/Coupon';
 import { Login } from 'pages/Login';
 import { Signup } from 'pages/Signup';
 import KakaoCallback from 'features/auth/Kakao';
@@ -28,6 +27,9 @@ import { useDispatch } from 'react-redux';
 import { login } from 'features/auth/authSlice';
 import { CheckOut } from 'pages/order/CheckOut';
 import { setupApiInterceptors } from 'features/auth/axios';
+import axios from 'axios';
+import RecipePage from 'shared/ui/recipe/RecipePage';
+import RecipeDetailPage from 'shared/ui/recipe/RecipeDetailPage';
 function App() {
 
   const [isIntroFinished, setIsIntroFinished] = useState(false);
@@ -77,7 +79,7 @@ function App() {
       <Routes>
         <Route  path="/" element={<Layout />}>
           <Route index element={<Home/>}/>
-          <Route path="/coupon" element={<Coupon/>}/>
+          {/* <Route path="/coupon" element={<Coupon/>}/> */}
           <Route path="/delivery" element={<Delivery/>}/>
           <Route path="/login" element={<Login/>} />
           <Route path="/find-user-id" element={<FindUserId />} />
@@ -102,6 +104,8 @@ function App() {
           <Route path="/payResult" element={<PayResult />} />
           <Route path="/mypage" element={<MyOrders />} />
           <Route path="/oauth/success" element={<SuccessPage />} />
+          <Route path="/recipe" element={<RecipePage />} />
+          <Route path="/recipe/:id" element={<RecipeDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

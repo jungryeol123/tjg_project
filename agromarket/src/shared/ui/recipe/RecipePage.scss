@@ -1,0 +1,29 @@
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.recipe-card {
+  cursor: pointer;
+}
+
+.recipe-img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.recipe-title {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.recipe-rating {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.recipe-time {
+  font-size: 0.85rem;
+  color: #999;
+}

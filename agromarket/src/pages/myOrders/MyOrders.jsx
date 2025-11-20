@@ -45,51 +45,34 @@ export function MyOrders() {
     fetchOrders();
   }, [userId]);
 
-  /** 🔹 쿠폰 목록 조회 */
-useEffect(() => {
-  if (!userId) return;
+  console.log("orders", orders);  
+  /** 🔹 3) 쿠폰 목록 가져오기 */
+  useEffect(() => {
+    if (!userId) return;
 
-  const fetchCoupons = async () => {
-    console.log("쿠폰조회 userId", userId);
+    const fetchCoupons = async () => {
+      try {
+        const res = await axios.get(`/coupon/my/${userId}`); // 프록시 적용
+        setCoupons(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("쿠폰 조회 실패:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    try {
-      // 🔥 loginInfo 안에서 token 가져오기
-      const stored = localStorage.getItem("loginInfo");
-      const parsed = stored ? JSON.parse(stored) : null;
-      const token = parsed?.token || null;
+    fetchCoupons();
+  }, [userId]);
 
-      console.log("요청 URL:", `http://localhost:8080/coupon/my/${userId}`);
-
-
-      const res = await axios.get(`/coupon/my/${userId}`);
-
-      console.log("🔥 백엔드 응답:", res.data);
-      setCoupons(Array.isArray(res.data) ? res.data : []);
-    } catch (err) {
-      console.error("쿠폰 조회 실패:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchCoupons();
-}, [userId]);
-
-
-
-  /** 🔹 쿠폰 삭제 기능 */
+  /** 🔹 4) 쿠폰 삭제 */
   const handleDeleteCoupon = async (couponId) => {
     if (!window.confirm("정말 쿠폰을 삭제하시겠습니까?")) return;
 
     try {
-      const res = await axios.delete(
-        `http://localhost:8080/coupon/delete/${userId}/${couponId}`
-      );
+      const res = await axios.delete(`/coupon/delete/${userId}/${couponId}`);
 
       if (res.status === 200) {
         alert("쿠폰이 삭제되었습니다.");
-
-        // 🔄 화면에서도 즉시 삭제
         setCoupons(coupons.filter((c) => c.coupon.couponId !== couponId));
       }
     } catch (err) {
@@ -134,9 +117,10 @@ useEffect(() => {
             </div>
           </div>
         ))
+      ) : (
+        <p>주문 내역이 없습니다.</p>
       )}
 
-      {/* 받은 쿠폰 목록 */}
       <div style={{ marginTop: "40px" }}>
         <h2 style={styles.title}>🎟️ 받은 쿠폰</h2>
 
@@ -163,7 +147,6 @@ useEffect(() => {
     </div>
   );
 }
-
 
 const styles = {
   container: {

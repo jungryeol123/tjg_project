@@ -1,0 +1,131 @@
+[
+  {
+    "title": "매콤한 돼지고기 김치찌개",
+    "imageUrl": "/images/recipe/kimchi_stew.jpg",
+    "cookTime": 40,
+    "summary": "돼지고기와 신김치로 깊고 매운맛을 낸 김치찌개입니다.",
+    "rating": 4.8,
+    "reviewCount": 65,
+    "difficulty": "보통",
+    "ingredients": [
+      "돼지고기 앞다리살 200g",
+      "신김치 1컵",
+      "대파 1대",
+      "두부 1/2모",
+      "고춧가루 1.5스푼",
+      "고추장 1스푼",
+      "마늘 1스푼"
+    ],
+    "steps": [
+      "냄비에 돼지고기와 마늘을 넣고 중불에서 볶아 고기의 풍미를 낸다.",
+      "고기가 반쯤 익으면 신김치를 넣고 2~3분 더 볶는다.",
+      "물 또는 육수를 붓고 끓기 시작하면 중불로 줄여 15분 정도 끓인다.",
+      "두부와 대파를 넣고 5분 더 끓인 후 간을 맞추어 완성한다."
+    ],
+    "tips": "청양고추를 추가하면 더 칼칼한 맛을 낼 수 있습니다.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=NnHpI1VUjhM",
+    "subCategoryId": 1
+  },
+  {
+    "title": "부드러운 소고기 미역국",
+    "imageUrl": "/images/recipe/beef_miyeok.jpg",
+    "cookTime": 35,
+    "summary": "담백하고 깊은 맛의 소고기 미역국입니다.",
+    "rating": 4.6,
+    "reviewCount": 87,
+    "difficulty": "쉬움",
+    "ingredients": [
+      "불린 미역 1컵",
+      "소고기 국거리 150g",
+      "참기름 1스푼",
+      "국간장 1.5스푼",
+      "마늘 1스푼"
+    ],
+    "steps": [
+      "참기름에 소고기를 볶아 고기의 육향을 충분히 낸다.",
+      "불린 미역을 넣고 함께 2분 정도 볶아 풍미를 올린다.",
+      "물을 붓고 중불에서 20분간 끓인다.",
+      "국간장으로 간을 하고 5분 더 끓여 완성한다."
+    ],
+    "tips": "미역은 너무 오래 볶으면 질겨질 수 있으니 주의하세요.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=uF6PwkSMDa0",
+    "subCategoryId": 1
+  },
+  {
+    "title": "토마토 계란볶음",
+    "imageUrl": "/images/recipe/tomato_egg.jpg",
+    "cookTime": 10,
+    "summary": "촉촉하고 부드러운 중국식 토마토 계란볶음입니다.",
+    "rating": 4.9,
+    "reviewCount": 30,
+    "difficulty": "쉬움",
+    "ingredients": [
+      "토마토 2개",
+      "계란 3개",
+      "대파 1대",
+      "간장 1스푼",
+      "설탕 1티스푼"
+    ],
+    "steps": [
+      "계란을 소금 약간 넣고 풀어 스크램블 형태로 부드럽게 익힌 후 따로 빼둔다.",
+      "토마토와 대파를 볶아 자연스럽게 나온 수분으로 소스를 만든다.",
+      "간장과 설탕으로 간을 맞춘다.",
+      "스크램블한 계란을 다시 넣고 가볍게 섞어 완성한다."
+    ],
+    "tips": "토마토 껍질을 제거하면 더 부드러운 식감을 즐길 수 있습니다.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=erV4lLerKiU&pp=0gcJCQwKAYcqIYzv",
+    "subCategoryId": 4
+  },
+  {
+    "title": "매콤 떡볶이",
+    "imageUrl": "/images/recipe/tteokbokki.jpg",
+    "cookTime": 20,
+    "summary": "분식집 스타일의 매콤달콤 떡볶이입니다.",
+    "rating": 4.7,
+    "reviewCount": 122,
+    "difficulty": "쉬움",
+    "ingredients": [
+      "떡볶이 떡 200g",
+      "어묵 2장",
+      "대파 1대",
+      "고추장 2스푼",
+      "고춧가루 1스푞",
+      "간장 1스푤",
+      "설탕 1스푤"
+    ],
+    "steps": [
+      "팬에 물을 넣고 고추장, 고춧가루, 설탕, 간장으로 양념장을 만든다.",
+      "떡과 어묵을 넣고 중불에서 10분간 졸인다.",
+      "대파를 넣고 3분 더 끓인 후 걸쭉해지면 완성한다."
+    ],
+    "tips": "치즈를 올리면 더욱 고소한 풍미를 즐길 수 있습니다.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=Y8OFkrLW-ak",
+    "subCategoryId": 7
+  },
+  {
+    "title": "해물 파전",
+    "imageUrl": "/images/recipe/seafood_pajeon.jpg",
+    "cookTime": 25,
+    "summary": "겉은 바삭하고 속은 촉촉한 해물파전입니다.",
+    "rating": 4.8,
+    "reviewCount": 54,
+    "difficulty": "보통",
+    "ingredients": [
+      "부침가루 1컵",
+      "물 1컵",
+      "오징어 50g",
+      "새우 50g",
+      "대파 2대",
+      "식용유 넉넉히"
+    ],
+    "steps": [
+      "반죽을 만들어 팬 전체에 얇게 펼친다.",
+      "오징어와 새우, 대파를 위에 풍성하게 올린다.",
+      "기름을 넉넉히 두르고 약불~중불에서 천천히 익힌다.",
+      "가장자리가 노릇해지면 뒤집어 바삭하게 완성한다."
+    ],
+    "tips": "약불에서 천천히 구울수록 더 바삭해집니다.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=wM4k0J03s1Y",
+    "subCategoryId": 22
+  }
+]
