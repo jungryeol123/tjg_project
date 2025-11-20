@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 import { Layout } from 'layouts/Layout';
 import Home from 'pages/Home';
 import { Delivery } from 'pages/Delivery';
