@@ -20,6 +20,7 @@ export function HeaderProductList() {
   // 상품 리스트 최신화
   useEffect(() => {
     dispatch(setProductListAPI());
+    setActiveFilter("");
   }, []);
 
   // ✅ (1) 신상품: 날짜 기준 최신순 정렬

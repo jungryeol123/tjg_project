@@ -1,8 +1,6 @@
 export const ProductValidateCheck = (inputField, formData) => {
     const result = { "result" : false, "message" : {} };
 
-    console.log("formData : ", formData);
-
     // 각 항목 체크
     for (const field of inputField) {
       const value = formData[field.name];
