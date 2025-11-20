@@ -27,7 +27,6 @@ import { useDispatch } from 'react-redux';
 import { login } from 'features/auth/authSlice';
 import { CheckOut } from 'pages/order/CheckOut';
 import { setupApiInterceptors } from 'features/auth/axios';
-import axios from 'axios';
 import RecipePage from 'shared/ui/recipe/RecipePage';
 import RecipeDetailPage from 'shared/ui/recipe/RecipeDetailPage';
 function App() {
