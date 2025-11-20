@@ -23,7 +23,7 @@ export function QnA({id, product}) {
   const qnaList = useMemo(() => {
     if (!qnaAll || qnaAll.length === 0) return [];
     // 🔥 숫자/문자열 타입이 다를 수 있으니 Number()로 변환
-    return qnaAll.filter((item) => Number(item.ppk) === Number(id));
+    return qnaAll.filter((item) => Number(item.ppk) === Number(id)).sort((a,b)=> new Date(b.date) - new Date(a.date));
   }, [qnaAll, id]);
 
   const handleNext = () => {
@@ -102,7 +102,7 @@ export function QnA({id, product}) {
                 {item.is_private ? <div>비밀글 입니다. <span className="lock-icon">🔒</span></div> : item.title}
               </td>
               <td>{item.writer}</td>
-              <td>{item.date}</td>
+              <td>{new Date(item.date).toLocaleDateString("ko-KR")}</td>
               <td className= {`status ${item.status === "답변대기" ? "wait" : "" }`}>{item.status}</td>
             </tr>
           ))}
