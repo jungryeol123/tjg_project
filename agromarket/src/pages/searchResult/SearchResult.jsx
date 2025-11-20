@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import ProductCard from "shared/ui/productList/ProductCard";
 import { FilterItem } from "../../shared/constants/FilterItem";
-import "./SearchResult.scss";
+import "./SearchResult.scss"
+import "../../styles/components/filter.scss";
 
 export default function SearchResult() {
   const { keyword } = useParams();
