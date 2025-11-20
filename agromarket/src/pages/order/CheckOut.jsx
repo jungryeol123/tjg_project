@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-// import "./cart.css";
-import "./CheckOut.css";
 import { getKakaoPayment, getNaverPayment } from './paymentAPI.js';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { AddressModal } from './AddressModal';
+import { parseJwt } from "features/auth/parseJwt";
+import axios from 'axios';
+import "./CheckOut.css";
 
 export function CheckOut() {
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
     const [isChange,setIsChange] = useState(true);
+    const [userId, setUserId] = useState(null);
+    const [coupons, setCoupons] = useState([]);
+    const [selectCoupon, setSelectCoupon] = useState(0);
 
     // ✅ 결제 수단 상태 추가
     const [paymentMethod, setPaymentMethod] = useState("kakao");
@@ -40,6 +45,37 @@ export function CheckOut() {
         });
         setUserZoneCode(cartList[0].user.zonecode);
     }, [])
+
+    useEffect(() => {
+        const stored = localStorage.getItem("loginInfo");
+        if (stored) {
+            const { accessToken } = JSON.parse(stored);
+            const payload = parseJwt(accessToken);
+        
+            setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
+        }
+
+        if (!userId) return;
+
+        const fetchCoupons = async () => {
+            try {
+                // 🔥 loginInfo 안에서 token 가져오기
+                const stored = localStorage.getItem("loginInfo");
+                const parsed = stored ? JSON.parse(stored) : null;
+                const token = parsed?.token || null;
+
+                const res = await axios.get(`/coupon/my/${userId}`);
+
+                console.log(res.data);
+
+                setCoupons(Array.isArray(res.data) ? res.data : []);
+            } catch (err) {
+                console.error("쿠폰 조회 실패:", err);
+            }
+        };
+
+        fetchCoupons();
+    }, [userId]);
 
     /** ✅ 결제 실행 */
     const handlePayment = async () => {
@@ -90,6 +126,39 @@ export function CheckOut() {
         open({ onComplete: handleComplete });
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleSelectAddress = (order) => {
+        console.log(order);
+        setUserZoneCode(order.zipcode);
+        setFullAddress(order.address1);
+        setReceiver({
+            "name": order.receiverName,
+            "phone": order.receiverPhone,
+            "address1": order.address1,
+            "address2": order.address2,
+            "zipcode": order.zipcode,
+            "memo": order.memo
+        })
+    }
+
+    const handleChangeCoupon = (e) => {
+        const {value} = e.target;
+        if(value === "30") {
+            Math.round((totalPrice - totalDcPrice)*value*0.01) >= 15000 
+            ? setSelectCoupon(15000)
+            : setSelectCoupon(Math.round((totalPrice - totalDcPrice)*value*0.01));
+        } else if(value === "50") {
+            Math.round((totalPrice - totalDcPrice)*value*0.01) >= 5000
+            ? setSelectCoupon(5000)
+            : setSelectCoupon(Math.round((totalPrice - totalDcPrice)*value*0.01)) 
+        } else if(value === "60") {
+            Math.round((totalPrice - totalDcPrice)*value*0.01) >= 10000
+            ? setSelectCoupon(10000)
+            : setSelectCoupon(Math.round((totalPrice - totalDcPrice)*value*0.01))
+        }
+    }
+
     return (
         <div className="checkout-container">
             <h2 className="checkout-header">주문/결제</h2>
@@ -120,7 +189,11 @@ export function CheckOut() {
                     {isChange ?
                     <button className='btn' onClick={handleChange}>배송지 변경</button>
                     :
-                    <button className='btn' onClick={handleChange}>수정</button>
+                    <div className='section-btn-group'>
+                        <button className='btn' onClick={() => setIsOpen(true)}>최근 주소</button>
+                        {isOpen && <AddressModal onClose={() => setIsOpen(false)} onSelectAddress={handleSelectAddress} />}
+                        <button className='btn' onClick={handleChange}>수정</button>
+                    </div>
                     }
                 </h2>
                 {isChange ?
@@ -146,20 +219,20 @@ export function CheckOut() {
                         <div className="info-grid">
                             <div className="label">이름</div>
                             <div className="value phone-input">
-                                <input type="text" name='name' onChange={handleChangeValue} defaultValue={receiver.name} />
+                                <input type="text" name='name' onChange={handleChangeValue} value={receiver.name} />
                             </div>
                             <div className="label">배송주소</div>
                             <div className="value phone-input">
                                 <input type="text" name='address1' value={userFullAddress} onClick={handleClick} readOnly/>
-                                <input type="text" name='address2' onChange={handleChangeValue} defaultValue={receiver.address2} />
+                                <input type="text" name='address2' onChange={handleChangeValue} value={receiver.address2} />
                             </div>
                             <div className="label">연락처</div>
                             <div className="value phone-input">
-                                <input type="text" name='phone' onChange={handleChangeValue} defaultValue={receiver.phone} />
+                                <input type="text" name='phone' onChange={handleChangeValue} value={receiver.phone} />
                             </div>
                             <div className="label">배송 요청사항</div>
                             <div className="value phone-input">
-                                <input type="text" name='memo' onChange={handleChangeValue} defaultValue={receiver.memo} />
+                                <input type="text" name='memo' onChange={handleChangeValue} value={receiver.memo} />
                             </div>
                         </div>
                     </div>
@@ -188,15 +261,34 @@ export function CheckOut() {
                     <tbody>
                         <tr>
                             <td>총상품가격</td>
+                            <td></td>
                             <td className="price">{totalPrice.toLocaleString()}원</td>
                         </tr>
                         <tr>
                             <td>즉시할인</td>
+                            <td></td>
                             <td className="discount">-{totalDcPrice.toLocaleString()}원</td>
+                        </tr>
+                        <tr>
+                            <td>쿠폰할인</td>
+                            <td className="coupon" onChange={handleChangeCoupon}>
+                                {coupons.length === 0 ? <div>사용 가능한 쿠폰이 없습니다.</div> :
+                                <>
+                                    <select className="couponList">
+                                        <option value="0">쿠폰 사용 안함</option>
+                                        {coupons.map(coupon =>
+                                            <option value={coupon.coupon.couponDcRate}>{coupon.coupon.couponDcRate}% 할인 쿠폰</option>
+                                        )}
+                                    </select>
+                                </>
+                                }
+                            </td>
+                            <td className='discount'>-{selectCoupon.toLocaleString()}원</td>
                         </tr>
                         <tr className="total">
                             <td>총결제금액</td>
-                            <td className="total-price">{(totalPrice - totalDcPrice).toLocaleString()}원</td>
+                            <td></td>
+                            <td className="total-price">{(totalPrice - totalDcPrice - selectCoupon).toLocaleString()}원</td>
                         </tr>
                     </tbody>
                 </table>
