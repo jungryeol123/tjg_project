@@ -29,6 +29,7 @@ import { CheckOut } from 'pages/order/CheckOut';
 import { setupApiInterceptors } from 'features/auth/axios';
 import RecipePage from 'shared/ui/recipe/RecipePage';
 import RecipeDetailPage from 'shared/ui/recipe/RecipeDetailPage';
+import { Coupon } from 'pages/Coupon';
 function App() {
 
   const [isIntroFinished, setIsIntroFinished] = useState(false);
@@ -78,7 +79,7 @@ function App() {
       <Routes>
         <Route  path="/" element={<Layout />}>
           <Route index element={<Home/>}/>
-          {/* <Route path="/coupon" element={<Coupon/>}/> */}
+          <Route path="/coupon" element={<Coupon/>}/>
           <Route path="/delivery" element={<Delivery/>}/>
           <Route path="/login" element={<Login/>} />
           <Route path="/find-user-id" element={<FindUserId />} />
