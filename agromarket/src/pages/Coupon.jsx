@@ -92,12 +92,12 @@ export function Coupon() {
   };
 
   return (
-    <div style={{ fontFamily: "'Pretendard', sans-serif" }}>
+    <div style={{ fontFamily: "'Pretendard', sans-serif", maxWidth : "1200px" }}>
 
       {/* 🔥 전체 화면 이미지 */}
       <div
         style={{
-          width: "77.3vw",
+          // width: "77.3vw",
           height: "100vh",
           backgroundImage: "url('/images/popupimage/coupon_image3.png')",
           backgroundSize: "cover",
