@@ -62,7 +62,7 @@ import { axiosPost } from "../../utils/dataFetch.js";
 import { loadNaverPaySDK } from "../../utils/loadNaverSDK.js";
 import { parseJwt } from "features/auth/parseJwt.js";
 /** ✅ 카카오페이 결제 */
-export const getKakaoPayment = async (receiver, paymentInfo, cartList) => {
+export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
   // const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
@@ -84,6 +84,7 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList) => {
     receiver,
     paymentInfo,
     cidList,
+    couponId
   };
 
   try {

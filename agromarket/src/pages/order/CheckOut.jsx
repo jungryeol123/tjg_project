@@ -15,6 +15,7 @@ export function CheckOut() {
     const [userId, setUserId] = useState(null);
     const [coupons, setCoupons] = useState([]);
     const [selectCoupon, setSelectCoupon] = useState(0);
+    const [couponId, setCouponId] = useState(0);
 
     // ✅ 결제 수단 상태 추가
     const [paymentMethod, setPaymentMethod] = useState("kakao");
@@ -66,9 +67,9 @@ export function CheckOut() {
 
                 const res = await axios.get(`/coupon/my/${userId}`);
 
-                console.log(res.data);
+                const couponList = res.data.filter(item => item.isUsed === false)
 
-                setCoupons(Array.isArray(res.data) ? res.data : []);
+                setCoupons(Array.isArray(couponList) ? couponList : []);
             } catch (err) {
                 console.error("쿠폰 조회 실패:", err);
             }
@@ -80,9 +81,9 @@ export function CheckOut() {
     /** ✅ 결제 실행 */
     const handlePayment = async () => {
         if (paymentMethod === "kakao") {
-            await getKakaoPayment(receiver, paymentInfo, cartList);
+            await getKakaoPayment(receiver, paymentInfo, cartList, couponId);
         } else if (paymentMethod === "naver") {
-            await getNaverPayment(receiver, paymentInfo, cartList);
+            await getNaverPayment(receiver, paymentInfo, cartList, couponId);
         }
     };
 
@@ -144,18 +145,28 @@ export function CheckOut() {
 
     const handleChangeCoupon = (e) => {
         const {value} = e.target;
-        if(value === "30") {
-            Math.round((totalPrice - totalDcPrice)*value*0.01) >= 15000 
+        setCouponId(value);
+
+        if(value === "0") {
+            setSelectCoupon(0);
+            return;
+        }
+        const selected = coupons.find(c => c.id == value);
+        const dcRate = selected.coupon.couponDcRate;
+        const finalPrice = Math.round((totalPrice - totalDcPrice)*dcRate*0.01);
+
+        if(dcRate === 30) {
+            finalPrice >= 15000 
             ? setSelectCoupon(15000)
-            : setSelectCoupon(Math.round((totalPrice - totalDcPrice)*value*0.01));
-        } else if(value === "50") {
-            Math.round((totalPrice - totalDcPrice)*value*0.01) >= 5000
+            : setSelectCoupon(finalPrice);
+        } else if(dcRate === 50) {
+            finalPrice >= 5000
             ? setSelectCoupon(5000)
-            : setSelectCoupon(Math.round((totalPrice - totalDcPrice)*value*0.01)) 
-        } else if(value === "60") {
-            Math.round((totalPrice - totalDcPrice)*value*0.01) >= 10000
+            : setSelectCoupon(finalPrice) 
+        } else if(dcRate === 60) {
+            finalPrice >= 10000
             ? setSelectCoupon(10000)
-            : setSelectCoupon(Math.round((totalPrice - totalDcPrice)*value*0.01))
+            : setSelectCoupon(finalPrice)
         }
     }
 
@@ -277,7 +288,7 @@ export function CheckOut() {
                                     <select className="couponList">
                                         <option value="0">쿠폰 사용 안함</option>
                                         {coupons.map(coupon =>
-                                            <option value={coupon.coupon.couponDcRate}>{coupon.coupon.couponDcRate}% 할인 쿠폰</option>
+                                            <option value={coupon.id}>{coupon.coupon.couponDcRate}% 할인 쿠폰</option>
                                         )}
                                     </select>
                                 </>
