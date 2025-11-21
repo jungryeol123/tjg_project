@@ -3,7 +3,6 @@ import "./ImageUpload.css";
 
 export function ImageUpload({ onFileSelect, idx, text, existingImage }) {
     const [image, setImage] = useState(null);
-
     useEffect(() => {
       setImage(existingImage || null);
     }, [existingImage]);
@@ -36,7 +35,7 @@ export function ImageUpload({ onFileSelect, idx, text, existingImage }) {
 
       { image && (
         <div className="image-preview-container">
-          <img src={`/images/${image}`} alt="미리보기" className="image-preview" />
+          <img src={image} alt="미리보기" className="image-preview" />
         </div>
       )}
     </div>
