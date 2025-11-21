@@ -2,11 +2,12 @@
 import React, { useMemo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "shared/ui/productList/ProductCard";
-import { useParams } from "react-router-dom";
-import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
+import { useParams, useNavigate } from "react-router-dom";
+import { setProductBestListAPI, setProductListAPI, delProductData } from "features/product/productAPI";
 import { Link } from "react-router-dom";
 import { parseJwt } from "features/auth/parseJwt";
 import { FilterItem } from "shared/constants/FilterItem";
+import Swal from 'sweetalert2';
 import "./HeaderProductList.scss";
 import "../../styles/components/filter.scss";
 
@@ -16,6 +17,7 @@ export function HeaderProductList() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   // 상품 리스트 최신화
   useEffect(() => {
@@ -140,6 +142,38 @@ export function HeaderProductList() {
     setFilteredProducts(filtered);
   }
 
+  // 삭제 버튼 클릭
+  const handleDelete = (productId) => {
+    Swal.fire({
+      icon: 'warning',
+      text: '상품을 정말 삭제 하시겠습니까?',
+      showCancelButton: true, 
+      confirmButtonText: '삭제',
+      cancelButtonText: '취소'
+    }).then((result) => {
+      // 삭제 버튼 클릭시
+      if (result.isConfirmed) {
+        // 삭제 성공시
+        if(dispatch(delProductData(productId))){
+          Swal.fire({
+            icon: 'success',
+            title: '✅ 상품 삭제 성공!',
+            text: '상품이 성공적으로 삭제되었습니다.',
+            confirmButtonText: '확인',
+          }).then(() => {
+            dispatch(setProductListAPI());
+          });
+        } else{
+          Swal.fire({
+            icon: 'success',
+            title: '❌ 상품 삭제 실패!',
+            text: '다시 시도해주세요.'
+          });
+        }
+      }
+    });
+  }
+
   return (
     <div className="new-products-page">
       <h1 className="page-title">
@@ -183,13 +217,21 @@ export function HeaderProductList() {
             {filteredProducts.map((item, idx) => (
               // 상품 편집일 경우, 경로 변경
               id === "update" ? 
-                <Link
-                  to={`/products/update`}
-                  state={{ item }}
-                  key={idx}
-                >
-                    <ProductCard item={item} />
-                </Link>
+                <div>
+                  <Link
+                    to={`/products/update`}
+                    state={{ item }}
+                    key={idx}
+                  >
+                      <ProductCard item={item} />
+                  </Link>
+                  <Link
+                    to={`/products/update`}
+                    state={{ item }}
+                    key={idx}>
+                  <button type="button" className="update-btn">편집</button></Link>
+                  <button type="button" className="delete-btn" onClick={ () => { handleDelete(item.id) } }>삭제</button>
+                </div>
               :
                 <Link
                   to={`/products/${item.id}`}

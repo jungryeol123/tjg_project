@@ -32,7 +32,6 @@ export default function ProductCard({ item }) {
         <h3 className="product-name">
           [{item.brandName}] <span>{item.productName}</span>
         </h3>
-
         <div className="price-wrap">
           {item.dc ? (
             <>
@@ -48,7 +47,6 @@ export default function ProductCard({ item }) {
               <span className="or-price">{item.price.toLocaleString()}원</span>   
           )}
         </div>
-
         {/* <button className="cart-btn">🛒 담기</button> */}
       </div>
     </div>

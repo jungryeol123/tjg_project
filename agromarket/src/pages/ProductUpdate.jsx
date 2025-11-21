@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { setDeliveryAPI } from "features/delivery/deliveryAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { ImageUploadList } from "./ImageUploadList";
-import { setProductData, delProductData } from "../features/product/productAPI.js";
+import { setProductData } from "../features/product/productAPI.js";
 import { ProductValidateCheck } from "../shared/constants/ProductValidateCheck.jsx"
 import Swal from 'sweetalert2';
 import "./ProductAdd.css";
@@ -186,38 +186,6 @@ export function ProductUpdate() {
     }
   };
 
-  // 삭제 버튼 클릭
-  const handleDelete = () => {
-    Swal.fire({
-      icon: 'warning',
-      text: '상품을 정말 삭제 하시겠습니까?',
-      showCancelButton: true, 
-      confirmButtonText: '삭제',
-      cancelButtonText: '취소'
-    }).then((result) => {
-      // 삭제 버튼 클릭시
-      if (result.isConfirmed) {
-        // 삭제 성공시
-        if(dispatch(delProductData(item.id))){
-          Swal.fire({
-            icon: 'success',
-            title: '✅ 상품 삭제 성공!',
-            text: '상품이 성공적으로 삭제되었습니다.',
-            confirmButtonText: '확인',
-          }).then(() => {
-            navigate("/productList/update");
-          });
-        } else{
-          Swal.fire({
-            icon: 'success',
-            title: '❌ 상품 삭제 실패!',
-            text: '다시 시도해주세요.'
-          });
-        }
-      }
-    });
-  }
-
   return (
     <div className="product-add-container">
       <h1>상품 등록</h1>
@@ -301,7 +269,6 @@ export function ProductUpdate() {
         <ImageUploadList onFileSelect={ handleImagesSelect }
                          imageList={ imageList } existingImages= { existingImages }/>
         <button type="submit" className="submit-btn">등록</button>
-        <button type="button" className="delete-btn" onClick={ handleDelete }>삭제</button>
       </form>
     </div>
   );
