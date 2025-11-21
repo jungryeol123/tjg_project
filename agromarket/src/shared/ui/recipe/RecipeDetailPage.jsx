@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   getRecipeDetailAPI,
@@ -10,7 +10,9 @@ import "./RecipeDetailPage1.scss";
 export default function RecipeDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  // 현재 경로 확인용
+  const location = useLocation();
+  
   const [recipe, setRecipe] = useState(null);
   const [reviews, setReviews] = useState([]);
 
@@ -221,7 +223,7 @@ export default function RecipeDetailPage() {
       (
       <div
         className="review-login-needed"
-        onClick={() => navigate("/login")}
+        onClick={() => navigate("/login", { state: { from: location.pathname } }) }
       >
         <p>로그인 후 후기를 작성할 수 있습니다.</p>
         <button className="goto-login-btn">로그인하러 가기</button>
