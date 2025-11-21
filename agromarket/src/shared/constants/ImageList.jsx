@@ -3,7 +3,7 @@ export function ImageList({imgList, className}) {
         <ul className={className}>
             {imgList && imgList.map( img => 
                 <li>
-                    <img src={img} />
+                    <img src={`/images/${img}`} />
                 </li>)}
         </ul>
     );
