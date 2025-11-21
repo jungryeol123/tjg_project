@@ -223,13 +223,9 @@ export function HeaderProductList() {
                     state={{ item }}
                     key={idx}
                   >
-                      <ProductCard item={item} />
+                  <ProductCard item={item} />
+                  <button type="button" className="update-btn">편집</button>
                   </Link>
-                  <Link
-                    to={`/products/update`}
-                    state={{ item }}
-                    key={idx}>
-                  <button type="button" className="update-btn">편집</button></Link>
                   <button type="button" className="delete-btn" onClick={ () => { handleDelete(item.id) } }>삭제</button>
                 </div>
               :
