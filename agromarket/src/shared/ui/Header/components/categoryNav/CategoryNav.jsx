@@ -2,34 +2,45 @@ import React from "react";
 import "./CategoryNav.scss";
 import { useSelector } from "react-redux";
 import { FiMenu } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function CategoryNav() {
   // 카테고리(대분류) 리스트
   const categoryList = useSelector((state) => state.category.categoryList);
+  const navigate = useNavigate();
 
   return (
     <nav className="category-nav">
       <ul className="category-nav__list">
-        <li className="category-first"><FiMenu /><span>카테고리</span>
+        <li className="category-first">
+          <FiMenu /><span>카테고리</span>
           <ul className="main-category-list">
-              { categoryList.map((main) => (
-                <Link to={`/category/${encodeURIComponent(main.name)}`} state ={ { "type": "main", "id": main.id } } >
-                  <li key={ main.id } className="main-category-item">
-                    {/* 메인 카테고리 표시 */}
-                    { main.name }
-                    {/* 서브 카테고리는 표시 */}
-                    { main.subCategories && main.subCategories.length > 0 && (
-                      <ul className="sub-category-list">
-                        { main.subCategories.map((sub) => (
-                          <Link to={`/category/${encodeURIComponent(sub.name)}`} state ={ { "type": "sub", "id": sub.id } } >
-                            <li key={ sub.id }>{ sub.name }</li>
-                          </Link>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                </Link>
-              ))}
+            {categoryList.map((main) => (
+              <li
+                key={main.id}
+                className="main-category-item"
+                onClick={() =>
+                  navigate(`/category/${encodeURIComponent(main.name)}`, {
+                    state: { type: "main", id: main.id },
+                  })}>
+                {main.name}
+                {main.subCategories && main.subCategories.length > 0 && (
+                  <ul className="sub-category-list">
+                    {main.subCategories.map((sub) => (
+                      <li
+                        key={sub.id}
+                        onClick={(e) => {
+                          e.stopPropagation(); // 부모 li 클릭 방지
+                          navigate(`/category/${encodeURIComponent(sub.name)}`, {
+                            state: { type: "sub", id: sub.id },
+                          });
+                        }}>
+                        {sub.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
           </ul>
         </li>
         <li>
