@@ -28,9 +28,7 @@ import { useSelector } from "react-redux";
   // }, [dispatch, keyword]);
 
     // console.log("id", typeof id);
-   // ✅ 필터 조건 분기
-
-   console.log("productList", productList);
+  // ✅ 필터 조건 분기
   const productFilterList = useMemo(() => {
     if (!productList || productList.length === 0) return [];
 
@@ -53,8 +51,6 @@ import { useSelector } from "react-redux";
         return productList.slice(0, limit);
     }
   }, [productList, keyword, limit]);
-
-// console.log("productFilterList", productFilterList);
 
   const stopMomentum = () => cancelAnimationFrame(momentumId.current);
 

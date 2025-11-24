@@ -107,8 +107,8 @@ export function ProductAdd() {
 
     // 미입력 항목 존재시 팝업 메세지 출력
     if(!vCheckResult.result){
-        Swal.fire(vCheckResult.message);
-      return;
+      Swal.fire(vCheckResult.message);
+      return ;
     }
 
     // 이미지 정보 체크
