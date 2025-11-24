@@ -30,10 +30,9 @@ import { setupApiInterceptors } from 'features/auth/axios';
 import RecipePage from 'shared/ui/recipe/RecipePage';
 import RecipeDetailPage from 'shared/ui/recipe/RecipeDetailPage';
 import { Coupon } from 'pages/Coupon';
-import TestAi from 'pages/administration/TestAi';
 import ForecastPage from 'pages/administration/ForecastPage';
 import ConversionPage from 'pages/administration/ConversionPage';
-import { AnalyticsPage } from 'pages/administration/AnalyticsPage';
+
 import AdminLayout from 'pages/administration/AdminLayout';
 function App() {
 

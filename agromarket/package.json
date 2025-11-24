@@ -10,7 +10,10 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.13.2",
     "chart.js": "^4.5.1",
+    "file-saver": "^2.0.5",
     "framer-motion": "^12.23.24",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2",
     "lottie-react": "^2.4.1",
     "postcode": "^5.1.0",
     "react": "^19.2.0",
@@ -23,7 +26,8 @@
     "react-scripts": "5.0.1",
     "sass": "^1.77.2",
     "sweetalert2": "^11.26.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
