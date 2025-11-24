@@ -29,11 +29,35 @@
   position: relative; /* 뱃지 위치 기준 */
 }
 
+.product-image-container {
+  position: relative;
+  display: inline-block;
+}
+
 .product-image-main {
   width: 480px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: block;
+}
+
+.sold-out {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
+  color: rgb(255, 0, 0);
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  pointer-events: none; /* 클릭 방해 방지 */
+  border-radius: 5px;
+  z-index: 10;
 }
 
 .product-info {
@@ -258,6 +282,12 @@
 
 .btn-cart:hover {
   background: #eaeaea;
+}
+/* 갯수가 0개 일때 */
+.btn-cart:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 /* 찜하기 버튼 */

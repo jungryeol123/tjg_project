@@ -355,10 +355,10 @@ export function CheckOut() {
 
             {/* 약관 */}
             <div className="terms">
-                <input type="checkbox" name="terms" checked={agree.terms} onClick={handleChangeAgree}/>
+                <input type="checkbox" name="terms" checked={agree.terms} onChange={handleChangeAgree}/>
                 <label htmlFor="terms">구매조건 확인 및 결제대행 서비스 약관 동의</label>
                 <br />
-                <input type="checkbox" name="privacy" checked={agree.privacy} onClick={handleChangeAgree}/>
+                <input type="checkbox" name="privacy" checked={agree.privacy} onChange={handleChangeAgree}/>
                 <label htmlFor="privacy">개인정보 국외 이전 동의</label>
             </div>
 

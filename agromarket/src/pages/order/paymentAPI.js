@@ -84,7 +84,8 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId)
     receiver,
     paymentInfo,
     cidList,
-    couponId
+    couponId,
+    pid: cartList[0].product.id
   };
 
   try {

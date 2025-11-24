@@ -113,6 +113,8 @@ export default function RecipeDetailPage() {
     }
   };
 
+  console.log("relatedProducts", relatedProducts);
+
   if (!recipe) return <div>로딩중...</div>;
 
   return (
@@ -143,7 +145,7 @@ export default function RecipeDetailPage() {
             {relatedProducts.map((p) => (
               <Link to={`/products/${p.id}`} key={p.id}>
                 <div className="related-product-card">
-                  <img src={p.imageUrl} alt={p.productName} />
+                  <img src={`/images/productImages/${p.imageUrl}`} alt={p.productName} />
                   <div className="product-name">{p.productName}</div>
                   <div className="product-price">{p.price.toLocaleString()}원</div>
                 </div>
