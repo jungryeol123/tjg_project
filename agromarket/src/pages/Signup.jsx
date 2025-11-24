@@ -6,6 +6,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { axiosGet } from "shared/lib/axiosInstance";
 import '../styles/components/Signup.css';
 import Swal from 'sweetalert2';
+import { validateSignup } from 'shared/constants/SignupValidation';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "emailDomainInput", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
@@ -105,7 +106,6 @@ export function Signup() {
         }
     }    
 
-
     const handleSubmit = async(e) => {
         e.preventDefault();
         const param = {
@@ -132,6 +132,29 @@ export function Signup() {
                 "address":userFullAddress.concat(" ", form.addressDetail)
             };
         }
+
+        const errors = validateSignup(formData);
+
+        if(Object.keys(errors).length > 0) {
+            Swal.fire({
+                icon: 'error',
+                title: '회원가입 실패',
+                text: errors,
+                confirmButtonText: '확인',
+            })
+            return;
+        }
+
+        if(!agree.terms || !agree.privacy || !agree.age) {
+            Swal.fire({
+                icon: 'error',
+                title: '회원가입 실패',
+                text: '필수 이용 약관을 동의해주세요.',
+                confirmButtonText: '확인',
+            })
+            return;
+        }
+
         const result = await dispatch(getSignup(formData, param));
         
         if(result) {
@@ -185,6 +208,16 @@ export function Signup() {
     /** 아이디 중복체크 */
     const handleIdCheck = async(e) => {
         const {name, value} = e.target;
+        if(value === "") {
+            Swal.fire({
+                icon: 'error',
+                title: '중복체크 결과',
+                text: "❌ 아이디를 입력해주세요.",
+                confirmButtonText: '확인',
+            })
+            return;
+        }
+
         const result = await dispatch(getIdCheck(name, value));
         if(name === "userId") {
             if(result) {
