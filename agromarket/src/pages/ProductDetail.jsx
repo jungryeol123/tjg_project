@@ -182,16 +182,18 @@ export function ProductDetail() {
           <div className="product-image">
             <div
               className={`badge-container ${product.hotDeal && product.memberSpecial ? "multi" : ""
-                }`}
-            >
+                }`}>
               {product.hotDeal && <span className="badge hot">원딜핫딜</span>}
               {product.memberSpecial && <span className="badge member">멤버특가</span>}
             </div>
-            <img
-              src={`/images/productImages/${product.imageUrl}`}
-              alt={product.imageUrl_name}
-              className="product-image-main"
-            />
+            <div className="product-image-container">
+              <img
+                src={`/images/productImages/${product.imageUrl}`}
+                alt={product.imageUrl_name}
+                className="product-image-main"
+              />
+              { product.count === 0 && <div class="sold-out">SOLD OUT</div> }
+            </div>
           </div>
 
           <div className="product-info">
@@ -324,7 +326,7 @@ export function ProductDetail() {
                   <AiOutlineHeart size={20} />
                 )}
               </button>
-              <button className="btn-cart" onClick={handleAddCart}>
+              <button className="btn-cart" onClick={handleAddCart} disabled={product.count === 0} >
                 장바구니
               </button>
             </div>
