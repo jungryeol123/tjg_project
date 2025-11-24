@@ -5,7 +5,9 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { AddressModal } from './AddressModal';
 import { parseJwt } from "features/auth/parseJwt";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import "./CheckOut.css";
+
 
 export function CheckOut() {
     const cartList = useSelector((state) => state.cart.cartList);
@@ -16,6 +18,7 @@ export function CheckOut() {
     const [coupons, setCoupons] = useState([]);
     const [selectCoupon, setSelectCoupon] = useState(0);
     const [couponId, setCouponId] = useState(0);
+    const [agree, setAgree] = useState({terms:false, privacy:false});
 
     // ✅ 결제 수단 상태 추가
     const [paymentMethod, setPaymentMethod] = useState("kakao");
@@ -78,8 +81,22 @@ export function CheckOut() {
         fetchCoupons();
     }, [userId]);
 
+    const handleChangeAgree = (e) => {
+        const {name, checked} = e.target;
+        setAgree({...agree, [name]:checked});
+    }
+
     /** ✅ 결제 실행 */
     const handlePayment = async () => {
+        if(!agree.terms || !agree.privacy){
+            Swal.fire({
+                icon: 'error',
+                title: '결제하기 실패',
+                text: '❌ 결제 약관에 동의해주세요.',
+                confirmButtonText: '확인',
+            });
+            return;
+        }
         if (paymentMethod === "kakao") {
             await getKakaoPayment(receiver, paymentInfo, cartList, couponId);
         } else if (paymentMethod === "naver") {
@@ -338,10 +355,10 @@ export function CheckOut() {
 
             {/* 약관 */}
             <div className="terms">
-                <input type="checkbox" id="terms" />
+                <input type="checkbox" name="terms" checked={agree.terms} onClick={handleChangeAgree}/>
                 <label htmlFor="terms">구매조건 확인 및 결제대행 서비스 약관 동의</label>
                 <br />
-                <input type="checkbox" id="privacy" />
+                <input type="checkbox" name="privacy" checked={agree.privacy} onClick={handleChangeAgree}/>
                 <label htmlFor="privacy">개인정보 국외 이전 동의</label>
             </div>
 
