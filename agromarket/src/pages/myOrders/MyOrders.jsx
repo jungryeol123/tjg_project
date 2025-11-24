@@ -35,7 +35,7 @@ export function MyOrders() {
 
     const fetchOrders = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/orders/my/${userId}`);
+        const res = await axios.get(`/orders/my/${userId}`);
         setOrders(res.data);
       } catch (err) {
         console.error("주문 내역 조회 실패:", err);
