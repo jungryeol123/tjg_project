@@ -1,41 +1,41 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import axios from 'axios';
-import { Layout } from 'layouts/Layout';
-import Home from 'pages/Home';
-import { Delivery } from 'pages/Delivery';
-import { Login } from 'pages/Login';
-import { Signup } from 'pages/Signup';
-import KakaoCallback from 'features/auth/Kakao';
-import { useEffect, useState } from 'react';
-import PaymentButton from 'features/order/PaymentButton';
-import { ProductDetail } from 'pages/ProductDetail';
-import { ProductAdd } from 'pages/ProductAdd';
-import { ProductUpdate } from 'pages/ProductUpdate';
-import { HeaderProductList } from 'pages/productCategoryList/HeaderProductList';
-import SearchResult from 'pages/searchResult/SearchResult';
-import CustomerService from 'pages/customerService/CustomerService';
-import { NoticeList } from 'pages/noticeList/NoticeList';
-import NoticeDetail from 'pages/noticeList/NoticeDetail';
-import { Cart } from 'pages/Cart';
-import { FindUserId } from 'pages/FindUserId';
-import { FindPassword } from 'pages/FindPassword';
-import { PayResult } from 'pages/PayResult';
-import { MyOrders } from 'pages/myOrders/MyOrders';
-import IntroAnimation from 'IntroAnimation';
-import SuccessPage from 'pages/successPage/SuccessPage';
-import { useDispatch } from 'react-redux';
-import { login } from 'features/auth/authSlice';
-import { CheckOut } from 'pages/order/CheckOut';
-import { setupApiInterceptors } from 'features/auth/axios';
-import RecipePage from 'shared/ui/recipe/RecipePage';
-import RecipeDetailPage from 'shared/ui/recipe/RecipeDetailPage';
-import { Coupon } from 'pages/Coupon';
-import ForecastPage from 'pages/administration/ForecastPage';
-import ConversionPage from 'pages/administration/ConversionPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import axios from "axios";
+import { Layout } from "layouts/Layout";
+import Home from "pages/Home";
+import { Delivery } from "pages/Delivery";
+import { Login } from "pages/Login";
+import { Signup } from "pages/Signup";
+import KakaoCallback from "features/auth/Kakao";
+import { useEffect, useState } from "react";
+import PaymentButton from "features/order/PaymentButton";
+import { ProductDetail } from "pages/ProductDetail";
+import { ProductAdd } from "pages/ProductAdd";
+import { ProductUpdate } from "pages/ProductUpdate";
+import { HeaderProductList } from "pages/productCategoryList/HeaderProductList";
+import SearchResult from "pages/searchResult/SearchResult";
+import CustomerService from "pages/customerService/CustomerService";
+import { NoticeList } from "pages/noticeList/NoticeList";
+import NoticeDetail from "pages/noticeList/NoticeDetail";
+import { Cart } from "pages/Cart";
+import { FindUserId } from "pages/FindUserId";
+import { FindPassword } from "pages/FindPassword";
+import { PayResult } from "pages/PayResult";
+import { MyOrders } from "pages/myOrders/MyOrders";
+import IntroAnimation from "IntroAnimation";
+import SuccessPage from "pages/successPage/SuccessPage";
+import { useDispatch } from "react-redux";
+import { login } from "features/auth/authSlice";
+import { CheckOut } from "pages/order/CheckOut";
+import { setupApiInterceptors } from "features/auth/axios";
+import RecipePage from "shared/ui/recipe/RecipePage";
+import RecipeDetailPage from "shared/ui/recipe/RecipeDetailPage";
+import { Coupon } from "pages/Coupon";
+import ForecastPage from "pages/administration/ForecastPage";
+import ConversionPage from "pages/administration/ConversionPage";
 
-import AdminLayout from 'pages/administration/AdminLayout';
+import AdminLayout from "pages/administration/AdminLayout";
+import { AdminProductList } from "pages/administration/AdminProductList";
 function App() {
-
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const dispatch = useDispatch();
 
@@ -65,10 +65,10 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-
   useEffect(() => {
     // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
-    axios.get("/csrf", { withCredentials: true })
+    axios
+      .get("/csrf", { withCredentials: true })
       .then(() => console.log("✅ CSRF Token issued"))
       .catch((err) => console.error("❌ CSRF Token init failed:", err));
   }, []);
@@ -91,13 +91,13 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           {/* <Route path="/detail" element={<ProductDetail/>} /> */}
           <Route path="/cart" element={<Cart />} />
-          <Route path='/checkout' element={<CheckOut />} />
+          <Route path="/checkout" element={<CheckOut />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           {/* <Route path="/pay" element={<PaymentButton/>} /> */}
           <Route path="/" element={<PaymentButton />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
-          <Route path="/products/add" element={<ProductAdd />} />
+          {/* <Route path="/products/add" element={<ProductAdd />} /> */}
           <Route path="/products/update" element={<ProductUpdate />} />
           <Route path="/search/:keyword" element={<SearchResult />} />
           <Route path="/brand/:keyword" element={<SearchResult />} />
@@ -110,10 +110,12 @@ function App() {
           <Route path="/oauth/success" element={<SuccessPage />} />
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/recipe/:id" element={<RecipeDetailPage />} />
-           <Route path="/admin" element={<AdminLayout />}>
-          <Route path="analytics/forecast" element={<ForecastPage />} />
-          <Route path="analytics/conversion" element={<ConversionPage />} />
-        </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="analytics/forecast" element={<ForecastPage />} />
+            <Route path="analytics/conversion" element={<ConversionPage />} />
+            <Route path="products/add" element={<ProductAdd />} />
+            <Route path="adminProductList/:id" element={<AdminProductList />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
