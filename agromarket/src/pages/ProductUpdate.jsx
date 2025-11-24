@@ -151,17 +151,18 @@ export function ProductUpdate() {
     }
 
     // 이미지 정보 체크
-    for (let i = 0; i < imageList.length; i++) {
+    // for (let i = 0; i < imageList.length; i++) {
       // 신규 이미지등록 또는 기존 이미지 등록이 둘다 되있지 않으면 이미지등록 필요
-      if (!imageListFile[i] && !existingImages[i]) {
+      // if (!imageListFile[i] && !existingImages[i]) {
+      if (!imageListFile[0] && !existingImages[0]) {
           Swal.fire({
             icon: 'warning',
             title: '필수 항목 미입력',
-            text: `${imageList[i]}를 등록하세요.`,
+            text: `${imageList[0]}를 등록하세요.`,
             confirmButtonText: '확인'
           });
         return ; // 하나라도 누락되면 등록 불가
-      }
+      // }
     }
 
     // 신규 등록 : true, 상품 편집 : false
