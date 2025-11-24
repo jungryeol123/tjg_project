@@ -14,7 +14,7 @@ import { ProductUpdate } from 'pages/ProductUpdate';
 import { HeaderProductList } from 'pages/productCategoryList/HeaderProductList';
 import SearchResult from 'pages/searchResult/SearchResult';
 import CustomerService from 'pages/customerService/CustomerService';
-import {NoticeList} from 'pages/noticeList/NoticeList';
+import { NoticeList } from 'pages/noticeList/NoticeList';
 import NoticeDetail from 'pages/noticeList/NoticeDetail';
 import { Cart } from 'pages/Cart';
 import { FindUserId } from 'pages/FindUserId';
@@ -30,6 +30,11 @@ import { setupApiInterceptors } from 'features/auth/axios';
 import RecipePage from 'shared/ui/recipe/RecipePage';
 import RecipeDetailPage from 'shared/ui/recipe/RecipeDetailPage';
 import { Coupon } from 'pages/Coupon';
+import TestAi from 'pages/administration/TestAi';
+import ForecastPage from 'pages/administration/ForecastPage';
+import ConversionPage from 'pages/administration/ConversionPage';
+import { AnalyticsPage } from 'pages/administration/AnalyticsPage';
+import AdminLayout from 'pages/administration/AdminLayout';
 function App() {
 
   const [isIntroFinished, setIsIntroFinished] = useState(false);
@@ -63,11 +68,11 @@ function App() {
 
 
   useEffect(() => {
-  // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
-  axios.get("/csrf", { withCredentials: true })
-    .then(() => console.log("✅ CSRF Token issued"))
-    .catch((err) => console.error("❌ CSRF Token init failed:", err));
-}, []);
+    // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
+    axios.get("/csrf", { withCredentials: true })
+      .then(() => console.log("✅ CSRF Token issued"))
+      .catch((err) => console.error("❌ CSRF Token init failed:", err));
+  }, []);
 
   // // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
   // if (!isIntroFinished) {
@@ -77,20 +82,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route  path="/" element={<Layout />}>
-          <Route index element={<Home/>}/>
-          <Route path="/coupon" element={<Coupon/>}/>
-          <Route path="/delivery" element={<Delivery/>}/>
-          <Route path="/login" element={<Login/>} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/coupon" element={<Coupon />} />
+          <Route path="/delivery" element={<Delivery />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/find-user-id" element={<FindUserId />} />
           <Route path="/find-password" element={<FindPassword />} />
-          <Route path="/signup" element={<Signup/>} />
+          <Route path="/signup" element={<Signup />} />
           {/* <Route path="/detail" element={<ProductDetail/>} /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path='/checkout' element={<CheckOut />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           {/* <Route path="/pay" element={<PaymentButton/>} /> */}
-          <Route path="/" element={<PaymentButton/>} />
+          <Route path="/" element={<PaymentButton />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
           <Route path="/products/add" element={<ProductAdd />} />
@@ -106,6 +111,10 @@ function App() {
           <Route path="/oauth/success" element={<SuccessPage />} />
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+           <Route path="/admin" element={<AdminLayout />}>
+          <Route path="analytics/forecast" element={<ForecastPage />} />
+          <Route path="analytics/conversion" element={<ConversionPage />} />
+        </Route>
         </Route>
       </Routes>
     </BrowserRouter>

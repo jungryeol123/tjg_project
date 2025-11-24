@@ -87,6 +87,11 @@ export default function TopBar() {
         {/* 주문 */}
         <li><Link to="/pay">주문</Link></li>
 
+        
+        
+        <li><Link to="/admin">관리자페이지</Link></li>
+
+
         {/* 상품등록 (로그인 시만) */}
         {isLogin && <li><Link to="/products/add">상품등록</Link></li>}
         
