@@ -111,19 +111,16 @@ export function ProductAdd() {
       return;
     }
 
-    // // 이미지 정보 체크
-    // for (let i = 0; i < imageList.length; i++) {
-      // 이미지등록 필요
-      // if (!imageListFile[i]) {
-      if (!imageListFile[0]) {
-          Swal.fire({
-            icon: 'warning',
-            title: '필수 항목 미입력',
-            text: `${imageList[0]}를 등록하세요.`,
-            confirmButtonText: '확인'
-          });
-        return ; // 하나라도 누락되면 등록 불가
-      // }
+    // 이미지 정보 체크
+    // 이미지등록 필요
+    if (!imageListFile[0]) {
+        Swal.fire({
+          icon: 'warning',
+          title: '필수 항목 미입력',
+          text: `${imageList[0]}를 등록하세요.`,
+          confirmButtonText: '확인'
+        });
+      return ;
     }
 
     // 신규 등록 : true, 상품 편집 : false
