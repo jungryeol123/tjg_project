@@ -35,6 +35,7 @@ import ConversionPage from "pages/administration/ConversionPage";
 
 import AdminLayout from "pages/administration/AdminLayout";
 import { AdminProductList } from "pages/administration/AdminProductList";
+import PricingConversionPage from "pages/administration/PricingConversionPage";
 function App() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const dispatch = useDispatch();
