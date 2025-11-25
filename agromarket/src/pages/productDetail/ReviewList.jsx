@@ -13,7 +13,7 @@ export function ReviewList({ id }) {
   const isFirstRender = useRef(true);
   // ✅ 부모요소 ref 추가
   const containerRef = useRef(null);
-
+console.log("reviews", reviewsAll);
   // useEffect(() => {
   //   const axiosData = async () => {
   //     // const result = await axiosGet("/data/reviews.json")
