@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { parseJwt } from "features/auth/parseJwt";
-import { api } from "features/auth/axios";
 
 
 export function MyOrders() {
@@ -76,13 +75,20 @@ useEffect(() => {
 
   fetchCoupons();
 }, [userId]);
+
   /** 주문내역 삭제 기능 */
   const handleDeleteOrder = async (orderCode) => {
     if(!window.confirm("주문 내역을 삭제하시겠습니까?")) return;
 
     try {
-      const res = await api.delete(
-        `/order/delete/${userId}/${orderCode}`
+      const res = await axios.delete(
+        `/orders/deleteOrder/${userId}/${orderCode}`,
+        {
+        data : {},
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // ★ 추가
+        }
+      }
       );
       if (res.status === 200) {
         alert("주문내역이 삭제되었습니다.")
@@ -100,8 +106,8 @@ useEffect(() => {
     if (!window.confirm("정말 쿠폰을 삭제하시겠습니까?")) return;
 
     try {
-      const res = await api.delete(
-        `/coupon/delete/${userId}/${couponId}`
+      const res = await axios.delete(
+        `/coupon/deleteCoupon/${userId}/${couponId}`
       );
 
       if (res.status === 200) {
