@@ -173,7 +173,7 @@ export function ProductUpdate() {
           text: '상품이 성공적으로 등록되었습니다.',
           confirmButtonText: '확인',
         }).then(() => {
-          navigate("/productList/update");
+          navigate("/admin/adminProductList");
       });
     } else {
       Swal.fire({

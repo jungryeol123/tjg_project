@@ -97,8 +97,6 @@ function App() {
           <Route path="/" element={<PaymentButton />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
-          {/* <Route path="/products/add" element={<ProductAdd />} /> */}
-          <Route path="/products/update" element={<ProductUpdate />} />
           <Route path="/search/:keyword" element={<SearchResult />} />
           <Route path="/brand/:keyword" element={<SearchResult />} />
           <Route path="/category/:keyword" element={<SearchResult />} />
@@ -114,7 +112,8 @@ function App() {
             <Route path="analytics/forecast" element={<ForecastPage />} />
             <Route path="analytics/conversion" element={<ConversionPage />} />
             <Route path="products/add" element={<ProductAdd />} />
-            <Route path="adminProductList/:id" element={<AdminProductList />} />
+            <Route path="products/update" element={<ProductUpdate />} />
+            <Route path="adminProductList" element={<AdminProductList />} />
           </Route>
         </Route>
       </Routes>
