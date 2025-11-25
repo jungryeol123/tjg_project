@@ -8,7 +8,7 @@ import { Signup } from "pages/Signup";
 import KakaoCallback from "features/auth/Kakao";
 import { useEffect, useState } from "react";
 import PaymentButton from "features/order/PaymentButton";
-import { ProductDetail } from "pages/ProductDetail";
+import { ProductDetail } from "pages/productDetail/ProductDetail";
 import { ProductAdd } from "pages/administration/ProductAdd";
 import { ProductUpdate } from "pages/administration/ProductUpdate";
 import { HeaderProductList } from "pages/productCategoryList/HeaderProductList";
