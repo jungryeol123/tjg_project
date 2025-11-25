@@ -6,22 +6,42 @@ import "./ChatBotPanel.scss";
 
 export default function ChatBotPanel({ onClose }) {
   const [messages, setMessages] = useState([
-    { from: "bot", text: "안녕하세요! 무엇을 도와드릴까요? 😊" }
+    { from: "bot", type: "text", text: "안녕하세요! 무엇을 도와드릴까요? 😊" }
   ]);
   const [input, setInput] = useState("");
 
   const chatEndRef = useRef(null);
 
-  // 자동 스크롤
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // 배송 상태 텍스트 라벨
+  const statusLabel = (status) => {
+    switch (status) {
+      case "READY":
+        return "상품 준비중";
+      case "SHIPPING":
+        return "배송 중";
+      case "DELIVERED":
+        return "배송 완료";
+      default:
+        return "상태 정보 없음";
+    }
+  };
+
+  // ETA 계산 (odate + 2일)
+  const getEta = (odate) => {
+    if (!odate) return "";
+    const date = new Date(odate);
+    date.setDate(date.getDate() + 2);
+    return date.toLocaleString();
+  };
+
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const myMessage = { from: "me", text: input };
-    setMessages((prev) => [...prev, myMessage]);
+    setMessages((prev) => [...prev, { from: "me", type: "text", text: input }]);
 
     const sendText = input;
     setInput("");
@@ -31,49 +51,102 @@ export default function ChatBotPanel({ onClose }) {
         upk: JSON.parse(localStorage.getItem("loginInfo"))?.id,
         message: sendText,
       });
-    
-      console.log("res", res.data);
-      const botMessage = { from: "bot", text: res.data.reply };
-      setMessages((prev) => [...prev, botMessage]);
+
+      const result = res.data;
+      console.log("result", result);
+      const order = result.data;
+
+      if (order) {
+        setMessages((prev) => [
+          ...prev,
+          { from: "bot", type: "text", text: result.reply },
+          { from: "bot", type: "order", order }
+        ]);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { from: "bot", type: "text", text: result.reply }
+        ]);
+      }
+
     } catch (err) {
       setMessages((prev) => [
         ...prev,
-        { from: "bot", text: "서버 오류가 발생했습니다. 다시 시도해주세요." }
+        { from: "bot", type: "text", text: "서버 오류가 발생했습니다." }
       ]);
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") sendMessage();
-  };
-
   return (
     <div className="chatbot-panel">
-      {/* 헤더 */}
+
       <div className="chat-header">
         <span>AI 고객센터</span>
         <button className="close-btn" onClick={onClose}>✖</button>
       </div>
 
-      {/* 메시지 영역 */}
       <div className="chat-body">
-        {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`chat-message ${msg.from === "me" ? "me" : "bot"}`}
-          >
-            {msg.text}
-          </div>
-        ))}
+
+        {messages.map((msg, idx) => {
+          if (msg.type === "order" && msg.order) {
+            const o = msg.order;
+
+            return (
+              <div key={idx} className="chat-order-block">
+                <div className="order-title">📦 주문 정보</div>
+
+                <div className="order-info-box">
+                  <div>주문번호 : {o.orderCode}</div>
+                  <div>주문일자 : {new Date(o.odate).toLocaleString()}</div>
+                  <div>배송상태 : {statusLabel(o.deliveryStatus)}</div>
+
+                  {o.deliveryStatus === "READY" && (
+                    <div>출발 예정 : {getEta(o.odate)}</div>
+                  )}
+
+                  {o.deliveryStatus === "SHIPPING" && (
+                    <div>도착 예정 : {o.eta ? new Date(o.eta).toLocaleString() : getEta(o.odate)}</div>
+                  )}
+
+                  {o.deliveryStatus === "DELIVERED" && (
+                    <div>배송 완료일 : {o.deliveredAt ? new Date(o.deliveredAt).toLocaleString() : new Date(o.odate).toLocaleString()}</div>
+                  )}
+                </div>
+
+                <div className="order-title">🛒 주문 상품</div>
+
+                {o.orderDetails?.map((d) => (
+                  <div key={d.id} className="order-item">
+                    <img className="order-img" src={d.product?.imageUrl} alt="" />
+                    <div className="order-info">
+                      <div className="name">{d.product?.productName}</div>
+                      <div className="qty">{d.qty}개</div>
+                      <div className="price">{d.product?.price?.toLocaleString()}원</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+
+          return (
+            <div
+              key={idx}
+              className={`chat-message ${msg.from === "me" ? "me" : "bot"}`}
+            >
+              {msg.text}
+            </div>
+          );
+        })}
+
         <div ref={chatEndRef}></div>
       </div>
 
-      {/* 입력창 */}
       <div className="chat-input">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="메시지를 입력하세요..."
         />
         <button onClick={sendMessage}>전송</button>
