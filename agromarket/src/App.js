@@ -37,6 +37,8 @@ import AdminLayout from "pages/administration/AdminLayout";
 import { AdminProductList } from "pages/administration/AdminProductList";
 import PricingConversionPage from "pages/administration/PricingConversionPage";
 import ProductPricingDetailPage from "pages/administration/ProductPricingDetailPage";
+import ReviewListPage from "pages/reviewAnalysic/ReviewListPage";
+import ReviewAnalysisPage from "pages/reviewAnalysic/ReviewAnalysisPage";
 function App() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const dispatch = useDispatch();
@@ -114,10 +116,13 @@ function App() {
             <Route path="analytics/forecast" element={<ForecastPage />} />
             <Route path="analytics/conversion" element={<ConversionPage />} />
             <Route path="analytics/price" element={<PricingConversionPage />} />
-             <Route path="pricing/:ppk" element={<ProductPricingDetailPage />} />
+            <Route path="pricing/:ppk" element={<ProductPricingDetailPage />} />
             <Route path="products/add" element={<ProductAdd />} />
             <Route path="products/update" element={<ProductUpdate />} />
             <Route path="adminProductList" element={<AdminProductList />} />
+            <Route path="products/reviewList" element={<ReviewListPage />} />
+            <Route path="reviews/:ppk" element={<ReviewAnalysisPage />} />
+      
           </Route>
         </Route>
       </Routes>
