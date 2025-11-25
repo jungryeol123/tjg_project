@@ -1,0 +1,61 @@
+.pricing-page {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: "Pretendard", sans-serif;
+  color: #333;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+
+  /* 상품 상세 리스트 구역 */
+  .detail-section {
+    margin-top: 50px;
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    li {
+      background: #fff;
+      padding: 15px 18px;
+      border-radius: 12px;
+      border: 1px solid #e7e7e7;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: 0.25s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        font-weight: 600;
+
+        span {
+          display: block;
+          margin-top: 5px;
+          font-size: 14px;
+          color: #777;
+        }
+      }
+    }
+  }
+}
