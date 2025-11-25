@@ -11,6 +11,7 @@ import "./CheckOut.css";
 
 export function CheckOut() {
     const cartList = useSelector((state) => state.cart.cartList);
+    const [reduceCartList, setReduceCartList] = useState([]);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
     const [isChange,setIsChange] = useState(true);
@@ -81,6 +82,11 @@ export function CheckOut() {
         fetchCoupons();
     }, [userId]);
 
+    // 상품 갯수가 0인 상품 제외
+    useEffect( ()=> {
+        setReduceCartList(cartList.filter(cart => cart.product.count !== 0));
+    },[]);
+
     const handleChangeAgree = (e) => {
         const {name, checked} = e.target;
         setAgree({...agree, [name]:checked});
@@ -98,9 +104,9 @@ export function CheckOut() {
             return;
         }
         if (paymentMethod === "kakao") {
-            await getKakaoPayment(receiver, paymentInfo, cartList, couponId);
+            await getKakaoPayment(receiver, paymentInfo, reduceCartList, couponId);
         } else if (paymentMethod === "naver") {
-            await getNaverPayment(receiver, paymentInfo, cartList, couponId);
+            await getNaverPayment(receiver, paymentInfo, reduceCartList, couponId);
         }
     };
 
@@ -272,12 +278,12 @@ export function CheckOut() {
                 <h2 className="section-title">주문 상품</h2>
                 <div className="info-box">
                     <div className="info-grid order-info-grid">
-                        {cartList.map((item) => (
+                        {reduceCartList.map((item) => 
                             <div key={item.cid} className="value">
                                 <img src={`/images/productImages/${item.product.imageUrl}`} alt="product" style={{ width: '35px' }} />
                                 {item.product.productName}, 수량({item.qty}), 가격({(item.product.price*(100-item.product.dc)*0.01*item.qty).toLocaleString()}원)
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
             </div>

@@ -33,16 +33,21 @@ export function Cart() {
                         cartList && cartList.map(item => 
                             <div>
                                 <div className='cart-item'>
-                                    <img src={`/images/productImages/${item.product.imageUrl}`} alt='product img' />
+                                    <div className="cart-image-container">
+                                        <img src={`/images/productImages/${item.product.imageUrl}`} alt='product img' />
+                                        { item.product.count === 0 && <div class="sold-out">SOLD OUT</div> }
+                                    </div>
                                     <div className='cart-item-details'>
                                         <p className='cart-item-title'>{item.product.productName}</p>
                                         <p className='cart-item-title cart-item-price'>{parseInt(item.product.price).toLocaleString()}원</p>
                                         <p className='cart-item-title cart-item-dcprice'>{parseInt((item.product.price)*(100-item.product.dc)*0.01).toLocaleString()}원</p>
                                     </div>
                                     <div className='cart-quantity'>
-                                        <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1), userId)) : null}>-</button>
+                                        <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1), userId)) : null}
+                                            disabled={item.product.count === 0}>-</button>
                                         <input type="text" value={item.qty} readOnly/>
-                                        <button type='button' onClick={() => dispatch(updateCart(item.cid, (item.qty+1), userId))}>+</button>
+                                        <button type='button' onClick={() => dispatch(updateCart(item.cid, (item.qty+1), userId))}
+                                            disabled={item.product.count === 0}>+</button>
                                     </div>
                                     <button className='cart-remove' onClick={()=>dispatch(removeCart(item.cid, userId))}>제거</button>
                                 </div>
@@ -77,7 +82,8 @@ export function Cart() {
                                 </p>
                             </div>
                             <div className='cart-actions'>
-                                <button type='button' onClick={()=>{navigate("/checkout")}}>주문하기</button>
+                                <button type='button' onClick={()=>{navigate("/checkout")}}
+                                    disabled={totalPrice - totalDcPrice === 0}>주문하기</button>
                             </div>
                         </>
                     : <div>
