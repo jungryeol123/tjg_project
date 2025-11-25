@@ -19,13 +19,16 @@ export default function ProductCard({ item }) {
         {item.memberSpecial && <span className="badge member">멤버특가</span>}
       </div>
 
-      {/* ✅ 제품 이미지 */}
-      <img
-        src={`/images/productImages/${item.imageUrl}`}
-        alt={item.imageUrl_name}
-        className="product-image"
-        draggable="false"
-      />
+      <div className="image-container">
+        {/* ✅ 제품 이미지 */}
+        <img
+          src={`/images/productImages/${item.imageUrl}`}
+          alt={item.imageUrl_name}
+          className="product-image"
+          draggable="false"
+        />
+        { item.count === 0 && <div class="sold-out">SOLD OUT</div> }
+      </div>
 
       {/* ✅ 제품 정보 */}
       <div className="product-info">
