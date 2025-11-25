@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { Item } from "./productDetail/Item.jsx";
-import { Detail } from "./productDetail/Detail.jsx";
-import { QnA } from "./productDetail/QnA.jsx";
-import { Return } from "./productDetail/Return.jsx";
+import { Item } from "./Item.jsx";
+import { Detail } from "./Detail.jsx";
+import { QnA } from "./QnA.jsx";
+import { Return } from "./Return.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { addCart } from "features/cart/cartAPI.js";
-import { ReviewList } from "./productDetail/ReviewList.jsx";
+import { ReviewList } from "./ReviewList.jsx";
 import { setProductAPI } from "features/product/productAPI.js";
-import "../styles/components/ProductDetail.css";
-import Swal from 'sweetalert2';
 import { parseJwt } from "features/auth/parseJwt.js";
 import { api } from "features/auth/axios.js";
+import "../../styles/components/ProductDetail.css";
+import Swal from 'sweetalert2';
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
@@ -80,7 +80,7 @@ export function ProductDetail() {
 
   // 구매 수량 감소 버튼 클릭 이벤트
   const handleDecrease = () => {
-    if (count !== 1) {
+    if (count > 1) {
       setCount(count - 1);
     }
   };

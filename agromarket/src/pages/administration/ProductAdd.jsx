@@ -1,44 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { setDeliveryAPI } from "features/delivery/deliveryAPI";
 import { useSelector, useDispatch } from "react-redux";
-import { ImageUploadList } from "./ImageUploadList";
-import { setProductData } from "../features/product/productAPI.js";
-import { ProductValidateCheck } from "../shared/constants/ProductValidateCheck.jsx"
+import { ImageUploadList } from "../../shared/constants/ImageUploadList";
+import { setProductData } from "../../features/product/productAPI.js";
+import { ProductValidateCheck } from "../../shared/constants/ProductValidateCheck.jsx";
 import Swal from 'sweetalert2';
 import "./ProductAdd.css";
 
-export function ProductUpdate() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+export function ProductAdd() {
   // 배송정보리스트
   const deliveryList = useSelector((state) => state.delivery.deliveryList);
   // 카테고리(대분류) 리스트
   const categoryList = useSelector((state) => state.category.categoryList);
-
-  // 기존 이미지 URL 배열 (item.images: 서버에서 온 이미지 이름)
-  const [existingImages, setExistingImages] = useState([null, null, null]);
-
-  // 상품 편집 시 데이터
-  const location = useLocation();
-
-  // 기존 상품 정보 취득
-  const { item } = location.state || {};
-
-  // form데이터용
-  const [formData, setFormData] = useState({});
-
-  // 이미지 등록용
-  const [imageListFile, setImageListFile] = useState([]);
-
   // 카테고리(중분류) 등록용
   const [subCategoryList, setSubCategoryList] = useState([]);
+  const [selectedMain, setSelectedMain] = useState("");   // 선택한 대분류
+  const [selectedSub, setSelectedSub] = useState("");     // 선택한 중분류
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+  const imageList = ["상품 이미지","속성 이미지","상세 이미지"];
 
-  // 카테고리 대분류 표시용
-  const [selectedMain, setSelectedMain] = useState("");
-  // 카테고리 중분류 표시용
-  const [selectedSub, setSelectedSub] = useState("");
+  // form데이터용
+  const [formData, setFormData] = useState({
+    productName: "",
+    brandName: "",
+    seller: "",
+    origin: "",
+    unit: "",
+    weight: "",
+    count: "",
+    price: "",
+    dc: "",
+    allergyInfo: "",
+    description: "",
+    notes: "",
+    delType: "",
+    categorySub : ""
+  });
 
   // form필드
   const inputField = [
@@ -55,58 +56,17 @@ export function ProductUpdate() {
     { label: "상품 설명", name: "description", placeholder: "예: 맛있는 1등급 우유", type: "text" },
   ];
 
-  // 이미지리스트
-  const imageList = ["상품 이미지", "속성 이미지", "상세 이미지"];
-
   useEffect(() => {
     dispatch(setDeliveryAPI());
-
-    // 상품 편집시 formData 설정
-    setFormData(
-      {
-          productName: item.productName,
-          brandName: item.brandName,
-          seller: item.seller,
-          origin: item.origin,
-          unit: item.unit,
-          weight: item.weight,
-          count: item.count,
-          price: item.price,
-          dc: item.dc,
-          allergyInfo: item.allergyInfo,
-          description: item.description,
-          notes: item.notes,
-          delType: item.delType,
-          categorySub : item.categorySub
-        }
-    );
-
-    // 카테고리 대분류 설정
-    const mainList = categoryList.find( mainCategory => 
-        mainCategory.subCategories.find( subCategory => 
-          subCategory.id === item.categorySub.id 
-      )
-    )
-    setSelectedMain(mainList.id);
-    // 카테고리 중분류 설정
-    setSubCategoryList(mainList.subCategories);
-    setSelectedSub(item.categorySub.id);
-
-    // 기존 이미지 설정
-    const urls = imageList.map((_, idx) => idx === 0 ? `/images/productImages/${item.imageUrl}`
-                                            : idx === 1 ? `/images/productInformation/${item.productInformationImage}`
-                                            : idx === 2 ? `/images/productDescription/${item.productDescriptionImage}`
-                                            : null);
-    setExistingImages(urls);
-  }, []); 
+  }, [dispatch]);
 
   // form데이터 입력시 이벤트
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+    
     if(name === "categorySub"){
         setFormData({ ...formData, [name] : { "id": parseInt(value)} });
-        setSelectedSub(value);
+        setSelectedSub(value)
     } else {
         setFormData({ ...formData, [name]: value });
     }
@@ -123,9 +83,10 @@ export function ProductUpdate() {
     setSelectedMain(value);
     // 카테고리 중분류 초기화
     setSelectedSub("");
-    // form데이터 설정(카테고리 중분류 초기화)
-    setFormData({ ...formData, "categorySub" : { "id": "" } });
   }
+  
+  // 이미지 등록용
+  const [imageListFile, setImageListFile] = useState([]);
 
   // 이미지 등록 시 이벤트
   const handleImagesSelect = (index, file) => {
@@ -146,13 +107,13 @@ export function ProductUpdate() {
 
     // 미입력 항목 존재시 팝업 메세지 출력
     if(!vCheckResult.result){
-        Swal.fire(vCheckResult.message);
-      return;
+      Swal.fire(vCheckResult.message);
+      return ;
     }
 
     // 이미지 정보 체크
-    // 신규 이미지등록 또는 기존 이미지 등록이 둘다 되있지 않으면 이미지등록 필요
-    if (!imageListFile[0] && !existingImages[0]) {
+    // 이미지등록 필요
+    if (!imageListFile[0]) {
         Swal.fire({
           icon: 'warning',
           title: '필수 항목 미입력',
@@ -163,8 +124,8 @@ export function ProductUpdate() {
     }
 
     // 신규 등록 : true, 상품 편집 : false
-    const result = await setProductData(formData, imageListFile, false, item?.id, imageList.length);
-    
+    const result = await setProductData(formData, imageListFile, true, "", imageList.length);
+
     // 등록 성공시
     if(result){
       Swal.fire({
@@ -173,7 +134,7 @@ export function ProductUpdate() {
           text: '상품이 성공적으로 등록되었습니다.',
           confirmButtonText: '확인',
         }).then(() => {
-          navigate("/productList/update");
+          navigate("/admin/adminProductList");
       });
     } else {
       Swal.fire({
@@ -217,19 +178,18 @@ export function ProductUpdate() {
           <label>배송정보:</label>
           <select
             name="delType"
-            value={ formData.delType }
+            value={ formData.deliveryInfo }
             onChange={ handleChange }
           >
-            <option value="" disabled>배송 방법을 선택해주세요.</option>
+            <option value="">배송 방법을 선택해주세요.</option>
             { deliveryList &&
               deliveryList.map((option, idx) => (
-                <option key={ idx } value={ option.delType }>
+                <option key={ idx  } value={ option.delType }>
                   { option.delName }
                 </option>
               ))}
           </select>
         </div>
-
         <div className="form-group full-width">
           <label>상품 분류(대분류):</label>
           <select
@@ -263,9 +223,8 @@ export function ProductUpdate() {
               ))}
           </select>
         </div>
-
         <ImageUploadList onFileSelect={ handleImagesSelect }
-                         imageList={ imageList } existingImages= { existingImages }/>
+                         imageList={ imageList } />
         <button type="submit" className="submit-btn">등록</button>
       </form>
     </div>

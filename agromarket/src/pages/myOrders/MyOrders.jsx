@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { parseJwt } from "features/auth/parseJwt";
+import { api } from "features/auth/axios";
+
 
 export function MyOrders() {
   const [orders, setOrders] = useState([]);
@@ -35,7 +37,7 @@ export function MyOrders() {
 
     const fetchOrders = async () => {
       try {
-        const res = await axios.get(`/orders/my/${userId}`);
+        const res = await axios.get(`http://localhost:8080/orders/my/${userId}`);
         setOrders(res.data);
       } catch (err) {
         console.error("주문 내역 조회 실패:", err);
@@ -45,34 +47,67 @@ export function MyOrders() {
     fetchOrders();
   }, [userId]);
 
-  console.log("orders", orders);  
-  /** 🔹 3) 쿠폰 목록 가져오기 */
-  useEffect(() => {
-    if (!userId) return;
+  /** 🔹 쿠폰 목록 조회 */
+useEffect(() => {
+  if (!userId) return;
 
-    const fetchCoupons = async () => {
-      try {
-        const res = await axios.get(`/coupon/my/${userId}`); // 프록시 적용
-        setCoupons(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("쿠폰 조회 실패:", err);
-      } finally {
-        setLoading(false);
+  const fetchCoupons = async () => {
+    console.log("쿠폰조회 userId", userId);
+
+    try {
+      // 🔥 loginInfo 안에서 token 가져오기
+      const stored = localStorage.getItem("loginInfo");
+      const parsed = stored ? JSON.parse(stored) : null;
+      const token = parsed?.token || null;
+
+      console.log("요청 URL:", `http://localhost:8080/coupon/my/${userId}`);
+
+
+      const res = await axios.get(`/coupon/my/${userId}`);
+
+      console.log("🔥 백엔드 응답:", res.data);
+      setCoupons(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      console.error("쿠폰 조회 실패:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchCoupons();
+}, [userId]);
+  /** 주문내역 삭제 기능 */
+  const handleDeleteOrder = async (orderCode) => {
+    if(!window.confirm("주문 내역을 삭제하시겠습니까?")) return;
+
+    try {
+      const res = await api.delete(
+        `/order/delete/${userId}/${orderCode}`
+      );
+      if (res.status === 200) {
+        alert("주문내역이 삭제되었습니다.")
+        setOrders(orders.filter((o) => o.orderCode !== orderCode));
       }
-    };
+    } catch (err) {
+      console.error("주문내역 삭제 실패:",err);
+      alert("주문내역 삭제 실패!");
+    }
+  };
 
-    fetchCoupons();
-  }, [userId]);
 
-  /** 🔹 4) 쿠폰 삭제 */
+  /** 🔹 쿠폰 삭제 기능 */
   const handleDeleteCoupon = async (couponId) => {
     if (!window.confirm("정말 쿠폰을 삭제하시겠습니까?")) return;
 
     try {
-      const res = await axios.delete(`/coupon/delete/${userId}/${couponId}`);
+      const res = await api.delete(
+        `/coupon/delete/${userId}/${couponId}`
+      );
 
       if (res.status === 200) {
         alert("쿠폰이 삭제되었습니다.");
+
+        // 🔄 화면에서도 즉시 삭제
         setCoupons(coupons.filter((c) => c.coupon.couponId !== couponId));
       }
     } catch (err) {
@@ -113,12 +148,20 @@ export function MyOrders() {
                     {item.price.toLocaleString()}원
                   </li>
                 ))}
+                <button
+                  style={styles.deleteBtn }
+                  
+                  onClick={() => handleDeleteOrder(order.orderCode)}
+                >
+                    삭제
+                </button>
               </ul>
             </div>
           </div>
         ))
       )}
 
+      {/* 받은 쿠폰 목록 */}
       <div style={{ marginTop: "40px" }}>
         <h2 style={styles.title}>🎟️ 받은 쿠폰</h2>
 
@@ -145,6 +188,7 @@ export function MyOrders() {
     </div>
   );
 }
+
 
 const styles = {
   container: {
