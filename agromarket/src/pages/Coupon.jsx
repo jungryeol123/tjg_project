@@ -61,6 +61,7 @@ export function Coupon() {
   };
 
   const handleIssueCoupon = async (couponId) => {
+    // 비로그인시
     if (!userId) {
       Swal.fire({
         icon: 'warning',
@@ -69,52 +70,52 @@ export function Coupon() {
         confirmButtonText: '확인'
       }) // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
         .then(() => { navigate("/login", { state: { from: location.pathname } }) });
-    }
-
-    if (issuedCoupons.includes(couponId)) {
-        Swal.fire({
-        icon: 'warning',
-        title: '⚠ 지급 완료',
-        text: "이미 받은 쿠폰입니다!",
-        confirmButtonText: '확인'
-      });
-      return;
-    }
-
-    try {
-      const stored = localStorage.getItem("loginInfo");
-      const { accessToken } = JSON.parse(stored);
-
-      const res = await axios.post(
-        `http://localhost:8080/coupon/issue/${couponId}`,
-        { userId: userId },
-        { headers : { Authorization : `Bearer ${accessToken}` }
-    });
-
-    if (res.data.status === "success") {
-        Swal.fire({
-          icon: 'success',
-          title: '✅ 지급 완료',
-          text: "쿠폰이 발급되었습니다!",
-          confirmButtonText: '확인'
-        });
-        setIssuedCoupons((prev) => [...prev, couponId]);
-      } else {
-        Swal.fire({
+    } else {
+      if (issuedCoupons.includes(couponId)) {
+          Swal.fire({
           icon: 'warning',
           title: '⚠ 지급 완료',
-          text: res.data.message || "이미 받은 쿠폰입니다.",
+          text: "이미 받은 쿠폰입니다!",
           confirmButtonText: '확인'
         });
+        return;
       }
-    } catch (err) {
-      Swal.fire({
-          icon: 'error',
-          title: '❌ 지급 실패',
-          text: "쿠폰 발급 실패 또는 이미 받은 쿠폰입니다.",
-          confirmButtonText: '확인'
-        });
-      console.error("쿠폰 발급 실패:", err);
+
+      try {
+        const stored = localStorage.getItem("loginInfo");
+        const { accessToken } = JSON.parse(stored);
+
+        const res = await axios.post(
+          `http://localhost:8080/coupon/issue/${couponId}`,
+          { userId: userId },
+          { headers : { Authorization : `Bearer ${accessToken}` }
+      });
+
+      if (res.data.status === "success") {
+          Swal.fire({
+            icon: 'success',
+            title: '✅ 지급 완료',
+            text: "쿠폰이 발급되었습니다!",
+            confirmButtonText: '확인'
+          });
+          setIssuedCoupons((prev) => [...prev, couponId]);
+        } else {
+          Swal.fire({
+            icon: 'warning',
+            title: '⚠ 지급 완료',
+            text: res.data.message || "이미 받은 쿠폰입니다.",
+            confirmButtonText: '확인'
+          });
+        }
+      } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: '❌ 지급 실패',
+            text: "쿠폰 발급 실패 또는 이미 받은 쿠폰입니다.",
+            confirmButtonText: '확인'
+          });
+        console.error("쿠폰 발급 실패:", err);
+      }
     }
   };
 
