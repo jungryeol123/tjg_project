@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { parseJwt } from "features/auth/parseJwt";
+import { useNavigate, useLocation } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 export function Coupon() {
   const [userId, setUserId] = useState(null);
   const [issuedCoupons, setIssuedCoupons] = useState([]);
+  const navigate = useNavigate();
+  // 현재 경로 확인용
+  const location = useLocation();
 
   const couponList = [
     { id: 1, rate: 30 },
@@ -56,38 +61,60 @@ export function Coupon() {
   };
 
   const handleIssueCoupon = async (couponId) => {
-
-    const stored = localStorage.getItem("loginInfo");
-    const { accessToken } = JSON.parse(stored);
-
     if (!userId) {
-      alert("로그인이 필요합니다!");
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: '⚠ 로그인 화면으로',
+        text: "로그인이 필요합니다!",
+        confirmButtonText: '확인'
+      }) // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
+        .then(() => { navigate("/login", { state: { from: location.pathname } }) });
     }
 
     if (issuedCoupons.includes(couponId)) {
-      alert("이미 받은 쿠폰입니다!");
+        Swal.fire({
+        icon: 'warning',
+        title: '⚠ 지급 완료',
+        text: "이미 받은 쿠폰입니다!",
+        confirmButtonText: '확인'
+      });
       return;
     }
 
     try {
+      const stored = localStorage.getItem("loginInfo");
+      const { accessToken } = JSON.parse(stored);
+
       const res = await axios.post(
         `http://localhost:8080/coupon/issue/${couponId}`,
         { userId: userId },
-        {
-      headers : { Authorization : `Bearer ${accessToken}` }
-  }
-      );
+        { headers : { Authorization : `Bearer ${accessToken}` }
+    });
 
-      if (res.data.status === "success") {
-        alert(`쿠폰이 발급되었습니다!`);
+    if (res.data.status === "success") {
+        Swal.fire({
+          icon: 'success',
+          title: '✅ 지급 완료',
+          text: "쿠폰이 발급되었습니다!",
+          confirmButtonText: '확인'
+        });
         setIssuedCoupons((prev) => [...prev, couponId]);
       } else {
-        alert(res.data.message || "이미 받은 쿠폰입니다.");
+        Swal.fire({
+          icon: 'warning',
+          title: '⚠ 지급 완료',
+          text: res.data.message || "이미 받은 쿠폰입니다.",
+          confirmButtonText: '확인'
+        });
       }
     } catch (err) {
+      Swal.fire({
+          icon: 'error',
+          title: '❌ 지급 실패',
+          text: "쿠폰 발급 실패 또는 이미 받은 쿠폰입니다.",
+          confirmButtonText: '확인'
+        });
       console.error("쿠폰 발급 실패:", err);
-      alert("쿠폰 발급 실패 또는 이미 받은 쿠폰입니다.");
     }
   };
 
