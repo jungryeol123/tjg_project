@@ -1,41 +1,84 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./ReviewAnalysisPage.scss";
 
 export default function ReviewAnalysisPage() {
   const { ppk } = useParams();
-  const reviewsAll = useSelector(state => state.product.productReviewList);
+  const reviewsAll = useSelector((state) => state.product.productReviewList);
 
-  // 현재 상품 리뷰만 필터
-  const reviews = reviewsAll.filter(r => r.ppk === Number(ppk));
+  const reviews = reviewsAll.filter((r) => r.ppk === Number(ppk));
+  const [analysis, setAnalysis] = useState(null);
 
-  // 분석용 텍스트 준비
-  const texts = reviews.map(r => r.content);
+  useEffect(() => {
+    axios.get(`/api/admin/reviews/analysis/${ppk}`).then((res) => {
+      setAnalysis(res.data);
+    });
+  }, [ppk]);
+
+  if (!reviews.length) return <p>리뷰가 없습니다</p>;
+  if (!analysis) return <p>AI 분석 중...</p>;
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>{reviews[0]?.product_name} 리뷰 분석</h2>
+    <div className="analysis-page">
 
-      <section>
-        <h3>총 리뷰 {reviews.length}개</h3>
-      </section>
+      <h2 className="page-title">
+        {analysis.productName} AI 리뷰 분석
+      </h2>
 
-      <section>
-        <h3>리뷰 목록</h3>
-        {reviews.map(r => (
-          <div key={r.id} style={{ borderBottom: "1px solid #ddd", padding: 10 }}>
-            <p><b>{r.title}</b></p>
-            <p>{r.content}</p>
+      {/* AI 분석 요약 카드 */}
+      <div className="analysis-grid">
+
+        <div className="analysis-card">
+          <h3>🍽 맛 키워드</h3>
+          <ul>
+            {analysis.tasteKeywords.map((v, i) => <li key={i}>{v}</li>)}
+          </ul>
+        </div>
+
+        <div className="analysis-card">
+          <h3>👍 고객이 좋아한 포인트</h3>
+          <ul>
+            {analysis.positivePoints.map((v, i) => <li key={i}>{v}</li>)}
+          </ul>
+        </div>
+
+        <div className="analysis-card">
+          <h3>⚠ 품질 문제</h3>
+          <ul>
+            {analysis.qualityIssues.map((v, i) => <li key={i}>{v}</li>)}
+          </ul>
+        </div>
+
+        <div className="analysis-card score-card">
+          <h3>😊 긍정 / 😡 부정</h3>
+          <p className="positive-score">긍정 {analysis.positiveCount}개</p>
+          <p className="negative-score">부정 {analysis.negativeCount}개</p>
+        </div>
+
+      </div>
+
+      {/* 실제 리뷰 */}
+      <h3 className="review-title">📌 전체 리뷰({reviews.length})</h3>
+
+      <div className="review-list">
+        {reviews.map((r) => (
+          <div key={r.id} className="review-item">
+            <p className="review-title-text">{r.title}</p>
+            <p className="review-content">{r.content}</p>
 
             {r.images?.length > 0 && (
-              <div style={{ display: "flex", gap: 10 }}>
+              <div className="review-images">
                 {r.images.map((img, i) => (
-                  <img key={i} src={img} width={80} alt="" />
+                  <img key={i} src={img} alt="" />
                 ))}
               </div>
             )}
           </div>
         ))}
-      </section>
+      </div>
+
     </div>
   );
 }

@@ -1,0 +1,81 @@
+.analysis-page {
+  max-width: 900px;
+  margin: auto;
+  padding: 24px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.analysis-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+}
+
+.analysis-card h3 {
+  margin-bottom: 10px;
+}
+
+.score-card {
+  text-align: center;
+}
+
+.positive-score {
+  color: #2ecc71;
+  font-size: 18px;
+}
+
+.negative-score {
+  color: #e74c3c;
+  font-size: 18px;
+}
+
+/* 리뷰 리스트 */
+.review-title {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.review-item {
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #ececec;
+}
+
+.review-title-text {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.review-images {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.review-images img {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+}

@@ -1,0 +1,113 @@
+.review-dashboard {
+  padding: 24px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+/* 요약 카드 3개 */
+.summary-cards {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  flex: 1;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  border: 1px solid #ececec;
+  box-shadow: 0px 3px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px);
+}
+
+.summary-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.positive {
+  color: #2ecc71;
+}
+
+.negative {
+  color: #e74c3c;
+}
+
+/* TOP 5 */
+.top-products-box {
+  background: #f8f9ff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 28px;
+}
+
+.top-products-box ul {
+  margin-top: 10px;
+  padding-left: 18px;
+}
+
+.top-products-box li {
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+/* 검색 */
+.search-box {
+  margin-bottom: 24px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 상품 카드 */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.product-card {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.12);
+}
+
+.product-card h4 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.no-result {
+  text-align: center;
+  color: #888;
+  padding: 20px 0;
+}
