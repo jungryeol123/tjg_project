@@ -196,7 +196,10 @@ useEffect(() => {
               <ul>
                 {order.orderDetails.map((item) => (
                   <li className="mypage-product-list" key={item.id}>
-                    <img className="mypage-product-img" src={`/images/productImages/${item.product.imageUrl}`} alt="product" />
+                    <div className="mypage-product-img-container">
+                      <img className="mypage-product-img" src={`/images/productImages/${item.product.imageUrl}`} alt="product" />
+                      { item.product.count === 0 && <div class="sold-out">SOLD OUT</div> }
+                    </div>
                     <div className="mypage-product-info">
                       <div>
                         {item.productName}
@@ -205,7 +208,7 @@ useEffect(() => {
                     </div>
                     <div className="mypage-btn">
                       <button onClick={() => {navigate(`/products/${item.ppk}`)}}>상품 바로가기</button>
-                      <button onClick={() => {handleAddCart(item)}}>장바구니</button>
+                      <button onClick={() => {handleAddCart(item)}} disabled={item.product.count === 0}>장바구니</button>
                     </div>
                   </li>
                 ))}
