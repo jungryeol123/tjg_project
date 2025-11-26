@@ -65,6 +65,7 @@ import { parseJwt } from "features/auth/parseJwt.js";
 export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
+  const productInfo = cartList.map((item) => ({pid: item.product.id, qty: item.qty}));
   // const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   // const id = loginInfo.id;
   let id = -1;
@@ -80,12 +81,12 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId)
     itemName: cartList[0].product.productName,
     id,
     qty,
-    totalAmount: cartList[0].product.price * qty,
+    totalAmount: paymentInfo.totalAmount,
     receiver,
     paymentInfo,
     cidList,
     couponId,
-    pid: cartList[0].product.id
+    productInfo
   };
 
   try {

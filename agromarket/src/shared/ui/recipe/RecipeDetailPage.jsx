@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 import {
   getRecipeDetailAPI,
   postRecipeReviewAPI,
@@ -18,7 +19,7 @@ export default function RecipeDetailPage() {
 
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   const isLoggedIn = !!loginInfo;
-  const userId = loginInfo?.id;
+  // const userId = loginInfo?.id;
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
@@ -81,25 +82,38 @@ export default function RecipeDetailPage() {
 
   // 후기 등록
   const handleSubmitReview = async () => {
-    if (newRating === 0) return alert("별점을 선택해주세요!");
+    if (newRating === 0) return Swal.fire({
+            icon: 'warning',
+            title: '⚠ 필수 입력',
+            text: "별점을 선택해주세요!",
+            confirmButtonText: '확인'
+          });
     if (newContent.trim().length < 2)
-      return alert("후기 내용을 입력해주세요.");
-
+      return Swal.fire({
+            icon: 'warning',
+            title: '⚠ 필수 입력',
+            text: "후기 내용을 입력해주세요.",
+            confirmButtonText: '확인'
+          });
 
     const res = await postRecipeReviewAPI(
       id,
       newRating,
       newContent
     );
-    console.log("res", res.reviewId);
 
     if (res.status === 200) {
-      alert("후기가 등록되었습니다!");
+      Swal.fire({
+              icon: 'success',
+              title: '✅ 등록 완료',
+              text: "후기가 등록되었습니다!",
+              confirmButtonText: '확인'
+            });
       // 화면 즉시 반영
       setReviews((prev) => [
         {
-          id: res.reviewId,
-          username: loginInfo.name,
+          id: res.data.recipeReview.user.id,
+          username: res.data.recipeReview.user.name,
           rating: newRating,
           content: newContent,
           createdAt: new Date().toISOString(),
@@ -112,8 +126,6 @@ export default function RecipeDetailPage() {
       setCurrentPage(1);
     }
   };
-
-  console.log("relatedProducts", relatedProducts);
 
   if (!recipe) return <div>로딩중...</div>;
 
@@ -245,7 +257,7 @@ export default function RecipeDetailPage() {
                 <span className="review-rating">⭐ {rev.rating}</span>
               </div>
               <div className="review-content">{rev.content}</div>
-              <div className="review-date">{rev.createdAt}</div>
+              <div className="review-date">{new Date((rev.createdAt)).toLocaleString('ko-KR')}</div>
             </li>
           ))}
         </ul>
