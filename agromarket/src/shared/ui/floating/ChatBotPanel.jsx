@@ -1,6 +1,7 @@
 // shared/ui/floating/ChatBotPanel.jsx
 
 import React, { useState, useRef, useEffect } from "react";
+import { parseJwt } from "features/auth/parseJwt";
 import axios from "axios";
 import "./ChatBotPanel.scss";
 
@@ -9,12 +10,23 @@ export default function ChatBotPanel({ onClose }) {
     { from: "bot", type: "text", text: "안녕하세요! 무엇을 도와드릴까요? 😊" }
   ]);
   const [input, setInput] = useState("");
+  const [userId, setUserId] = useState("");
 
   const chatEndRef = useRef(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("loginInfo");
+    if (stored) {
+      const { accessToken } = JSON.parse(stored);
+      const payload = parseJwt(accessToken);
+
+      setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
+    }
+  }, [])
 
   // 배송 상태 텍스트 라벨
   const statusLabel = (status) => {
@@ -48,7 +60,7 @@ export default function ChatBotPanel({ onClose }) {
 
     try {
       const res = await axios.post("/api/chatbot/ask", {
-        upk: JSON.parse(localStorage.getItem("loginInfo"))?.id,
+        upk: userId,
         message: sendText,
       });
 
