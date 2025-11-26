@@ -45,12 +45,6 @@ export default function LogoSearch() {
       </div>
 
       <div className="etc">
-        <span>
-          <CiLocationOn />
-        </span>
-        <span>
-          <FaRegHeart />
-        </span>
         <span className="etc__cart-link">
           <Link to="/cart"><IoCartOutline /></Link>
           <span className="etc__cart-count">{cartCount}</span>

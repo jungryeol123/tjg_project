@@ -7,7 +7,6 @@ import { setNoticeListAPI } from "features/catalog/notice/noticeAPI";
 export function NoticeList() {
   const noticeList = useSelector((state) => state.notice.noticeList);
   const dispatch = useDispatch();
-  // const [noticeList, setNoticeList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
