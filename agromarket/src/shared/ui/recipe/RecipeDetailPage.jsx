@@ -91,7 +91,7 @@ export default function RecipeDetailPage() {
       newRating,
       newContent
     );
-    console.log("res", res.status);
+    console.log("res", res.reviewId);
 
     if (res.status === 200) {
       alert("후기가 등록되었습니다!");
