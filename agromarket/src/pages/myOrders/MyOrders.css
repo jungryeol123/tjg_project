@@ -1,0 +1,120 @@
+.mypage-container {
+    min-width: 700px;
+    max-width: 800px;
+    margin: 50px auto;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.mypage-container .mypage-title {
+    margin-bottom: 24px;
+    color: #4B3EFF;
+}
+
+.mypage-container .mypage-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.mypage-container .mypage-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.mypage-container .mypage-body {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.mypage-container .mypage-couponList {
+    list-style: none;
+    padding: 0;
+}
+
+.mypage-container .mypage-couponItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: #fafafa;
+}
+
+.mypage-container .mypage-deleteBtn {
+    background: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.mypage-container .mypage-product-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 20px;
+    padding-left: 20px;
+    box-shadow: 
+    0 1px 3px rgba(0,0,0,0.12),
+    0 1px 2px rgba(0,0,0,0.24);
+}
+
+.mypage-container .mypage-order-code {
+    color : #aaa;
+    font-size: 0.8rem;
+}
+
+.mypage-container .mypage-order-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mypage-container .mypage-product-img {
+    width: 100px;
+}
+
+.mypage-container .mypage-info {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 
+    0 1px 3px rgba(0,0,0,0.12),
+    0 1px 2px rgba(0,0,0,0.24);
+}
+
+.mypage-container .mypage-order-title-name {
+    font-size: 1.5rem;
+}
+
+.mypage-container .mypage-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mypage-container .mypage-btn>button {
+    background: #4949b1ff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.mypage-container .mypage-product-info {
+    width: 300px;
+    padding: 0px 20px;
+}

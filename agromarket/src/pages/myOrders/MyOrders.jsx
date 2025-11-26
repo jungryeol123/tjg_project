@@ -1,8 +1,12 @@
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { parseJwt } from "features/auth/parseJwt";
+import { addCart } from "features/cart/cartAPI.js";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import Swal from "sweetalert2";
+import './MyOrders.css'
 
 
 export function MyOrders() {
@@ -10,6 +14,8 @@ export function MyOrders() {
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   
   // /** 🔹 로그인 ID 읽기 */
   // useEffect(() => {
@@ -38,6 +44,8 @@ export function MyOrders() {
     const fetchOrders = async () => {
       try {
         const res = await axios.get(`http://localhost:8080/orders/my/${userId}`);
+        console.log(res.data);
+        
         setOrders(res.data);
       } catch (err) {
         console.error("주문 내역 조회 실패:", err);
@@ -142,42 +150,79 @@ useEffect(() => {
     }
   };
 
+  const handleAddCart = async(item) => {
+    const isNew = await dispatch(addCart(item.ppk, 1));
+
+    // 신규 상품 등록시
+    if (isNew) {
+      // 장바구니 확인
+      Swal.fire({
+        icon: 'success',
+        title: '✅ 장바구니 등록',
+        text: item.productName + "가 장바구니에 등록이 완료되었습니다.",
+        confirmButtonText: '확인'
+      });
+    } else {
+      Swal.fire({
+        icon: 'success',
+        title: '✅ 장바구니 등록',
+        text: item.productName + "의 수량이 증가 되었습니다.",
+        confirmButtonText: '확인'
+      });
+    }
+  }
+
   if (loading) return <p>⌛ 데이터 불러오는 중...</p>;
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>🧾 내 주문 내역</h2>
+    <div className="mypage-container">
+      <h2 className="mypage-title">🧾 내 주문 내역</h2>
 
       {/* 주문 내역 */}
       {orders.length === 0 ? (
         <p>주문 내역이 없습니다.</p>
       ) : (
         orders.map((order) => (
-          <div key={order.id} style={styles.card}>
+          <div key={order.id} className="mypage-card">
 
-            <div style={styles.body}>
-              <h4 style={{ marginTop: "10px" }}>📦 주문 상품</h4>
-              <ul style={{ listStyle: "none", padding: 0 }}>
+            <div className="mypage-body">
+              <div className="mypage-order-title">
+                <h4 className="mypage-order-title-name">📦 주문 상품</h4>
+                <div>
+                  <b>주문일자:</b> {new Date(order.odate).toLocaleString()}
+                  <p className="mypage-order-code"><b>주문 번호:</b> {order.orderCode}</p>
+                </div>
+              </div>
+              <ul>
                 {order.orderDetails.map((item) => (
-                  <li key={item.id}>
-                    {item.productName} — <b>{item.qty}</b>개 /{" "}
-                    {item.price.toLocaleString()}원
+                  <li className="mypage-product-list" key={item.id}>
+                    <img className="mypage-product-img" src={`/images/productImages/${item.product.imageUrl}`} alt="product" />
+                    <div className="mypage-product-info">
+                      <div>
+                        {item.productName}
+                      </div>
+                        {item.price.toLocaleString()}원 · <b>{item.qty}</b>개
+                    </div>
+                    <div className="mypage-btn">
+                      <button onClick={() => {navigate(`/products/${item.ppk}`)}}>상품 바로가기</button>
+                      <button onClick={() => {handleAddCart(item)}}>장바구니</button>
+                    </div>
                   </li>
                 ))}
               </ul>
-              <p><b>수령인:</b> {order.receiverName} / {order.receiverPhone}</p>
-              <p><b>주소:</b> {order.address1} {order.address2} ({order.zipcode})</p>
-              <p><b>결제 금액:</b> {order.totalAmount.toLocaleString()}원</p>
+              <div className="mypage-info">
+                <p><b>수령인:</b> {order.receiverName} / {order.receiverPhone}</p>
+                <p><b>주소:</b> {order.address1} {order.address2} ({order.zipcode})</p>
+                <p><b>결제 금액:</b> {order.totalAmount.toLocaleString()}원</p>
+              </div>
 
             </div>
-            <div style={styles.body}>
-              <p style={styles.date}>
-                <b>주문일자:</b> {new Date(order.odate).toLocaleString()}
+            <div className="mypage-body">
+              <p>
               </p>
-              <p style={{fontSize:13}}><b>주문 번호:</b> {order.orderCode}</p>
             </div>
                 <button
-                  style={styles.deleteBtn }
+                  className="mypage-deleteBtn"
                   
                   onClick={() => handleDeleteOrder(order.orderCode)}
                 >
@@ -188,21 +233,21 @@ useEffect(() => {
       )}
 
       {/* 받은 쿠폰 목록 */}
-      <div style={{ marginTop: "40px" }}>
-        <h2 style={styles.title}>🎟️ 받은 쿠폰</h2>
+      <div>
+        <h2 className="mypage-title">🎟️ 받은 쿠폰</h2>
 
         {coupons.length === 0 ? (
           <p>받은 쿠폰이 없습니다.</p>
         ) : (
-          <ul style={styles.couponList}>
+          <ul className="mypage-couponList">
           
             { coupons.map((c) => (
-              <li key={c.id} style={styles.couponItem}>
+              <li key={c.id} className="mypage-couponItem">
                 <span>
                   <b>{c.coupon.couponDcRate}% 할인 쿠폰</b> — 수량: {c.qty}
                 </span>
                 <button
-                  style={styles.deleteBtn}
+                  className="mypage-deleteBtn"
                   onClick={() => handleDeleteCoupon(c.coupon.couponId)}
                 >
                   삭제
@@ -216,57 +261,3 @@ useEffect(() => {
   );
 }
 
-
-const styles = {
-  container: {
-    maxWidth: "800px",
-    margin: "50px auto",
-    fontFamily: "'Pretendard', sans-serif",
-  },
-  title: {
-    marginBottom: "24px",
-    color: "#4B3EFF",
-  },
-  card: {
-    border: "1px solid #e0e0e0",
-    borderRadius: "12px",
-    padding: "20px",
-    marginBottom: "20px",
-    backgroundColor: "#fff",
-  },
-  header: {
-    borderBottom: "1px solid #eee",
-    marginBottom: "12px",
-    paddingBottom: "8px",
-  },
-  date: {
-    fontSize: "0.9rem",
-    // color: "#555",
-  },
-  body: {
-    fontSize: "1rem",
-    lineHeight: "1.6",
-  },
-  couponList: {
-    listStyle: "none",
-    padding: 0,
-  },
-  couponItem: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "12px",
-    border: "1px solid #ddd",
-    borderRadius: "10px",
-    marginBottom: "10px",
-    background: "#fafafa",
-  },
-  deleteBtn: {
-    background: "#ff4d4f",
-    color: "white",
-    border: "none",
-    padding: "6px 12px",
-    borderRadius: "6px",
-    cursor: "pointer",
-  },
-};
