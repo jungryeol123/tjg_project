@@ -76,10 +76,10 @@ function App() {
       .catch((err) => console.error("❌ CSRF Token init failed:", err));
   }, []);
 
-  // // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
-  // if (!isIntroFinished) {
-  //   return <IntroAnimation />;
-  // }
+  // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
+  if (!isIntroFinished) {
+    return <IntroAnimation />;
+  }
 
   return (
     <BrowserRouter>

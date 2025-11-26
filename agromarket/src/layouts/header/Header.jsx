@@ -2,8 +2,8 @@
 import React from "react";
 import "./Header.scss";
 import TopBar from "layouts/topbar/TopBar";
-import LogoSearch from "shared/ui/Header/components/logoSearch/LogoSearch";
 import CategoryNav from "shared/ui/Header/components/categoryNav/CategoryNav";
+import LogoSearch from "layouts/logoSearch/LogoSearch";
 
 
 export default function Header() {
