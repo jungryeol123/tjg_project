@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
-import { Layout } from "layouts/Layout";
 import Home from "pages/Home";
 import { Delivery } from "pages/Delivery";
 import { Login } from "pages/Login";
@@ -32,13 +31,13 @@ import RecipeDetailPage from "shared/ui/recipe/RecipeDetailPage";
 import { Coupon } from "pages/Coupon";
 import ForecastPage from "pages/administration/ForecastPage";
 import ConversionPage from "pages/administration/ConversionPage";
-
 import AdminLayout from "pages/administration/AdminLayout";
 import { AdminProductList } from "pages/administration/AdminProductList";
 import PricingConversionPage from "pages/administration/PricingConversionPage";
 import ProductPricingDetailPage from "pages/administration/ProductPricingDetailPage";
 import ReviewListPage from "pages/reviewAnalysic/ReviewListPage";
 import ReviewAnalysisPage from "pages/reviewAnalysic/ReviewAnalysisPage";
+import { Layout } from "layouts/layout/Layout";
 function App() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const dispatch = useDispatch();
@@ -93,11 +92,9 @@ function App() {
           <Route path="/find-user-id" element={<FindUserId />} />
           <Route path="/find-password" element={<FindPassword />} />
           <Route path="/signup" element={<Signup />} />
-          {/* <Route path="/detail" element={<ProductDetail/>} /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckOut />} />
           <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
-          {/* <Route path="/pay" element={<PaymentButton/>} /> */}
           <Route path="/" element={<PaymentButton />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
