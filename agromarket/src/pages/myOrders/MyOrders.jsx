@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { parseJwt } from "features/auth/parseJwt";
+import Swal from "sweetalert2";
 
 
 export function MyOrders() {
@@ -63,9 +64,10 @@ useEffect(() => {
 
 
       const res = await axios.get(`/coupon/my/${userId}`);
+      const couponList = res.data.filter(item => item.isUsed === false)
 
       console.log("🔥 백엔드 응답:", res.data);
-      setCoupons(Array.isArray(res.data) ? res.data : []);
+      setCoupons(Array.isArray(couponList) ? couponList : []);
     } catch (err) {
       console.error("쿠폰 조회 실패:", err);
     } finally {
@@ -78,8 +80,7 @@ useEffect(() => {
 
   /** 주문내역 삭제 기능 */
   const handleDeleteOrder = async (orderCode) => {
-    if(!window.confirm("주문 내역을 삭제하시겠습니까?")) return;
-
+    // if(!window.confirm("주문 내역을 삭제하시겠습니까?")) return;
     try {
       const res = await axios.delete(
         `/orders/deleteOrder/${userId}/${orderCode}`,
@@ -91,34 +92,53 @@ useEffect(() => {
       }
       );
       if (res.status === 200) {
-        alert("주문내역이 삭제되었습니다.")
+        Swal.fire({
+                icon: 'success',
+                title: '✅삭제 완료',
+                text: "주문 내역이 삭제되었습니다.",
+                confirmButtonText: '확인'
+              });
         setOrders(orders.filter((o) => o.orderCode !== orderCode));
       }
     } catch (err) {
       console.error("주문내역 삭제 실패:",err);
-      alert("주문내역 삭제 실패!");
+      Swal.fire({
+              icon: 'error',
+              title: '⚠ 삭제 실패',
+              text: "주문 내역 삭제에 실패했습니다.!",
+              confirmButtonText: '확인'
+            });;
     }
   };
 
 
   /** 🔹 쿠폰 삭제 기능 */
   const handleDeleteCoupon = async (couponId) => {
-    if (!window.confirm("정말 쿠폰을 삭제하시겠습니까?")) return;
-
+    // if (!window.confirm("정말 쿠폰을 삭제하시겠습니까?")) return;
     try {
       const res = await axios.delete(
         `/coupon/deleteCoupon/${userId}/${couponId}`
       );
 
       if (res.status === 200) {
-        alert("쿠폰이 삭제되었습니다.");
+        Swal.fire({
+                icon: 'success',
+                title: '✅삭제 완료',
+                text: "쿠폰이 삭제 되었습니다.",
+                confirmButtonText: '확인'
+              });;
 
         // 🔄 화면에서도 즉시 삭제
         setCoupons(coupons.filter((c) => c.coupon.couponId !== couponId));
       }
     } catch (err) {
       console.error("쿠폰 삭제 실패:", err);
-      alert("쿠폰 삭제 실패!");
+      Swal.fire({
+              icon: 'error',
+              title: '⚠ 삭제 실패',
+              text: "쿠폰 삭제에 실패했습니다.",
+              confirmButtonText: '확인'
+            });;
     }
   };
 
@@ -134,18 +154,8 @@ useEffect(() => {
       ) : (
         orders.map((order) => (
           <div key={order.id} style={styles.card}>
-            <div style={styles.header}>
-              <h3>주문번호: {order.orderCode}</h3>
-              <p style={styles.date}>
-                주문일자: {new Date(order.odate).toLocaleString()}
-              </p>
-            </div>
 
             <div style={styles.body}>
-              <p><b>수령인:</b> {order.receiverName} / {order.receiverPhone}</p>
-              <p><b>주소:</b> {order.address1} {order.address2} ({order.zipcode})</p>
-              <p><b>결제 금액:</b> {order.totalAmount.toLocaleString()}원</p>
-
               <h4 style={{ marginTop: "10px" }}>📦 주문 상품</h4>
               <ul style={{ listStyle: "none", padding: 0 }}>
                 {order.orderDetails.map((item) => (
@@ -154,6 +164,18 @@ useEffect(() => {
                     {item.price.toLocaleString()}원
                   </li>
                 ))}
+              </ul>
+              <p><b>수령인:</b> {order.receiverName} / {order.receiverPhone}</p>
+              <p><b>주소:</b> {order.address1} {order.address2} ({order.zipcode})</p>
+              <p><b>결제 금액:</b> {order.totalAmount.toLocaleString()}원</p>
+
+            </div>
+            <div style={styles.body}>
+              <p style={styles.date}>
+                <b>주문일자:</b> {new Date(order.odate).toLocaleString()}
+              </p>
+              <p style={{fontSize:13}}><b>주문 번호:</b> {order.orderCode}</p>
+            </div>
                 <button
                   style={styles.deleteBtn }
                   
@@ -161,8 +183,6 @@ useEffect(() => {
                 >
                     삭제
                 </button>
-              </ul>
-            </div>
           </div>
         ))
       )}
@@ -175,7 +195,8 @@ useEffect(() => {
           <p>받은 쿠폰이 없습니다.</p>
         ) : (
           <ul style={styles.couponList}>
-            {coupons.map((c) => (
+          
+            { coupons.map((c) => (
               <li key={c.id} style={styles.couponItem}>
                 <span>
                   <b>{c.coupon.couponDcRate}% 할인 쿠폰</b> — 수량: {c.qty}
@@ -220,7 +241,7 @@ const styles = {
   },
   date: {
     fontSize: "0.9rem",
-    color: "#555",
+    // color: "#555",
   },
   body: {
     fontSize: "1rem",
