@@ -290,39 +290,6 @@
   opacity: 0.6;
 }
 
-/* 찜하기 버튼 */
-.btn-wish {
-  width: 110px;
-  height: 52px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  background: #fff;
-  color: #e60023;
-  border: 1px solid #e60023;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-wish:hover {
-  background: #ffe5ea;
-}
-
-/* 찜 상태 (활성) */
-.btn-wish.active {
-  background: #e60023;
-  color: #fff;
-  border-color: #e60023;
-}
-
-.btn-wish.active:hover {
-  background: #cc001e;
-}
-
 /* 탭 영역 */
 .product-tabs {
   width: 100%;

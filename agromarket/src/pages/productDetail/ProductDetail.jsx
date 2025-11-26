@@ -16,7 +16,6 @@ import Swal from 'sweetalert2';
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
-  const [isWished, setIsWished] = useState(false); // 찜 상태 관리
   const [isFirstEffectComplete, setIsFirstEffectComplete] = useState(false);
   const [sentViewLog, setSentViewLog] = useState(false);
   const [count, setCount] = useState(1); // 수량 관리
@@ -72,11 +71,6 @@ export function ProductDetail() {
 
   // 레시피 토글
   const [showRecipe, setShowRecipe] = useState(false);
-
-  // 좋아요 버튼 클릭 이벤트
-  const toggleWish = () => {
-    setIsWished((prev) => !prev);
-  };
 
   // 구매 수량 감소 버튼 클릭 이벤트
   const handleDecrease = () => {
@@ -316,16 +310,6 @@ export function ProductDetail() {
               </ul>
             </div>
             <div className="product-buttons">
-              <button
-                className={`btn-wish ${isWished ? "active" : ""}`}
-                onClick={toggleWish}
-              >
-                {isWished ? (
-                  <AiFillHeart size={20} />
-                ) : (
-                  <AiOutlineHeart size={20} />
-                )}
-              </button>
               <button className="btn-cart" onClick={handleAddCart} disabled={product.count === 0} >
                 장바구니
               </button>
