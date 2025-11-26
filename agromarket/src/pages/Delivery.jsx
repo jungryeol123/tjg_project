@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import CspTest from "features/CspTest";
 import "./Delivery.scss";
 
 export function Delivery() {
@@ -106,7 +105,6 @@ export function Delivery() {
         <h2>📍 Candy 본사 위치</h2>
         <div ref={mapRef} className="map-container"></div>
       </section>
-         <CspTest />
     </div>
   );
 }

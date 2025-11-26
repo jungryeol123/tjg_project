@@ -1,9 +1,8 @@
-// src/ui/Header/components/topbar/TopBar.jsx
 import React from "react";
 import "./TopBar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LuCandy } from "react-icons/lu";
-import { useDispatch,useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { api } from "features/auth/axios";
 
 
@@ -17,7 +16,6 @@ export default function TopBar() {
     localStorage.removeItem("loginInfo");
     window.location.href = "/";
   } catch (err) {
-    console.error("로그아웃 실패:", err);
   }
 };
 
