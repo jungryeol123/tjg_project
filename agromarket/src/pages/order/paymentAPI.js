@@ -100,24 +100,32 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId)
 };
 
 /** ✅ 네이버페이 결제 요청 */
-export const getNaverPayment = async (receiver, paymentInfo, cartList) => {
+export const getNaverPayment = async (receiver, paymentInfo, cartList, couponId) => {
   const cidList = cartList.map((item) => item.cid);
   const totalAmount = cartList.reduce(
     (sum, item) => sum + item.product.price * item.qty,
     0
   );
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
+  const productInfo = cartList.map((item) => ({pid: item.product.id, qty: item.qty}));
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
-  const id = loginInfo.id;
-  // 1️⃣ 백엔드에 주문 생성 요청
+  const stored = localStorage.getItem("loginInfo");
+  let id = -1;
+  if (stored) {
+    const { accessToken } = JSON.parse(stored);
+    const payload = parseJwt(accessToken);
+    id = payload.id;
+  }  // 1️⃣ 백엔드에 주문 생성 요청
   const data = {
     itemName: cartList[0].product.productName,
     id,
     qty,
-    totalAmount: cartList[0].product.price * qty,
+    totalAmount: paymentInfo.totalAmount,
     receiver,
     paymentInfo,
     cidList,
+    couponId,
+    productInfo
   };
 
   try {
@@ -139,8 +147,8 @@ export const getNaverPayment = async (receiver, paymentInfo, cartList) => {
       merchantPayKey,
       productName: "AgroMarket 상품 결제",
       productCount: cartList.length.toString(),
-      totalPayAmount: totalAmount.toString(),
-      taxScopeAmount: totalAmount.toString(),
+      totalPayAmount: paymentInfo.totalAmount.toString(),
+      taxScopeAmount: paymentInfo.totalAmount.toString(),
       taxExScopeAmount: "0",
       returnUrl: `http://localhost:8080/payment/naver/return?merchantPayKey=${merchantPayKey}`,
     });
