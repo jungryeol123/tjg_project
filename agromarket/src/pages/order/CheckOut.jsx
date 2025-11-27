@@ -176,7 +176,7 @@ export function CheckOut() {
         }
         const selected = coupons.find(c => c.id == value);
         const dcRate = selected.coupon.couponDcRate;
-        const finalPrice = Math.round((totalPrice - totalDcPrice)*dcRate*0.01);
+        const finalPrice = Math.floor((totalPrice - totalDcPrice)*dcRate*0.01);
 
         if(dcRate === 30) {
             finalPrice >= 15000 
