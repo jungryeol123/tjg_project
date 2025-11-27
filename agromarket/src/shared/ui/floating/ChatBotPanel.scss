@@ -59,6 +59,23 @@
   background: #7b5cff;
   color: white;
   margin-left: auto;
+  // text-align: end;
+}
+
+.chat-order-block {
+  max-width: 80%;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  line-height: 1.4;
+  font-size: 14px;
+  background: #eeeeee;
+  margin-right: auto;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
 }
 
 /* 입력창 */
@@ -85,4 +102,34 @@
   padding: 0 14px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.order-img {
+  width: 100px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 2px 0px;
+}
+
+.order-info-detail {
+  display: flex;
+}
+
+.order-info-left {
+  width: 35%;
+  font-weight: 600;
+}
+
+.order-info-right {
+  width: 65%;
+  font-size: 12.5px;
+}
+
+.order-title {
+  font-size: 15px;
+  font-weight: 600;
 }

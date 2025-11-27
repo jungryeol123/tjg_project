@@ -105,12 +105,24 @@ export default function ChatBotPanel({ onClose }) {
 
             return (
               <div key={idx} className="chat-order-block">
+                <div className="order-title">🛒 주문 상품</div>
+
+                {o.orderDetails?.map((d) => (
+                  <div key={d.id} className="order-item">
+                    <img className="order-img" src={`/images/productImages/${d.product?.imageUrl}`} alt="" />
+                    <div className="order-info">
+                      <div className="name">{d.product?.productName}</div>
+                      <div className="qty">{d.qty}개</div>
+                      <div className="price">{d.product?.price?.toLocaleString()}원</div>
+                    </div>
+                  </div>
+                ))}
                 <div className="order-title">📦 주문 정보</div>
 
                 <div className="order-info-box">
-                  <div>주문번호 : {o.orderCode}</div>
-                  <div>주문일자 : {new Date(o.odate).toLocaleString()}</div>
-                  <div>배송상태 : {statusLabel(o.deliveryStatus)}</div>
+                  <div className="order-info-detail"><div className="order-info-left">배송상태 : </div><div className="order-info-right">{statusLabel(o.deliveryStatus)}</div></div>
+                  <div className="order-info-detail"><div className="order-info-left">주문일자 : </div><div className="order-info-right">{new Date(o.odate).toLocaleString()}</div></div>
+                  <div className="order-info-detail"><div className="order-info-left">주문번호 : </div><div className="order-info-right">{o.orderCode}</div></div>
 
                   {o.deliveryStatus === "READY" && (
                     <div>출발 예정 : {getEta(o.odate)}</div>
@@ -125,18 +137,6 @@ export default function ChatBotPanel({ onClose }) {
                   )}
                 </div>
 
-                <div className="order-title">🛒 주문 상품</div>
-
-                {o.orderDetails?.map((d) => (
-                  <div key={d.id} className="order-item">
-                    <img className="order-img" src={d.product?.imageUrl} alt="" />
-                    <div className="order-info">
-                      <div className="name">{d.product?.productName}</div>
-                      <div className="qty">{d.qty}개</div>
-                      <div className="price">{d.product?.price?.toLocaleString()}원</div>
-                    </div>
-                  </div>
-                ))}
               </div>
             );
           }
