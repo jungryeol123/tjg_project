@@ -78,7 +78,6 @@ export function Signup() {
     } 
     
     const [form, setForm] = useState({...initForm(initArray), emailDomain: "선택하기"});
-    const [errors, setErrors] = useState({...initForm(initArray), emailDomain: ""});
     
     const refs = useMemo(() => {    //Hooks 비동기식 처리 진행
         return initArray.reduce((acc,cur) => {
@@ -95,9 +94,7 @@ export function Signup() {
         }
 
         setForm({...form,[name]:value});    //스프레드 연산자 이용
-        // setForm(prev => ({...prev, [name]:value})); //callback 함수 이용
-        setErrors({...initForm(initArray), emailDomain: ""});
-        
+
         // ✅ 자동 포커스 이동
         if (name === "dateYear" && value.length === 4) {
             refs.dateMonthRef.current.focus();
@@ -108,11 +105,7 @@ export function Signup() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const param = {
-            refs: refs,
-            setErrors: setErrors
-        };
-        
+
         let formData;
 
         if(form.emailDomain === "") {
@@ -155,7 +148,7 @@ export function Signup() {
             return;
         }
 
-        const result = await dispatch(getSignup(formData, param));
+        const result = await dispatch(getSignup(formData));
         
         if(result) {
             Swal.fire({
@@ -175,8 +168,6 @@ export function Signup() {
     }
     
     const [userFullAddress, setFullAddress] = useState(""); //유저 주소
-    const [userZoneCode, setUserZoneCode] = useState(""); //유저 우편번호
-    const [isDaumPostcodeOpen, setIsDaumPostcodeOpen] = useState(false);
     //다음 우편번호 찾기 API사용
     const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
 
@@ -197,7 +188,6 @@ export function Signup() {
         }
 
         setFullAddress(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-        setUserZoneCode(zonecode);
         setForm({...form, zonecode:zonecode});
     };
 

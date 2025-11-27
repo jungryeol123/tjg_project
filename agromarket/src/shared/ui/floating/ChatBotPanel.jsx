@@ -105,7 +105,10 @@ export default function ChatBotPanel({ onClose }) {
 
             return (
               <div key={idx} className="chat-order-block">
-                <div className="order-title">🛒 주문 상품</div>
+                <div className="order-top">
+                  <div className="order-top-num"><div className="order-top-num-left">주문번호 : </div><div className="order-top-num-right">{o.orderCode}</div></div>
+                  <div className="order-title">🛒주문상품</div>
+                </div>
 
                 {o.orderDetails?.map((d) => (
                   <div key={d.id} className="order-item">
@@ -122,18 +125,17 @@ export default function ChatBotPanel({ onClose }) {
                 <div className="order-info-box">
                   <div className="order-info-detail"><div className="order-info-left">배송상태 : </div><div className="order-info-right">{statusLabel(o.deliveryStatus)}</div></div>
                   <div className="order-info-detail"><div className="order-info-left">주문일자 : </div><div className="order-info-right">{new Date(o.odate).toLocaleString()}</div></div>
-                  <div className="order-info-detail"><div className="order-info-left">주문번호 : </div><div className="order-info-right">{o.orderCode}</div></div>
 
                   {o.deliveryStatus === "READY" && (
-                    <div>출발 예정 : {getEta(o.odate)}</div>
+                    <div className="order-info-detail"><div className="order-info-left">출발 예정 : </div><div className="order-info-right">{getEta(o.odate)}</div></div>
                   )}
 
                   {o.deliveryStatus === "SHIPPING" && (
-                    <div>도착 예정 : {o.eta ? new Date(o.eta).toLocaleString() : getEta(o.odate)}</div>
+                    <div className="order-info-detail"><div className="order-info-left">도착 예정 : </div><div className="order-info-right">{o.eta ? new Date(o.eta).toLocaleString() : getEta(o.odate)}</div></div>
                   )}
 
                   {o.deliveryStatus === "DELIVERED" && (
-                    <div>배송 완료일 : {o.deliveredAt ? new Date(o.deliveredAt).toLocaleString() : new Date(o.odate).toLocaleString()}</div>
+                    <div className="order-info-detail"><div className="order-info-left">배송 완료일 : </div><div className="order-info-right">{o.deliveredAt ? new Date(o.deliveredAt).toLocaleString() : new Date(o.odate).toLocaleString()}</div></div>
                   )}
                 </div>
 

@@ -111,7 +111,7 @@
 .order-item {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   margin: 2px 0px;
 }
 
@@ -121,7 +121,7 @@
 
 .order-info-left {
   width: 35%;
-  font-weight: 600;
+  font-weight: 450;
 }
 
 .order-info-right {
@@ -129,7 +129,29 @@
   font-size: 12.5px;
 }
 
+.order-top {
+  display: flex;
+  flex-direction: column;
+}
+
 .order-title {
-  font-size: 15px;
+  font-size: 16px;
+  margin: 5px 0px;
   font-weight: 600;
+}
+
+.order-top-num {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.order-top-num-left {
+  width: 35%;
+}
+
+.order-top-num-right {
+  font-size: 10px;
 }
