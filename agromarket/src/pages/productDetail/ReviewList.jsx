@@ -1,30 +1,18 @@
+import { useSelector } from "react-redux";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./ReviewList.scss";
-import { useSelector } from "react-redux";
 
 export function ReviewList({ id }) {
   const reviewsAll = useSelector((state) => state.product.productReviewList);
   const [reviews, setReviews] = useState([]);
   const [reviewImages, setReviewImages] = useState([]);
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const isFirstRender = useRef(true);
   // ✅ 부모요소 ref 추가
   const containerRef = useRef(null);
-console.log("reviews", reviewsAll);
-  // useEffect(() => {
-  //   const axiosData = async () => {
-  //     // const result = await axiosGet("/data/reviews.json")
-  //     const reviews = result.reviews.filter((item) => item.pid === pid);
-  //     const allImages = reviews.flatMap((review) => review.images);
-  //     setImages(allImages);
-  //     setReviewImages(allImages.slice(0, 6));
-  //     setReviews(reviews);
-  //   };
-  //   axiosData();
-  // }, [pid]);
 
   // ✅ 상품별 리뷰 필터링
   const productReviews = useMemo(() => {
@@ -46,18 +34,18 @@ console.log("reviews", reviewsAll);
   }, [productReviews]);
 
   useEffect(() => {
-  if (isFirstRender.current) {
-    isFirstRender.current = false;
-    return; // 첫 렌더링일 땐 스크롤하지 않음
-  }
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; // 첫 렌더링일 땐 스크롤하지 않음
+    }
 
-  if (containerRef.current) {
-    containerRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-}, [currentPage]);
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [currentPage]);
 
   const handleNext = () => {
     setCurrentPage((prev) =>
@@ -87,11 +75,11 @@ console.log("reviews", reviewsAll);
           </div>
         ))}
 
-        {images.length > 6 && (
+        {/* {images.length > 6 && (
           <div className="review-thumb more" onClick={() => setShowModal(true)}>
             <span>+ 더보기</span>
           </div>
-        )}
+        )} */}
       </div>
 
       {showModal && (
@@ -103,13 +91,13 @@ console.log("reviews", reviewsAll);
                 ✕
               </button>
             </div>
-            <div className="modal-grid">
+            {/* <div className="modal-grid">
               {images.map((img, i) => (
                 <div key={i} className="modal-image">
                   <img src={img} alt={`full-${i}`} />
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       )}
@@ -144,16 +132,15 @@ console.log("reviews", reviewsAll);
       ))}
 
       <div className="pagination">
-        <button onClick={handlePrev} disabled={currentPage === 1}>
+        <button onClick={handlePrev}
+          disabled={currentPage === 1}>
           {"<"}
         </button>
         <span style={{ margin: "0 0.6rem" }}>
           {currentPage} / {Math.ceil(reviews.length / itemsPerPage)}
         </span>
-        <button
-          onClick={handleNext}
-          disabled={currentPage * itemsPerPage >= reviews.length}
-        >
+        <button onClick={handleNext}
+          disabled={currentPage * itemsPerPage >= reviews.length}>
           {">"}
         </button>
       </div>

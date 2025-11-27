@@ -11,24 +11,24 @@
         border-right: 1px solid #ccc; // 구분선
 
         a {
-        text-decoration: none;
-        color: #333;
+            text-decoration: none;
+            color: #333;
         }
 
         &.active {
-        a {
-            font-weight: bold;
-            color: #333;
-        }
+            a {
+                font-weight: bold;
+                color: #333;
+            }
         }
 
         &:last-child {
-        border-right: none; // 마지막 요소는 선 제거
+            border-right: none; // 마지막 요소는 선 제거
         }
 
         &:hover a {
-        color: #000;
-        font-weight: 600;
+            color: #000;
+            font-weight: 600;
         }
     }
 }

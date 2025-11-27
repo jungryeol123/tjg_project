@@ -32,7 +32,6 @@ export function ImageUpload({ onFileSelect, idx, text, existingImage }) {
         onChange={ handleFileChange }
         className="image-upload-input"
       />
-
       { image && (
         <div className="image-preview-container">
           <img src={image} alt="미리보기" className="image-preview" />

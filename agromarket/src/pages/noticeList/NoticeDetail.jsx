@@ -1,8 +1,7 @@
-// src/pages/NoticeDetail.jsx
 import React from "react";
+import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import "./NoticeDetail.scss";
-import { useSelector } from "react-redux";
 
 export default function NoticeDetail() {
   const notices = useSelector((state) => state.notice.noticeList );

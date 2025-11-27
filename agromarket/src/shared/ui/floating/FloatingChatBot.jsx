@@ -1,5 +1,3 @@
-// shared/ui/floating/FloatingChatBot.jsx
-
 import React, { useState } from "react";
 import ChatBotPanel from "./ChatBotPanel";
 import "./FloatingChatBot.scss";

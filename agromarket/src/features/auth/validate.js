@@ -14,7 +14,6 @@ export const validateFormCheck = ({ idRef, pwdRef, setErrors, errors }) => {
     return true;
 }
 
-
 /**
  * Shoppy 회원가입 폼 체크
  */

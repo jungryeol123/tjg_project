@@ -1,4 +1,3 @@
-// hooks/useAutoSlider.ts
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useAutoSlider(length, delay) {

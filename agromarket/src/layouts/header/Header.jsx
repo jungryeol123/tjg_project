@@ -1,10 +1,10 @@
-// src/ui/Header/Header.jsx
 import React from "react";
-import "./Header.scss";
+// layouts
 import TopBar from "layouts/topbar/TopBar";
-import CategoryNav from "shared/ui/Header/components/categoryNav/CategoryNav";
 import LogoSearch from "layouts/logoSearch/LogoSearch";
-
+// shared
+import CategoryNav from "shared/ui/Header/components/categoryNav/CategoryNav";
+import "./Header.scss";
 
 export default function Header() {
   return (

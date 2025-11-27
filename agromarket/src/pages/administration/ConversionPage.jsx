@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import ConversionChart from "./ConversionChart";
+// utils
 import { getConversionRates } from "utils/analyticsApi";
 import { exportConversionExcel } from "utils/exportConversionExcel";
+// sub
+import ConversionChart from "./ConversionChart";
 
 export default function ConversionPage() {
     const [data, setData] = useState([]);
@@ -30,7 +32,6 @@ export default function ConversionPage() {
     return (
         <div style={{ padding: 20 }}>
             <h1>📊 상품별 클릭 → 구매 전환율 분석</h1>
-
             <button
                 onClick={() =>
                     exportConversionExcel(
@@ -45,7 +46,6 @@ export default function ConversionPage() {
             >
                 📥 전환율 엑셀 다운로드
             </button>
-
 
             {data.length > 0 ? (
                 <ConversionChart

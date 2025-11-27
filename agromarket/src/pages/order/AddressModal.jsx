@@ -1,6 +1,6 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { parseJwt } from "features/auth/parseJwt";
-import axios from "axios";
 
 export function AddressModal({ onClose, onSelectAddress }) {
   const [orders, setOrders] = useState([]);

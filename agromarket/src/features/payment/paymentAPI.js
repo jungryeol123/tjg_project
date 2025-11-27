@@ -21,7 +21,7 @@ export const getPayment = async (receiver, paymentInfo, cartList) => {
 
   try {
     const result = await axiosPost("http://localhost:8080/payment/kakao/ready", data);
-    console.log("카카오 결제 요청 결과:", result);
+    
     if (result?.tid) {
       window.location.href = result.next_redirect_pc_url;
     } else {

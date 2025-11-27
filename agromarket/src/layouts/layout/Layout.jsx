@@ -1,8 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Footer from "shared/ui/Footer/Footer";
-import "./Layout.scss";
-import FloatingChatBot from "shared/ui/floating/FloatingChatBot";
+// layouts
 import Header from "layouts/header/Header";
+// shared
+import Footer from "shared/ui/Footer/Footer";
+import FloatingChatBot from "shared/ui/floating/FloatingChatBot";
+import "./Layout.scss";
+
 export function Layout() {
   return (
     <div className="layout">

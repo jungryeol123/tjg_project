@@ -1,27 +1,12 @@
-// import KakaoLoginButton from "features/auth/KakaoLoginButton";
-// import { KakaoLogoutButton } from "features/auth/KakaoLogoutButton";
-
-// export  function Login() {
-//   return (
-//     <>
-//       <KakaoLoginButton/>
-//       <KakaoLogoutButton />
-//     </>
-//   );
-// }
-
-// npm install react-icons react-redux @reduxjs/toolkit axios -- 아이콘 설치 코드
-
-import { useState, useRef, useContext } from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
-import { FaUser } from "react-icons/fa6";
+import Swal from 'sweetalert2';
 import { FaLock } from "react-icons/fa";
+import { FaUser } from "react-icons/fa6";
+import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+// features
 import { getLogin } from "../features/auth/authAPI.js";
 import "../styles/utilities/login.css";
-import axios from "axios";
-import Swal from 'sweetalert2';
-// import KakaoLoginButton from 'features/auth/KakaoLoginButton.jsx';
 
 //로그인페이지
 export function Login() {

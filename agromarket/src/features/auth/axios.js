@@ -34,10 +34,8 @@ export function setupApiInterceptors() {
     refreshSubscribers.push(cb);
   };
 
-
  api.interceptors.response.use(
-  (res) => res,
-  async (error) => {
+  (res) => res, async (error) => {
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -82,8 +80,5 @@ export function setupApiInterceptors() {
 
     // ✅ 나머지는 reject 유지
     return Promise.reject(error);
-  }
-);
-
-
+  });
 }

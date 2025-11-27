@@ -1,7 +1,6 @@
-// src/components/IntroAnimation.jsx
 import Lottie from "lottie-react";
-import CuteBunnies from "./assets/CuteBunnies.json";  // 다운받은 JSON 파일
 import { motion } from "framer-motion";
+import CuteBunnies from "./assets/CuteBunnies.json";  // 다운받은 JSON 파일
 import "./IntroAnimation.css";
 
 export default function IntroAnimation() {

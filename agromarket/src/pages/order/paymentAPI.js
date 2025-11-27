@@ -1,21 +1,21 @@
+import { parseJwt } from "features/auth/parseJwt.js";
 import { axiosPost } from "../../utils/dataFetch.js";
 import { loadNaverPaySDK } from "../../utils/loadNaverSDK.js";
-import { parseJwt } from "features/auth/parseJwt.js";
+
 /** ✅ 카카오페이 결제 */
 export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
   const productInfo = cartList.map((item) => ({pid: item.product.id, qty: item.qty}));
-  // const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
-  // const id = loginInfo.id;
+  const stored = localStorage.getItem("loginInfo");
   let id = -1;
 
-  const stored = localStorage.getItem("loginInfo");
-      if (stored) {
-        const { accessToken } = JSON.parse(stored);
-        const payload = parseJwt(accessToken);
-        id = payload.id;
-      }
+  if (stored) {
+    const { accessToken } = JSON.parse(stored);
+    const payload = parseJwt(accessToken);
+    id = payload.id;
+  }
+
   const url = "/payment/kakao/ready";
   const data = {
     itemName: cartList[0].product.productName,
@@ -42,20 +42,17 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId)
 /** ✅ 네이버페이 결제 요청 */
 export const getNaverPayment = async (receiver, paymentInfo, cartList, couponId) => {
   const cidList = cartList.map((item) => item.cid);
-  const totalAmount = cartList.reduce(
-    (sum, item) => sum + item.product.price * item.qty,
-    0
-  );
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
   const productInfo = cartList.map((item) => ({pid: item.product.id, qty: item.qty}));
-  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   const stored = localStorage.getItem("loginInfo");
   let id = -1;
+
   if (stored) {
     const { accessToken } = JSON.parse(stored);
     const payload = parseJwt(accessToken);
     id = payload.id;
-  }  // 1️⃣ 백엔드에 주문 생성 요청
+  } 
+  // 1️⃣ 백엔드에 주문 생성 요청
   const data = {
     itemName: cartList[0].product.productName,
     id,

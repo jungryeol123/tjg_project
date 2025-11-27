@@ -10,12 +10,11 @@
     align-items: center;
 
     &__input {
-    width: clamp(140px, 20vw, 500px);
-    margin-left: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
-    
+      width: clamp(140px, 20vw, 500px);
+      margin-left: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
     }
 
     &__btn {
@@ -40,25 +39,25 @@
     margin-right: 10px;
 
     &__cart-link {
-          position: relative;
-          margin-right: 15px;
-        }
-        
-      &__cart-count {
-        width: 20px;
-        height:20px;
-        position: absolute;
-        top: -5px;
-        left: 25px;
-        font-size: 0.8rem;
-        color: white;
-        /* padding: 3px; */
-        border-radius: 100%;
-        /* border: 1px solid rgb(55, 0, 255); */
-        background-color: red;
-        text-align: center;
-        align-content: center;
-      }
+      position: relative;
+      margin-right: 15px;
     }
+        
+    &__cart-count {
+      width: 20px;
+      height:20px;
+      position: absolute;
+      top: -5px;
+      left: 25px;
+      font-size: 0.8rem;
+      color: white;
+      /* padding: 3px; */
+      border-radius: 100%;
+      /* border: 1px solid rgb(55, 0, 255); */
+      background-color: red;
+      text-align: center;
+      align-content: center;
+    }
+  }
 }
 

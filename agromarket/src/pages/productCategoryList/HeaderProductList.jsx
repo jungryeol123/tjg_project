@@ -1,11 +1,11 @@
-// src/pages/NewProducts.jsx
-import React, { useMemo, useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ProductCard from "shared/ui/productList/ProductCard";
-import { useParams } from "react-router-dom";
-import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
-import { Link } from "react-router-dom";
+import React, { useMemo, useEffect, useState } from "react";
+// shared
 import { FilterItem } from "shared/constants/FilterItem";
+import ProductCard from "shared/ui/productList/ProductCard";
+// features
+import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
 import "./HeaderProductList.scss";
 import "../../styles/components/filter.scss";
 
@@ -35,14 +35,17 @@ export function HeaderProductList() {
   const hotOrSpecialProducts = useMemo(() => {
     if (!productList || productList.length === 0) return [];
     if (id !== "deal") return [];
-    return productList.filter((p) => p.hotDeal === true || p.memberSpecial === true);
+    return productList
+      .filter((p) => p.hotDeal === true || p.memberSpecial === true);
   }, [id, productList]);
 
   // ✅ (3) 세일 상품 (sale): 할인율(dc)이 10% 이상
   const saleProducts = useMemo(() => {
     if (!productList || productList.length === 0) return [];
     if (id !== "sale") return [];
-    return productList.filter((p) => p.dc >= 10).sort((a, b) => b.dc - a.dc);
+    return productList
+      .filter((p) => p.dc >= 10)
+      .sort((a, b) => b.dc - a.dc);
   }, [id, productList]);
 
   // ✅ (4) 마감 상품 (time) : 날짜 기준 오래된 순서
@@ -136,14 +139,6 @@ export function HeaderProductList() {
           ? "마감 임박 상품" 
           : "신상품"}
       </h1>
-
-      {/* ✅ 탭 버튼
-      <div className="product-tabs">
-        <button className={id === "new" ? "active" : ""}>신상품순</button>
-        <button className={id === "best" ? "active" : ""}>판매량순</button>
-        <button className={id === "sale" ? "active" : ""}>세일상품</button>
-        <button className={id === "deal" ? "active" : ""}>특가/혜택</button>
-      </div> */}
       {/* 필터 */}
       <ul className="product-filter">
         {filterLabel.map((item) => (

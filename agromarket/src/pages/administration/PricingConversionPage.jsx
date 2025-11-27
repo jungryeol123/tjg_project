@@ -1,8 +1,7 @@
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PricingConversionChart from "./PricingConversionChart";
-import { Link } from "react-router-dom";
-import axios from "axios";
-
 import "./pricing.scss";   // ⭐ SCSS 적용
 
 export default function PricingConversionPage() {
@@ -29,7 +28,6 @@ export default function PricingConversionPage() {
     return (
         <div className="pricing-page">
             <h1>📊 AI 가격 최적화 분석 (전체 상품)</h1>
-
             {data.length > 0 ? (
                 <>
                     <PricingConversionChart

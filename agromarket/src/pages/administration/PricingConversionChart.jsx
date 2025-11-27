@@ -19,7 +19,7 @@ export default function PricingConversionChart({
     aiRates,
     aiClickRates,
     aiPrices
-}) {
+    }) {
     const data = {
         labels,
         datasets: [

@@ -1,20 +1,25 @@
-import ProductList from "features/catalog/ProductList/ProductList";
-import { setProductListAPI, setProductReviewListAPI, setProductQnAListAPI, fetchRecentSubCategory } from "features/product/productAPI";
-import { setCategoryListAPI } from "features/category/categoryAPI.js";
-import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useAutoSlider } from "shared/hooks/useAutoSlider";
-import { getData } from "shared/lib/axiosInstance";
-import { SlideContainer } from "shared/ui/slider/SlideContainer";
-import { parseJwt } from "features/auth/parseJwt";
-import RecommendedSlider from "shared/ui/recommend/RecommendedSlider";
+import React, { useEffect, useState } from "react";
+// shared
 import Popup from "shared/ui/popup/Popup";
-
+import { getData } from "shared/lib/axiosInstance";
+import { useAutoSlider } from "shared/hooks/useAutoSlider";
+import { SlideContainer } from "shared/ui/slider/SlideContainer";
+import RecommendedSlider from "shared/ui/recommend/RecommendedSlider";
+// features
+import { parseJwt } from "features/auth/parseJwt";
+import ProductList from "features/catalog/ProductList/ProductList";
+import { setCategoryListAPI } from "features/category/categoryAPI.js";
+import { setProductListAPI,
+          setProductReviewListAPI, 
+          setProductQnAListAPI,
+          fetchRecentSubCategory } from "features/product/productAPI";
 
 export default function Home() {
   const [images, setImages] = useState([]);
   const dispatch = useDispatch();
   const { index, setIndex } = useAutoSlider(images.length, 5000);
+  
   useEffect(() => {
     const fetchData = async () => {
       const result = await getData("/data/homeDataImages.json");
@@ -38,7 +43,7 @@ export default function Home() {
   }, []);
 
   //홈화면 팝업 창 띄우기
-    const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const isShown = localStorage.getItem("coupon_popup_shown");
@@ -51,6 +56,7 @@ export default function Home() {
     localStorage.setItem("coupon_popup_shown", "true"); 
     setShowPopup(false);
   };
+
   return (
     <>
       {showPopup && <Popup onClose={handleClosePopup} />}

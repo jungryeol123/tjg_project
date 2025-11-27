@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+// features
 import cartSlice from 'features/cart/cartSlice.js'
-import productSlice from 'features/product/productSlice.js'
 import authSlice from 'features/auth/authSlice.js'
-import noticeSlice from 'features/catalog/notice/noticeSlice.js'
+import productSlice from 'features/product/productSlice.js'
 import deliverySlice from 'features/delivery/deliverySlice.js'
 import categorySlice from 'features/category/categorySlice.js'
-
+import noticeSlice from 'features/catalog/notice/noticeSlice.js'
 
 export const store = configureStore({
   reducer: {

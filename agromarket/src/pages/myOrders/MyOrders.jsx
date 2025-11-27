@@ -1,13 +1,12 @@
-
-import { useEffect, useState } from "react";
-import { parseJwt } from "features/auth/parseJwt";
-import { addCart } from "features/cart/cartAPI.js";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+// features
+import { parseJwt } from "features/auth/parseJwt";
+import { addCart } from "features/cart/cartAPI.js";
 import './MyOrders.css'
-
 
 export function MyOrders() {
   const [orders, setOrders] = useState([]);
@@ -17,26 +16,18 @@ export function MyOrders() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // /** 🔹 로그인 ID 읽기 */
-  // useEffect(() => {
-  //   const stored = localStorage.getItem("loginInfo");
-  //   if (stored) {
-  //     const parsed = JSON.parse(stored);
-  //     setUserId(parsed.id); // Long id 저장
-  //   }
-  // }, []);
-  
+  /** 🔹 로그인 ID 읽기 */
   useEffect(() => {
       const stored = localStorage.getItem("loginInfo");
       if (stored) {
         const { accessToken } = JSON.parse(stored);
         const payload = parseJwt(accessToken);
-        console.log("토큰 payload:", payload); // { id: 7, iat: ..., exp: ... }
   
         setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
       }
   
     }, []);
+
   /** 🔹 주문 내역 조회 */
   useEffect(() => {
     if (!userId) return;
@@ -56,39 +47,28 @@ export function MyOrders() {
   }, [userId]);
 
   /** 🔹 쿠폰 목록 조회 */
-useEffect(() => {
-  if (!userId) return;
+  useEffect(() => {
+    if (!userId) return;
 
-  const fetchCoupons = async () => {
-    console.log("쿠폰조회 userId", userId);
+    const fetchCoupons = async () => {
+      try {
+        const res = await axios.get(`/coupon/my/${userId}`);
+        const couponList = res.data.filter(item => item.isUsed === false)
 
-    try {
-      // 🔥 loginInfo 안에서 token 가져오기
-      const stored = localStorage.getItem("loginInfo");
-      const parsed = stored ? JSON.parse(stored) : null;
-      const token = parsed?.token || null;
+        console.log("🔥 백엔드 응답:", res.data);
+        setCoupons(Array.isArray(couponList) ? couponList : []);
+      } catch (err) {
+        console.error("쿠폰 조회 실패:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      console.log("요청 URL:", `http://localhost:8080/coupon/my/${userId}`);
-
-
-      const res = await axios.get(`/coupon/my/${userId}`);
-      const couponList = res.data.filter(item => item.isUsed === false)
-
-      console.log("🔥 백엔드 응답:", res.data);
-      setCoupons(Array.isArray(couponList) ? couponList : []);
-    } catch (err) {
-      console.error("쿠폰 조회 실패:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchCoupons();
-}, [userId]);
+    fetchCoupons();
+  }, [userId]);
 
   /** 주문내역 삭제 기능 */
   const handleDeleteOrder = async (orderCode) => {
-    // if(!window.confirm("주문 내역을 삭제하시겠습니까?")) return;
     try {
       const res = await axios.delete(
         `/orders/deleteOrder/${userId}/${orderCode}`,
@@ -97,8 +77,8 @@ useEffect(() => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`, // ★ 추가
         }
-      }
-      );
+      });
+
       if (res.status === 200) {
         Swal.fire({
                 icon: 'success',
@@ -109,7 +89,6 @@ useEffect(() => {
         setOrders(orders.filter((o) => o.orderCode !== orderCode));
       }
     } catch (err) {
-      console.error("주문내역 삭제 실패:",err);
       Swal.fire({
               icon: 'error',
               title: '⚠ 삭제 실패',
@@ -119,10 +98,8 @@ useEffect(() => {
     }
   };
 
-
   /** 🔹 쿠폰 삭제 기능 */
   const handleDeleteCoupon = async (couponId) => {
-    // if (!window.confirm("정말 쿠폰을 삭제하시겠습니까?")) return;
     try {
       const res = await axios.delete(
         `/coupon/deleteCoupon/${userId}/${couponId}`
@@ -140,7 +117,6 @@ useEffect(() => {
         setCoupons(coupons.filter((c) => c.coupon.couponId !== couponId));
       }
     } catch (err) {
-      console.error("쿠폰 삭제 실패:", err);
       Swal.fire({
               icon: 'error',
               title: '⚠ 삭제 실패',
@@ -226,7 +202,6 @@ useEffect(() => {
             </div>
                 <button
                   className="mypage-deleteBtn"
-                  
                   onClick={() => handleDeleteOrder(order.orderCode)}
                 >
                     삭제
@@ -263,4 +238,3 @@ useEffect(() => {
     </div>
   );
 }
-

@@ -1,18 +1,19 @@
+import Swal from 'sweetalert2';
+import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+// features
+import { api } from "features/auth/axios.js";
+import { addCart } from "features/cart/cartAPI.js";
+import { parseJwt } from "features/auth/parseJwt.js";
+import { setProductAPI } from "features/product/productAPI.js";
+// 탭 컴포넌트
+import { ReviewList } from "./ReviewList.jsx";
 import { Item } from "./Item.jsx";
 import { Detail } from "./Detail.jsx";
 import { QnA } from "./QnA.jsx";
 import { Return } from "./Return.jsx";
-import { useSelector, useDispatch } from "react-redux";
-import { addCart } from "features/cart/cartAPI.js";
-import { ReviewList } from "./ReviewList.jsx";
-import { setProductAPI } from "features/product/productAPI.js";
-import { parseJwt } from "features/auth/parseJwt.js";
-import { api } from "features/auth/axios.js";
 import "../../styles/components/ProductDetail.css";
-import Swal from 'sweetalert2';
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
@@ -139,8 +140,7 @@ export function ProductDetail() {
         title: '⚠ 로그인 화면으로',
         text: "로그인이 필요합니다.",
         confirmButtonText: '확인'
-      })
-        // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
+      }) // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
         .then(() => { navigate("/login", { state: { from: location.pathname } }) });
     }
   };
@@ -175,15 +175,14 @@ export function ProductDetail() {
         <div className="product-detail-main">
           <div className="product-image">
             <div
-              className={`badge-container ${product.hotDeal && product.memberSpecial ? "multi" : ""
-                }`}>
-              {product.hotDeal && <span className="badge hot">원딜핫딜</span>}
-              {product.memberSpecial && <span className="badge member">멤버특가</span>}
+              className={`badge-container ${ product.hotDeal && product.memberSpecial ? "multi" : "" }`}>
+              { product.hotDeal && <span className="badge hot">원딜핫딜</span>}
+              { product.memberSpecial && <span className="badge member">멤버특가</span>}
             </div>
             <div className="product-image-container">
               <img
                 src={`/images/productImages/${product.imageUrl}`}
-                alt={product.imageUrl_name}
+                alt={ product.imageUrl_name }
                 className="product-image-main"
               />
               { product.count === 0 && <div class="sold-out">SOLD OUT</div> }
@@ -193,9 +192,9 @@ export function ProductDetail() {
           <div className="product-info">
             <div className="product-info-top">
               <div className="product-info-left">
-                {product.productName} ㅣ {" "}
+                { product.productName} ㅣ {" "}
                 <Link to={`/brand/${encodeURIComponent(product.brandName)}`} className="product-brand">
-                  {product.brandName}
+                  { product.brandName}
                 </Link>
               </div>
 
@@ -207,7 +206,7 @@ export function ProductDetail() {
               >
                 <span className="recipe-text">레시피</span>
 
-                {showRecipe && (
+                { showRecipe && (
                   <div className="recipe-box">
                     <h4 className="recipe-title">레시피 보기</h4>
                     <ol className="recipe-list">
@@ -225,11 +224,15 @@ export function ProductDetail() {
 
             {/* 할인 정보 */}
             <div className="product-discount red">
-              {Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원"} 할인
-              <span className="product-price-original line">{(product.price)?.toLocaleString() + "원"}</span>
+              { Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원" } 할인
+              <span className="product-price-original line">
+                {(product.price)?.toLocaleString() + "원"}
+              </span>
             </div>
 
-            <div className="product-price-final">{salesPrice?.toLocaleString() + "원"}</div>
+            <div className="product-price-final">
+              {salesPrice?.toLocaleString() + "원"}
+            </div>
             <div className="product-period red">
               행사 기간 2025-09-10 ~ 2025-10-20
             </div>
@@ -338,28 +341,28 @@ export function ProductDetail() {
         <section
           className="product-section"
           ref={sectionRefs.detail}
-          id="detail"
-        >
+          id="detail">
           <Detail images={product.productInformationImage} />
         </section>
 
         <section
           className="product-section"
           ref={sectionRefs.review}
-          id="review"
-        >
+          id="review">
           <ReviewList id={id} />
         </section>
 
-        <section className="product-section" ref={sectionRefs.qna} id="qna">
+        <section 
+          className="product-section"
+          ref={sectionRefs.qna}
+          id="qna">
           <QnA id={ id } product={ product } />
         </section>
 
         <section
           className="product-section"
           ref={sectionRefs.return}
-          id="return"
-        >
+          id="return">
           <Return />
         </section>
       </div>

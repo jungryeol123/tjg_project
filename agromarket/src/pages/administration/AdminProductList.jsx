@@ -1,12 +1,13 @@
-// src/pages/NewProducts.jsx
-import React, { useMemo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ProductCard from "shared/ui/productList/ProductCard";
-import { setProductListAPI, delProductData } from "features/product/productAPI";
-import { Link } from "react-router-dom";
-import { parseJwt } from "features/auth/parseJwt";
-import { FilterItem } from "shared/constants/FilterItem";
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useMemo, useEffect, useState } from "react";
+// shared
+import { FilterItem } from "shared/constants/FilterItem";
+import ProductCard from "shared/ui/productList/ProductCard";
+// features
+import { parseJwt } from "features/auth/parseJwt";
+import { setProductListAPI, delProductData } from "features/product/productAPI";
 import "./AdminProductList.scss";
 import "../../styles/components/filter.scss";
 
@@ -38,7 +39,7 @@ export function AdminProductList() {
   }, [productList]);
     
   useEffect(() => {
-      setFilteredProducts(updateProducts);
+    setFilteredProducts(updateProducts);
   }, [productList, updateProducts]);
 
   // 선택된 필터라벨
@@ -139,8 +140,8 @@ export function AdminProductList() {
                     state={{ item }}
                     key={idx}
                   >
-                  <ProductCard item={item} />
-                  <button type="button" className="update-btn">편집</button>
+                    <ProductCard item={item} />
+                    <button type="button" className="update-btn">편집</button>
                   </Link>
                   <button type="button" className="delete-btn" onClick={ () => { handleDelete(item.id) } }>삭제</button>
                 </div>

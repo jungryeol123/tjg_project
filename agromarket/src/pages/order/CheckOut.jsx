@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getKakaoPayment, getNaverPayment } from './paymentAPI.js';
-import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { AddressModal } from './AddressModal';
-import { parseJwt } from "features/auth/parseJwt";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDaumPostcodePopup } from 'react-daum-postcode';
+// features
+import { parseJwt } from "features/auth/parseJwt";
+// sub
+import { AddressModal } from './AddressModal';
+import { getKakaoPayment, getNaverPayment } from './paymentAPI.js';
 import "./CheckOut.css";
-
 
 export function CheckOut() {
     const cartList = useSelector((state) => state.cart.cartList);
@@ -33,7 +34,7 @@ export function CheckOut() {
         memo: "문앞에 놔주세요"
     });
 
-    const [paymentInfo, setPaymentInfo] = useState({
+    const [paymentInfo, _] = useState({
         shippingFee: "0",
         discountAmount: totalDcPrice,
         totalAmount: totalPrice - totalDcPrice
@@ -64,13 +65,7 @@ export function CheckOut() {
 
         const fetchCoupons = async () => {
             try {
-                // 🔥 loginInfo 안에서 token 가져오기
-                const stored = localStorage.getItem("loginInfo");
-                const parsed = stored ? JSON.parse(stored) : null;
-                const token = parsed?.token || null;
-
                 const res = await axios.get(`/coupon/my/${userId}`);
-
                 const couponList = res.data.filter(item => item.isUsed === false)
 
                 setCoupons(Array.isArray(couponList) ? couponList : []);
@@ -83,7 +78,7 @@ export function CheckOut() {
     }, [userId]);
 
     // 상품 갯수가 0인 상품 제외
-    useEffect( ()=> {
+    useEffect(()=> {
         setReduceCartList(cartList.filter(cart => cart.product.count !== 0));
     },[]);
 
@@ -119,7 +114,6 @@ export function CheckOut() {
         setReceiver({...receiver, [name]:value})
     }
 
-    
     const [userFullAddress, setFullAddress] = useState(cartList[0].user.address); //유저 주소
     const [userZoneCode, setUserZoneCode] = useState(""); //유저 우편번호
     //다음 우편번호 찾기 API사용
@@ -174,6 +168,7 @@ export function CheckOut() {
             setSelectCoupon(0);
             return;
         }
+        
         const selected = coupons.find(c => c.id == value);
         const dcRate = selected.coupon.couponDcRate;
         const finalPrice = Math.round((totalPrice - totalDcPrice)*dcRate*0.01);
@@ -331,7 +326,6 @@ export function CheckOut() {
             {/* 🟢 결제 수단 선택 */}
             <div className="section">
                 <h2>결제 수단</h2>
-
                 <div className="payment-method">
                     <label className="radio-label">
                         <input

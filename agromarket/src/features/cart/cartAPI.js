@@ -1,13 +1,21 @@
-import { setCartItem, updateCartList, updateTotalPrice, updateTotalDcPrice, getCartCount } from './cartSlice.js';
-import { axiosPost } from 'shared/lib/axiosInstance.js'
-import { parseJwt } from "features/auth/parseJwt";
+import { 
+  setCartItem, 
+  updateCartList,
+  updateTotalPrice,
+  updateTotalDcPrice,
+  getCartCount } from './cartSlice.js';
+//features
 import { api } from 'features/auth/axios.js';
+import { parseJwt } from "features/auth/parseJwt";
+// shared
+import { axiosPost } from 'shared/lib/axiosInstance.js'
 
 // 장바구니 추가(신규일경우 레코드추가, 기존 레코드 존재시 qty 증가)
 export const addCart = (ppk, qty) => async(dispatch, getState) => {
     const url = "/cart/add";
     // localStorage에서 토큰정보취득
     const stored = localStorage.getItem("loginInfo");
+
     if (stored) {
         const { accessToken } = JSON.parse(stored);
         const payload = parseJwt(accessToken);
@@ -44,7 +52,6 @@ export const showCart = (id) => async (dispatch) => {
   try {
     const cartData = await api.post(url, cartItem);
 
-
     // ✅ 혹시라도 응답이 비었을 경우 방어
     if (!cartData || !cartData.data) {
       console.warn("⚠️ cartData 비어 있음 (토큰 갱신 중일 수 있음)");
@@ -70,7 +77,6 @@ export const updateCart = (cid, qty, id) => async(dispatch) => {
     const url = "/cart/updateQty";
     const cartData = { "cid": cid, "qty":qty };
     const rows = await axiosPost(url, cartData);
-    console.log(rows);
     
     // 장바구니 아이템 재설정
     dispatch(showCart(id));
@@ -81,6 +87,8 @@ export const removeCart = (cid, id) => async(dispatch) => {
     const url = "/cart/deleteItem";
     const data = {"cid": cid};
     const rows = await axiosPost(url, data);
+    
+    // 장바구니 아이템 재설정
     dispatch(showCart(id));
     return rows;
 }

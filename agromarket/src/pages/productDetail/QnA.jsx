@@ -1,29 +1,26 @@
-import React, { useEffect, useMemo, useState } from "react";
 import Swal from 'sweetalert2';
+import React, { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import AddQnA from "shared/ui/QnA/AddQnA";
+// feautres
 import { addProductQnA } from "features/product/productAPI";
+// shared
+import AddQnA from "shared/ui/QnA/AddQnA";
 import "./QnA.scss";
 
 export function QnA({id, product}) {
   const qnaAll = useSelector((state) => state.product.productQnAList);
-  // const [qnaList, setQnaList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const dispatch = useDispatch();
+  // 문의하기 창 띄우기 플래그
+  const [isClickQnA, setIsClickQnA] = useState(false);
 
-  // useEffect(() => {
-  //   fetch("/data/productQnA.json")
-  //     .then((res) => res.json())
-  //     .then((data) => setQnaList(data.qnaList))
-  //     .catch((err) => console.error("QnA 불러오기 실패:", err));
-  // }, []);
-
-    // ✅ 상품별 QnA 필터링
+  // ✅ 상품별 QnA 필터링
   const qnaList = useMemo(() => {
     if (!qnaAll || qnaAll.length === 0) return [];
     // 🔥 숫자/문자열 타입이 다를 수 있으니 Number()로 변환
-    return qnaAll.filter((item) => Number(item.ppk) === Number(id)).sort((a,b)=> new Date(b.date) - new Date(a.date));
+    return qnaAll.filter((item) => Number(item.ppk) === Number(id))
+                  .sort((a,b)=> new Date(b.date) - new Date(a.date));
   }, [qnaAll, id]);
 
   const handleNext = () => {
@@ -42,12 +39,12 @@ export function QnA({id, product}) {
     currentPage * itemsPerPage
   );
 
-  const [isClickQnA, setIsClickQnA] = useState(false);
-
+  // 문의하기 버튼 클릭시 문의하기창 띄우기
   const handleQnA = () => {
     setIsClickQnA(true)
   }
 
+  // 문의하기창에서 닫기버튼 클릭시 창 닫기 
   const handleCloseQnA = () => {
     setIsClickQnA(false);
   };
@@ -78,7 +75,8 @@ export function QnA({id, product}) {
       <div className="title-area">
         <h2>상품 문의</h2>
         <button onClick={ handleQnA }>문의하기</button>
-        { isClickQnA ? <AddQnA onAddQnA = { handleAddQnA } onClose={ handleCloseQnA } product= { product }/> : ""}
+        { isClickQnA &&
+         <AddQnA onAddQnA = { handleAddQnA } onClose={ handleCloseQnA } product= { product }/>}
       </div>
       <p className="qna-desc">
         상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 이동될 수 있습니다. <br />
@@ -110,14 +108,15 @@ export function QnA({id, product}) {
       </table>
 
       <div className="pagination">
-        <button onClick={handlePrev} disabled={currentPage === 1}>{"<"}</button>
+        <button onClick={handlePrev} 
+          disabled={currentPage === 1}>
+          {"<"}
+        </button>
         <span style={{ margin: "0 0.6rem" }}>
           {currentPage} / {Math.ceil(qnaList.length / itemsPerPage)}
         </span>
-        <button
-          onClick={handleNext}
-          disabled={currentPage * itemsPerPage >= qnaList.length}
-        >
+        <button onClick={handleNext}
+          disabled={currentPage * itemsPerPage >= qnaList.length}>
           {">"}
         </button>
       </div>

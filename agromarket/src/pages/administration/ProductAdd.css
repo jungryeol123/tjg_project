@@ -81,9 +81,6 @@
   background-color: #e2355d;
 }
 
-
-
-
 /* 2열 레이아웃 */
 .product-add-form .form-grid {
   display: grid;
@@ -100,4 +97,3 @@
     grid-template-columns: 1fr;
   }
 }
-

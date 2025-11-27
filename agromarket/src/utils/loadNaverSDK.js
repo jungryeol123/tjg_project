@@ -1,4 +1,3 @@
-// src/utils/loadNaverSDK.js
 export const loadNaverPaySDK = () => {
   return new Promise((resolve, reject) => {
     // 이미 로드된 경우

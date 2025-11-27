@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
-import { getRecipeListAPI } from "utils/recipeAPI";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+// utils
+import { getRecipeListAPI } from "utils/recipeAPI";
+// sub
+import Sidebar from "./Sidebar";
 import "./RecipePage.scss";
 
 export default function RecipePage() {
@@ -57,7 +59,6 @@ export default function RecipePage() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }

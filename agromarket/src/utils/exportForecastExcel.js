@@ -1,4 +1,3 @@
-// utils/exportForecastExcel.js
 import axios from "axios";
 
 export async function exportForecastExcel(rows) {

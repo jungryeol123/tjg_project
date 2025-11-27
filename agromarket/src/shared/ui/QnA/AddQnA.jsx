@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import Swal from 'sweetalert2';
+import React, { useState } from "react";
 import "./AddQnA.css";
 
 export default function AddQnA({ onAddQnA, onClose, product }) {
@@ -19,22 +19,22 @@ export default function AddQnA({ onAddQnA, onClose, product }) {
     // 제목의 값이 없거나 공백일 경우
     if (qnaData.title === null || qnaData.title === undefined || String(qnaData.title).trim() === "") {
       Swal.fire({
-          icon: 'warning',
-          title: '필수 항목 미입력',
-          text: `제목을 입력해주세요.`,
-          confirmButtonText: '확인'
-        });
-        return ;
+        icon: 'warning',
+        title: '필수 항목 미입력',
+        text: `제목을 입력해주세요.`,
+        confirmButtonText: '확인'
+      });
+      return ;
     }
     // 내용의 값이 없거나 공백일 경우
     if (qnaData.content === null || qnaData.content === undefined || String(qnaData.content).trim() === "") {
       Swal.fire({
-          icon: 'warning',
-          title: '필수 항목 미입력',
-          text: `내용을 입력해주세요.`,
-          confirmButtonText: '확인'
-        });
-        return ;
+        icon: 'warning',
+        title: '필수 항목 미입력',
+        text: `내용을 입력해주세요.`,
+        confirmButtonText: '확인'
+      });
+      return ;
     }
 
     onAddQnA(qnaData);

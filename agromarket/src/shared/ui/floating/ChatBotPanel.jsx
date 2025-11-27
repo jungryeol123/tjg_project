@@ -1,8 +1,7 @@
-// shared/ui/floating/ChatBotPanel.jsx
-
-import React, { useState, useRef, useEffect } from "react";
-import { parseJwt } from "features/auth/parseJwt";
 import axios from "axios";
+import React, { useState, useRef, useEffect } from "react";
+// features
+import { parseJwt } from "features/auth/parseJwt";
 import "./ChatBotPanel.scss";
 
 export default function ChatBotPanel({ onClose }) {
@@ -65,7 +64,7 @@ export default function ChatBotPanel({ onClose }) {
       });
 
       const result = res.data;
-      console.log("result", result);
+
       const order = result.data;
 
       if (order) {
@@ -91,14 +90,12 @@ export default function ChatBotPanel({ onClose }) {
 
   return (
     <div className="chatbot-panel">
-
       <div className="chat-header">
         <span>AI 고객센터</span>
         <button className="close-btn" onClick={onClose}>✖</button>
       </div>
 
       <div className="chat-body">
-
         {messages.map((msg, idx) => {
           if (msg.type === "order" && msg.order) {
             const o = msg.order;

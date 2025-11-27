@@ -1,16 +1,16 @@
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useRef, useMemo, memo } from "react";
-import ProductCard from "shared/ui/productList/ProductCard";
 import {
   MdOutlineArrowForwardIos,
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
+// shared
+import ProductCard from "shared/ui/productList/ProductCard";
 import "./ProductList.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
  function ProductList({ title = "오늘의 특가", limit = 20, keyword }) {
   const productList = useSelector((state) => state.product.productList );
-  // const [items, setItems] = useState([]);
   const sliderRef = useRef(null);
   const isDragging = useRef(false);
   const prevX = useRef(0);
@@ -21,13 +21,6 @@ import { useSelector } from "react-redux";
   const dragThreshold = 5; // 클릭으로 인식할 최대 이동 거리(px)
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if(keyword) {
-  //        dispatch(setProductListAPI(keyword));
-  //   } 
-  // }, [dispatch, keyword]);
-
-    // console.log("id", typeof id);
   // ✅ 필터 조건 분기
   const productFilterList = useMemo(() => {
     if (!productList || productList.length === 0) return [];
@@ -127,7 +120,6 @@ import { useSelector } from "react-redux";
   return (
     <section className="home-page">
       <div className="section-header">
-        <div></div>
         <h2 className="section-title">{title}</h2>
         <button className="view-all-btn" onClick={ handleAllView }>전체보기 &gt;</button>
       </div>

@@ -1,7 +1,6 @@
-// src/ui/Header/components/mainNav/MainNavBar.jsx
 import React from "react";
-import "./MainNavBar.scss";
 import { FiMenu } from "react-icons/fi"; // 햄버거 메뉴 아이콘 (react-icons 설치 필요)
+import "./MainNavBar.scss";
 
 export function MainNavBar() {
   return (
