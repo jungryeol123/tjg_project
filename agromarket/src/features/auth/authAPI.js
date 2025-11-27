@@ -88,13 +88,9 @@ export const getIdCheck = (name, value) => async (dispatch) => {
 /**
     signup
 */
-export const getSignup = (formData, param) => async (dispatch) => {
-  let result = null;
-  if (validateSignupFormCheck(param)) {
-    const url = "/member/signup";
-    result = await axiosPost(url, formData);
-  }
-  return result;
+export const getSignup = (formData) => async (dispatch) => {
+  const url = "/member/signup";
+  return await axiosPost(url, formData);
 };
 
 /**
