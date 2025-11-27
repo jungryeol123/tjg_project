@@ -68,82 +68,74 @@ export function ReviewList({ id }) {
       <h2>상품 후기</h2>
       <p>총 {reviews.length}개</p>
 
-      <div className="review-images">
-        {reviewImages.map((img, i) => (
-          <div key={i} className="review-thumb">
-            <img src={img} alt={`review-${i}`} />
+      { reviews.length === 0 ? "상품 후기가 존재하지 않습니다."
+       : <>
+        <div className="review-images">
+          {reviewImages.map((img, i) => (
+            <div key={i} className="review-thumb">
+              <img src={img} alt={`review-${i}`} />
+            </div>
+          ))}
+        </div>
+
+        {showModal && (
+          <div className="modal-overlay" onClick={() => setShowModal(false)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-top">
+                <span>상품 전체 보기</span>
+                <button className="close-btn" onClick={() => setShowModal(false)}>
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ✅ 리뷰 카드 목록 */}
+        {currentItems.map((r, index) => (
+          <div key={index} className="review-card">
+            {r.isBest && <span className="badge">베스트</span>}
+            <h3>{r.productName}</h3>
+            <p className="review-title">{r.title}</p>
+            <p className="review-content">{r.content}</p>
+            <div className="review-images">
+              {r.images.map((img, i) => (
+                <img key={i} src={img} alt="리뷰 이미지" />
+              ))}
+            </div>
+            <div className="review-footer">
+              <div className="user-Date">
+                <span>{r.userId}</span>
+                <span className="date">{r.date}</span>
+              </div>
+              <span className="likes">도움돼요 {r.likes}</span>
+            </div>
+            <div className="tags">
+              {r.tags.map((tag, i) => (
+                <span key={i} className="tag">
+                  #{tag}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
 
-        {/* {images.length > 6 && (
-          <div className="review-thumb more" onClick={() => setShowModal(true)}>
-            <span>+ 더보기</span>
-          </div>
-        )} */}
-      </div>
-
-      {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-top">
-              <span>상품 전체 보기</span>
-              <button className="close-btn" onClick={() => setShowModal(false)}>
-                ✕
-              </button>
-            </div>
-            {/* <div className="modal-grid">
-              {images.map((img, i) => (
-                <div key={i} className="modal-image">
-                  <img src={img} alt={`full-${i}`} />
-                </div>
-              ))}
-            </div> */}
-          </div>
+      {currentItems.length !== 0 ?
+        <div className="pagination">
+          <button onClick={handlePrev}
+            disabled={currentPage === 1}>
+            {"<"}
+          </button>
+          <span style={{ margin: "0 0.6rem" }}>
+            {currentPage} / {Math.ceil(reviews.length / itemsPerPage)}
+          </span>
+          <button onClick={handleNext}
+            disabled={currentPage * itemsPerPage >= reviews.length}>
+            {">"}
+          </button>
         </div>
-      )}
-
-      {/* ✅ 리뷰 카드 목록 */}
-      {currentItems.map((r, index) => (
-        <div key={index} className="review-card">
-          {r.isBest && <span className="badge">베스트</span>}
-          <h3>{r.productName}</h3>
-          <p className="review-title">{r.title}</p>
-          <p className="review-content">{r.content}</p>
-          <div className="review-images">
-            {r.images.map((img, i) => (
-              <img key={i} src={img} alt="리뷰 이미지" />
-            ))}
-          </div>
-          <div className="review-footer">
-            <div className="user-Date">
-              <span>{r.userId}</span>
-              <span className="date">{r.date}</span>
-            </div>
-            <span className="likes">도움돼요 {r.likes}</span>
-          </div>
-          <div className="tags">
-            {r.tags.map((tag, i) => (
-              <span key={i} className="tag">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      ))}
-
-      <div className="pagination">
-        <button onClick={handlePrev}
-          disabled={currentPage === 1}>
-          {"<"}
-        </button>
-        <span style={{ margin: "0 0.6rem" }}>
-          {currentPage} / {Math.ceil(reviews.length / itemsPerPage)}
-        </span>
-        <button onClick={handleNext}
-          disabled={currentPage * itemsPerPage >= reviews.length}>
-          {">"}
-        </button>
-      </div>
+        : ""}
+      </>}
     </div>
   );
 }

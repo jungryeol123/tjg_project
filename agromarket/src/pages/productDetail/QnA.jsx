@@ -93,33 +93,36 @@ export function QnA({id, product}) {
             <th>답변상태</th>
           </tr>
         </thead>
-        <tbody>
-          {currentItems.map((item, index) => (
-            <tr key={index}>
-              <td>
-                {item.is_private ? <div>비밀글 입니다. <span className="lock-icon">🔒</span></div> : item.title}
-              </td>
-              <td>{item.writer}</td>
-              <td>{new Date(item.date).toLocaleDateString("ko-KR")}</td>
-              <td className= {`status ${item.status === "답변대기" ? "wait" : "" }`}>{item.status}</td>
-            </tr>
-          ))}
-        </tbody>
+        {currentItems.length === 0 ? <div style={{ textAlign: "right", paddingTop: "10px"}}>이 상품에 대한 문의글이 없습니다.</div>  : 
+          <tbody>
+            {currentItems.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  {item.is_private ? <div>비밀글 입니다. <span className="lock-icon">🔒</span></div> : item.title}
+                </td>
+                <td>{item.writer}</td>
+                <td>{new Date(item.date).toLocaleDateString("ko-KR")}</td>
+                <td className= {`status ${item.status === "답변대기" ? "wait" : "" }`}>{item.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        }
       </table>
-
-      <div className="pagination">
-        <button onClick={handlePrev} 
-          disabled={currentPage === 1}>
-          {"<"}
-        </button>
-        <span style={{ margin: "0 0.6rem" }}>
-          {currentPage} / {Math.ceil(qnaList.length / itemsPerPage)}
-        </span>
-        <button onClick={handleNext}
-          disabled={currentPage * itemsPerPage >= qnaList.length}>
-          {">"}
-        </button>
-      </div>
+      {currentItems.length !== 0 ?
+        <div className="pagination">
+          <button onClick={handlePrev} 
+            disabled={currentPage === 1}>
+            {"<"}
+          </button>
+          <span style={{ margin: "0 0.6rem" }}>
+            {currentPage} / {Math.ceil(qnaList.length / itemsPerPage)}
+          </span>
+          <button onClick={handleNext}
+            disabled={currentPage * itemsPerPage >= qnaList.length}>
+            {">"}
+          </button>
+        </div>
+      : ""}
     </div>
   );
 }
