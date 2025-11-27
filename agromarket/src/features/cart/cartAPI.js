@@ -5,8 +5,8 @@ import {
   updateTotalDcPrice,
   getCartCount } from './cartSlice.js';
 //features
-import { api } from 'features/auth/axios.js';
 import { parseJwt } from "features/auth/parseJwt";
+import { api } from 'shared/lib/axios.js';
 // shared
 import { axiosPost } from 'shared/lib/axiosInstance.js'
 

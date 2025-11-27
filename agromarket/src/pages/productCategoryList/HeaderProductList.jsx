@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useMemo, useEffect, useState } from "react";
 // shared
 import { FilterItem } from "shared/constants/FilterItem";
-import ProductCard from "shared/ui/productList/ProductCard";
+
 // features
 import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
 import "./HeaderProductList.scss";
 import "../../styles/components/filter.scss";
+import ProductCard from "shared/ui/productCard/ProductCard";
 
 export function HeaderProductList() {
   const { id } = useParams();

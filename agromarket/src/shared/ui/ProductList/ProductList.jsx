@@ -6,8 +6,8 @@ import {
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
 // shared
-import ProductCard from "shared/ui/productList/ProductCard";
 import "./ProductList.scss";
+import ProductCard from "../productCard/ProductCard";
 
  function ProductList({ title = "오늘의 특가", limit = 20, keyword }) {
   const productList = useSelector((state) => state.product.productList );

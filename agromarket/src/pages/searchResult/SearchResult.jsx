@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 // shared
-import ProductCard from "shared/ui/productList/ProductCard";
 import { FilterItem } from "../../shared/constants/FilterItem";
 import "./SearchResult.scss"
 import "../../styles/components/filter.scss";
+import ProductCard from "shared/ui/productCard/ProductCard";
 
 export default function SearchResult() {
   const { keyword } = useParams();

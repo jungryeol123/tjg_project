@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useMemo, useEffect, useState } from "react";
 // shared
 import { FilterItem } from "shared/constants/FilterItem";
-import ProductCard from "shared/ui/productList/ProductCard";
 // features
 import { parseJwt } from "features/auth/parseJwt";
 import { setProductListAPI, delProductData } from "features/product/productAPI";
 import "./AdminProductList.scss";
 import "../../styles/components/filter.scss";
+import ProductCard from 'shared/ui/productCard/ProductCard';
 
 export function AdminProductList() {
   const productList = useSelector((state) => state.product.productList);

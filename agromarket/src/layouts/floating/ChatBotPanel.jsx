@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 // features
 import { parseJwt } from "features/auth/parseJwt";
 import "./ChatBotPanel.scss";
+import { api } from "shared/lib/axios";
 
 export default function ChatBotPanel({ onClose }) {
   const [messages, setMessages] = useState([
@@ -45,7 +46,7 @@ export default function ChatBotPanel({ onClose }) {
   const getEta = (odate) => {
     if (!odate) return "";
     const date = new Date(odate);
-    date.setDate(date.getDate() + 2);
+    date.setDate(date.getDate() + 1);
     return date.toLocaleString();
   };
 
@@ -58,7 +59,7 @@ export default function ChatBotPanel({ onClose }) {
     setInput("");
 
     try {
-      const res = await axios.post("/api/chatbot/ask", {
+      const res = await api.post("/api/chatbot/ask", {
         upk: userId,
         message: sendText,
       });

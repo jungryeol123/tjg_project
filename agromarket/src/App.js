@@ -7,9 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "layouts/layout/Layout";
 // features
 import { login } from "features/auth/authSlice";
-import KakaoCallback from "features/auth/Kakao";
 import PaymentButton from "features/order/PaymentButton";
-import { setupApiInterceptors } from "features/auth/axios";
 // shared
 import RecipePage from "shared/ui/recipe/RecipePage";
 import RecipeDetailPage from "shared/ui/recipe/RecipeDetailPage";
@@ -26,8 +24,6 @@ import { CheckOut } from "pages/order/CheckOut";
 import { FindPassword } from "pages/FindPassword";
 import { MyOrders } from "pages/myOrders/MyOrders";
 import SuccessPage from "pages/successPage/SuccessPage";
-import { NoticeList } from "pages/noticeList/NoticeList";
-import NoticeDetail from "pages/noticeList/NoticeDetail";
 import AdminLayout from "pages/administration/AdminLayout";
 import SearchResult from "pages/searchResult/SearchResult";
 import ForecastPage from "pages/administration/ForecastPage";
@@ -42,6 +38,10 @@ import { AdminProductList } from "pages/administration/AdminProductList";
 import PricingConversionPage from "pages/administration/PricingConversionPage";
 import ProductPricingDetailPage from "pages/administration/ProductPricingDetailPage";
 import { HeaderProductList } from "pages/productCategoryList/HeaderProductList";
+import { setupApiInterceptors } from "shared/lib/axios";
+import NoticeDetail from "features/notice/components/NoticeDetail";
+import { NoticeList } from "pages/notice/NoticeList";
+
 
 function App() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
@@ -59,12 +59,6 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    // ✅ 1. 카카오 SDK 초기화
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init("217fcf3151ca4922f670954462e84226");
-      console.log("Kakao SDK initialized:", window.Kakao.isInitialized());
-    }
-
     // ✅ 2. 인트로 애니메이션 3초 후 종료
     const timer = setTimeout(() => {
       setIsIntroFinished(true);
@@ -99,7 +93,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckOut />} />
-          <Route path="/features/auth/Kakao" element={<KakaoCallback />} />
           <Route path="/" element={<PaymentButton />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />

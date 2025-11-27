@@ -8,12 +8,13 @@ import { SlideContainer } from "shared/ui/slider/SlideContainer";
 import RecommendedSlider from "shared/ui/recommend/RecommendedSlider";
 // features
 import { parseJwt } from "features/auth/parseJwt";
-import ProductList from "features/catalog/ProductList/ProductList";
+
 import { setCategoryListAPI } from "features/category/categoryAPI.js";
 import { setProductListAPI,
           setProductReviewListAPI, 
           setProductQnAListAPI,
           fetchRecentSubCategory } from "features/product/productAPI";
+import ProductList from "shared/ui/ProductList/ProductList";
 
 export default function Home() {
   const [images, setImages] = useState([]);

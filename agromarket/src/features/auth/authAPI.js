@@ -1,18 +1,18 @@
 import axios from "axios";
-import { setupApiInterceptors } from "./axios.js";
 import { login, logout, socialLogin } from "./authSlice.js";
 import { setCartItem, getCartCount } from "../cart/cartSlice.js"
 // features
 import { parseJwt } from "features/auth/parseJwt";
 // utils
 import { axiosPost } from "../../utils/dataFetch.js";
+import { api, setupApiInterceptors } from "shared/lib/axios.js";
 
 export const getLogin = (formData, param) => async (dispatch) => {
   const { userId, password } = formData;
 
   try {
     // ✅ 1. 로그인 전에 CSRF 토큰 먼저 요청
-    const res = await axios.post("/auth/login", { userId, password },  { withCredentials: true });
+    const res = await api.post("/auth/login", { userId, password });
     const accessToken = res.data.accessToken;
 
     if (accessToken) {

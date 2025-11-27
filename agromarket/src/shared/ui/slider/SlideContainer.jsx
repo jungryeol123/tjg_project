@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  MdOutlineArrowForwardIos,
-  MdOutlineArrowBackIosNew,
-} from "react-icons/md";
 import { IoIosRadioButtonOn } from "react-icons/io";
 import { SlideDots } from "./SlideDots";
-import { SlideNavButton } from "./SlideNavButton";
 import "./SlideContainer.scss";
 
 export function SlideContainer({ images, index, setIndex }) {
@@ -24,18 +19,6 @@ export function SlideContainer({ images, index, setIndex }) {
             />
           </div>
         ))}
-
-      {/* <SlideNavButton
-        position="left"
-        onClick={() => setIndex(index === 0 ? images.length - 1 : index - 1)}
-        icon={<MdOutlineArrowBackIosNew />}
-      />
-
-      <SlideNavButton
-        position="right"
-        onClick={() => setIndex((index + 1) % images.length)}
-        icon={<MdOutlineArrowForwardIos />}
-      /> */}
 
       <SlideDots
         count={images.length}

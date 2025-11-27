@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { LuCandy } from "react-icons/lu";
 import { useSelector } from "react-redux";
 // features
-import { api } from "features/auth/axios";
 import "./TopBar.scss";
+import { api } from "shared/lib/axios";
 
 export default function TopBar() {
   const isLogin  = useSelector((state) => state.auth.isLogin);
   const handleLogout = async () => {
     try {
-        await api.post("/auth/logout",{},  {withCredentials: true});
+        await api.post("/auth/logout",{});
         localStorage.removeItem("loginInfo");
         window.location.href = "/";
       } catch (err) {

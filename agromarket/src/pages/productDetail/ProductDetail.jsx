@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 // features
-import { api } from "features/auth/axios.js";
 import { addCart } from "features/cart/cartAPI.js";
 import { parseJwt } from "features/auth/parseJwt.js";
 import { setProductAPI } from "features/product/productAPI.js";
@@ -14,6 +13,7 @@ import { Detail } from "./Detail.jsx";
 import { QnA } from "./QnA.jsx";
 import { Return } from "./Return.jsx";
 import "../../styles/components/ProductDetail.css";
+import { api } from 'shared/lib/axios.js';
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)

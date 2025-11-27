@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useMemo, useState } from "react";
 // features
-import { setNoticeListAPI } from "features/catalog/notice/noticeAPI";
 import "./NoticeList.scss";
+import { setNoticeListAPI } from "features/notice/noticeAPI";
 
 export function NoticeList() {
   const noticeList = useSelector((state) => state.notice.noticeList);

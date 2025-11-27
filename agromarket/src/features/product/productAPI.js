@@ -6,11 +6,11 @@ import {
   setRecentSubCategory
 } from "./productSlice";
 // features
-import { api } from "features/auth/axios";
 import { showCart } from "features/cart/cartAPI";
 import { parseJwt } from "features/auth/parseJwt";
 // shared
 import { axiosGet, axiosPost, axiosPostFile } from "shared/lib/axiosInstance";
+import { api } from "shared/lib/axios";
 
 export const setProductListAPI = () => async (dispatch) => {
   const result = await axiosGet("/product/productList");

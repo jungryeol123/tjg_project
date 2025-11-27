@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import React, { useEffect, useRef, useMemo } from "react";
-import ProductCard from "shared/ui/productList/ProductCard";
 import "./RecommendedSlider.scss";
+import ProductCard from "../productCard/ProductCard";
 
 export default function RecommendedSlider({ title = "추천 상품", limit = 20 }) {
   const productList = useSelector((state) => state.product.productList);
