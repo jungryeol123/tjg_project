@@ -1,8 +1,9 @@
 import React from "react";
-import "./CategoryNav.scss";
-import { useSelector } from "react-redux";
 import { FiMenu } from "react-icons/fi";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import "./CategoryNav.scss";
+
 export default function CategoryNav() {
   // 카테고리(대분류) 리스트
   const categoryList = useSelector((state) => state.category.categoryList);

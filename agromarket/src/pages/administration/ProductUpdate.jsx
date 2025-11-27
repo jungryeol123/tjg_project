@@ -1,11 +1,13 @@
+import Swal from 'sweetalert2';
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { setDeliveryAPI } from "features/delivery/deliveryAPI";
 import { useSelector, useDispatch } from "react-redux";
+// shared
 import { ImageUploadList } from "../../shared/constants/ImageUploadList";
-import { setProductData } from "../../features/product/productAPI.js";
 import { ProductValidateCheck } from "../../shared/constants/ProductValidateCheck.jsx"
-import Swal from 'sweetalert2';
+// features
+import { setDeliveryAPI } from "features/delivery/deliveryAPI";
+import { setProductData } from "../../features/product/productAPI.js";
 import "./ProductAdd.css";
 
 export function ProductUpdate() {
@@ -19,22 +21,19 @@ export function ProductUpdate() {
 
   // 기존 이미지 URL 배열 (item.images: 서버에서 온 이미지 이름)
   const [existingImages, setExistingImages] = useState([null, null, null]);
-
   // 상품 편집 시 데이터
   const location = useLocation();
-
   // 기존 상품 정보 취득
   const { item } = location.state || {};
-
   // form데이터용
   const [formData, setFormData] = useState({});
-
+  // 이미지리스트
+  const imageList = ["상품 이미지", "속성 이미지", "상세 이미지"];
   // 이미지 등록용
   const [imageListFile, setImageListFile] = useState([]);
 
   // 카테고리(중분류) 등록용
   const [subCategoryList, setSubCategoryList] = useState([]);
-
   // 카테고리 대분류 표시용
   const [selectedMain, setSelectedMain] = useState("");
   // 카테고리 중분류 표시용
@@ -54,9 +53,6 @@ export function ProductUpdate() {
     { label: "알레르기 정보", name: "allergyInfo", placeholder: "예: 우유, 견과류 등", type: "text" },
     { label: "상품 설명", name: "description", placeholder: "예: 맛있는 1등급 우유", type: "text" },
   ];
-
-  // 이미지리스트
-  const imageList = ["상품 이미지", "속성 이미지", "상세 이미지"];
 
   useEffect(() => {
     dispatch(setDeliveryAPI());

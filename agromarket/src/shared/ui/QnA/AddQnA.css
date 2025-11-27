@@ -38,6 +38,7 @@
   cursor: pointer;
   opacity: 0.7;
 }
+
 .close-btn:hover { opacity: 1; }
 
 /* 상품 영역 */

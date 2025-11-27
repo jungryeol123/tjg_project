@@ -1,43 +1,48 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
-import Home from "pages/Home";
-import { Delivery } from "pages/Delivery";
-import { Login } from "pages/Login";
-import { Signup } from "pages/Signup";
-import KakaoCallback from "features/auth/Kakao";
-import { useEffect, useState } from "react";
-import PaymentButton from "features/order/PaymentButton";
-import { ProductDetail } from "pages/productDetail/ProductDetail";
-import { ProductAdd } from "pages/administration/ProductAdd";
-import { ProductUpdate } from "pages/administration/ProductUpdate";
-import { HeaderProductList } from "pages/productCategoryList/HeaderProductList";
-import SearchResult from "pages/searchResult/SearchResult";
-import CustomerService from "pages/customerService/CustomerService";
-import { NoticeList } from "pages/noticeList/NoticeList";
-import NoticeDetail from "pages/noticeList/NoticeDetail";
-import { Cart } from "pages/Cart";
-import { FindUserId } from "pages/FindUserId";
-import { FindPassword } from "pages/FindPassword";
-import { PayResult } from "pages/PayResult";
-import { MyOrders } from "pages/myOrders/MyOrders";
 import IntroAnimation from "IntroAnimation";
-import SuccessPage from "pages/successPage/SuccessPage";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+// layouts
+import { Layout } from "layouts/layout/Layout";
+// features
 import { login } from "features/auth/authSlice";
-import { CheckOut } from "pages/order/CheckOut";
+import KakaoCallback from "features/auth/Kakao";
+import PaymentButton from "features/order/PaymentButton";
 import { setupApiInterceptors } from "features/auth/axios";
+// shared
 import RecipePage from "shared/ui/recipe/RecipePage";
 import RecipeDetailPage from "shared/ui/recipe/RecipeDetailPage";
+// pages
+import Home from "pages/Home";
+import { Cart } from "pages/Cart";
+import { Login } from "pages/Login";
 import { Coupon } from "pages/Coupon";
-import ForecastPage from "pages/administration/ForecastPage";
-import ConversionPage from "pages/administration/ConversionPage";
+import { Signup } from "pages/Signup";
+import { Delivery } from "pages/Delivery";
+import { PayResult } from "pages/PayResult";
+import { FindUserId } from "pages/FindUserId";
+import { CheckOut } from "pages/order/CheckOut";
+import { FindPassword } from "pages/FindPassword";
+import { MyOrders } from "pages/myOrders/MyOrders";
+import SuccessPage from "pages/successPage/SuccessPage";
+import { NoticeList } from "pages/noticeList/NoticeList";
+import NoticeDetail from "pages/noticeList/NoticeDetail";
 import AdminLayout from "pages/administration/AdminLayout";
+import SearchResult from "pages/searchResult/SearchResult";
+import ForecastPage from "pages/administration/ForecastPage";
+import { ProductAdd } from "pages/administration/ProductAdd";
+import ConversionPage from "pages/administration/ConversionPage";
+import ReviewListPage from "pages/reviewAnalysic/ReviewListPage";
+import { ProductDetail } from "pages/productDetail/ProductDetail";
+import { ProductUpdate } from "pages/administration/ProductUpdate";
+import CustomerService from "pages/customerService/CustomerService";
+import ReviewAnalysisPage from "pages/reviewAnalysic/ReviewAnalysisPage";
 import { AdminProductList } from "pages/administration/AdminProductList";
 import PricingConversionPage from "pages/administration/PricingConversionPage";
 import ProductPricingDetailPage from "pages/administration/ProductPricingDetailPage";
-import ReviewListPage from "pages/reviewAnalysic/ReviewListPage";
-import ReviewAnalysisPage from "pages/reviewAnalysic/ReviewAnalysisPage";
-import { Layout } from "layouts/layout/Layout";
+import { HeaderProductList } from "pages/productCategoryList/HeaderProductList";
+
 function App() {
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   const dispatch = useDispatch();
@@ -119,7 +124,6 @@ function App() {
             <Route path="adminProductList" element={<AdminProductList />} />
             <Route path="products/reviewList" element={<ReviewListPage />} />
             <Route path="reviews/:ppk" element={<ReviewAnalysisPage />} />
-      
           </Route>
         </Route>
       </Routes>

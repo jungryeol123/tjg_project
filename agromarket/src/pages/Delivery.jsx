@@ -23,12 +23,12 @@ export function Delivery() {
 
         const info = new window.kakao.maps.InfoWindow({
           content: `
-    <div style="
-      color: #6a4dfd;
-    ">
-      Candy Corporation
-    </div>
-  `,
+            <div style="
+              color: #6a4dfd;
+            ">
+              Candy Corporation
+            </div>
+          `,
         });
         info.open(map, marker);
       });

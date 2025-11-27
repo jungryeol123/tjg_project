@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import ForecastChart from "./ForecastChart";
+// utils
 import { getForecast, getSalesData } from "utils/forecastApi";
 import { exportForecastExcel } from "utils/exportForecastExcel";
+import ForecastChart from "./ForecastChart";
 
 export default function ForecastPage() {
     const [ppk, setPpk] = useState(4);
     const [sales, setSales] = useState([]);
     const [forecast, setForecast] = useState(null);
+    const excelRows = [];
+    const today = new Date();
 
     useEffect(() => {
         loadSales();
@@ -23,9 +26,6 @@ export default function ForecastPage() {
         setForecast(result);
     };
 
-    const today = new Date();
-    const excelRows = [];
-    console.log("excelRows", excelRows);
     if (forecast) {
         const genDates = (len, type = "day") =>
             Array.from({ length: len }, (_, i) => {
@@ -79,7 +79,6 @@ export default function ForecastPage() {
     return (
         <div style={{ padding: 20 }}>
             <h1>📈 상품 판매량 예측</h1>
-
             <div style={{ marginBottom: 20 }}>
                 <label>PPK: </label>
                 <input

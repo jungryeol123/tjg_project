@@ -1,13 +1,9 @@
 import React from "react";
-import "./Popup.css";
 import { useNavigate } from "react-router-dom";
-import { parseJwt } from "features/auth/parseJwt";
-import { useEffect,useState } from "react";
-
+import "./Popup.css";
 
 export default function Popup({ onClose }) {
   const navigate = useNavigate();
-  
   
   return (
     <div className="popup-container">

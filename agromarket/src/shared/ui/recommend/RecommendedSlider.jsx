@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useMemo } from "react";
-import { useSelector } from "react-redux";
-import ProductCard from "shared/ui/productList/ProductCard";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import React, { useEffect, useRef, useMemo } from "react";
+import ProductCard from "shared/ui/productList/ProductCard";
 import "./RecommendedSlider.scss";
 
 export default function RecommendedSlider({ title = "추천 상품", limit = 20 }) {
@@ -39,14 +39,14 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
 
     let animationId;
     
-const scroll = () => {
-  slider.scrollLeft += 0.8; // ★ 속도 증가 (0.4 → 0.8)
+    const scroll = () => {
+      slider.scrollLeft += 0.8; // ★ 속도 증가 (0.4 → 0.8)
 
-  if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-    slider.scrollLeft = 0;
-  }
-  animationId = requestAnimationFrame(scroll);
-};
+      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+        slider.scrollLeft = 0;
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
 
     animationId = requestAnimationFrame(scroll);
 

@@ -134,6 +134,7 @@
   z-index: 10;
   animation: fadeIn 0.2s ease-in-out;
 }
+
 .recipe-title {
   font-size: 16px;
   font-weight: 700;
@@ -283,6 +284,7 @@
 .btn-cart:hover {
   background: #eaeaea;
 }
+
 /* 갯수가 0개 일때 */
 .btn-cart:disabled {
   background-color: #ccc;

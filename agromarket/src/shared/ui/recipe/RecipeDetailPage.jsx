@@ -1,12 +1,13 @@
+import Swal from 'sweetalert2';
+import { useSelector } from "react-redux";
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Swal from 'sweetalert2';
+// utils
 import {
   getRecipeDetailAPI,
   postRecipeReviewAPI,
 } from "utils/recipeAPI";
-import "./RecipeDetailPage1.scss";
+import "./RecipeDetailPage.scss";
 
 export default function RecipeDetailPage() {
   const { id } = useParams();
@@ -19,7 +20,6 @@ export default function RecipeDetailPage() {
 
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   const isLoggedIn = !!loginInfo;
-  // const userId = loginInfo?.id;
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
@@ -68,10 +68,10 @@ export default function RecipeDetailPage() {
   useEffect(() => {
     if (!recipe || !productList.length) return;
 
-  const keywords = recipe.ingredients
-  .map((ing) => ing.split(/\s+/)[0])      // 🔥 첫 번째 단어만 추출
-  .map((w) => w.replace(/[^가-힣a-zA-Z0-9]/g, "")) // 특수문자 제거
-  .filter((w) => w.length > 1);           // 한 글자 단어 제외
+    const keywords = recipe.ingredients
+    .map((ing) => ing.split(/\s+/)[0])      // 🔥 첫 번째 단어만 추출
+    .map((w) => w.replace(/[^가-힣a-zA-Z0-9]/g, "")) // 특수문자 제거
+    .filter((w) => w.length > 1);           // 한 글자 단어 제외
 
     const matches = productList.filter((p) =>
       keywords.some((kw) => p.productName.includes(kw))
@@ -82,19 +82,20 @@ export default function RecipeDetailPage() {
 
   // 후기 등록
   const handleSubmitReview = async () => {
-    if (newRating === 0) return Swal.fire({
-            icon: 'warning',
-            title: '⚠ 필수 입력',
-            text: "별점을 선택해주세요!",
-            confirmButtonText: '확인'
-          });
+    if (newRating === 0) 
+      return Swal.fire({
+        icon: 'warning',
+        title: '⚠ 필수 입력',
+        text: "별점을 선택해주세요!",
+        confirmButtonText: '확인'
+      });
     if (newContent.trim().length < 2)
       return Swal.fire({
-            icon: 'warning',
-            title: '⚠ 필수 입력',
-            text: "후기 내용을 입력해주세요.",
-            confirmButtonText: '확인'
-          });
+        icon: 'warning',
+        title: '⚠ 필수 입력',
+        text: "후기 내용을 입력해주세요.",
+        confirmButtonText: '확인'
+      });
 
     const res = await postRecipeReviewAPI(
       id,
@@ -104,11 +105,11 @@ export default function RecipeDetailPage() {
 
     if (res.status === 200) {
       Swal.fire({
-              icon: 'success',
-              title: '✅ 등록 완료',
-              text: "후기가 등록되었습니다!",
-              confirmButtonText: '확인'
-            });
+        icon: 'success',
+        title: '✅ 등록 완료',
+        text: "후기가 등록되었습니다!",
+        confirmButtonText: '확인'
+      });
       // 화면 즉시 반영
       setReviews((prev) => [
         {
@@ -204,7 +205,6 @@ export default function RecipeDetailPage() {
       {/* 후기 */}
       <h2 className="section-title">후기</h2>
 
-
       {/* 후기 작성 UI */}
       {isLoggedIn ? (
         <div className="review-write-box">
@@ -246,9 +246,9 @@ export default function RecipeDetailPage() {
       }
 
       {/* 후기 목록 */}
-      {currentItems.length === 0 ? (
-        <p>아직 작성된 후기가 없습니다.</p>
-      ) : (
+      {currentItems.length === 0 ?
+       ( <p>아직 작성된 후기가 없습니다.</p> )
+        : (
         <ul className="review-list">
           {currentItems.map((rev) => (
             <li key={rev.id} className="review-item">

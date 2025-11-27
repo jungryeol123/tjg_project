@@ -1,17 +1,17 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { getIdCheck, getSignup } from 'features/auth/authAPI';
-import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import React, { useState, useMemo, useEffect } from 'react';
+// features
+import { getIdCheck, getSignup } from 'features/auth/authAPI';
+// shared
 import { axiosGet } from "shared/lib/axiosInstance";
-import '../styles/components/Signup.css';
-import Swal from 'sweetalert2';
 import { validateSignup } from 'shared/constants/SignupValidation';
+import '../styles/components/Signup.css';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "emailDomainInput", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
     const numericOnly = ["phone", "dateYear", "dateMonth", "dateDay"];
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isPlusAfer, setIsPlusAfter] = useState(true);
 
@@ -148,7 +148,7 @@ export function Signup() {
             return;
         }
 
-        const result = await dispatch(getSignup(formData));
+        const result = await getSignup(formData);
         
         if(result) {
             Swal.fire({
@@ -208,7 +208,7 @@ export function Signup() {
             return;
         }
 
-        const result = await dispatch(getIdCheck(name, value));
+        const result = await getIdCheck(name, value);
         if(name === "userId") {
             if(result) {
                 Swal.fire({
@@ -243,6 +243,7 @@ export function Signup() {
             }
         }
     }
+    
     useEffect(() => {
         const load = async() => {
             const {terms} = await axiosGet('/data/terms.json');

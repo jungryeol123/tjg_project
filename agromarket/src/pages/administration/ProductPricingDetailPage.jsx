@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PricingConversionChart from "./PricingConversionChart";
-import axios from "axios";
 import "./pricingDetail.scss"; // ⭐ SCSS 스타일 추가
 
 export default function ProductPricingDetailPage() {
@@ -30,7 +30,6 @@ export default function ProductPricingDetailPage() {
 
     return (
         <div className="pricing-detail-container">
-            
             <div className="header-box">
                 <h1>📈 {item.productName} - AI 가격 상세 분석</h1>
                 <p className="sub">

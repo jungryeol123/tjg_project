@@ -79,8 +79,8 @@
 }
 
 .mypage-container .mypage-product-img-container {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .mypage-container .mypage-product-img {
@@ -88,22 +88,22 @@
 }
 
 .mypage-container .sold-out {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
-  color: rgb(255, 0, 0);
-  font-size: 1rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  pointer-events: none; /* 클릭 방해 방지 */
-  border-radius: 5px;
-  z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
+    color: rgb(255, 0, 0);
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    pointer-events: none; /* 클릭 방해 방지 */
+    border-radius: 5px;
+    z-index: 10;
 }
 
 
@@ -141,9 +141,9 @@
 
 /* 갯수가 0개 일때 */
 .mypage-btn>button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  opacity: 0.6;
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 .mypage-container .mypage-product-info {

@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useMemo, useState } from "react";
 import "./ReviewListPage.scss";
 
@@ -42,11 +42,8 @@ export default function ReviewListPage() {
         r.content.includes("좋") ||
         r.content.includes("추천") ||
         r.likes >= 5
-      ) {
-        positive++;
-      } else {
-        negative++;
-      }
+      ) { positive++; }
+      else { negative++; }
     });
 
     const topProducts = [...list]

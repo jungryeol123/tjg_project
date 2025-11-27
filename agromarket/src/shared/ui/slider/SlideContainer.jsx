@@ -1,13 +1,12 @@
 import React from "react";
-
-import { SlideDots } from "./SlideDots";
 import {
   MdOutlineArrowForwardIos,
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
 import { IoIosRadioButtonOn } from "react-icons/io";
-import "./SlideContainer.scss";
+import { SlideDots } from "./SlideDots";
 import { SlideNavButton } from "./SlideNavButton";
+import "./SlideContainer.scss";
 
 export function SlideContainer({ images, index, setIndex }) {
   return (

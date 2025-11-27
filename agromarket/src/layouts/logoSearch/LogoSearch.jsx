@@ -1,13 +1,10 @@
-// src/ui/Header/components/logoSearch/LogoSearch.jsx
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import "./LogoSearch.scss";
-import { CiLocationOn } from "react-icons/ci";
-import { FaRegHeart } from "react-icons/fa";
-import { IoCartOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom"; // ✅ 페이지 이동용
+import { IoCartOutline } from "react-icons/io5";
+import "./LogoSearch.scss";
 
-import { Link } from "react-router-dom";
 export default function LogoSearch() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
@@ -17,8 +14,10 @@ export default function LogoSearch() {
 
   // ✅ 검색 버튼 클릭 시 이동
   const handleSearch = () => {
-    if (keyword.trim() === "") return; // 빈 입력 방지
-    navigate(`/search/${encodeURIComponent(keyword)}`);
+    // 빈 입력 방지
+    if (keyword.trim() !== "") {
+      navigate(`/search/${encodeURIComponent(keyword)}`);
+    }
   };
 
   // ✅ Enter 키로도 검색 가능하게

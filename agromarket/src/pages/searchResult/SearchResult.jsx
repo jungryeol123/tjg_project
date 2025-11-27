@@ -1,7 +1,7 @@
-// src/pages/SearchResult.jsx
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
+// shared
 import ProductCard from "shared/ui/productList/ProductCard";
 import { FilterItem } from "../../shared/constants/FilterItem";
 import "./SearchResult.scss"
@@ -70,7 +70,7 @@ export default function SearchResult() {
         filtered = productList.filter((p) =>
         p.categorySub.id === categoryData.id);
       }
-            
+
       setFilterList(filtered);
     }
 
@@ -134,5 +134,4 @@ export default function SearchResult() {
       )}
     </div>
   );
-
 }

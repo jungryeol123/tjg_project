@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { setDeliveryAPI } from "features/delivery/deliveryAPI";
-import { useSelector, useDispatch } from "react-redux";
-import { ImageUploadList } from "../../shared/constants/ImageUploadList";
-import { setProductData } from "../../features/product/productAPI.js";
-import { ProductValidateCheck } from "../../shared/constants/ProductValidateCheck.jsx";
 import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+// features
+import { setDeliveryAPI } from "features/delivery/deliveryAPI";
+import { setProductData } from "features/product/productAPI.js";
+// shared
+import { ImageUploadList } from "shared/constants/ImageUploadList";
+import { ProductValidateCheck } from "shared/constants/ProductValidateCheck.jsx";
 import "./ProductAdd.css";
 
 export function ProductAdd() {

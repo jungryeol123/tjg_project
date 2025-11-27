@@ -1,4 +1,3 @@
-import { axiosGet, axiosPost, axiosPostFile } from "shared/lib/axiosInstance";
 import {
   setProductList,
   setProduct,
@@ -6,12 +5,16 @@ import {
   setProductQnAList,
   setRecentSubCategory
 } from "./productSlice";
-import { parseJwt } from "features/auth/parseJwt";
+// features
 import { api } from "features/auth/axios";
 import { showCart } from "features/cart/cartAPI";
+import { parseJwt } from "features/auth/parseJwt";
+// shared
+import { axiosGet, axiosPost, axiosPostFile } from "shared/lib/axiosInstance";
 
-export const setProductListAPI = (keyword) => async (dispatch) => {
+export const setProductListAPI = () => async (dispatch) => {
   const result = await axiosGet("/product/productList");
+
   if (result !== null && Array.isArray(result)) {
     dispatch(setProductList({ result: result }));
   }
@@ -21,9 +24,8 @@ export const setProductListAPI = (keyword) => async (dispatch) => {
 export const setProductAPI = (id) => async (dispatch) => {
   const url = "/product/productDetail";
   const params = { "id" : id };
-  
-  // const jsonData = await axiosGetParams(url, { params });
   const jsonData = await api.get(url, { params });
+
   // null이 아닐경우만 실행
   if(jsonData && Object.keys(jsonData).length > 0){
     dispatch(setProduct({ product: jsonData.data }));
@@ -58,8 +60,8 @@ export const setProductQnAListAPI = () => async (dispatch) => {
 
 
 export const setProductBestListAPI = async() =>  {
-    const result = await axiosGet("/product/productBestList");
-    return result;
+  const result = await axiosGet("/product/productBestList");
+  return result;
 }
 
 // 상품 정보 등록
@@ -108,9 +110,9 @@ export const setProductData = async(formData, imageListFile, isNew, id, maxImage
 
     // 업로드 성공시 메세지 출력
     if (result) {
-        return true;
+      return true;
     } else {
-        return false;
+      return false;
     }
   }
 }
@@ -141,7 +143,6 @@ export const delProductData = (productId) => async(dispatch) => {
 export const fetchRecentSubCategory = (upk) => async (dispatch) => {
   try {
     const res = await api.get(`/view/recent-subcat/${upk}`);
-    console.log("res", res);
     dispatch(setRecentSubCategory(res.data.recentSubCategory));
   } catch (err) {
     console.error("추천 subCategory 가져오기 실패:", err);

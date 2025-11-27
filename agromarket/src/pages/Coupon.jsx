@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-import { parseJwt } from "features/auth/parseJwt";
-import { useNavigate, useLocation } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+// features
+import { parseJwt } from "features/auth/parseJwt";
 
 export function Coupon() {
   const [userId, setUserId] = useState(null);
@@ -17,28 +18,17 @@ export function Coupon() {
     { id: 3, rate: 60 },
   ];
 
-//   // 로그인 정보 로드
-//   useEffect(() => {
-//     const stored = localStorage.getItem("loginInfo");
-//     if (stored) {
-//       const parsed = JSON.parse(stored);
-//       setUserId(parsed.id);
-//     }
-//   }, []);
-
   useEffect(() => {
-      const stored = localStorage.getItem("loginInfo");
-      if (stored) {
-        const { accessToken } = JSON.parse(stored);
-        const payload = parseJwt(accessToken);
-        console.log("토큰 payload:", payload); // { id: 7, iat: ..., exp: ... }
-  
-        setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
-      }
-  
-    }, []);
-  
+    const stored = localStorage.getItem("loginInfo");
+    if (stored) {
+      const { accessToken } = JSON.parse(stored);
+      const payload = parseJwt(accessToken);
+      console.log("토큰 payload:", payload); // { id: 7, iat: ..., exp: ... }
 
+      setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
+    }
+  }, []);
+  
   useEffect(() => {
     if (userId) {
       fetchIssuedCoupons(userId);
@@ -49,10 +39,9 @@ export function Coupon() {
     const stored = localStorage.getItem("loginInfo");
     const { accessToken } = JSON.parse(stored);
     try {
-      const res = await axios.get(`http://localhost:8080/coupon/user-ids/${id}`,
-        {
-      headers : { Authorization : `Bearer ${accessToken}` }
-  }
+      const res = await axios.get(
+        `http://localhost:8080/coupon/user-ids/${id}`,
+        { headers : { Authorization : `Bearer ${accessToken}` } }
       );
       setIssuedCoupons(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
@@ -135,8 +124,6 @@ export function Coupon() {
 
       {/* 🔽 이미지 아래 쿠폰 리스트 */}
       <div style={{ textAlign: "center", padding: "30px 0" }}>
-        
-
         <ul style={{ listStyle: "none", padding: 0 }}>
           {couponList.map((coupon) => (
             <li key={coupon.id} style={{ marginBottom: "20px" }}>
@@ -184,5 +171,3 @@ export function Coupon() {
     </div>
   );
 }
-
-

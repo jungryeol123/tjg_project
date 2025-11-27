@@ -26,6 +26,7 @@
   width: 400px; /* 이미지 크기 조정 가능 */
   border-radius: 10px;
 }
+
 .get-coupon-button {
   margin-top: 10px;
   width: 100%;
@@ -38,9 +39,11 @@
   cursor: pointer;
   transition: 0.2s ease;
 }
+
 .get-coupon-button:hover {
   background: #3a3a98;
 }
+
 .get-coupon-button {
   margin-top: 10px;
   padding: 8px 20px;
@@ -64,6 +67,7 @@
 .popup-close-btn:hover {
   background: #3a3a98;
 }
+
 .popup-container {
   position: fixed;
   top: 0;

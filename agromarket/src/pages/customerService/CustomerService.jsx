@@ -1,7 +1,6 @@
-// src/pages/CustomerService.jsx
 import React from "react";
-import "./CustomerService.scss";
 import { FaPhoneAlt, FaEnvelope, FaQuestionCircle } from "react-icons/fa";
+import "./CustomerService.scss";
 
 export default function CustomerService() {
   return (

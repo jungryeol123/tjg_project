@@ -33,7 +33,7 @@ export const productSlice = createSlice({
       state.productQnAList = result;
     },
     setRecentSubCategory(state, action) {
-      state.recentSubCategory = action.payload;  // ← 요것도 추가
+      state.recentSubCategory = action.payload;
     }
   }
 });

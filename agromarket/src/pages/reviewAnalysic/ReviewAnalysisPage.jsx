@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useParams } from "react-router-dom";
 import "./ReviewAnalysisPage.scss";
 
 export default function ReviewAnalysisPage() {
@@ -12,9 +12,10 @@ export default function ReviewAnalysisPage() {
   const [analysis, setAnalysis] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/admin/reviews/analysis/${ppk}`).then((res) => {
-      setAnalysis(res.data);
-    });
+    axios.get(`/api/admin/reviews/analysis/${ppk}`)
+      .then((res) => {
+        setAnalysis(res.data);
+      });
   }, [ppk]);
 
   if (!reviews.length) return <p>리뷰가 없습니다</p>;
@@ -22,14 +23,12 @@ export default function ReviewAnalysisPage() {
 
   return (
     <div className="analysis-page">
-
       <h2 className="page-title">
         {analysis.productName} AI 리뷰 분석
       </h2>
 
       {/* AI 분석 요약 카드 */}
       <div className="analysis-grid">
-
         <div className="analysis-card">
           <h3>🍽 맛 키워드</h3>
           <ul>
@@ -56,12 +55,10 @@ export default function ReviewAnalysisPage() {
           <p className="positive-score">긍정 {analysis.positiveCount}개</p>
           <p className="negative-score">부정 {analysis.negativeCount}개</p>
         </div>
-
       </div>
 
       {/* 실제 리뷰 */}
       <h3 className="review-title">📌 전체 리뷰({reviews.length})</h3>
-
       <div className="review-list">
         {reviews.map((r) => (
           <div key={r.id} className="review-item">
@@ -78,7 +75,6 @@ export default function ReviewAnalysisPage() {
           </div>
         ))}
       </div>
-
     </div>
   );
 }

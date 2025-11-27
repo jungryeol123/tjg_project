@@ -19,7 +19,6 @@ export async function getData(url) {
 }
 
 export async function axiosGet(url) {
-
     try {
         const response = await axios.get(url);
         return response.data;
@@ -54,7 +53,6 @@ export async function axiosPostFile(url, params) {
 
 // get방식 params 보내기
 export async function axiosGetParams(url, params) {
-
     try {
         const response = await axios.get(url, params);
         return response.data;
