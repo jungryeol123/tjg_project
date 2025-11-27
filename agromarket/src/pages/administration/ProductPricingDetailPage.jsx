@@ -78,7 +78,7 @@ export default function ProductPricingDetailPage() {
                         <tr><th>매출 증가율</th><td className="improved">{item.revenueGainPercent.toFixed(2)}%</td></tr>
 
                         <tr><th>가격 탄력성 (PED)</th><td>{item.ped.toFixed(4)}</td></tr>
-                        <tr><th>최적 가격</th><td>{Math.round(item.optimalPrice).toLocaleString()} 원</td></tr>
+                        <tr><th>최적 가격</th><td>{Math.floor(item.optimalPrice).toLocaleString()} 원</td></tr>
 
                     </tbody>
                 </table>
