@@ -6,8 +6,11 @@ import { getData } from "shared/lib/axiosInstance";
 import { useAutoSlider } from "shared/hooks/useAutoSlider";
 import { SlideContainer } from "shared/ui/slider/SlideContainer";
 import RecommendedSlider from "shared/ui/recommend/RecommendedSlider";
+import { AdvertiseList } from "shared/ui/advertise/AdvertiseList";
+import { RightAdBanner } from "shared/ui/advertise/RightAdvBanner";
 // features
 import { parseJwt } from "features/auth/parseJwt";
+
 
 import { setCategoryListAPI } from "features/category/categoryAPI.js";
 import { setProductListAPI,
@@ -20,7 +23,20 @@ export default function Home() {
   const [images, setImages] = useState([]);
   const dispatch = useDispatch();
   const { index, setIndex } = useAutoSlider(images.length, 5000);
-  
+  const [advertiseList, setAdvertiseList] = useState([]);
+  const bannerAds = advertiseList.filter(ad => ad.advImageBanner !== null);
+  const inlineAds = advertiseList.filter(ad => ad.advImageInline !== null);
+  const fetchAdvertiseList = async () => {
+    return await getData("/advertise/list");
+  };
+  useEffect(() => {
+    const fetchAdvertises = async () => {
+      const adv = await fetchAdvertiseList();
+      setAdvertiseList(adv);
+    };
+    fetchAdvertises();
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await getData("/data/homeDataImages.json");
@@ -60,9 +76,11 @@ export default function Home() {
 
   return (
     <>
+      <RightAdBanner ads={bannerAds} />
       {showPopup && <Popup onClose={handleClosePopup} />}
       <SlideContainer images={images} index={index} setIndex={setIndex} />
       <RecommendedSlider title="좋아할만한 브랜드 상품" limit={15} />
+      <AdvertiseList ads={inlineAds} />
       <ProductList title="마감 임박! 원더특가 ~66%" keyword="time" limit={12} />
       <ProductList title="실시간 인기 랭킹" keyword="sale" limit={12} />
       <ProductList title="할인을 잡아라!!" keyword="sale" limit={12} />

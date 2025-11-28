@@ -1,0 +1,41 @@
+/* 상품 사이 광고 */
+.advertise-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* margin: 40px 0; */
+}
+
+.advertise-inline {
+  width: 1200px;
+  height: 200px;
+  max-width: 1200px;
+  /* border-radius: 10px; */
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+
+/* 오른쪽 고정 배너 */
+.right-ad-banner {
+  position: fixed;
+  right: 20px;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 9999;
+}
+
+.banner-img {
+  width: 110px;
+  height: 300px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease;
+}
+
+.banner-img:hover {
+  transform: scale(1.05);
+}
