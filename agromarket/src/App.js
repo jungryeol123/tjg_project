@@ -13,10 +13,10 @@ import RecipePage from "shared/ui/recipe/RecipePage";
 import RecipeDetailPage from "shared/ui/recipe/RecipeDetailPage";
 // pages
 import Home from "pages/Home";
-import { Cart } from "pages/Cart";
+import { Cart } from "pages/cart/Cart";
 import { Login } from "pages/Login";
 import { Coupon } from "pages/Coupon";
-import { Signup } from "pages/Signup";
+import { Signup } from "pages/signup/Signup";
 import { Delivery } from "pages/Delivery";
 import { PayResult } from "pages/PayResult";
 import { FindUserId } from "pages/FindUserId";
