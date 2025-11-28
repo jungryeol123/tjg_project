@@ -3,8 +3,8 @@ import React from "react";
 import TopBar from "layouts/topbar/TopBar";
 import LogoSearch from "layouts/logoSearch/LogoSearch";
 // shared
-import CategoryNav from "shared/ui/Header/components/categoryNav/CategoryNav";
 import "./Header.scss";
+import CategoryNav from "layouts/categoryNav/CategoryNav";
 
 export default function Header() {
   return (

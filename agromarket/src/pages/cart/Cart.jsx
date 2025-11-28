@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // features
 import { parseJwt } from "features/auth/parseJwt";
 import { removeCart, showCart, updateCart } from "features/cart/cartAPI";
-import "./Cart.css";
+import "./Cart.scss";
 
 export function Cart() {
     const navigate = useNavigate();

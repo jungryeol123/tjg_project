@@ -7,13 +7,13 @@ import { addCart } from "features/cart/cartAPI.js";
 import { parseJwt } from "features/auth/parseJwt.js";
 import { setProductAPI } from "features/product/productAPI.js";
 // 탭 컴포넌트
-import { ReviewList } from "./ReviewList.jsx";
-import { Item } from "./Item.jsx";
-import { Detail } from "./Detail.jsx";
-import { QnA } from "./QnA.jsx";
-import { Return } from "./Return.jsx";
-import "../../styles/components/ProductDetail.css";
-import { api } from 'shared/lib/axios.js';
+import "./ProductDetail.scss";
+import { Item } from 'features/productDetail/item/Item';
+import { Detail } from 'features/productDetail/Detail/Detail';
+import { ReviewList } from 'features/productDetail/review/ReviewList';
+import { QnA } from 'features/productDetail/qna/QnA';
+import { Return } from 'features/productDetail/return/Return';
+import { api } from 'shared/lib/axios';
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)

@@ -7,40 +7,39 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "layouts/layout/Layout";
 // features
 import { login } from "features/auth/authSlice";
-import PaymentButton from "features/order/PaymentButton";
 // shared
-import RecipePage from "shared/ui/recipe/RecipePage";
-import RecipeDetailPage from "shared/ui/recipe/RecipeDetailPage";
 // pages
 import Home from "pages/Home";
 import { Cart } from "pages/cart/Cart";
-import { Login } from "pages/Login";
-import { Coupon } from "pages/Coupon";
 import { Signup } from "pages/signup/Signup";
-import { Delivery } from "pages/Delivery";
-import { PayResult } from "pages/PayResult";
-import { FindUserId } from "pages/FindUserId";
 import { CheckOut } from "pages/order/CheckOut";
-import { FindPassword } from "pages/FindPassword";
 import { MyOrders } from "pages/myOrders/MyOrders";
 import SuccessPage from "pages/successPage/SuccessPage";
 import AdminLayout from "pages/administration/AdminLayout";
 import SearchResult from "pages/searchResult/SearchResult";
-import ForecastPage from "pages/administration/ForecastPage";
-import { ProductAdd } from "pages/administration/ProductAdd";
-import ConversionPage from "pages/administration/ConversionPage";
-import ReviewListPage from "pages/reviewAnalysic/ReviewListPage";
 import { ProductDetail } from "pages/productDetail/ProductDetail";
-import { ProductUpdate } from "pages/administration/ProductUpdate";
 import CustomerService from "pages/customerService/CustomerService";
-import ReviewAnalysisPage from "pages/reviewAnalysic/ReviewAnalysisPage";
-import { AdminProductList } from "pages/administration/AdminProductList";
-import PricingConversionPage from "pages/administration/PricingConversionPage";
-import ProductPricingDetailPage from "pages/administration/ProductPricingDetailPage";
 import { HeaderProductList } from "pages/productCategoryList/HeaderProductList";
 import { setupApiInterceptors } from "shared/lib/axios";
 import NoticeDetail from "features/notice/components/NoticeDetail";
 import { NoticeList } from "pages/notice/NoticeList";
+import { AdminProductList } from "pages/administration/adminProductList/AdminProductList";
+import ConversionPage from "pages/administration/conversion/ConversionPage";
+import ForecastPage from "pages/administration/forecast/ForecastPage";
+import PricingConversionPage from "pages/administration/pricingConversion/PricingConversionPage";
+import ProductPricingDetailPage from "pages/administration/pricingDetail/ProductPricingDetailPage";
+import { ProductUpdate } from "pages/administration/productSkill/ProductUpdate";
+import { ProductAdd } from "pages/administration/productSkill/ProductAdd";
+import ReviewListPage from "pages/administration/reviewAnalysic/ReviewListPage";
+import ReviewAnalysisPage from "features/reviewAnalysic/ReviewAnalysisPage";
+import { Delivery } from "pages/delivery/Delivery";
+import { Login } from "pages/login/Login";
+import { FindPassword } from "features/login/FindPassword";
+import { FindUserId } from "features/login/FindUserId";
+import { Coupon } from "pages/coupon/Coupon";
+import { PayResult } from "pages/payResult/PayResult";
+import RecipePage from "pages/recipe/RecipePage";
+import RecipeDetailPage from "features/recipe/RecipeDetailPage";
 
 
 function App() {
@@ -75,10 +74,10 @@ function App() {
       .catch((err) => console.error("❌ CSRF Token init failed:", err));
   }, []);
 
-  // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
-  if (!isIntroFinished) {
-    return <IntroAnimation />;
-  }
+  // // ✅ 3. 인트로가 끝나기 전에는 IntroAnimation만 보여줌
+  // if (!isIntroFinished) {
+  //   return <IntroAnimation />;
+  // }
 
   return (
     <BrowserRouter>
@@ -93,7 +92,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckOut />} />
-          <Route path="/" element={<PaymentButton />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/productList/:id" element={<HeaderProductList />} />
           <Route path="/search/:keyword" element={<SearchResult />} />

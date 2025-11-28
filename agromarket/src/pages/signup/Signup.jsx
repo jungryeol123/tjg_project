@@ -6,8 +6,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { getIdCheck, getSignup } from 'features/auth/authAPI';
 // shared
 import { axiosGet } from "shared/lib/axiosInstance";
-import { validateSignup } from 'shared/constants/SignupValidation';
-import './Signup.css';
+import './Signup.scss';
+import { validateSignup } from 'features/signup/SignupValidation';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "emailDomainInput", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
