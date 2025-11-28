@@ -15,7 +15,25 @@ export function MyOrders() {
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
   
+  const handleNext = () => {
+    setCurrentPage((prev) =>
+      prev * itemsPerPage < orders.length ? prev + 1 : prev
+    );
+  };
+
+  const handlePrev = () => {
+    setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+
+  // ✅ 페이지네이션 처리
+  const currentItems = orders.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   /** 🔹 로그인 ID 읽기 */
   useEffect(() => {
       const stored = localStorage.getItem("loginInfo");
@@ -158,13 +176,13 @@ export function MyOrders() {
       {orders.length === 0 ? (
         <p>주문 내역이 없습니다.</p>
       ) : (
-        orders.map((order) => (
+        currentItems.map((order) => (
           <div key={order.id} className="mypage-card">
 
             <div className="mypage-body">
               <div className="mypage-order-title">
                 <h4 className="mypage-order-title-name">📦 주문 상품</h4>
-                <div>
+                <div className="mypage-order-date">
                   <b>주문일자:</b> {new Date(order.odate).toLocaleString()}
                   <p className="mypage-order-code"><b>주문 번호:</b> {order.orderCode}</p>
                 </div>
@@ -209,6 +227,23 @@ export function MyOrders() {
           </div>
         ))
       )}
+      {/* ✅ 페이지네이션 */}
+      {orders.length>0 && 
+        <div className="pagination">
+          <button className="pagination-btn" onClick={handlePrev} disabled={currentPage === 1}>
+            {"<"}
+          </button>
+          <span style={{ margin: "0 0.6rem" }}>
+            {currentPage} / {Math.ceil(orders.length / itemsPerPage)}
+          </span>
+          <button className="pagination-btn"
+            onClick={handleNext}
+            disabled={currentPage * itemsPerPage >= orders.length}
+          >
+            {">"}
+          </button>
+        </div>
+      }
 
       {/* 받은 쿠폰 목록 */}
       <div>
