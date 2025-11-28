@@ -7,7 +7,7 @@ import { getIdCheck, getSignup } from 'features/auth/authAPI';
 // shared
 import { axiosGet } from "shared/lib/axiosInstance";
 import { validateSignup } from 'shared/constants/SignupValidation';
-import '../styles/components/Signup.css';
+import './Signup.css';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "emailDomainInput", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
