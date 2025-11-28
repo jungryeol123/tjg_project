@@ -150,3 +150,23 @@
     width: 300px;
     padding: 0px 20px;
 }
+
+.mypage-container .pagination-btn {
+  background-color: transparent;
+  color: #4949b1ff;
+  border: 1px solid #4949b1ff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mypage-container .pagination-btn:hover {
+  background-color: #4949b1ff;
+  color: #fff;
+}
+
+.mypage-container .mypage-order-date {
+    text-align: right;
+}
