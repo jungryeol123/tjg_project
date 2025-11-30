@@ -64,7 +64,6 @@ export function ProductAdd() {
   // form데이터 입력시 이벤트
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
     if(name === "categorySub"){
         setFormData({ ...formData, [name] : { "id": parseInt(value)} });
         setSelectedSub(value)

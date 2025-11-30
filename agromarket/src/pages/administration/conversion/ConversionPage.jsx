@@ -22,13 +22,6 @@ export default function ConversionPage() {
     const orders = data.map((d) => d.orders);
     const rates = data.map((d) => d.conversionRate.toFixed(2));
 
-    const excelData = data.map((item) => ({
-        상품명: item.productName,
-        클릭수: item.clicks,
-        주문수: item.orders,
-        전환율: item.conversionRate.toFixed(2) + "%",
-    }));
-
     return (
         <div style={{ padding: 20 }}>
             <h1>📊 상품별 클릭 → 구매 전환율 분석</h1>
