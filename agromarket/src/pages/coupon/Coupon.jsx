@@ -23,7 +23,6 @@ export function Coupon() {
     if (stored) {
       const { accessToken } = JSON.parse(stored);
       const payload = parseJwt(accessToken);
-      console.log("토큰 payload:", payload); // { id: 7, iat: ..., exp: ... }
 
       setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
     }
@@ -40,7 +39,7 @@ export function Coupon() {
     const { accessToken } = JSON.parse(stored);
     try {
       const res = await axios.get(
-        `http://localhost:8080/coupon/user-ids/${id}`,
+        `/coupon/user-ids/${id}`,
         { headers : { Authorization : `Bearer ${accessToken}` } }
       );
       setIssuedCoupons(Array.isArray(res.data) ? res.data : []);

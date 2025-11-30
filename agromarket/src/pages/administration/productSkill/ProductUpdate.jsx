@@ -17,6 +17,7 @@ export function ProductUpdate() {
   const deliveryList = useSelector((state) => state.delivery.deliveryList);
   // 카테고리(대분류) 리스트
   const categoryList = useSelector((state) => state.category.categoryList);
+  console.log("cate", categoryList);
 
   // 기존 이미지 URL 배열 (item.images: 서버에서 온 이미지 이름)
   const [existingImages, setExistingImages] = useState([null, null, null]);
@@ -24,6 +25,7 @@ export function ProductUpdate() {
   const location = useLocation();
   // 기존 상품 정보 취득
   const { item } = location.state || {};
+  console.log("item", item);
   // form데이터용
   const [formData, setFormData] = useState({});
   // 이미지리스트
@@ -82,6 +84,7 @@ export function ProductUpdate() {
           subCategory.id === item.categorySub.id 
       )
     )
+    console.log("main", mainList);
     setSelectedMain(mainList.id);
     // 카테고리 중분류 설정
     setSubCategoryList(mainList.subCategories);

@@ -12,9 +12,11 @@ import { parseJwt } from "features/auth/parseJwt";
 import { axiosGet, axiosPost, axiosPostFile } from "shared/lib/axiosInstance";
 import { api } from "shared/lib/axios";
 
+
+
+
 export const setProductListAPI = () => async (dispatch) => {
   const result = await axiosGet("/product/productList");
-
   if (result !== null && Array.isArray(result)) {
     dispatch(setProductList({ result: result }));
   }

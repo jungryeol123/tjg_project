@@ -10,10 +10,8 @@ import axios from "axios";
 export async function getData(url) {
     try {
         const response = await axios.get(url);
-        console.log("✅ KAMIS API 응답:", response.data);
         return response.data;
     } catch (error) {
-        console.error("🚨 KAMIS API 오류:", error);
         throw error;
     }
 }
@@ -23,7 +21,6 @@ export async function axiosGet(url) {
         const response = await axios.get(url);
         return response.data;
     } catch (error) {
-        console.error("데이터 오류", error);
         throw error;
     }
 }
