@@ -1,4 +1,3 @@
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -6,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 // features
 import { parseJwt } from "features/auth/parseJwt";
 import { addCart } from "features/cart/cartAPI.js";
+// shared
+import { api } from 'shared/lib/axios.js';
 import './MyOrders.css'
 
 export function MyOrders() {
@@ -52,7 +53,7 @@ export function MyOrders() {
 
     const fetchOrders = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/orders/my/${userId}`);
+        const res = await api.get(`http://localhost:8080/orders/my/${userId}`);
         console.log(res.data);
         
         setOrders(res.data);
@@ -70,7 +71,7 @@ export function MyOrders() {
 
     const fetchCoupons = async () => {
       try {
-        const res = await axios.get(`/coupon/my/${userId}`);
+        const res = await api.get(`/coupon/my/${userId}`);
         const couponList = res.data.filter(item => item.isUsed === false)
 
         console.log("🔥 백엔드 응답:", res.data);
@@ -88,7 +89,7 @@ export function MyOrders() {
   /** 주문내역 삭제 기능 */
   const handleDeleteOrder = async (orderCode) => {
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         `/orders/deleteOrder/${userId}/${orderCode}`,
         {
         data : {},
@@ -119,7 +120,7 @@ export function MyOrders() {
   /** 🔹 쿠폰 삭제 기능 */
   const handleDeleteCoupon = async (couponId) => {
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         `/coupon/deleteCoupon/${userId}/${couponId}`
       );
 

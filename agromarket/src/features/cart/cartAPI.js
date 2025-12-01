@@ -7,8 +7,6 @@ import {
 //features
 import { parseJwt } from "features/auth/parseJwt";
 import { api } from 'shared/lib/axios.js';
-// shared
-import { axiosPost } from 'shared/lib/axiosInstance.js'
 
 // 장바구니 추가(신규일경우 레코드추가, 기존 레코드 존재시 qty 증가)
 export const addCart = (ppk, qty) => async(dispatch, getState) => {
@@ -28,10 +26,10 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
         }
 
         // 장바구니 설정
-        const result = await axiosPost(url, cart);
+        const result = await api.post(url, cart);
 
-        if (result) {
-            await dispatch(updateCartList({ "cartItem" : result }));
+        if (result.data) {
+            await dispatch(updateCartList({ "cartItem" : result.data }));
             await dispatch(getCartCount());
 
             // // 최신 state 가져오기
@@ -76,7 +74,7 @@ export const showCart = (id) => async (dispatch) => {
 export const updateCart = (cid, qty, id) => async(dispatch) => {
     const url = "/cart/updateQty";
     const cartData = { "cid": cid, "qty":qty };
-    const rows = await axiosPost(url, cartData);
+    const rows = await api.post(url, cartData);
     
     // 장바구니 아이템 재설정
     dispatch(showCart(id));
@@ -86,7 +84,7 @@ export const updateCart = (cid, qty, id) => async(dispatch) => {
 export const removeCart = (cid, id) => async(dispatch) => {
     const url = "/cart/deleteItem";
     const data = {"cid": cid};
-    const rows = await axiosPost(url, data);
+    const rows = await api.post(url, data);
     
     // 장바구니 아이템 재설정
     dispatch(showCart(id));

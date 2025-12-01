@@ -12,6 +12,7 @@ export function Cart() {
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
+    const shippingFee = useSelector((state) => state.cart.shippingFee);
     const [userId, setUserId] = useState(null); // ✅ 테스트용 사용자 id (나중엔 토큰으로 대체)
 
     useEffect(() => {
@@ -71,12 +72,12 @@ export function Cart() {
                                     </p>
                                     <p className='cart-total'>
                                         <label>총 배송비 : </label>
-                                        <span>0원</span>
+                                        <span>{shippingFee}원</span>
                                     </p>
                                 </div>
                                 <p className='cart-total2'>
                                     <label>총 금액 : </label>
-                                    <span>{totalPrice - totalDcPrice} 원</span>
+                                    <span>{totalPrice - totalDcPrice + shippingFee} 원</span>
                                 </p>
                             </div>
                             <div className='cart-actions'>
