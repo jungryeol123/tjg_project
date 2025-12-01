@@ -12,23 +12,23 @@ export const getLogin = (formData, param) => async (dispatch) => {
     // ✅ 1. 로그인 전에 CSRF 토큰 먼저 요청
     const res = await api.post("/auth/login", { userId, password });
     const accessToken = res.data.accessToken;
-
+    const role = res.data.role;
     if (accessToken) {
-      dispatch(login({ provider: "local", accessToken }));
+      dispatch(login({ provider: "local", accessToken, role }));
       // 토큰정보 취득
       const payload = parseJwt(accessToken);
-      
+
       // 장바구니 리스트 설정
-	    const url = "/cart/cartList";
-	    const cartItem = { "user" : {"id":payload.id} };
-      
+      const url = "/cart/cartList";
+      const cartItem = { "user": { "id": payload.id } };
+
       // 장바구니 리스트 취득
-	    const cartData = await api.post(url, cartItem);
+      const cartData = await api.post(url, cartItem);
       // 장바구니 리스트 설정
-	    dispatch(setCartItem({"cartItem": cartData.data}));
+      dispatch(setCartItem({ "cartItem": cartData.data }));
       // 장바구니 카운트 설정
-	    dispatch(getCartCount());
-    
+      dispatch(getCartCount());
+
       return true;
     }
   } catch (err) {
@@ -44,7 +44,7 @@ export const getLogin = (formData, param) => async (dispatch) => {
 /**
     id중복 체크
 */
-export const getCheckId = async(name, value) => {
+export const getCheckId = async (name, value) => {
   const data = { [name]: value };
   const url = "/member/idcheck";
   const result = await api.post(url, data);
@@ -55,7 +55,7 @@ export const getCheckId = async(name, value) => {
 /**
     signup
 */
-export const getSignup = async(formData) => {
+export const getSignup = async (formData) => {
   const url = "/member/signup";
   return await api.post(url, formData);
 };

@@ -40,6 +40,7 @@ import { Coupon } from "pages/coupon/Coupon";
 import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
 import RecipeDetailPage from "features/recipe/RecipeDetailPage";
+import AdminRoute from "shared/ui/adminRoute/AdminRoute";
 
 
 function App() {
@@ -105,16 +106,18 @@ function App() {
           <Route path="/oauth/success" element={<SuccessPage />} />
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/recipe/:id" element={<RecipeDetailPage />} />
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="analytics/forecast" element={<ForecastPage />} />
-            <Route path="analytics/conversion" element={<ConversionPage />} />
-            <Route path="analytics/price" element={<PricingConversionPage />} />
-            <Route path="pricing/:ppk" element={<ProductPricingDetailPage />} />
-            <Route path="products/add" element={<ProductAdd />} />
-            <Route path="products/update" element={<ProductUpdate />} />
-            <Route path="adminProductList" element={<AdminProductList />} />
-            <Route path="products/reviewList" element={<ReviewListPage />} />
-            <Route path="reviews/:ppk" element={<ReviewAnalysisPage />} />
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="analytics/forecast" element={<ForecastPage />} />
+              <Route path="analytics/conversion" element={<ConversionPage />} />
+              <Route path="analytics/price" element={<PricingConversionPage />} />
+              <Route path="pricing/:ppk" element={<ProductPricingDetailPage />} />
+              <Route path="products/add" element={<ProductAdd />} />
+              <Route path="products/update" element={<ProductUpdate />} />
+              <Route path="adminProductList" element={<AdminProductList />} />
+              <Route path="products/reviewList" element={<ReviewListPage />} />
+              <Route path="reviews/:ppk" element={<ReviewAnalysisPage />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
