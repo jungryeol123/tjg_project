@@ -1,10 +1,8 @@
-import {
-  setDeliveryList,
-} from "./deliverySlice";
+import { setDeliveryList } from "./deliverySlice";
 // shared
-import { axiosGet } from "shared/lib/axiosInstance";
+import { api } from "shared/lib/axios";
 
 export const setDeliveryAPI = () => async(dispatch) => {
-  const result = await axiosGet("/delivery/deliveryList");
-  dispatch(setDeliveryList({ result: result }));
+  const result = await api.get("/delivery/deliveryList");
+  dispatch(setDeliveryList({ result: result.data }));
 };

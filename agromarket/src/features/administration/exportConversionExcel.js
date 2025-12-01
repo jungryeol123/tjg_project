@@ -1,7 +1,8 @@
-import axios from "axios";
+// utils
+import { api } from "shared/lib/axios.js";
 
 export async function exportConversionExcel(rows) {
-  const res = await axios.post(
+  const res = await api.post(
     "/excel/conversion",
     { rows },
     {

@@ -1,20 +1,22 @@
-import axios from "axios";
-import { axiosGet } from "shared/lib/axiosInstance";
+// utils
+import { api } from "shared/lib/axios.js";
+
 
 export const getRecipeListAPI = async (subId) => {
-  return await axiosGet(`/recipe/list?subId=${subId}`);
+  const result = await api.get(`/recipe/list?subId=${subId}`);
+  return result.data;
 };
 export const getRecipeDetailAPI = async (id) => {
   const url = `/recipe/${id}`;
-  const result = await axiosGet(url);
-  return result;
+  const result = await api.get(url);
+  return result.data;
 };
 
 export const postRecipeReviewAPI = async (recipeId, rating, content) => {
   const stored = JSON.parse(localStorage.getItem("loginInfo"));
   const accessToken = stored?.accessToken;
 
-  return await axios.post(
+  const result = await api.post(
     `/recipe/${recipeId}/review`,
     { rating, content },
     {
@@ -23,4 +25,5 @@ export const postRecipeReviewAPI = async (recipeId, rating, content) => {
       }
     }
   );
+  return result.data;
 };

@@ -9,16 +9,15 @@ import {
 import { showCart } from "features/cart/cartAPI";
 import { parseJwt } from "features/auth/parseJwt";
 // shared
-import { axiosGet, axiosPost, axiosPostFile } from "shared/lib/axiosInstance";
 import { api } from "shared/lib/axios";
 
 
 
 
 export const setProductListAPI = () => async (dispatch) => {
-  const result = await axiosGet("/product/productList");
-  if (result !== null && Array.isArray(result)) {
-    dispatch(setProductList({ result: result }));
+  const result = await api.get("/product/productList");
+  if (result.data !== null && Array.isArray(result.data)) {
+    dispatch(setProductList({ result: result.data }));
   }
 };
 
@@ -36,12 +35,12 @@ export const setProductAPI = (id) => async (dispatch) => {
 
 export const setProductReviewListAPI = () => async (dispatch) => {
   try {
-    const result = await axiosGet(
+    const result = await api.get(
       "/product/productReviewList"
     );
 
     // ✅ 문자열 JSON → 실제 배열로 변환
-    const parsed = result.map((item) => ({
+    const parsed = result.data.map((item) => ({
       ...item,
       images:
         typeof item.images === "string" ? JSON.parse(item.images) : item.images,
@@ -56,14 +55,14 @@ export const setProductReviewListAPI = () => async (dispatch) => {
 };
 
 export const setProductQnAListAPI = () => async (dispatch) => {
-  const result = await axiosGet("/product/productQnAList");
-  dispatch(setProductQnAList({"result" : result}));
+  const result = await api.get("/product/productQnAList");
+  dispatch(setProductQnAList({"result" : result.data}));
 };
 
 
 export const setProductBestListAPI = async() =>  {
-  const result = await axiosGet("/product/productBestList");
-  return result;
+  const result = await api.get("/product/productBestList");
+  return result.data;
 }
 
 // 상품 정보 등록
@@ -108,10 +107,10 @@ export const setProductData = async(formData, imageListFile, isNew, id, maxImage
     data.append("product", JSON.stringify(formData));
 
     // // 상품 정보 DB에 업로드
-    const result = await axiosPostFile(url, data);
+    const result = await api.post(url, data);
 
     // 업로드 성공시 메세지 출력
-    if (result) {
+    if (result.data) {
       return true;
     } else {
       return false;
@@ -164,9 +163,9 @@ export const addProductQnA = (qnaData) => async(dispatch) => {
     const url = "/product/addQnA";
     const params = {...qnaData, "upk" : payload.id };
 
-    const result = await axiosPost(url, params);
+    const result = await api.post(url, params);
 
-    if (result) {
+    if (result.data) {
       await dispatch(setProductQnAListAPI());
       return true;
     } else {

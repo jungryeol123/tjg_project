@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// shared
+import { api } from "shared/lib/axios";
 import '../../pages/login/login.scss';
 
 export function FindUserId() {
@@ -16,11 +18,8 @@ export function FindUserId() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        `/member/find-user-Id?query=${encodeURIComponent(query)}`
-      );
-      const data = await response.text(); // 문자열 반환
-      setResult(data);
+      const response = await api.get("/member/find-user-Id", {params: {query: query}});
+      setResult(response.data);
     } catch (err) {
       console.error(err);
       setResult('서버 오류가 발생했습니다.');

@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// shared
+import { api } from 'shared/lib/axios.js';
 import "./ReviewAnalysisPage.scss";
 
 export default function ReviewAnalysisPage() {
@@ -12,7 +13,7 @@ export default function ReviewAnalysisPage() {
   const [analysis, setAnalysis] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/admin/reviews/analysis/${ppk}`)
+    api.get(`/api/admin/reviews/analysis/${ppk}`)
       .then((res) => {
         setAnalysis(res.data);
       });

@@ -1,8 +1,9 @@
-import axios from "axios";
+// shared
+import { api } from 'shared/lib/axios.js';
 
 const API = "/api/analytics";
 
 export const getConversionRates = async () => {
-  const res = await axios.get(`${API}/conversion`);
+  const res = await api.get(`${API}/conversion`);
   return res.data;
 };
