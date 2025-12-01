@@ -28,7 +28,6 @@ export function ProductDetail() {
   // dispatch
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-
   // product 최신화
   useEffect(() => {
     const fetchData = async () => {
@@ -169,6 +168,9 @@ export function ProductDetail() {
 
   // 화면 표시용 할인가 적용 가격 : 9,999
   const salesPrice = Math.floor(product.price * ((100 - product.dc) / 100));
+
+
+
   return (
     <div className="product-container">
       <div className="product-detail">

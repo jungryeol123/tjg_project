@@ -17,6 +17,7 @@ import { api } from "shared/lib/axios";
 
 export const setProductListAPI = () => async (dispatch) => {
   const result = await axiosGet("/product/productList");
+  console.log("result", result);
   if (result !== null && Array.isArray(result)) {
     dispatch(setProductList({ result: result }));
   }
@@ -27,10 +28,9 @@ export const setProductAPI = (id) => async (dispatch) => {
   const url = "/product/productDetail";
   const params = { "id" : id };
   const jsonData = await api.get(url, { params });
-
   // null이 아닐경우만 실행
   if(jsonData && Object.keys(jsonData).length > 0){
-    dispatch(setProduct({ product: jsonData.data }));
+    dispatch(setProduct({ product: jsonData }));
   }
 };
 

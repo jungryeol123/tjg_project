@@ -207,7 +207,7 @@ export function Signup() {
             })
             return;
         }
-
+        
         const result = await getIdCheck(name, value);
         if(name === "userId") {
             if(result) {

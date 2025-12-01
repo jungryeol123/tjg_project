@@ -13,10 +13,10 @@ export const getLogin = (formData, param) => async (dispatch) => {
   try {
     // ✅ 1. 로그인 전에 CSRF 토큰 먼저 요청
     const res = await api.post("/auth/login", { userId, password });
-    const accessToken = res.data.accessToken;
-
+    const accessToken = res.accessToken;
+    const role = res.role; 
     if (accessToken) {
-      dispatch(login({ provider: "local", accessToken }));
+      dispatch(login({ provider: "local", accessToken,role}));
       // 토큰정보 취득
       const payload = parseJwt(accessToken);
       
@@ -25,7 +25,7 @@ export const getLogin = (formData, param) => async (dispatch) => {
 	    const cartItem = { "user" : {"id":payload.id} };
       
       // 장바구니 리스트 취득
-	    const cartData = await axiosPost(url, cartItem);
+	    const cartData = await api.post(url, cartItem);
       // 장바구니 리스트 설정
 	    dispatch(setCartItem({"cartItem": cartData}));
       // 장바구니 카운트 설정
@@ -46,7 +46,8 @@ export const getLogin = (formData, param) => async (dispatch) => {
 /**
     id중복 체크
 */
-export const getIdCheck = (name, value) => async () => {
+export const getIdCheck = async(name, value) => {
+  console.log("result111");
   const data = { [name]: value };
   const url = "/member/idcheck";
   const result = await axiosPost(url, data);

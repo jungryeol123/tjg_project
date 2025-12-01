@@ -40,6 +40,7 @@ import { Coupon } from "pages/coupon/Coupon";
 import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
 import RecipeDetailPage from "features/recipe/RecipeDetailPage";
+import AdminRoute from "shared/ui/adminRoute/AdminRoute";
 
 
 function App() {
@@ -105,6 +106,7 @@ function App() {
           <Route path="/oauth/success" element={<SuccessPage />} />
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+          <Route element={<AdminRoute />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="analytics/forecast" element={<ForecastPage />} />
             <Route path="analytics/conversion" element={<ConversionPage />} />
@@ -115,6 +117,7 @@ function App() {
             <Route path="adminProductList" element={<AdminProductList />} />
             <Route path="products/reviewList" element={<ReviewListPage />} />
             <Route path="reviews/:ppk" element={<ReviewAnalysisPage />} />
+          </Route>
           </Route>
         </Route>
       </Routes>
