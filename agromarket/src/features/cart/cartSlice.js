@@ -11,7 +11,9 @@ const initialState = {
     // 총 할인 금액
     totalDcPrice: 0,
     // 장바구니 신규 추가 플래그
-    isNew: false
+    isNew: false,
+    // 배송비
+    shippingFee: 3000
 };
 
 // Slice reducers 설정( 함수 설정 )
@@ -51,9 +53,10 @@ export const cartSlice = createSlice({
       state.totalDcPrice = state.cartList.filter(cart => cart.product.count !== 0)
       .reduce( ( total, item ) => total + (item.qty * (item.product.price * item.product.dc * 0.01)) , 0);
     },
-    // 장바구니 갯수 취득(총 리스트 갯수)
+    // 장바구니 갯수 취득(총 리스트 갯수) + 배송비 계산
     getCartCount(state){
       state.cartCount = state.cartList.length;
+      state.totalPrice>=30000 ? (state.shippingFee = 0) : (state.shippingFee = 3000);
     }
   }
 });

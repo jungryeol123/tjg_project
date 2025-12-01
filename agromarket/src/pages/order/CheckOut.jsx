@@ -1,26 +1,28 @@
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+// features
 import { parseJwt } from "features/auth/parseJwt";
-import "./CheckOut.scss";
 import { AddressModal } from 'features/order/AddressModal.jsx';
 import { getKakaoPayment, getNaverPayment } from 'features/order/paymentAPI';
 import { showCart } from 'features/cart/cartAPI';
+// shared
+import { api } from 'shared/lib/axios.js';
+import "./CheckOut.scss";
 
 export function CheckOut() {
 
     const cartList = useSelector((state) => state.cart.cartList);
     const totalPrice = useSelector((state) => state.cart.totalPrice);
     const totalDcPrice = useSelector((state) => state.cart.totalDcPrice);
+    const shippingFee = useSelector((state) => state.cart.shippingFee);
     const dispatch = useDispatch();
     // ⭐ 이 자리에 early return 넣으면 Hook 규칙 깨짐 → 절대 금지!
     // if (!cartList || cartList.length === 0) return ...
     // -----------------------------
     // 💡 모든 Hook은 조건 없이 항상 호출
     // -----------------------------
-    console.log("total", totalPrice);
     const [reduceCartList, setReduceCartList] = useState([]);
     const [isChange, setIsChange] = useState(true);
     const [userId, setUserId] = useState(null);
@@ -41,9 +43,9 @@ export function CheckOut() {
     });
 
     const paymentInfo = useMemo(() => ({
-        shippingFee: 0,
+        shippingFee: shippingFee,
         discountAmount: totalDcPrice,
-        totalAmount: totalPrice - totalDcPrice
+        totalAmount: totalPrice - totalDcPrice + shippingFee
     }), [totalPrice, totalDcPrice]);
 
 
@@ -86,7 +88,7 @@ export function CheckOut() {
 
         const loadCoupons = async () => {
             try {
-                const res = await axios.get(`/coupon/my/${userId}`);
+                const res = await api.get(`/coupon/my/${userId}`);
                 const couponList = res.data.filter(item => !item.isUsed);
                 setCoupons(couponList);
             } catch (err) {
@@ -338,12 +340,17 @@ export function CheckOut() {
                             </td>
                             <td className='discount'>-{selectCoupon.toLocaleString()}원</td>
                         </tr>
+                        <tr>
+                            <td>배송비</td>
+                            <td></td>
+                            <td className="price">+{shippingFee.toLocaleString()}원</td>
+                        </tr>
 
                         <tr className="total">
                             <td>총결제금액</td>
                             <td></td>
                             <td className="total-price">
-                                {(totalPrice - totalDcPrice - selectCoupon).toLocaleString()}원
+                                {(totalPrice - totalDcPrice - selectCoupon + shippingFee).toLocaleString()}원
                             </td>
                         </tr>
                     </tbody>

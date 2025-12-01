@@ -1,5 +1,7 @@
+// features
 import { parseJwt } from "features/auth/parseJwt.js";
-import { axiosPost } from "../../utils/dataFetch.js";
+// shared
+import { api } from 'shared/lib/axios.js';
 import { loadNaverPaySDK } from "../../utils/loadNaverSDK.js";
 
 /** ✅ 카카오페이 결제 */
@@ -30,9 +32,10 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId)
   };
 
   try {
-    const res = await axiosPost(url, data);
-    if (res.tid) {
-      window.location.href = res.next_redirect_pc_url;
+    const res = await api.post(url, data);
+    console.log(res);
+    if (res.data.tid) {
+      window.location.href = res.data.next_redirect_pc_url;
     }
   } catch (error) {
     console.error("KakaoPay Error:", error);
@@ -66,8 +69,8 @@ export const getNaverPayment = async (receiver, paymentInfo, cartList, couponId)
   };
 
   try {
-    const res = await axiosPost("/payment/naver/order", data);
-    const { merchantPayKey } = res;
+    const res = await api.post("/payment/naver/order", data);
+    const { merchantPayKey } = res.data;
 
     // 2️⃣ SDK 동적 로드
     await loadNaverPaySDK();

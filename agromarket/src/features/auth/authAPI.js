@@ -1,10 +1,8 @@
-import axios from "axios";
 import { login, logout, socialLogin } from "./authSlice.js";
 import { setCartItem, getCartCount } from "../cart/cartSlice.js"
 // features
 import { parseJwt } from "features/auth/parseJwt";
 // utils
-import { axiosPost } from "../../utils/dataFetch.js";
 import { api, setupApiInterceptors } from "shared/lib/axios.js";
 
 export const getLogin = (formData, param) => async (dispatch) => {
@@ -25,9 +23,9 @@ export const getLogin = (formData, param) => async (dispatch) => {
 	    const cartItem = { "user" : {"id":payload.id} };
       
       // 장바구니 리스트 취득
-	    const cartData = await axiosPost(url, cartItem);
+	    const cartData = await api.post(url, cartItem);
       // 장바구니 리스트 설정
-	    dispatch(setCartItem({"cartItem": cartData}));
+	    dispatch(setCartItem({"cartItem": cartData.data}));
       // 장바구니 카운트 설정
 	    dispatch(getCartCount());
     
@@ -46,19 +44,20 @@ export const getLogin = (formData, param) => async (dispatch) => {
 /**
     id중복 체크
 */
-export const getIdCheck = (name, value) => async () => {
+export const getCheckId = async(name, value) => {
   const data = { [name]: value };
   const url = "/member/idcheck";
-  const result = await axiosPost(url, data);
+  const result = await api.post(url, data);
+  console.log(result);
   return result;
 };
 
 /**
     signup
 */
-export const getSignup = (formData) => async () => {
+export const getSignup = async(formData) => {
   const url = "/member/signup";
-  return await axiosPost(url, formData);
+  return await api.post(url, formData);
 };
 
 /**
@@ -67,7 +66,7 @@ export const getSignup = (formData) => async () => {
 export const getLogout = () => async (dispatch) => {
   dispatch(logout());
   const url = "/auth/logout"
-  axiosPost(url, {});
+  api.post(url, {});
   return false;
 };
 

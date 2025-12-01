@@ -5,8 +5,8 @@ import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 // features
-import "./login.scss";
 import { getLogin } from 'features/auth/authAPI';
+import "./login.scss";
 
 //로그인페이지
 export function Login() {

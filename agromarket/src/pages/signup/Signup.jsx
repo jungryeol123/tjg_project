@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import React, { useState, useMemo, useEffect } from 'react';
 // features
-import { getIdCheck, getSignup } from 'features/auth/authAPI';
-// shared
-import { axiosGet } from "shared/lib/axiosInstance";
-import './Signup.scss';
+import { getCheckId, getSignup } from 'features/auth/authAPI';
 import { validateSignup } from 'features/signup/SignupValidation';
+// shared
+import { api } from 'shared/lib/axios.js';
+import './Signup.scss';
 
 export function Signup() {
     const initArray = ["userId", "password", "cpwd", "name", "phone", "address", "addressDetail", "emailName", "emailDomain", "emailDomainInput", "gender", "dateYear", "dateMonth", "dateDay", "recommendation", "zonecode"];
@@ -207,10 +207,11 @@ export function Signup() {
             })
             return;
         }
-
-        const result = await getIdCheck(name, value);
+        
+        const result = await getCheckId(name, value);
+        
         if(name === "userId") {
-            if(result) {
+            if(result.data) {
                 Swal.fire({
                     icon: 'error',
                     title: '중복체크 결과',
@@ -226,7 +227,7 @@ export function Signup() {
                 });
             }
         } else if(name === "recommendation") {
-            if(result) {
+            if(result.data) {
                 Swal.fire({
                     icon: 'success',
                     title: '추천인 확인 결과',
@@ -246,8 +247,8 @@ export function Signup() {
     
     useEffect(() => {
         const load = async() => {
-            const {terms} = await axiosGet('/data/terms.json');
-            setTermList(terms);
+            const result = await api.get('/data/terms.json');
+            setTermList(result.data.terms);
         }
         load();
     }, [])
