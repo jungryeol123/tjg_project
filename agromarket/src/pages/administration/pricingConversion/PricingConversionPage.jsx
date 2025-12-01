@@ -1,7 +1,8 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PricingConversionChart from "./PricingConversionChart";
+// shared
+import { api } from 'shared/lib/axios.js';
 import "./pricing.scss";   // ⭐ SCSS 적용
 
 export default function PricingConversionPage() {
@@ -12,7 +13,7 @@ export default function PricingConversionPage() {
     }, []);
 
     const load = async () => {
-        const res = await axios.get("/api/admin/pricing/all");
+        const res = await api.get("/api/admin/pricing/all");
         setData(res.data);
     };
 

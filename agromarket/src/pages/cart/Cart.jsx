@@ -85,9 +85,9 @@ export function Cart() {
                                     disabled={totalPrice - totalDcPrice === 0}>주문하기</button>
                             </div>
                         </>
-                        : <div>
+                        : <div className="cart-empty">
                             <p> 장바구니에 담은 상품이 없습니다. &nbsp;&nbsp;&nbsp;&nbsp; </p>
-                            <img style={{width:"50%", marginTop:"20px"}} src="/images/cart.jpg" />
+                            <img style={{marginTop:"20px"}} src="/images/emptycart.png" />
                         </div>
                     }
                 </div>

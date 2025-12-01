@@ -240,6 +240,11 @@
   opacity: 0.85;
 }
 
+.cart-container .cart-empty {
+  position: absolute;
+  left: 45%;
+}
+
 /* ===== 반응형 ===== */
 @media (max-width: 900px) {
   .cart-container .cart-body {

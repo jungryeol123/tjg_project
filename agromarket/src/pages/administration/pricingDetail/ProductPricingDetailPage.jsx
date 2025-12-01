@@ -1,6 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+// shared
+import { api } from 'shared/lib/axios.js';
 import "./pricingDetail.scss"; // ⭐ SCSS 스타일 추가
 import PricingConversionChart from "../pricingConversion/PricingConversionChart";
 
@@ -13,7 +14,7 @@ export default function ProductPricingDetailPage() {
     }, [ppk]);
 
     const load = async () => {
-        const res = await axios.get(`/api/admin/pricing/${ppk}`);
+        const res = await api.get(`/api/admin/pricing/${ppk}`);
         setItem(res.data);
     };
 

@@ -7,7 +7,10 @@ import "./TopBar.scss";
 import { api } from "shared/lib/axios";
 
 export default function TopBar() {
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
   const isLogin  = useSelector((state) => state.auth.isLogin);
+  const isAdmin = loginInfo?.role === "ADMIN";
+
   const handleLogout = async () => {
     try {
         await api.post("/auth/logout",{});
@@ -36,7 +39,7 @@ export default function TopBar() {
           {/* 마이페이지 */}
           {isLogin && <li><Link to="/mypage">마이페이지</Link></li>}
           {/* 관리자페이지 */}
-          {isLogin && <li><Link to="/admin">관리자페이지</Link></li>}
+          {isLogin && isAdmin && <li><Link to="/admin">관리자페이지</Link></li>}
         </ul>
       </div>
     </div>

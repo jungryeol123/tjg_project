@@ -27,6 +27,7 @@ export const addCart = (ppk, qty) => async(dispatch, getState) => {
 
         // 장바구니 설정
         const result = await api.post(url, cart);
+        console.log(result);
 
         if (result.data) {
             await dispatch(updateCartList({ "cartItem" : result.data }));

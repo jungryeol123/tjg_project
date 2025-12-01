@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// shared
+import { api } from "shared/lib/axios";
 import '../../pages/login/login.scss';
 
 export function FindPassword() {
@@ -13,11 +15,13 @@ export function FindPassword() {
     setResult('');
 
     try {
-      const response = await fetch(
-        `/member/find-password?id=${encodeURIComponent(id)}&query=${encodeURIComponent(query)}`
-      );
-      const data = await response.text();
-      setResult(data);
+      const response = await api.get('/member/find-password', {
+      params: {
+        id: id,
+        query: query,
+      },
+      });
+      setResult(response.data);
     } catch (err) {
       console.error(err);
       setResult('서버 오류가 발생했습니다.');

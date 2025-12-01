@@ -1,9 +1,10 @@
-import axios from "axios";
 import Swal from 'sweetalert2';
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 // features
 import { parseJwt } from "features/auth/parseJwt";
+// shared
+import { api } from 'shared/lib/axios.js';
 
 export function Coupon() {
   const [userId, setUserId] = useState(null);
@@ -38,7 +39,7 @@ export function Coupon() {
     const stored = localStorage.getItem("loginInfo");
     const { accessToken } = JSON.parse(stored);
     try {
-      const res = await axios.get(
+      const res = await api.get(
         `/coupon/user-ids/${id}`,
         { headers : { Authorization : `Bearer ${accessToken}` } }
       );
@@ -73,7 +74,7 @@ export function Coupon() {
         const stored = localStorage.getItem("loginInfo");
         const { accessToken } = JSON.parse(stored);
 
-        const res = await axios.post(
+        const res = await api.post(
           `http://localhost:8080/coupon/issue/${couponId}`,
           { userId: userId },
           { headers : { Authorization : `Bearer ${accessToken}` }

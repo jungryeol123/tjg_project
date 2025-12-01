@@ -1,4 +1,5 @@
-import { axiosGet } from "shared/lib/axiosInstance";
+// shared
+import { api } from "shared/lib/axios";
 
 import {
   setCategoryList
@@ -6,7 +7,7 @@ import {
 
 // 카테고리(대분류, 중분류 포함) 리스트 추출
 export const setCategoryListAPI = () => async(dispatch) => {
-  const result = await axiosGet("/category/list");
-  console.log("result", result);
-  dispatch(setCategoryList({ result: result }));
+  const result = await api.get("/category/list");
+  console.log("result", result.data);
+  dispatch(setCategoryList({ result: result.data }));
 };
