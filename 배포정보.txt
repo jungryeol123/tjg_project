@@ -1,0 +1,22 @@
+
+규모	              추천 조합	                  이유
+대기업	              Vercel + AWS	                  보안, 성능, 글로벌 확장
+중소기업·스타트업	  Vercel + Render + Supabase    개발속도 + 비용 최강
+개인/개발자	  Vercel + Render + Supabase    무료로 풀스택 가능
+
+
+밑에 환경변수
+프론트 설정
+key : REACT_APP_API_URL
+value : https://candybackend-6skt.onrender.com(백엔드 주소)
+
+백엔드 설정
+key : SPRING_DATASOURCE_URL 
+value : jdbc:postgresql://aws-1-ap-southeast-1.pooler.supabase.com:6543/postgres
+
+key : SPRING_DATASOURCE_PASSWORD
+value : CandyProject@123
+
+key: SPRING_DATASOURCE_USERNAME
+value : postgres.cloxzvgtzfscexietfaz
+
