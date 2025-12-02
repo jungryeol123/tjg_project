@@ -40,14 +40,14 @@ export default function ProductCard({ item }) {
             <>
               <span className="discount">{item.dc}%</span>
               <span className="discounted-price">
-                {discountedPrice.toLocaleString()}원
+                {discountedPrice?.toLocaleString()}원
               </span>
               <span className="original-price">
-                {item.price.toLocaleString()}원
+                {item.price?.toLocaleString()}원
               </span>
             </>
           ) : (
-              <span className="or-price">{item.price.toLocaleString()}원</span>   
+              <span className="or-price">{item.price?.toLocaleString()}원</span>   
           )}
         </div>
         {/* <button className="cart-btn">🛒 담기</button> */}

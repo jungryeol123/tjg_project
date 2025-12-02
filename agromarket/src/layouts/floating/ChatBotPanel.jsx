@@ -114,7 +114,7 @@ export default function ChatBotPanel({ onClose }) {
                     <div className="order-info">
                       <div className="name">{d.product?.productName}</div>
                       <div className="qty">{d.qty}개</div>
-                      <div className="price">{d.product?.price?.toLocaleString()}원</div>
+                      <div className="price">{d.product?.price.toLocaleString()}원</div>
                     </div>
                   </div>
                 ))}
