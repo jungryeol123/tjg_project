@@ -64,20 +64,20 @@ export function Cart() {
                                 <div className='cart-summary-sub'>
                                     <p className='cart-total'>
                                         <label>총 상품 가격 : </label>
-                                        <span>{totalPrice}원</span>
+                                        <span>{totalPrice.toLocaleString()}원</span>
                                     </p>
                                     <p className='cart-total'>
                                         <label>총 할인 가격 : </label>
-                                        <span>{totalDcPrice}원</span>
+                                        <span>{totalDcPrice.toLocaleString()}원</span>
                                     </p>
                                     <p className='cart-total'>
                                         <label>총 배송비 : </label>
-                                        <span>{shippingFee}원</span>
+                                        <span>{shippingFee.toLocaleString()}원</span>
                                     </p>
                                 </div>
                                 <p className='cart-total2'>
                                     <label>총 금액 : </label>
-                                    <span>{totalPrice - totalDcPrice + shippingFee} 원</span>
+                                    <span>{(totalPrice - totalDcPrice + shippingFee).toLocaleString()} 원</span>
                                 </p>
                             </div>
                             <div className='cart-actions'>
