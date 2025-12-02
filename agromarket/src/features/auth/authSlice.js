@@ -33,7 +33,6 @@ export const authSlice = createSlice({
       state.id = id;
       state.provider = provider;
       state.accessToken = accessToken;
-      console.log("provider", provider, "id", id);
       const loginInfo = { provider, id, accessToken };
       localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
     },

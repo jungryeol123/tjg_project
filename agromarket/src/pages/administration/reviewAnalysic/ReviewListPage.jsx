@@ -5,7 +5,6 @@ import "./ReviewListPage.scss";
 
 export default function ReviewListPage() {
   const reviewsAll = useSelector((state) => state.product.productReviewList);
-  console.log("productReviewList",reviewsAll);
   const [search, setSearch] = useState("");
 
   // ppk 기준 그룹화

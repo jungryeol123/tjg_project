@@ -13,7 +13,6 @@ export const loadNaverPaySDK = () => {
 
     script.onload = () => {
       if (window.Naver && window.Naver.Pay) {
-        console.log("✅ NaverPay SDK 로드 완료");
         resolve(window.Naver);
       } else {
         reject("❌ NaverPay SDK 로드 실패");

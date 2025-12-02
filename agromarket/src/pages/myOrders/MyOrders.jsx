@@ -53,9 +53,7 @@ export function MyOrders() {
 
     const fetchOrders = async () => {
       try {
-        const res = await api.get(`http://localhost:8080/orders/my/${userId}`);
-        console.log(res.data);
-        
+        const res = await api.get(`http://localhost:8080/orders/my/${userId}`);        
         setOrders(res.data);
       } catch (err) {
         console.error("주문 내역 조회 실패:", err);
@@ -72,9 +70,7 @@ export function MyOrders() {
     const fetchCoupons = async () => {
       try {
         const res = await api.get(`/coupon/my/${userId}`);
-        const couponList = res.data.filter(item => item.isUsed === false)
-
-        console.log("🔥 백엔드 응답:", res.data);
+        const couponList = res.data.filter(item => item.isUsed === false);
         setCoupons(Array.isArray(couponList) ? couponList : []);
       } catch (err) {
         console.error("쿠폰 조회 실패:", err);

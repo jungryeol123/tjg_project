@@ -126,7 +126,6 @@ export function CheckOut() {
         }
 
         if (paymentMethod === "kakao") {
-            console.log("payment", paymentInfo);
             await getKakaoPayment(receiver, paymentInfo, reduceCartList, couponId);
         } else {
             await getNaverPayment(receiver, paymentInfo, reduceCartList, couponId);
