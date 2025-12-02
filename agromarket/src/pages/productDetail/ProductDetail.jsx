@@ -271,7 +271,7 @@ export function ProductDetail() {
             </ul>
             <ul className="product-meta">
               <li>총 수량</li>
-              <li>{product.count}개</li>
+              <li>{product.count.toLocaleString()}개</li>
             </ul>
             <ul className="product-meta">
               <li>알레르기정보</li>
@@ -296,7 +296,7 @@ export function ProductDetail() {
                     <input
                       className="qty-input"
                       type="text"
-                      value={count}
+                      value={count.toLocaleString()}
                       onChange={handleChange}
                     />
                     <button className="qty-btn" onClick={handleIncrease}>

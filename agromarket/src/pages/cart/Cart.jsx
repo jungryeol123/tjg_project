@@ -46,7 +46,7 @@ export function Cart() {
                                 <div className='cart-quantity'>
                                     <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1), userId)) : null}
                                         disabled={item.product.count === 0}>-</button>
-                                    <input type="text" value={item.qty} readOnly/>
+                                    <input type="text" value={item.qty.toLocaleString()} readOnly/>
                                     <button type='button' onClick={() => item.qty<item.product.count && dispatch(updateCart(item.cid, (item.qty+1), userId))}
                                         disabled={item.product.count === 0}>+</button>
                                 </div>
