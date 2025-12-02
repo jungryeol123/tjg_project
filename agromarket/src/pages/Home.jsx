@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 // shared
 import Popup from "shared/ui/popup/Popup";
-import { getData } from "shared/lib/axiosInstance";
+import { api } from "shared/lib/axios";
 import { useAutoSlider } from "shared/hooks/useAutoSlider";
 import { SlideContainer } from "shared/ui/slider/SlideContainer";
 import RecommendedSlider from "shared/ui/recommend/RecommendedSlider";
@@ -27,20 +27,20 @@ export default function Home() {
   const bannerAds = advertiseList.filter(ad => ad.advImageBanner !== null);
   const inlineAds = advertiseList.filter(ad => ad.advImageInline !== null);
   const fetchAdvertiseList = async () => {
-    return await getData("/advertise/list");
+    return await api.get("/advertise/list");
   };
   useEffect(() => {
     const fetchAdvertises = async () => {
       const adv = await fetchAdvertiseList();
-      setAdvertiseList(adv);
+      setAdvertiseList(adv.data);
     };
     fetchAdvertises();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getData("/data/homeDataImages.json");
-      setImages(result.images);
+      const result = await api.get("/data/homeDataImages.json");
+      setImages(result.data.images);
     };
     dispatch(setProductListAPI());
     dispatch(setProductReviewListAPI());
