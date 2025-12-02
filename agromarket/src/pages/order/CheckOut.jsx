@@ -299,7 +299,7 @@ export function CheckOut() {
                             <div key={item.cid} className="value">
                                 <img src={`/images/productImages/${item.product.imageUrl}`} alt="product" style={{ width: '35px' }} />
                                 {item.product.productName},
-                                수량({item.qty}),
+                                수량({item.qty.toLocaleString()}),
                                 가격({(item.product.price * (100 - item.product.dc) * 0.01 * item.qty).toLocaleString()}원)
                             </div>
                         )}
