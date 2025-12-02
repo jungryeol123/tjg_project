@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 // features
 import { parseJwt } from "features/auth/parseJwt";
-import "./ChatBotPanel.scss";
+// shared
 import { api } from "shared/lib/axios";
+import "./ChatBotPanel.scss";
 
 export default function ChatBotPanel({ onClose }) {
   const [messages, setMessages] = useState([

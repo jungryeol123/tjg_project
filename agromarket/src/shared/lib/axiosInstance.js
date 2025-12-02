@@ -1,4 +1,5 @@
-import axios from "axios";
+// shared
+import { api } from "shared/lib/axios";
 /**
  * KAMIS API - 일일 시세 데이터 호출 (일반 axios 요청용)
  * @param {Object} params
@@ -9,7 +10,7 @@ import axios from "axios";
  */
 export async function getData(url) {
     try {
-        const response = await axios.get(url);
+        const response = await api.get(url);
         return response.data;
     } catch (error) {
         throw error;
@@ -18,7 +19,7 @@ export async function getData(url) {
 
 export async function axiosGet(url) {
     try {
-        const response = await axios.get(url);
+        const response = await api.get(url);
         return response.data;
     } catch (error) {
         throw error;
@@ -28,7 +29,7 @@ export async function axiosGet(url) {
 // post방식
 export async function axiosPost(url, params) {
     try {
-        const response = await axios.post(url, params);
+        const response = await api.post(url, params);
         return response.data;
     } catch (error) {
         console.error("데이터 오류", error);
@@ -39,7 +40,7 @@ export async function axiosPost(url, params) {
 // post방식(파일 전송)
 export async function axiosPostFile(url, params) {
     try {
-        const response = await axios.post(url, params);
+        const response = await api.post(url, params);
 
         return response.data;
     } catch (error) {
@@ -51,7 +52,7 @@ export async function axiosPostFile(url, params) {
 // get방식 params 보내기
 export async function axiosGetParams(url, params) {
     try {
-        const response = await axios.get(url, params);
+        const response = await api.get(url, params);
         return response.data;
     } catch (error) {
         console.error("데이터 오류", error);

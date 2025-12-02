@@ -1,4 +1,3 @@
-import axios from "axios";
 import IntroAnimation from "IntroAnimation";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { Layout } from "layouts/layout/Layout";
 // features
 import { login } from "features/auth/authSlice";
 // shared
+import { api } from "shared/lib/axios";
 // pages
 import Home from "pages/Home";
 import { Cart } from "pages/cart/Cart";
@@ -69,7 +69,7 @@ function App() {
 
   useEffect(() => {
     // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
-    axios
+    api
       .get("/csrf", { withCredentials: true })
       .then(() => console.log("✅ CSRF Token issued"))
       .catch((err) => console.error("❌ CSRF Token init failed:", err));
