@@ -53,13 +53,13 @@ export default function ReviewAnalysisPage() {
 
         <div className="analysis-card score-card">
           <h3>😊 긍정 / 😡 부정</h3>
-          <p className="positive-score">긍정 {analysis.positiveCount}개</p>
-          <p className="negative-score">부정 {analysis.negativeCount}개</p>
+          <p className="positive-score">긍정 {analysis.positiveCount.toLocaleString()}개</p>
+          <p className="negative-score">부정 {analysis.negativeCount.toLocaleString()}개</p>
         </div>
       </div>
 
       {/* 실제 리뷰 */}
-      <h3 className="review-title">📌 전체 리뷰({reviews.length})</h3>
+      <h3 className="review-title">📌 전체 리뷰({reviews.length.toLocaleString()})</h3>
       <div className="review-list">
         {reviews.map((r) => (
           <div key={r.id} className="review-item">

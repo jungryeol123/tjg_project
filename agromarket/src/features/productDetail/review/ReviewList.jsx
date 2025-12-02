@@ -66,7 +66,7 @@ export function ReviewList({ id }) {
   return (
     <div className="review-list" ref={containerRef}>
       <h2>상품 후기</h2>
-      <p>총 {reviews.length}개</p>
+      <p>총 {reviews.length.toLocaleString()}개</p>
 
       { reviews.length === 0 ? "상품 후기가 존재하지 않습니다."
        : <>
