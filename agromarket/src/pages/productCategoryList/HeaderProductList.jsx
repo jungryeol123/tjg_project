@@ -4,17 +4,25 @@ import React, { useMemo, useEffect, useState } from "react";
 // shared
 import { FilterItem } from "shared/constants/FilterItem";
 
+// hooks
+import { useAdvertise } from "shared/hooks/userAdvertise";
+
 // features
 import { setProductBestListAPI, setProductListAPI } from "features/product/productAPI";
 import "./HeaderProductList.scss";
 import "../../styles/components/filter.scss";
 import ProductCard from "shared/ui/productCard/ProductCard";
 
+// ui
+import { AdvertiseList } from "shared/ui/advertise/AdvertiseList";
+import { RightAdBanner } from "shared/ui/advertise/RightAdvBanner";
+
 export function HeaderProductList() {
   const { id } = useParams();
   const productList = useSelector((state) => state.product.productList);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const {bannerAds, inlineAds} = useAdvertise();
   const dispatch = useDispatch();
   
   // 상품 리스트 최신화
@@ -165,11 +173,16 @@ export function HeaderProductList() {
                     <ProductCard item={item} />
                 </Link>
             ))}
+           
           </div>
         ) : (
           <p className="empty">상품이 없습니다.</p>
         )}
       </div>
+       <li style={{listStyle : "none"}}>
+            <AdvertiseList ads = {inlineAds}/>
+            <RightAdBanner ads = {bannerAds}/>
+          </li>
     </div>
   );
 }

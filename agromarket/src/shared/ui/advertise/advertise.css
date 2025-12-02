@@ -24,12 +24,12 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  z-index: 9999;
+  z-index: 3333;
 }
 
 .banner-img {
   width: 110px;
-  height: 300px;
+  height: 220px;
   border-radius: 6px;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
