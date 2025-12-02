@@ -48,7 +48,6 @@ export const getCheckId = async (name, value) => {
   const data = { [name]: value };
   const url = "/member/idcheck";
   const result = await api.post(url, data);
-  console.log(result);
   return result;
 };
 

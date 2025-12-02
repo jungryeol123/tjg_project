@@ -16,7 +16,6 @@ export function setupApiInterceptors() {
       .split("; ")
       .find((row) => row.startsWith("XSRF-TOKEN="))
       ?.split("=")[1];
-      console.log("CSRF HEADER:", csrf);
     if (csrf) config.headers["X-XSRF-TOKEN"] = csrf;
     return config;
   });

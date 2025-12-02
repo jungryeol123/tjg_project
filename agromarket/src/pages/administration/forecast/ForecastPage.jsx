@@ -22,7 +22,6 @@ export default function ForecastPage() {
 
     const runForecast = async () => {
         const result = await getForecast(ppk);
-        console.log("result", result);
         setForecast(result);
     };
 
