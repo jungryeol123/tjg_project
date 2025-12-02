@@ -7,40 +7,42 @@ import { ImageUploadList } from 'features/administration/productSkill/ImageUploa
 import { ProductValidateCheck } from 'features/administration/productSkill/ProductValidateCheck';
 import "./ProductAdd.css";
 
-export function ProductForm({ mode, initialFormData, existingImages, onSubmit }) {
-    const dispatch = useDispatch();
+export function ProductForm({ mode, initialFormData, existingImages, onSubmit, initialCount, initialPrice}) {
+  const dispatch = useDispatch();
 
-    // 배송정보리스트
-    const deliveryList = useSelector((state) => state.delivery.deliveryList);
-    // 카테고리(대분류) 리스트
-    const categoryList = useSelector((state) => state.category.categoryList);
-    // form데이터용
-    const [formData, setFormData] = useState(initialFormData);
-    const [imageListFile, setImageListFile] = useState([]);
-    const imageNames = ["상품 이미지","속성 이미지","상세 이미지"];
+  // 배송정보리스트
+  const deliveryList = useSelector((state) => state.delivery.deliveryList);
+  // 카테고리(대분류) 리스트
+  const categoryList = useSelector((state) => state.category.categoryList);
+  // form데이터용
+  const [formData, setFormData] = useState(initialFormData);
+  const [count, setCount] = useState(initialCount); // 화면 표시용 수량
+  const [price, setPrice] = useState(initialPrice); // 화면 표시용 가격
+  const [imageListFile, setImageListFile] = useState([]);
+  const imageNames = ["상품 이미지","속성 이미지","상세 이미지"];
+  
+  // 카테고리(중분류) 등록용
+  const [subCategoryList, setSubCategoryList] = useState([]);
+  const [selectedMain, setSelectedMain] = useState("");   // 선택한 대분류
+  const [selectedSub, setSelectedSub] = useState("");     // 선택한 중분류
+  
+  const inputField = [
+      { label: "상품명", name: "productName", placeholder: "상품명을 입력해주세요.", type: "text" },
+      { label: "브랜드명", name: "brandName", placeholder: "브랜드명을 입력해주세요.", type: "text" },
+      { label: "판매자", name: "seller", placeholder: "판매자명을 입력해주세요.", type: "text" },
+      { label: "원산지", name: "origin", placeholder: "국산, 일본, 미국 등", type: "text" },
+      { label: "판매단위", name: "unit", placeholder: "예: 1팩, 500g 등", type: "text" },
+      { label: "중량/용량", name: "weight", placeholder: "예: 500g, 1kg 등", type: "text" },
+      { label: "총 수량", name: "count", placeholder: "총 수량을 입력해주세요.", type: "text" },
+      { label: "가격", name: "price", placeholder: "가격을 입력해주세요.", type: "text" },
+      { label: "할인 정보", name: "dc", placeholder: "할인을 입력해주세요.", type: "number" },
+      { label: "알레르기 정보", name: "allergyInfo", placeholder: "예: 우유, 견과류 등", type: "text" },
+      { label: "상품 설명", name: "description", placeholder: "예: 맛있는 1등급 우유", type: "text" },
+  ];
 
-    // 카테고리(중분류) 등록용
-    const [subCategoryList, setSubCategoryList] = useState([]);
-    const [selectedMain, setSelectedMain] = useState("");   // 선택한 대분류
-    const [selectedSub, setSelectedSub] = useState("");     // 선택한 중분류
-
-    const inputField = [
-        { label: "상품명", name: "productName", placeholder: "상품명을 입력해주세요.", type: "text" },
-        { label: "브랜드명", name: "brandName", placeholder: "브랜드명을 입력해주세요.", type: "text" },
-        { label: "판매자", name: "seller", placeholder: "판매자명을 입력해주세요.", type: "text" },
-        { label: "원산지", name: "origin", placeholder: "국산, 일본, 미국 등", type: "text" },
-        { label: "판매단위", name: "unit", placeholder: "예: 1팩, 500g 등", type: "text" },
-        { label: "중량/용량", name: "weight", placeholder: "예: 500g, 1kg 등", type: "text" },
-        { label: "총 수량", name: "count", placeholder: "총 수량을 입력해주세요.", type: "text" },
-        { label: "가격", name: "price", placeholder: "가격을 입력해주세요.", type: "text" },
-        { label: "할인 정보", name: "dc", placeholder: "할인을 입력해주세요.", type: "number" },
-        { label: "알레르기 정보", name: "allergyInfo", placeholder: "예: 우유, 견과류 등", type: "text" },
-        { label: "상품 설명", name: "description", placeholder: "예: 맛있는 1등급 우유", type: "text" },
-    ];
-
-    useEffect(() => {
-    dispatch(setDeliveryAPI());
-    }, []);
+  useEffect(() => {
+  dispatch(setDeliveryAPI());
+  }, []);
 
   // form데이터 입력시 이벤트
   const handleChange = (e) => {
@@ -49,8 +51,16 @@ export function ProductForm({ mode, initialFormData, existingImages, onSubmit })
     if(name === "categorySub"){
       setFormData({ ...formData, [name] : { "id": parseInt(value)} });
       setSelectedSub(value);
-    } else if(name === "count" || name === "price"){
-      setFormData({ ...formData, [name]: value.replace(/[^0-9]/g, "") });
+    } else if(name === "count"){
+      // 숫자만 설정(, 제거)
+      const num = parseInt(value.replace(/[^0-9]/g, "")) || 0;
+      setCount(num);
+      setFormData({ ...formData, [name]: num });
+    } else if(name === "price"){
+      // 숫자만 설정(, 제거)
+      const num = parseInt(value.replace(/[^0-9]/g, "")) || 0;
+      setPrice(num);
+      setFormData({ ...formData, [name]: num });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -117,9 +127,9 @@ export function ProductForm({ mode, initialFormData, existingImages, onSubmit })
                 name={ field.name }
                 placeholder={ field.placeholder }
                 value={
-                    field.name === "count" || field.name === "price"
-                      ? formData[field.name]?.toLocaleString()
-                      : formData[field.name]
+                    field.name === "count" ? count?.toLocaleString()
+                    : field.name === "price" ? price?.toLocaleString()
+                    : formData[field.name]
                   }
                 onChange={ handleChange }
               />

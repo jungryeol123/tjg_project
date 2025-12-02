@@ -91,22 +91,19 @@ export function ProductDetail() {
   const handleChange = (e) => {
     let value = e.target.value;
 
-    // 숫자만 입력
-    if (/^\d+$/.test(value)) {
-      // 숫자로 value값 설정
-      value = Number(value);
+    // 숫자만 설정(, 제거)
+    let num = parseInt(value.replace(/[^0-9]/g, "")) || 0;
 
-      // 1미만을 입력할 경우 1설정
-      if (value < 1) {
-        value = 1;
-      }
-      // 최대 갯수를 초과할 경우 최대치 설정
-      else if (value > product.count) {
-        value = product.count;
-      }
-
-      setCount(value);
+    // 1미만을 입력할 경우 1설정
+    if (num < 1) {
+      num = 1;
     }
+    // 최대 갯수를 초과할 경우 최대치 설정
+    if (num > product.count) {
+      num = product.count;
+    }
+
+    setCount(num);
   };
 
   // 장바구니 클릭

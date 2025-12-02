@@ -64,6 +64,8 @@ export function ProductUpdate() {
       initialFormData={initialFormData}
       existingImages={existingImages}
       onSubmit={handleSubmit}
+      initialCount = {item.count}
+      initialPrice = {item.price}
     />
   );
 }

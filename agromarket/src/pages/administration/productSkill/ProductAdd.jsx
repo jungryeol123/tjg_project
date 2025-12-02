@@ -58,6 +58,8 @@ export function ProductAdd() {
       initialFormData={initialFormData}
       initialExistingImages={existingImages}
       onSubmit={handleSubmit}
+      initialCount = {0}
+      initialPrice = {0}
     />
   );
 }
