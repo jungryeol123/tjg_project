@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { getData } from "shared/lib/axiosInstance";
+// shared
+import { api } from "shared/lib/axios";
 
 export function useAdvertise() {
   const [advertiseList, setAdvertiseList] = useState([]);
 
   useEffect(() => {
     const fetchAdvertises = async () => {
-      const adv = await getData("/advertise/list");
-      setAdvertiseList(adv);
+      const adv = await api.get("/advertise/list");
+      setAdvertiseList(adv.data);
     };
     fetchAdvertises();
   }, []);
