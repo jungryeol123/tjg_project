@@ -118,7 +118,7 @@ export function ProductForm({ mode, initialFormData, existingImages, onSubmit })
                 placeholder={ field.placeholder }
                 value={
                     field.name === "count" || field.name === "price"
-                      ? Number(formData[field.name]).toLocaleString()
+                      ? formData[field.name]?.toLocaleString()
                       : formData[field.name]
                   }
                 onChange={ handleChange }

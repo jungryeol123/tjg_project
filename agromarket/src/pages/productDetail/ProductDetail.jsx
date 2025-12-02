@@ -2,18 +2,18 @@ import Swal from 'sweetalert2';
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
+// shared
+import { api } from 'shared/lib/axios';
 // features
 import { addCart } from "features/cart/cartAPI.js";
+import { QnA } from 'features/productDetail/qna/QnA';
 import { parseJwt } from "features/auth/parseJwt.js";
-import { setProductAPI } from "features/product/productAPI.js";
-// 탭 컴포넌트
-import "./ProductDetail.scss";
 import { Item } from 'features/productDetail/item/Item';
 import { Detail } from 'features/productDetail/Detail/Detail';
-import { ReviewList } from 'features/productDetail/review/ReviewList';
-import { QnA } from 'features/productDetail/qna/QnA';
 import { Return } from 'features/productDetail/return/Return';
-import { api } from 'shared/lib/axios';
+import { setProductAPI } from "features/product/productAPI.js";
+import { ReviewList } from 'features/productDetail/review/ReviewList';
+import "./ProductDetail.scss";
 
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
@@ -169,6 +169,7 @@ export function ProductDetail() {
 
   // 화면 표시용 할인가 적용 가격 : 9,999
   const salesPrice = Math.floor(product.price * ((100 - product.dc) / 100));
+  
   return (
     <div className="product-container">
       <div className="product-detail">
@@ -226,12 +227,12 @@ export function ProductDetail() {
             <div className="product-discount red">
               { Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원" } 할인
               <span className="product-price-original line">
-                {(product.price)?.toLocaleString() + "원"}
+                {product.price?.toLocaleString() + "원"}
               </span>
             </div>
 
             <div className="product-price-final">
-              {salesPrice?.toLocaleString() + "원"}
+              {salesPrice.toLocaleString() + "원"}
             </div>
             <div className="product-period red">
               행사 기간 2025-09-10 ~ 2025-10-20
@@ -271,7 +272,7 @@ export function ProductDetail() {
             </ul>
             <ul className="product-meta">
               <li>총 수량</li>
-              <li>{product.count}개</li>
+              <li>{product.count?.toLocaleString()}개</li>
             </ul>
             <ul className="product-meta">
               <li>알레르기정보</li>
@@ -309,7 +310,7 @@ export function ProductDetail() {
                 <li>
                   총금액 <span>(부가세포함)</span>
                 </li>
-                <li>{(salesPrice * count)?.toLocaleString() + "원"}</li>
+                <li>{(salesPrice * count).toLocaleString() + "원"}</li>
               </ul>
             </div>
             <div className="product-buttons">

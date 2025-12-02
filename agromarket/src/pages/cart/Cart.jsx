@@ -40,8 +40,8 @@ export function Cart() {
                                 </div>
                                 <div className='cart-item-details'>
                                     <p className='cart-item-title'>{item.product.productName}</p>
-                                    <p className='cart-item-title cart-item-price'>{parseInt(item.product.price).toLocaleString()}원</p>
-                                    <p className='cart-item-title cart-item-dcprice'>{parseInt((item.product.price)*(100-item.product.dc)*0.01).toLocaleString()}원</p>
+                                    <p className='cart-item-title cart-item-price'>{item.product.price.toLocaleString()}원</p>
+                                    <p className='cart-item-title cart-item-dcprice'>{((item.product.price)*(100-item.product.dc)*0.01).toLocaleString()}원</p>
                                 </div>
                                 <div className='cart-quantity'>
                                     <button type='button' onClick={() => item.qty>1 ? dispatch(updateCart(item.cid, (item.qty-1), userId)) : null}
