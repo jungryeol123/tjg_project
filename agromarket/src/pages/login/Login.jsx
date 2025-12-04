@@ -126,7 +126,7 @@ export function Login() {
               <div className="links">
                 <Link to="/find-user-id">아이디 찾기</Link>
                 <span>|</span>
-                <Link to="/find-password">비밀번호 찾기</Link>
+                <Link to="/send-code">비밀번호 찾기</Link>
               </div>
             </li>
             <li>
