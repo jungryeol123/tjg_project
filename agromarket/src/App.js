@@ -1,3 +1,4 @@
+import axios from "axios";
 import IntroAnimation from "IntroAnimation";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -7,7 +8,6 @@ import { Layout } from "layouts/layout/Layout";
 // features
 import { login } from "features/auth/authSlice";
 // shared
-import { api } from "shared/lib/axios";
 // pages
 import Home from "pages/Home";
 import { Cart } from "pages/cart/Cart";
@@ -34,13 +34,14 @@ import ReviewListPage from "pages/administration/reviewAnalysic/ReviewListPage";
 import ReviewAnalysisPage from "features/reviewAnalysic/ReviewAnalysisPage";
 import { Delivery } from "pages/delivery/Delivery";
 import { Login } from "pages/login/Login";
-import { FindPassword } from "features/login/FindPassword";
+// import { FindPassword } from "features/login/FindPassword";
 import { FindUserId } from "features/login/FindUserId";
 import { Coupon } from "pages/coupon/Coupon";
 import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
 import RecipeDetailPage from "features/recipe/RecipeDetailPage";
 import AdminRoute from "shared/ui/adminRoute/AdminRoute";
+import ChangePassword from "features/login/ChangePassword";
 
 
 function App() {
@@ -69,7 +70,7 @@ function App() {
 
   useEffect(() => {
     // ✅ 메인 렌더링 시 CSRF 토큰 미리 요청
-    api
+    axios
       .get("/csrf", { withCredentials: true })
       .then(() => console.log("✅ CSRF Token issued"))
       .catch((err) => console.error("❌ CSRF Token init failed:", err));
@@ -89,7 +90,7 @@ function App() {
           <Route path="/delivery" element={<Delivery />} />
           <Route path="/login" element={<Login />} />
           <Route path="/find-user-id" element={<FindUserId />} />
-          <Route path="/find-password" element={<FindPassword />} />
+          <Route path="/send-code" element={<ChangePassword />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckOut />} />
