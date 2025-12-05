@@ -7,12 +7,13 @@ import { parseJwt } from "features/auth/parseJwt";
 import { addCart } from "features/cart/cartAPI.js";
 // shared
 import { api } from 'shared/lib/axios.js';
-import './MyOrders.css'
+import './MyPage.css'
+import '../administration/AdminLayout.scss'
 
-export function MyOrders() {
+export function MyOrders () {
   const [orders, setOrders] = useState([]);
-  const [coupons, setCoupons] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [coupons, setCoupons] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +29,21 @@ export function MyOrders() {
   const handlePrev = () => {
     setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
   };
+
+useEffect(() => {
+    if (!userId) return;
+
+    const fetchOrders = async () => {
+      try {
+        const res = await api.get(`http://localhost:8080/orders/my/${userId}`);        
+        setOrders(res.data);
+      } catch (err) {
+        console.error("주문 내역 조회 실패:", err);
+      }
+    };
+
+    fetchOrders();
+  }, [userId]);
 
   // ✅ 페이지네이션 처리
   const currentItems = orders.slice(
@@ -47,42 +63,8 @@ export function MyOrders() {
   
     }, []);
 
-  /** 🔹 주문 내역 조회 */
-  useEffect(() => {
-    if (!userId) return;
 
-    const fetchOrders = async () => {
-      try {
-        const res = await api.get(`http://localhost:8080/orders/my/${userId}`);        
-        setOrders(res.data);
-      } catch (err) {
-        console.error("주문 내역 조회 실패:", err);
-      }
-    };
-
-    fetchOrders();
-  }, [userId]);
-
-  /** 🔹 쿠폰 목록 조회 */
-  useEffect(() => {
-    if (!userId) return;
-
-    const fetchCoupons = async () => {
-      try {
-        const res = await api.get(`/coupon/my/${userId}`);
-        const couponList = res.data.filter(item => item.isUsed === false);
-        setCoupons(Array.isArray(couponList) ? couponList : []);
-      } catch (err) {
-        console.error("쿠폰 조회 실패:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCoupons();
-  }, [userId]);
-
-  /** 주문내역 삭제 기능 */
+/** 주문내역 삭제 기능 */
   const handleDeleteOrder = async (orderCode) => {
     try {
       const res = await api.delete(
@@ -112,64 +94,33 @@ export function MyOrders() {
             });;
     }
   };
-
-  /** 🔹 쿠폰 삭제 기능 */
-  const handleDeleteCoupon = async (couponId) => {
-    try {
-      const res = await api.delete(
-        `/coupon/deleteCoupon/${userId}/${couponId}`
-      );
-
-      if (res.status === 200) {
-        Swal.fire({
-                icon: 'success',
-                title: '✅삭제 완료',
-                text: "쿠폰이 삭제 되었습니다.",
-                confirmButtonText: '확인'
-              });;
-
-        // 🔄 화면에서도 즉시 삭제
-        setCoupons(coupons.filter((c) => c.coupon.couponId !== couponId));
-      }
-    } catch (err) {
-      Swal.fire({
-              icon: 'error',
-              title: '⚠ 삭제 실패',
-              text: "쿠폰 삭제에 실패했습니다.",
-              confirmButtonText: '확인'
-            });;
-    }
-  };
-
   const handleAddCart = async(item) => {
-    const isNew = await dispatch(addCart(item.ppk, 1));
-
-    // 신규 상품 등록시
-    if (isNew) {
-      // 장바구니 확인
-      Swal.fire({
-        icon: 'success',
-        title: '✅ 장바구니 등록',
-        text: item.productName + "가 장바구니에 등록이 완료되었습니다.",
-        confirmButtonText: '확인'
-      });
-    } else {
-      Swal.fire({
-        icon: 'success',
-        title: '✅ 장바구니 등록',
-        text: item.productName + "의 수량이 증가 되었습니다.",
-        confirmButtonText: '확인'
-      });
+      const isNew = await dispatch(addCart(item.ppk, 1));
+  
+      // 신규 상품 등록시
+      if (isNew) {
+        // 장바구니 확인
+        Swal.fire({
+          icon: 'success',
+          title: '✅ 장바구니 등록',
+          text: item.productName + "가 장바구니에 등록이 완료되었습니다.",
+          confirmButtonText: '확인'
+        });
+      } else {
+        Swal.fire({
+          icon: 'success',
+          title: '✅ 장바구니 등록',
+          text: item.productName + "의 수량이 증가 되었습니다.",
+          confirmButtonText: '확인'
+        });
+      }
     }
-  }
 
-  if (loading) return <p>⌛ 데이터 불러오는 중...</p>;
 
-  return (
-    <div className="mypage-container">
-      <h2 className="mypage-title">🧾 내 주문 내역</h2>
-
-      {/* 주문 내역 */}
+    
+    return (
+        <div className="mypage-container">
+        {/* 주문 내역 */}
       {orders.length === 0 ? (
         <p>주문 내역이 없습니다.</p>
       ) : (
@@ -241,32 +192,6 @@ export function MyOrders() {
           </button>
         </div>
       }
-
-      {/* 받은 쿠폰 목록 */}
-      <div>
-        <h2 className="mypage-title">🎟️ 받은 쿠폰</h2>
-
-        {coupons.length === 0 ? (
-          <p>받은 쿠폰이 없습니다.</p>
-        ) : (
-          <ul className="mypage-couponList">
-          
-            { coupons.map((c) => (
-              <li key={c.id} className="mypage-couponItem">
-                <span>
-                  <b>{c.coupon.couponDcRate}% 할인 쿠폰</b> — 수량: {c.qty}
-                </span>
-                <button
-                  className="mypage-deleteBtn"
-                  onClick={() => handleDeleteCoupon(c.coupon.couponId)}
-                >
-                  삭제
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 }

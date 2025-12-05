@@ -13,7 +13,7 @@ import Home from "pages/Home";
 import { Cart } from "pages/cart/Cart";
 import { Signup } from "pages/signup/Signup";
 import { CheckOut } from "pages/order/CheckOut";
-import { MyOrders } from "pages/myOrders/MyOrders";
+import { MyPage } from "pages/myPage/MyPage";
 import SuccessPage from "pages/successPage/SuccessPage";
 import AdminLayout from "pages/administration/AdminLayout";
 import SearchResult from "pages/searchResult/SearchResult";
@@ -41,6 +41,9 @@ import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
 import RecipeDetailPage from "features/recipe/RecipeDetailPage";
 import AdminRoute from "shared/ui/adminRoute/AdminRoute";
+import { MyOrders } from "pages/myPage/MyOrders";
+import { MyCoupon } from "pages/myPage/MyCoupon";
+import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
 
 
 function App() {
@@ -102,7 +105,11 @@ function App() {
           <Route path="/notice" element={<NoticeList />} />
           <Route path="/notice/:id" element={<NoticeDetail />} />
           <Route path="/payResult" element={<PayResult />} />
-          <Route path="/mypage" element={<MyOrders />} />
+          <Route path="/mypage" element={<MyPage />} >
+            <Route path="/mypage/myorders" element={<MyOrders/>}/>
+            <Route path="/mypage/mycoupon" element={<MyCoupon/>}/>
+            <Route path="/mypage/update" element={<UpdateUserDetail/>}/>
+          </Route>
           <Route path="/oauth/success" element={<SuccessPage />} />
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/recipe/:id" element={<RecipeDetailPage />} />
