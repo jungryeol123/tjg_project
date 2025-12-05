@@ -13,11 +13,7 @@ export function Coupon() {
   // 현재 경로 확인용
   const location = useLocation();
 
-  const couponList = [
-    { id: 1, rate: 30 },
-    { id: 2, rate: 50 },
-    { id: 3, rate: 60 },
-  ];
+  const [couponList, setCouponList] = useState([]);
 
   useEffect(() => {
     const stored = localStorage.getItem("loginInfo");
@@ -27,6 +23,14 @@ export function Coupon() {
 
       setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
     }
+  }, []);
+
+  useEffect(() => {
+    const getData = async() => {
+      const dbCoupon = await api.get("/coupon/couponList"); // 쿠폰 리스트 가져오기
+      setCouponList(dbCoupon.data);
+    } 
+    getData();
   }, []);
   
   useEffect(() => {
@@ -125,39 +129,39 @@ export function Coupon() {
       {/* 🔽 이미지 아래 쿠폰 리스트 */}
       <div style={{ textAlign: "center", padding: "30px 0" }}>
         <ul style={{ listStyle: "none", padding: 0 }}>
-          {couponList.map((coupon) => (
-            <li key={coupon.id} style={{ marginBottom: "20px" }}>
+          {couponList && couponList.map((coupon) => (
+            <li key={coupon.couponId} style={{ marginBottom: "20px" }}>
               <button
-                onClick={() => handleIssueCoupon(coupon.id)}
-                disabled={!userId || issuedCoupons.includes(coupon.id)}
+                onClick={() => handleIssueCoupon(coupon.couponId)}
+                disabled={!userId || issuedCoupons.includes(coupon.couponId)}
                 style={{
                     padding: "12px 25px",
                     fontSize: "18px",
                     borderRadius: "8px",
-                    cursor: issuedCoupons.includes(coupon.id) ? "not-allowed" : "pointer",
+                    cursor: issuedCoupons.includes(coupon.couponId) ? "not-allowed" : "pointer",
                     width: "200px",
                     border: "none",
                     fontWeight: "bold",
-                    backgroundColor: issuedCoupons.includes(coupon.id)
+                    backgroundColor: issuedCoupons.includes(coupon.couponId)
                     ? "#c5c5c5"              
                     : "#4949b1ff",           
                     color: "#fff",
                     transition: "0.2s ease",
                 }}
                 onMouseOver={(e) => {
-                    if (!issuedCoupons.includes(coupon.id)) {
+                    if (!issuedCoupons.includes(coupon.couponId)) {
                     e.currentTarget.style.backgroundColor = "#3a3a98";
                     }
                 }}
                 onMouseOut={(e) => {
-                    if (!issuedCoupons.includes(coupon.id)) {
+                    if (!issuedCoupons.includes(coupon.couponId)) {
                     e.currentTarget.style.backgroundColor = "#4949b1ff"; 
                     }
                 }}
                 >
-                {issuedCoupons.includes(coupon.id)
+                {issuedCoupons.includes(coupon.couponId)
                     ? "이미 발급됨"
-                    : `${coupon.rate}% 쿠폰 받기`}
+                    : `${coupon.couponDcRate}% 쿠폰 받기`}
                 </button>
 
             </li>
