@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import axios from "axios";
 import { api } from "shared/lib/axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +25,6 @@ export default function ChangePassword() {
         title : "✅ 인증번호 요청 성공",
         confirmButtonText : "확인"
       })
-//   alert("인증번호가 이메일로 발송되었습니다.");
   setStep(2);
 } 
 
@@ -36,7 +34,6 @@ export default function ChangePassword() {
         title : "⚠ 메일 전송 실패!",
         confirmButtonText : "확인"
     })    
-    //   alert("메일 전송 실패!");
       console.error(e);
     }
   };
@@ -55,7 +52,6 @@ export default function ChangePassword() {
         title : "✅ 인증 완료",
         confirmButtonText : "확인"
       })
-        // alert("인증 완료!");
         setStep(3);
       } 
     } catch (e) {
@@ -64,7 +60,6 @@ export default function ChangePassword() {
         title : "⚠ 메일 전송 실패!",
         confirmButtonText : "확인"
     })   
-    //   alert("인증 실패!");
       console.error(e);
     }
   };
@@ -87,7 +82,6 @@ export default function ChangePassword() {
       }).then(() => {
           navigate("/login");
       });
-        // alert("비밀번호가 변경되었습니다. 다시 로그인해주세요!");
       } 
     } catch (e) {
         Swal.fire({
@@ -95,7 +89,6 @@ export default function ChangePassword() {
         title : "⚠ 비밀번호 변경 실패!",
         confirmButtonText : "확인"
     })   
-    //   alert("서버 오류!");
       console.error(e);
     }
   };
