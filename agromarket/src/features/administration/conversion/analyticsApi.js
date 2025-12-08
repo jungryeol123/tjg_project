@@ -1,4 +1,3 @@
-// shared
 import { api } from 'shared/lib/axios.js';
 
 const API = "/api/analytics";

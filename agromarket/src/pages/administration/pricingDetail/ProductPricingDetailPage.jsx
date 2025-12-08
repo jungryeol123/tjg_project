@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 // shared
 import { api } from 'shared/lib/axios.js';
 import "./pricingDetail.scss"; // ⭐ SCSS 스타일 추가
-import PricingConversionChart from "../pricingConversion/PricingConversionChart";
+import PricingConversionChart from "features/administration/pricingConversion/components/PricingConversionChart";
 
 export default function ProductPricingDetailPage() {
     const { ppk } = useParams();
