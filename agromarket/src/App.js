@@ -39,14 +39,12 @@ import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
 import RecipeDetailPage from "features/recipe/RecipeDetailPage";
 import AdminRoute from "shared/ui/adminRoute/AdminRoute";
-<<<<<<< HEAD
-import ReviewListPage from "pages/administration/reviewAnalysis/ReviewListPage";
-import ReviewAnalysisPage from "pages/administration/reviewAnalysis/ReviewAnalysisPage";
-=======
 import { MyOrders } from "pages/myPage/MyOrders";
 import { MyCoupon } from "pages/myPage/MyCoupon";
 import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
->>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
+import { MyOrders } from "pages/myPage/MyOrders";
+import { MyCoupon } from "pages/myPage/MyCoupon";
+import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
 
 
 function App() {

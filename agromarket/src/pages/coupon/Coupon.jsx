@@ -182,12 +182,7 @@ export  function Coupon() {
   const navigate = useNavigate();
   const location = useLocation();
 
-<<<<<<< HEAD
-  const couponList = [
-    { id: 1, rate: 30 },
-    { id: 2, rate: 50 },
-    { id: 3, rate: 60 }
-  ];
+  const [couponList, setCouponList] = useState([]);
 
   const { userId, issuedCoupons, handleIssue } = useCoupon(navigate, location);
 =======
@@ -289,7 +284,6 @@ export  function Coupon() {
       }
     }
   };
->>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
 
   return (
     <div style={{ fontFamily: "'Pretendard', sans-serif" }}>
@@ -304,14 +298,6 @@ export  function Coupon() {
       ></div>
 
       <div style={{ textAlign: "center", padding: "30px 0" }}>
-<<<<<<< HEAD
-        <CouponList
-          couponList={couponList}
-          userId={userId}
-          issuedCoupons={issuedCoupons}
-          onIssue={handleIssue}
-        />
-=======
         <ul style={{ listStyle: "none", padding: 0 }}>
           {couponList && couponList.map((coupon) => (
             <li key={coupon.couponId} style={{ marginBottom: "20px" }}>
@@ -351,7 +337,6 @@ export  function Coupon() {
             </li>
           ))}
         </ul>
->>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
 
         {!userId && (
           <p style={{ color: "red" }}>로그인 후 쿠폰을 받을 수 있습니다.</p>

@@ -194,62 +194,6 @@ useEffect(() => {
       }
         </div>
     );
-<<<<<<< HEAD:agromarket/src/pages/myOrders/MyOrders.jsx
+}
 }
 
-
-// import { useNavigate } from "react-router-dom";
-
-// import "./MyOrders.css";
-// import { getUserIdFromToken } from "utils/getUserIdFromToken";
-// import { useMyOrders } from "features/order/hooks/useMyOrders";
-// import { useMyCoupons } from "features/order/hooks/useMyCoupons";
-// import { OrderCard } from "features/order/components/OrderCard";
-// import { CouponList } from "features/coupon/components/CouponList";
-// import { Pagination } from "features/order/components/Pagination";
-
-// export function MyOrders() {
-//   const userId = getUserIdFromToken();
-//   const navigate = useNavigate();
-
-//   const {
-//     orders,
-//     currentItems,
-//     page,
-//     setPage,
-//     itemsPerPage,
-//     handleDeleteOrder,
-//     handleAddCart
-//   } = useMyOrders(userId);
-
-//   const { coupons, loading, deleteCoupon } = useMyCoupons(userId);
-
-//   if (loading) return <p>⌛ 로딩 중...</p>;
-
-//   return (
-//     <div className="mypage-container">
-//       <h2 className="mypage-title">🧾 내 주문 내역</h2>
-
-//       {currentItems.map((order) => (
-//         <OrderCard
-//           key={order.id}
-//           order={order}
-//           navigate={navigate}
-//           onDelete={handleDeleteOrder}
-//           onAddCart={handleAddCart}
-//         />
-//       ))}
-
-//       {orders.length > 0 && (
-//         <Pagination page={page} setPage={setPage} total={orders.length} perPage={itemsPerPage} />
-//       )}
-
-//       <h2 className="mypage-title">🎟️ 받은 쿠폰</h2>
-
-//       <CouponList coupons={coupons ?? []} onDelete={deleteCoupon} />
-//     </div>
-//   );
-// }
-=======
-}
->>>>>>> af7669cb9d80b226142f5607a8dba851138cd957:agromarket/src/pages/myPage/MyOrders.jsx

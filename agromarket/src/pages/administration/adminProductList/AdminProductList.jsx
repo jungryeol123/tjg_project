@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import "./AdminProductList.scss";
-import "../../../styles/components/filter.scss";
-import { useAdminProducts } from "features/administration/adminProductList/useAdminProducts";
-import ProductFilter from "features/administration/adminProductList/components/ProductFilter";
-import ProductGrid from "features/administration/adminProductList/components/ProductGrid";
-=======
 import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +10,7 @@ import { parseJwt } from "features/auth/parseJwt";
 import { setProductListAPI, delProductData } from "features/product/productAPI";
 import "./AdminProductList.scss";
 import "../../../styles/components/filter.scss";
->>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
+
 
 export function AdminProductList() {
   const {
@@ -44,9 +36,6 @@ export function AdminProductList() {
         {loading ? (
           <p className="loading">로딩 중...</p>
         ) : filteredProducts.length > 0 ? (
-<<<<<<< HEAD
-          <ProductGrid items={filteredProducts} onDelete={handleDelete} />
-=======
           <div className="product-grid">
             {filteredProducts.map((item, idx) => (
               // 상품 편집일 경우, 경로 변경
@@ -62,7 +51,6 @@ export function AdminProductList() {
               </div>
             ))}
           </div>
->>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
         ) : (
           <p className="empty">상품이 없습니다.</p>
         )}
