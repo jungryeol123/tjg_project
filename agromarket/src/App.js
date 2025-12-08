@@ -30,8 +30,6 @@ import PricingConversionPage from "pages/administration/pricingConversion/Pricin
 import ProductPricingDetailPage from "pages/administration/pricingDetail/ProductPricingDetailPage";
 import { ProductUpdate } from "pages/administration/productSkill/ProductUpdate";
 import { ProductAdd } from "pages/administration/productSkill/ProductAdd";
-import ReviewListPage from "pages/administration/reviewAnalysic/ReviewListPage";
-import ReviewAnalysisPage from "features/reviewAnalysic/ReviewAnalysisPage";
 import { Delivery } from "pages/delivery/Delivery";
 import { Login } from "pages/login/Login";
 import { FindUserId } from "features/login/FindUserId";
@@ -41,6 +39,9 @@ import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
 import RecipeDetailPage from "features/recipe/RecipeDetailPage";
 import AdminRoute from "shared/ui/adminRoute/AdminRoute";
+import { MyOrders } from "pages/myPage/MyOrders";
+import { MyCoupon } from "pages/myPage/MyCoupon";
+import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
 import { MyOrders } from "pages/myPage/MyOrders";
 import { MyCoupon } from "pages/myPage/MyCoupon";
 import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
