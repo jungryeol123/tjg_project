@@ -194,6 +194,7 @@ useEffect(() => {
       }
         </div>
     );
+<<<<<<< HEAD:agromarket/src/pages/myOrders/MyOrders.jsx
 }
 
 
@@ -249,3 +250,6 @@ useEffect(() => {
 //     </div>
 //   );
 // }
+=======
+}
+>>>>>>> af7669cb9d80b226142f5607a8dba851138cd957:agromarket/src/pages/myPage/MyOrders.jsx

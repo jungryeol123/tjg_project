@@ -182,6 +182,7 @@ export  function Coupon() {
   const navigate = useNavigate();
   const location = useLocation();
 
+<<<<<<< HEAD
   const couponList = [
     { id: 1, rate: 30 },
     { id: 2, rate: 50 },
@@ -189,6 +190,106 @@ export  function Coupon() {
   ];
 
   const { userId, issuedCoupons, handleIssue } = useCoupon(navigate, location);
+=======
+  const [couponList, setCouponList] = useState([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("loginInfo");
+    if (stored) {
+      const { accessToken } = JSON.parse(stored);
+      const payload = parseJwt(accessToken);
+
+      setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
+    }
+  }, []);
+
+  useEffect(() => {
+    const getData = async() => {
+      const dbCoupon = await api.get("/coupon/couponList"); // 쿠폰 리스트 가져오기
+      setCouponList(dbCoupon.data);
+    } 
+    getData();
+  }, []);
+  
+  useEffect(() => {
+    if (userId) {
+      fetchIssuedCoupons(userId);
+    }
+  }, [userId]);
+
+  const fetchIssuedCoupons = async (id) => {
+    const stored = localStorage.getItem("loginInfo");
+    const { accessToken } = JSON.parse(stored);
+    try {
+      const res = await api.get(
+        `/coupon/user-ids/${id}`,
+        { headers : { Authorization : `Bearer ${accessToken}` } }
+      );
+      setIssuedCoupons(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      console.error("사용자 쿠폰 조회 실패:", err);
+    }
+  };
+
+  const handleIssueCoupon = async (couponId) => {
+    // 비로그인시
+    if (!userId) {
+      Swal.fire({
+        icon: 'warning',
+        title: '⚠ 로그인 화면으로',
+        text: "로그인이 필요합니다!",
+        confirmButtonText: '확인'
+      }) // 현재 페이지 경로(location.pathname)를 state에 담아 로그인 페이지로 이동
+        .then(() => { navigate("/login", { state: { from: location.pathname } }) });
+    } else {
+      if (issuedCoupons.includes(couponId)) {
+          Swal.fire({
+          icon: 'warning',
+          title: '⚠ 지급 완료',
+          text: "이미 받은 쿠폰입니다!",
+          confirmButtonText: '확인'
+        });
+        return;
+      }
+
+      try {
+        const stored = localStorage.getItem("loginInfo");
+        const { accessToken } = JSON.parse(stored);
+
+        const res = await api.post(
+          `http://localhost:8080/coupon/issue/${couponId}`,
+          { userId: userId },
+          { headers : { Authorization : `Bearer ${accessToken}` }
+      });
+
+      if (res.data.status === "success") {
+          Swal.fire({
+            icon: 'success',
+            title: '✅ 지급 완료',
+            text: "쿠폰이 발급되었습니다!",
+            confirmButtonText: '확인'
+          });
+          setIssuedCoupons((prev) => [...prev, couponId]);
+        } else {
+          Swal.fire({
+            icon: 'warning',
+            title: '⚠ 지급 완료',
+            text: res.data.message || "이미 받은 쿠폰입니다.",
+            confirmButtonText: '확인'
+          });
+        }
+      } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: '❌ 지급 실패',
+            text: "쿠폰 발급 실패 또는 이미 받은 쿠폰입니다.",
+            confirmButtonText: '확인'
+          });
+        console.error("쿠폰 발급 실패:", err);
+      }
+    }
+  };
+>>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
 
   return (
     <div style={{ fontFamily: "'Pretendard', sans-serif" }}>
@@ -203,12 +304,54 @@ export  function Coupon() {
       ></div>
 
       <div style={{ textAlign: "center", padding: "30px 0" }}>
+<<<<<<< HEAD
         <CouponList
           couponList={couponList}
           userId={userId}
           issuedCoupons={issuedCoupons}
           onIssue={handleIssue}
         />
+=======
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {couponList && couponList.map((coupon) => (
+            <li key={coupon.couponId} style={{ marginBottom: "20px" }}>
+              <button
+                onClick={() => handleIssueCoupon(coupon.couponId)}
+                disabled={!userId || issuedCoupons.includes(coupon.couponId)}
+                style={{
+                    padding: "12px 25px",
+                    fontSize: "18px",
+                    borderRadius: "8px",
+                    cursor: issuedCoupons.includes(coupon.couponId) ? "not-allowed" : "pointer",
+                    width: "200px",
+                    border: "none",
+                    fontWeight: "bold",
+                    backgroundColor: issuedCoupons.includes(coupon.couponId)
+                    ? "#c5c5c5"              
+                    : "#4949b1ff",           
+                    color: "#fff",
+                    transition: "0.2s ease",
+                }}
+                onMouseOver={(e) => {
+                    if (!issuedCoupons.includes(coupon.couponId)) {
+                    e.currentTarget.style.backgroundColor = "#3a3a98";
+                    }
+                }}
+                onMouseOut={(e) => {
+                    if (!issuedCoupons.includes(coupon.couponId)) {
+                    e.currentTarget.style.backgroundColor = "#4949b1ff"; 
+                    }
+                }}
+                >
+                {issuedCoupons.includes(coupon.couponId)
+                    ? "이미 발급됨"
+                    : `${coupon.couponDcRate}% 쿠폰 받기`}
+                </button>
+
+            </li>
+          ))}
+        </ul>
+>>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
 
         {!userId && (
           <p style={{ color: "red" }}>로그인 후 쿠폰을 받을 수 있습니다.</p>

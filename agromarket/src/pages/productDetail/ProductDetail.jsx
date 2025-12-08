@@ -18,15 +18,12 @@ import "./ProductDetail.scss";
 export function ProductDetail() {
   const { id } = useParams(); // 선택한 상품의 상품번호(primarykey)
   const [isFirstEffectComplete, setIsFirstEffectComplete] = useState(false);
-  const [sentViewLog, setSentViewLog] = useState(false);
   const [count, setCount] = useState(1); // 수량 관리
   const isLogin = useSelector((state) => state.auth.isLogin);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // 현재 경로 확인용
   const location = useLocation();
-
-  // dispatch
-  const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
 
   // product 최신화
@@ -41,21 +38,13 @@ export function ProductDetail() {
   }, [id]);
 
   useEffect(() => {
+    // product가 로딩되기전이면 실행 X
     if (!isFirstEffectComplete) return;
 
     const handleViewLog = async () => {
       const stored = localStorage.getItem("loginInfo");
 
       if (!stored) return;
-
-      // product가 로딩되면 실행해야하지만, 한 번만 해야 함
-      if (!product || !product.categorySubId) return;
-
-      if (sentViewLog) return; // ⛔ 두 번째 실행 차단
-      
-      setSentViewLog(true); // 🔥 한 번만 실행하도록 플래그 ON
-
-      window.scrollTo({ top: 0, behavior: "auto" });
 
       const { accessToken } = JSON.parse(stored);
       const payload = parseJwt(accessToken);
@@ -66,12 +55,11 @@ export function ProductDetail() {
         categorySubId: product.categorySubId
       });
     }
+
     handleViewLog();
+    window.scrollTo({ top: 0, behavior: "auto" });
 
-  }, [id, product, isFirstEffectComplete, sentViewLog]);
-
-  // 레시피 토글
-  const [showRecipe, setShowRecipe] = useState(false);
+  }, [isFirstEffectComplete]);
 
   // 구매 수량 감소 버튼 클릭 이벤트
   const handleDecrease = () => {
@@ -195,39 +183,16 @@ export function ProductDetail() {
                   { product.brandName}
                 </Link>
               </div>
-
-              {/* 레시피 글자 */}
-              <div
-                className="recipe-hover-area"
-                onMouseEnter={() => setShowRecipe(true)}
-                onMouseLeave={() => setShowRecipe(false)}
-              >
-                <span className="recipe-text">레시피</span>
-
-                { showRecipe && (
-                  <div className="recipe-box">
-                    <h4 className="recipe-title">레시피 보기</h4>
-                    <ol className="recipe-list">
-                      <li>팬에 식용유를 두르고 주꾸미를 볶습니다.</li>
-                      <li>양념장을 넣고 3분간 더 볶습니다.</li>
-                      <li>통깨를 뿌리고 완성!</li>
-                    </ol>
-                  </div>
-                )}
-              </div>
             </div>
             <div className="product-title">
               [{product.brandName}] {product.productName}
             </div>
-
-            {/* 할인 정보 */}
             <div className="product-discount red">
               { Math.floor(product.price * (product.dc / 100)).toLocaleString() + "원" } 할인
               <span className="product-price-original line">
                 {product.price?.toLocaleString() + "원"}
               </span>
             </div>
-
             <div className="product-price-final">
               {salesPrice.toLocaleString() + "원"}
             </div>
@@ -280,7 +245,6 @@ export function ProductDetail() {
               <li>{product.description}</li>
             </ul>
             <hr />
-
             <div className="product-purchase">
               <ul className="product-purchase-info">
                 <li>

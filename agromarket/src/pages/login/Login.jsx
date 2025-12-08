@@ -181,6 +181,7 @@ export  function Login() {
     <div className="content">
       <div className="center-layout login-form">
         <h1 className="center-title">로그인</h1>
+<<<<<<< HEAD
 
         <LoginForm
           idRef={idRef}
@@ -211,6 +212,86 @@ export  function Login() {
 
           <SocialLoginButtons />
         </ul>
+=======
+        <form onSubmit={handleLoginSubmit}>
+          <ul>
+            <li>
+              <div className="login-form-input">
+                <FaUser />
+                <input
+                  type="text"
+                  name="userId"
+                  value={formData.userId}
+                  ref={idRef}
+                  onChange={handleFormChange}
+                  placeholder="아이디를 입력해주세요"
+                />
+              </div>
+              <span style={{ color: "red", fontSize: "0.8rem" }}>
+                {errors.userId}
+              </span>
+            </li>
+            <li>
+              <div className="login-form-input">
+                <FaLock />
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  ref={pwdRef}
+                  onChange={handleFormChange}
+                  placeholder="패스워드를 입력해주세요"
+                />
+              </div>
+              <span style={{ color: "red", fontSize: "0.8rem" }}>
+                {errors.password}
+              </span>
+            </li>
+            <li>
+              <button type="submit" className="btn-main-color">
+                로그인
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="btn-main-color"
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                회원가입
+              </button>
+            </li>
+            <li>
+              <div className="links">
+                <Link to="/find-user-id">아이디 찾기</Link>
+                <span>|</span>
+                <Link to="/send-code">비밀번호 찾기</Link>
+              </div>
+            </li>
+            <li>
+              <button
+                className="btn-main-color-naver"
+                onClick={handleNaverLogin}
+              >
+                네이버 로그인
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={handleKakaoLogin}
+                style={{
+                  backgroundColor: "#FEE500",
+                }}
+                className="btn-main-color-naver"
+              >
+                카카오로 로그인
+              </button>
+            </li>
+          </ul>
+        </form>
+>>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
       </div>
     </div>
   );

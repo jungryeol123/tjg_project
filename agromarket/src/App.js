@@ -13,7 +13,7 @@ import Home from "pages/Home";
 import { Cart } from "pages/cart/Cart";
 import { Signup } from "pages/signup/Signup";
 import { CheckOut } from "pages/order/CheckOut";
-import { MyOrders } from "pages/myOrders/MyOrders";
+import { MyPage } from "pages/myPage/MyPage";
 import SuccessPage from "pages/successPage/SuccessPage";
 import AdminLayout from "pages/administration/AdminLayout";
 import SearchResult from "pages/searchResult/SearchResult";
@@ -32,15 +32,21 @@ import { ProductUpdate } from "pages/administration/productSkill/ProductUpdate";
 import { ProductAdd } from "pages/administration/productSkill/ProductAdd";
 import { Delivery } from "pages/delivery/Delivery";
 import { Login } from "pages/login/Login";
-import { FindPassword } from "features/login/FindPassword";
 import { FindUserId } from "features/login/FindUserId";
+import ChangePassword from "features/login/ChangePassword";
 import { Coupon } from "pages/coupon/Coupon";
 import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
 import RecipeDetailPage from "features/recipe/RecipeDetailPage";
 import AdminRoute from "shared/ui/adminRoute/AdminRoute";
+<<<<<<< HEAD
 import ReviewListPage from "pages/administration/reviewAnalysis/ReviewListPage";
 import ReviewAnalysisPage from "pages/administration/reviewAnalysis/ReviewAnalysisPage";
+=======
+import { MyOrders } from "pages/myPage/MyOrders";
+import { MyCoupon } from "pages/myPage/MyCoupon";
+import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
+>>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
 
 
 function App() {
@@ -89,7 +95,7 @@ function App() {
           <Route path="/delivery" element={<Delivery />} />
           <Route path="/login" element={<Login />} />
           <Route path="/find-user-id" element={<FindUserId />} />
-          <Route path="/find-password" element={<FindPassword />} />
+          <Route path="/send-code" element={<ChangePassword />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckOut />} />
@@ -102,7 +108,11 @@ function App() {
           <Route path="/notice" element={<NoticeList />} />
           <Route path="/notice/:id" element={<NoticeDetail />} />
           <Route path="/payResult" element={<PayResult />} />
-          <Route path="/mypage" element={<MyOrders />} />
+          <Route path="/mypage" element={<MyPage />} >
+            <Route path="/mypage/myorders" element={<MyOrders/>}/>
+            <Route path="/mypage/mycoupon" element={<MyCoupon/>}/>
+            <Route path="/mypage/update" element={<UpdateUserDetail/>}/>
+          </Route>
           <Route path="/oauth/success" element={<SuccessPage />} />
           <Route path="/recipe" element={<RecipePage />} />
           <Route path="/recipe/:id" element={<RecipeDetailPage />} />

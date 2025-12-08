@@ -45,8 +45,8 @@ export function CheckOut() {
     const paymentInfo = useMemo(() => ({
         shippingFee: shippingFee,
         discountAmount: totalDcPrice,
-        totalAmount: totalPrice - totalDcPrice + shippingFee
-    }), [totalPrice, totalDcPrice]);
+        totalAmount: totalPrice - totalDcPrice - selectCoupon + shippingFee
+    }), [selectCoupon]);
 
 
     const [userFullAddress, setFullAddress] = useState(cartList?.[0]?.user?.address || "");
