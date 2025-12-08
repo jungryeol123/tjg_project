@@ -126,7 +126,7 @@
 //               <div className="links">
 //                 <Link to="/find-user-id">아이디 찾기</Link>
 //                 <span>|</span>
-//                 <Link to="/find-password">비밀번호 찾기</Link>
+//                 <Link to="/send-code">비밀번호 찾기</Link>
 //               </div>
 //             </li>
 //             <li>
@@ -154,20 +154,22 @@
 //     </div>
 //   );
 // }
-
-
-// src/pages/auth/LoginPage.jsx
-import { useLogin } from "features/login/hooks/useLogin";
+// src/features/auth/pages/Login.jsx
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./login.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLogin } from "features/login/hooks/useLogin";
 import { LoginForm } from "features/login/components/LoginForm";
 import { SocialLoginButtons } from "features/login/components/SocialLoginButtons";
 
-export  function Login() {
+
+export function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // 이전 페이지로 돌아가기 (없으면 "/")
   const from = location.state?.from || "/";
 
+  // 🔹 useLogin 훅 사용
   const {
     idRef,
     pwdRef,
@@ -181,20 +183,22 @@ export  function Login() {
     <div className="content">
       <div className="center-layout login-form">
         <h1 className="center-title">로그인</h1>
-<<<<<<< HEAD
 
+        {/* 🔹 입력폼 부분 */}
         <LoginForm
-          idRef={idRef}
-          pwdRef={pwdRef}
           formData={formData}
           errors={errors}
+          idRef={idRef}
+          pwdRef={pwdRef}
           onChange={handleFormChange}
           onSubmit={handleLoginSubmit}
         />
 
+        {/* 🔹 로그인 외 추가 메뉴 */}
         <ul>
           <li>
             <button
+              type="button"
               className="btn-main-color"
               onClick={() => navigate("/signup")}
             >
@@ -206,92 +210,13 @@ export  function Login() {
             <div className="links">
               <Link to="/find-user-id">아이디 찾기</Link>
               <span>|</span>
-              <Link to="/find-password">비밀번호 찾기</Link>
+              <Link to="/send-code">비밀번호 찾기</Link>
             </div>
           </li>
 
+          {/* 🔹 소셜 로그인 버튼 */}
           <SocialLoginButtons />
         </ul>
-=======
-        <form onSubmit={handleLoginSubmit}>
-          <ul>
-            <li>
-              <div className="login-form-input">
-                <FaUser />
-                <input
-                  type="text"
-                  name="userId"
-                  value={formData.userId}
-                  ref={idRef}
-                  onChange={handleFormChange}
-                  placeholder="아이디를 입력해주세요"
-                />
-              </div>
-              <span style={{ color: "red", fontSize: "0.8rem" }}>
-                {errors.userId}
-              </span>
-            </li>
-            <li>
-              <div className="login-form-input">
-                <FaLock />
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  ref={pwdRef}
-                  onChange={handleFormChange}
-                  placeholder="패스워드를 입력해주세요"
-                />
-              </div>
-              <span style={{ color: "red", fontSize: "0.8rem" }}>
-                {errors.password}
-              </span>
-            </li>
-            <li>
-              <button type="submit" className="btn-main-color">
-                로그인
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                className="btn-main-color"
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
-                회원가입
-              </button>
-            </li>
-            <li>
-              <div className="links">
-                <Link to="/find-user-id">아이디 찾기</Link>
-                <span>|</span>
-                <Link to="/send-code">비밀번호 찾기</Link>
-              </div>
-            </li>
-            <li>
-              <button
-                className="btn-main-color-naver"
-                onClick={handleNaverLogin}
-              >
-                네이버 로그인
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={handleKakaoLogin}
-                style={{
-                  backgroundColor: "#FEE500",
-                }}
-                className="btn-main-color-naver"
-              >
-                카카오로 로그인
-              </button>
-            </li>
-          </ul>
-        </form>
->>>>>>> af7669cb9d80b226142f5607a8dba851138cd957
       </div>
     </div>
   );

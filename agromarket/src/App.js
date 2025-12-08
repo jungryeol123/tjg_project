@@ -42,9 +42,9 @@ import AdminRoute from "shared/ui/adminRoute/AdminRoute";
 import { MyOrders } from "pages/myPage/MyOrders";
 import { MyCoupon } from "pages/myPage/MyCoupon";
 import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
-import { MyOrders } from "pages/myPage/MyOrders";
-import { MyCoupon } from "pages/myPage/MyCoupon";
-import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
+import ReviewListPage from "pages/administration/reviewAnalysis/ReviewListPage";
+import ReviewAnalysisPage from "pages/administration/reviewAnalysis/ReviewAnalysisPage";
+
 
 
 function App() {
