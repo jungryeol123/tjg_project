@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useMemo } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,8 @@ import { validateSignup } from "features/signup/SignupValidation";
 export function useSignupForm() {
   const navigate = useNavigate();
   const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
+
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "auto" }); },[]);
 
   const initArray = [
     "userId", "password", "cpwd", "name",

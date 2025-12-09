@@ -22,7 +22,6 @@ export function useSignupAgree() {
       setTermList(result.data.terms);
     };
     load();
-    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   const handleAllAgree = (e) => {
