@@ -53,7 +53,6 @@ export function QnA({id, product}) {
       }).then(() =>
         navigate("/login", { state: { from: location.pathname } })
       );
-      return;
     } else {
      setIsClickQnA(true)
     }
