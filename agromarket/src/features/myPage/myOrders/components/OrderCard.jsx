@@ -23,7 +23,7 @@ export function OrderCard({ order, navigate, handleAddCart, onDelete }) {
                   src={`/images/productImages/${item.product.imageUrl}`}
                   alt="product"
                 />
-                {item.product.count === 0 && (
+                {item.product.count <= 0 && (
                   <div className="sold-out">SOLD OUT</div>
                 )}
               </div>
@@ -40,7 +40,7 @@ export function OrderCard({ order, navigate, handleAddCart, onDelete }) {
 
                 <button
                   onClick={() => handleAddCart(item)}
-                  disabled={item.product.count === 0}
+                  disabled={item.product.count <= 0}
                 >
                   장바구니
                 </button>

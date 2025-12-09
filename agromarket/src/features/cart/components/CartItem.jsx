@@ -4,7 +4,7 @@ export function CartItem({ item, decreaseQty, increaseQty, removeItem }) {
     <div className='cart-item'>
       <div className="cart-image-container">
         <img src={`/images/productImages/${item.product.imageUrl}`} alt='product img' />
-        {item.product.count === 0 && <div className="sold-out">SOLD OUT</div>}
+        {item.product.count <= 0 && <div className="sold-out">SOLD OUT</div>}
       </div>
 
       <div className='cart-item-details'>
@@ -16,13 +16,13 @@ export function CartItem({ item, decreaseQty, increaseQty, removeItem }) {
       </div>
 
       <div className='cart-quantity'>
-        <button disabled={item.product.count === 0}
+        <button disabled={item.product.count <= 0}
           onClick={() => decreaseQty(item)}
         >-</button>
 
         <input type="text" value={item.qty.toLocaleString()} readOnly/>
 
-        <button disabled={item.product.count === 0}
+        <button disabled={item.product.count <= 0}
           onClick={() => increaseQty(item)}
         >+</button>
       </div>

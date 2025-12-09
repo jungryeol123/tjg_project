@@ -101,7 +101,7 @@ export default function useCheckOutData() {
     // 0개 상품 제외
     // -----------------------------
     useEffect(() => {
-        setReduceCartList(cartList?.filter(cart => cart.product.count !== 0) || []);
+        setReduceCartList(cartList?.filter(cart => cart.product.count > 0) || []);
     }, [cartList]);
 
     // -----------------------------
