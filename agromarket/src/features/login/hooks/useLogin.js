@@ -1,6 +1,6 @@
 // src/features/auth/hooks/useLogin.js
 import { getLogin } from "features/auth/authAPI";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -10,6 +10,10 @@ export function useLogin(navigate, from) {
   const pwdRef = useRef(null);
   const [formData, setFormData] = useState({ userId: "", password: "" });
   const [errors, setErrors] = useState({ userId: "", password: "" });
+
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: "auto" });
+  },[]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
