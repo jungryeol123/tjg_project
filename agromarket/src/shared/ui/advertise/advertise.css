@@ -3,18 +3,17 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  /* margin: 40px 0; */
+  margin-top: 10px;
 }
 
 .advertise-inline {
   width: 1200px;
   height: 200px;
   max-width: 1200px;
-  /* border-radius: 10px; */
+  border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
-
 
 /* 오른쪽 고정 배너 */
 .right-ad-banner {
