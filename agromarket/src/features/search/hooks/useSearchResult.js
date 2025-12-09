@@ -53,7 +53,7 @@ export function useSearchResult() {
 
     setFilterList(filtered);
     setActiveFilter("");
-  }, [pathName, keyword, categoryData, productList, categoryList]);
+  }, [keyword]);
 
   // 🔍 필터 UI 클릭 처리
   const handleFilter = (type) => {
