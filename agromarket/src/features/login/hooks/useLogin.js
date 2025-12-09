@@ -11,10 +11,6 @@ export function useLogin(navigate, from) {
   const [formData, setFormData] = useState({ userId: "", password: "" });
   const [errors, setErrors] = useState({ userId: "", password: "" });
 
-  useEffect(()=>{
-    window.scrollTo({ top: 0, behavior: "auto" });
-  },[]);
-
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
