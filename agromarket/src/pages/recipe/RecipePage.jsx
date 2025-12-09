@@ -66,10 +66,10 @@
 
 
 import React, { useState } from "react";
-import Sidebar from "features/recipe/Sidebar";
 import "./RecipePage.scss";
-import { useRecipeList } from "features/recipe/useRecipeList";
-import { RecipeList } from "features/recipe/components/RecipeList";
+import { useRecipeList } from "features/recipe/recipePage/hooks/useRecipeList";
+import Sidebar from "features/recipe/recipePage/components/Sidebar";
+import { RecipeList } from "features/recipe/recipePage/components/RecipeList";
 
 export default function RecipePage() {
   const [selectedSub, setSelectedSub] = useState(null);
