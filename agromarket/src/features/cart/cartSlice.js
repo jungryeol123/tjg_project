@@ -46,11 +46,11 @@ export const cartSlice = createSlice({
     },
     // 총 금액 설정
     updateTotalPrice (state) {
-      state.totalPrice = state.cartList.filter(cart => cart.product.count !== 0)
+      state.totalPrice = state.cartList.filter(cart => cart.product.count > 0)
       .reduce( ( total, item ) => total + (item.qty * item.product.price) , 0);
     },
     updateTotalDcPrice (state) {
-      state.totalDcPrice = state.cartList.filter(cart => cart.product.count !== 0)
+      state.totalDcPrice = state.cartList.filter(cart => cart.product.count > 0)
       .reduce( ( total, item ) => total + (item.qty * (item.product.price * item.product.dc * 0.01)) , 0);
     },
     // 장바구니 갯수 취득(총 리스트 갯수) + 배송비 계산

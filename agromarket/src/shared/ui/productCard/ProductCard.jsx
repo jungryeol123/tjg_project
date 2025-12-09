@@ -27,7 +27,7 @@ export default function ProductCard({ item }) {
           className="product-image"
           draggable="false"
         />
-        { item.count === 0 && <div class="sold-out">SOLD OUT</div> }
+        { item.count <= 0 && <div class="sold-out">SOLD OUT</div> }
       </div>
 
       {/* ✅ 제품 정보 */}

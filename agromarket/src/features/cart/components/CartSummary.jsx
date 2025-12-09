@@ -18,18 +18,18 @@ export function CartSummary({ totalPrice, totalDcPrice, shippingFee, goCheckout 
           </p>
           <p className='cart-total'>
             <label>총 배송비 :</label>
-            <span>{shippingFee.toLocaleString()}원</span>
+            <span>{totalPrice === 0 ? 0 : shippingFee.toLocaleString()}원</span>
           </p>
         </div>
 
         <p className='cart-total2'>
           <label>총 금액 :</label>
-          <span>{finalPrice.toLocaleString()}원</span>
+          <span>{totalPrice === 0 ? 0 : finalPrice.toLocaleString()}원</span>
         </p>
       </div>
 
       <div className='cart-actions'>
-        <button onClick={goCheckout} disabled={finalPrice === 0}>
+        <button onClick={goCheckout} disabled={totalPrice === 0}>
           주문하기
         </button>
       </div>

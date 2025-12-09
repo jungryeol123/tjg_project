@@ -387,7 +387,7 @@ export function ProductDetail() {
                 alt={product.imageUrl_name}
                 className="product-image-main"
               />
-              {product.count === 0 && <div className="sold-out">SOLD OUT</div>}
+              {product.count <= 0 && <div className="sold-out">SOLD OUT</div>}
             </div>
           </div>
 
@@ -504,7 +504,7 @@ export function ProductDetail() {
               <button
                 className="btn-cart"
                 onClick={handleAddCart}
-                disabled={product.count === 0}
+                disabled={product.count <= 0}
               >
                 장바구니
               </button>
