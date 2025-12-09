@@ -67,7 +67,7 @@ export function useRecipeDetail(id) {
       return Swal.fire("⚠ 필수 입력", "후기 내용을 입력해주세요!", "warning");
 
     const res = await postRecipeReviewAPI(id, newRating, newContent);
-
+    console.log("res", res);
     if (res.status === 200) {
       Swal.fire("등록 완료", "후기가 등록되었습니다!", "success");
 
