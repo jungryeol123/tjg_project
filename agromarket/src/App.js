@@ -37,13 +37,13 @@ import ChangePassword from "features/login/ChangePassword";
 import { Coupon } from "pages/coupon/Coupon";
 import { PayResult } from "pages/payResult/PayResult";
 import RecipePage from "pages/recipe/RecipePage";
-import RecipeDetailPage from "features/recipe/RecipeDetailPage";
 import AdminRoute from "shared/ui/adminRoute/AdminRoute";
 import { MyOrders } from "pages/myPage/MyOrders";
 import { MyCoupon } from "pages/myPage/MyCoupon";
 import { UpdateUserDetail } from "pages/myPage/UpdateUserDetail";
 import ReviewListPage from "pages/administration/reviewAnalysis/ReviewListPage";
 import ReviewAnalysisPage from "pages/administration/reviewAnalysis/ReviewAnalysisPage";
+import RecipeDetailPage from "pages/recipe/RecipeDetailPage";
 
 
 
