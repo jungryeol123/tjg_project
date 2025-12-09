@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
 import React, { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 // feautres
 import { addProductQnA } from "features/product/productAPI";
 // shared
@@ -11,9 +12,12 @@ export function QnA({id, product}) {
   const qnaAll = useSelector((state) => state.product.productQnAList);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
+  const navigate = useNavigate();
+  const location = useLocation();
   // 문의하기 창 띄우기 플래그
   const [isClickQnA, setIsClickQnA] = useState(false);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   // ✅ 상품별 QnA 필터링
   const qnaList = useMemo(() => {
@@ -41,7 +45,18 @@ export function QnA({id, product}) {
 
   // 문의하기 버튼 클릭시 문의하기창 띄우기
   const handleQnA = () => {
-    setIsClickQnA(true)
+    if (!isLogin) {
+      Swal.fire({
+        icon: "warning",
+        title: "⚠ 로그인 필요",
+        text: "로그인이 필요합니다.",
+      }).then(() =>
+        navigate("/login", { state: { from: location.pathname } })
+      );
+      return;
+    } else {
+     setIsClickQnA(true)
+    }
   }
 
   // 문의하기창에서 닫기버튼 클릭시 창 닫기 
