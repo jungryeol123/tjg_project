@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ChatBotPanel from "./ChatBotPanel";
+import ChatBotPanel from "layouts/floating/ChatBotPanel.jsx";
 import "./FloatingChatBot.scss";
 
 export default function FloatingChatBot() {
