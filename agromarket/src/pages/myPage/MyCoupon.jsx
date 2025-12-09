@@ -108,8 +108,8 @@
 
 import './MyPage.css';
 import '../administration/AdminLayout.scss';
-import { useMyCoupon } from 'features/myPage/useMyCoupon';
-import { MyCouponList } from 'features/myPage/MyCouponList';
+import { useMyCoupon } from 'features/myPage/myCoupon/hooks/useMyCoupon';
+import { MyCouponList } from 'features/myPage/myCoupon/components/MyCouponList';
 
 export function MyCoupon() {
   const { userId, coupons, loading, deleteCoupon } = useMyCoupon();

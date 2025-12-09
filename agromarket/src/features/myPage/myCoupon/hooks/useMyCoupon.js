@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { parseJwt } from "features/auth/parseJwt";
-import { couponAPI } from "./couponAPI";
+import { couponAPI } from "../api/couponAPI";
 
 export function useMyCoupon() {
   const [coupons, setCoupons] = useState([]);
