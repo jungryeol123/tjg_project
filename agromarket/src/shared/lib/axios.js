@@ -37,6 +37,11 @@ export function setupApiInterceptors() {
   (res) => res, async (error) => {
     const originalRequest = error.config;
 
+    // 로그인 요청일 경우 refresh 무시
+    if (originalRequest.url === "/auth/login") {
+      return Promise.reject(error);
+    }
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
