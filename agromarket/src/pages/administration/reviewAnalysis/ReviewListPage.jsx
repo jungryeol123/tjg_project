@@ -140,7 +140,7 @@ export default function ReviewListPage() {
       <SummaryCards summary={summary} />
 
       <TopProducts top={summary.topProducts} />
-s
+
       <ReviewSearch search={search} setSearch={setSearch} />
 
       <ReviewProductList filtered={filtered} />

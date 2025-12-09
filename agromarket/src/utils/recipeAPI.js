@@ -25,5 +25,5 @@ export const postRecipeReviewAPI = async (recipeId, rating, content) => {
       }
     }
   );
-  return result.data;
+  return result;
 };
