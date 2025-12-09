@@ -251,6 +251,7 @@ export function Signup() {
             setTermList(result.data.terms);
         }
         load();
+        window.scrollTo({ top: 0, behavior: "auto" });
     }, [])
 
     return (
