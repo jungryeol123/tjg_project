@@ -21,8 +21,8 @@ export function useSignupAgree() {
       const result = await api.get("/data/terms.json");
       setTermList(result.data.terms);
     };
-
     load();
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
   const handleAllAgree = (e) => {
